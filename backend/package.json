@@ -1,0 +1,25 @@
+{
+   "name": "new-typeorm-project",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/node": "^8.0.29",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "@types/cors": "^2.8.8",
+      "@types/express": "^4.17.8",
+      "colors": "^1.4.0",
+      "cors": "^2.8.5",
+      "express": "^4.17.1",
+      "mysql": "^2.14.1",
+      "nodemon": "^2.0.4",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.26"
+   },
+   "scripts": {
+      "build": "tsc",
+      "start": "nodemon --watch src --delay 1 --exec ts-node src/server.ts"
+    }
+}
