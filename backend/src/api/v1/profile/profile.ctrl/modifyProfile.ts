@@ -1,22 +1,14 @@
-import { Request, Response } from "express";
+import AuthRequest from "../../../../type/AuthRequest";
+import { Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
 import { validateProfile } from "../../../../lib/validation/profile";
 
-export default async (req: Request, res: Response) => {
+export default async (req: AuthRequest, res: Response) => {
+  const { id } = req.user;
+
   if (!validateProfile(req, res)) return;
-
-  const idx: number = Number(req.params.idx);
-
-  if (isNaN(idx)) {
-    logger.yellow("[PUT] 검증 오류.", "idx is NaN");
-    res.status(400).json({
-      status: 400,
-      message: "검증 오류.",
-    });
-    return;
-  }
 
   type RequestBody = {
     name: string;
@@ -27,7 +19,7 @@ export default async (req: Request, res: Response) => {
 
   try {
     const userRepo = getRepository(User);
-    const user: User = await userRepo.findOne({ where: { idx } });
+    const user: User = await userRepo.findOne({ where: { id } });
 
     if (!user) {
       logger.yellow("[PUT] 유저 없음.");

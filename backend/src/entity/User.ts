@@ -33,6 +33,13 @@ export default class User extends BaseEntity {
   })
   bio: string;
 
+  //관리자
+  @Column({
+    default: false,
+    nullable: false,
+  })
+  is_admin: boolean;
+
   //생성일
   @Column("timestamptz")
   @CreateDateColumn()
