@@ -29,6 +29,15 @@ export default async (req: Request, res: Response) => {
     const userRepo = getRepository(User);
     const user: User = await userRepo.findOne({ where: { idx } });
 
+    if (!user) {
+      logger.yellow("[PUT] 유저 없음.");
+      res.status(404).json({
+        status: 404,
+        message: "유저 없음.",
+      });
+      return;
+    }
+
     user.name = data.name;
     user.bio = data.bio;
 
