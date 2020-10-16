@@ -61,7 +61,7 @@ export default async (req: Request, res: Response) => {
       access_token: token,
     });
   } catch (error) {
-    logger.red("[POST] 로그인 서버 오류", error);
+    logger.red("[POST] 로그인 서버 오류");
     return res.status(500).json({
       status: 500,
       message: "서버 오류.",
