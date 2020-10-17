@@ -1,26 +1,18 @@
 import "dotenv/config";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
+import AuthRequest from "../../../../type/AuthRequest";
 
-export default async (req: Request, res: Response) => {
-  const idx: number = Number(req.params.idx);
-
-  if (isNaN(idx)) {
-    logger.yellow("[GET] 검증 오류. idx is Not a Number");
-    res.status(400).json({
-      status: 400,
-      message: "검증 오류",
-    });
-    return;
-  }
+export default async (req: AuthRequest, res: Response) => {
+  const { id } = req.user;
 
   try {
     const userRepo = getRepository(User);
     const user = await userRepo.findOne({
       select: ["id", "name", "bio", "created_at"],
-      where: { idx: idx },
+      where: { id },
     });
 
     if (!user) {

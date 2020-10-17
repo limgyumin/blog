@@ -3,12 +3,12 @@ import { Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import { validateProfile } from "../../../../lib/validation/profile";
+import { validateModify } from "../../../../lib/validation/profile";
 
 export default async (req: AuthRequest, res: Response) => {
   const { id } = req.user;
 
-  if (!validateProfile(req, res)) return;
+  if (!validateModify(req, res)) return;
 
   type RequestBody = {
     name: string;

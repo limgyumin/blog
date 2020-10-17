@@ -5,7 +5,7 @@ import authMiddleWare from "../../../lib/middleware/auth";
 
 const router = Router();
 
-router.get("/:idx", getProfile);
+router.get("/", authMiddleWare.guest, getProfile);
 router.put("/", authMiddleWare.guest, modifyProfile);
 
 export default router;
