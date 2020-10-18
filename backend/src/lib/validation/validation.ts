@@ -16,7 +16,7 @@ export default (
     logger.yellow("[JOI] 검증 오류.", validation.error.message);
 
     res.status(401).json({
-      status: 400,
+      status: 401,
       message: "검증 오류.",
     });
 
