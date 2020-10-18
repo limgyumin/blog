@@ -10,7 +10,7 @@ export default async (req: AuthRequest, res: Response) => {
 
   try {
     const userRepo = getRepository(User);
-    const user = await userRepo.findOne({
+    const user: User = await userRepo.findOne({
       select: ["id", "name", "bio", "created_at"],
       where: { id },
     });

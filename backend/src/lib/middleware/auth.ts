@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import { getRepository } from "typeorm";
 import { isArray } from "util";
 import User from "../../entity/User";

@@ -38,7 +38,7 @@ export default class Post extends BaseEntity {
 
   //글 표지
   @Column({
-    length: 255,
+    length: 1000,
     nullable: true,
   })
   thumbnail: string;
