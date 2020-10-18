@@ -14,7 +14,9 @@ export default async (req: Request, res: Response) => {
 
   try {
     const categoryRepo = getRepository(Category);
-    const isExist: Category = await categoryRepo.findOne({ where: { name } });
+    const isExist: Category = await categoryRepo.findOne({
+      where: { name },
+    });
 
     if (isExist) {
       logger.yellow("[POST] 중복된 카테고리.");
