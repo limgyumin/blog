@@ -8,9 +8,7 @@ export default (
   schema: Joi.ObjectSchema<any>
 ): boolean => {
   const { body } = req;
-
   const validation = schema.validate(body);
-  //   const validation = Joi.valid(body, schema);
 
   if (validation.error) {
     logger.yellow("[JOI] 검증 오류.", validation.error.message);

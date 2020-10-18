@@ -15,7 +15,7 @@ router.get("/", getPosts);
 router.get("/:idx", getPost);
 router.get("/comment/:idx", getPostCommentCount);
 
-router.put("/", modifyPost);
+router.put("/:idx", authMiddleWare.guest, modifyPost);
 
 router.delete("/:idx", deletePost);
 

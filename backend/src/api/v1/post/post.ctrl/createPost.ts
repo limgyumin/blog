@@ -18,7 +18,7 @@ export default async (req: AuthRequest, res: Response) => {
     category_idx: number;
   };
 
-  const body: RequestBody = req.body;
+  const data: RequestBody = req.body;
   const { id } = req.user;
 
   try {
@@ -39,10 +39,10 @@ export default async (req: AuthRequest, res: Response) => {
     const postRepo = getRepository(Post);
     const post = new Post();
 
-    if (body.category_idx) {
+    if (data.category_idx) {
       const categoryRepo = getRepository(Category);
       const category: Category = await categoryRepo.findOne({
-        where: { idx: body.category_idx },
+        where: { idx: data.category_idx },
       });
 
       if (!category) {
@@ -57,10 +57,10 @@ export default async (req: AuthRequest, res: Response) => {
       post.category = category;
     }
 
-    post.title = body.title;
-    post.description = body.description;
-    post.content = body.content;
-    post.thumbnail = body.thumbnail;
+    post.title = data.title;
+    post.description = data.description;
+    post.content = data.content;
+    post.thumbnail = data.thumbnail;
     post.user = user;
 
     await postRepo.save(post);

@@ -6,8 +6,6 @@ import logger from "../../../../lib/logger";
 import { validateModify } from "../../../../lib/validation/profile";
 
 export default async (req: AuthRequest, res: Response) => {
-  const { id } = req.user;
-
   if (!validateModify(req, res)) return;
 
   type RequestBody = {
@@ -16,6 +14,7 @@ export default async (req: AuthRequest, res: Response) => {
   };
 
   const data: RequestBody = req.body;
+  const { id } = req.user;
 
   try {
     const userRepo = getRepository(User);
