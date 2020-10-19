@@ -30,26 +30,12 @@ export default async (req: AuthRequest, res: Response) => {
   };
 
   const data: RequestBody = req.body;
-  const { id } = req.user;
+  const user: User = req.user;
 
   try {
-    const userRepo = getRepository(User);
-    const user = await userRepo.findOne({
-      where: { id },
-    });
-
-    if (!user) {
-      logger.yellow("[PUT] 유저 없음.");
-      res.status(404).json({
-        status: 404,
-        message: "유저 없음.",
-      });
-      return;
-    }
-
     const postRepo = getRepository(Post);
     const post: Post = await postRepo.findOne({
-      where: { idx, user },
+      where: { idx },
     });
 
     if (!post) {
@@ -57,6 +43,15 @@ export default async (req: AuthRequest, res: Response) => {
       res.status(404).json({
         status: 404,
         message: "글 없음.",
+      });
+      return;
+    }
+
+    if (post.fk_user_idx !== user.idx) {
+      logger.yellow("[PUT] 권한 없음.");
+      res.status(403).json({
+        status: 403,
+        message: "권한 없음.",
       });
       return;
     }

@@ -17,6 +17,6 @@ router.get("/comment/:idx", getPostCommentCount);
 
 router.put("/:idx", authMiddleWare.guest, modifyPost);
 
-router.delete("/:idx", deletePost);
+router.delete("/:idx", authMiddleWare.guest, deletePost);
 
 export default router;
