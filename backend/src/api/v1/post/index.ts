@@ -6,11 +6,13 @@ import getPostCommentCount from "./post.ctrl/getPostCommentCount";
 import getPosts from "./post.ctrl/getPosts";
 import modifyPost from "./post.ctrl/modifyPost";
 import deletePost from "./post.ctrl/deletePost";
+import createTempPost from "./post.ctrl/createTempPost";
 
 const router = Router();
 
-router.post("/", authMiddleWare.guest, createPost);
+router.post("/temp", authMiddleWare.guest, createTempPost);
 
+router.post("/", authMiddleWare.guest, createPost);
 router.get("/", getPosts);
 router.get("/:idx", getPost);
 router.get("/comment/:idx", getPostCommentCount);

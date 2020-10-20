@@ -35,7 +35,10 @@ export default async (req: AuthRequest, res: Response) => {
   try {
     const postRepo = getRepository(Post);
     const post: Post = await postRepo.findOne({
-      where: { idx },
+      where: {
+        idx,
+        is_deleted: false,
+      },
     });
 
     if (!post) {

@@ -1,14 +1,16 @@
+import AuthRequest from "../../../../type/AuthRequest";
 import { Response } from "express";
 import { getRepository } from "typeorm";
 import Category from "../../../../entity/Category";
 import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import { validateCreate } from "../../../../lib/validation/post";
-import AuthRequest from "../../../../type/AuthRequest";
+import { validateCreateTemp } from "../../../../lib/validation/post";
 
 export default async (req: AuthRequest, res: Response) => {
-  if (!validateCreate(req, res)) return;
+  if (!validateCreateTemp(req, res)) return;
+
+  const user: User = req.user;
 
   type RequestBody = {
     title: string;
@@ -19,16 +21,16 @@ export default async (req: AuthRequest, res: Response) => {
   };
 
   const data: RequestBody = req.body;
-  const user: User = req.user;
 
   try {
-    const postRepo = getRepository(Post);
-    const post = new Post();
+    let category: Category;
 
     if (data.category_idx) {
       const categoryRepo = getRepository(Category);
-      const category: Category = await categoryRepo.findOne({
-        where: { idx: data.category_idx },
+      const category = await categoryRepo.findOne({
+        where: {
+          idx: data.category_idx,
+        },
       });
 
       if (!category) {
@@ -39,25 +41,28 @@ export default async (req: AuthRequest, res: Response) => {
         });
         return;
       }
-
-      post.category = category;
     }
+
+    const postRepo = getRepository(Post);
+    const post = new Post();
 
     post.title = data.title;
     post.description = data.description;
     post.content = data.content;
+    post.is_temp = true;
     post.thumbnail = data.thumbnail;
     post.user = user;
+    post.category = category;
 
     await postRepo.save(post);
 
-    logger.green("[POST] 글 작성 성공.");
+    logger.green("[POST] 임시 글 작성 성공.");
     res.status(200).json({
       status: 200,
-      message: "글 작성 성공.",
+      message: "임시 글 작성 성공.",
     });
   } catch (error) {
-    logger.red("[POST] 글 작성 서버 오류.");
+    logger.red("[POST] 임시 글 작성 서버 오류.");
     res.status(500).json({
       status: 500,
       message: "서버 오류.",
