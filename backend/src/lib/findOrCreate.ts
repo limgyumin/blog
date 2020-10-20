@@ -16,7 +16,7 @@ export default async (id: string, name: string): Promise<User> => {
   if (id === ADMIN_ID) user.is_admin = true;
 
   user.id = id;
-  user.name = name;
+  user.name = name || id;
 
   return userRepo.save(user);
 };

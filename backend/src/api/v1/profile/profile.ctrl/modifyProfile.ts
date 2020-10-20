@@ -29,7 +29,7 @@ export default async (req: AuthRequest, res: Response) => {
       return;
     }
 
-    user.name = data.name;
+    user.name = data.name.length ? user.id : data.name;
     user.bio = data.bio;
 
     await userRepo.save(user);

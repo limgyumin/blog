@@ -7,6 +7,15 @@ export default class Category extends BaseEntity {
   idx: number;
 
   //카테고리 이름
-  @Column({ length: 40, nullable: false })
+  @Column({
+    length: 40,
+    nullable: false,
+  })
   name: string;
+
+  @Column({
+    nullable: false,
+    unique: true,
+  })
+  order_number: number;
 }
