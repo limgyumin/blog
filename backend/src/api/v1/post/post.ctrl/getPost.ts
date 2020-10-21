@@ -1,9 +1,13 @@
-import { Request, Response } from "express";
+import AuthRequest from "../../../../type/AuthRequest";
+import { Response } from "express";
 import { getRepository } from "typeorm";
 import Post from "../../../../entity/Post";
 import logger from "../../../../lib/logger";
+import User from "../../../../entity/User";
+import PostCommentType from "../../../../type/PostCommentType";
 
-export default async (req: Request, res: Response) => {
+export default async (req: AuthRequest, res: Response) => {
+  const user: User = req.user;
   const idx: number = Number(req.params.idx);
 
   if (isNaN(idx)) {
@@ -17,10 +21,9 @@ export default async (req: Request, res: Response) => {
 
   try {
     const postRepo = getRepository(Post);
-    const post = await postRepo.findOne({
+    const post: PostCommentType = await postRepo.findOne({
       where: {
         idx,
-        is_deleted: false,
       },
     });
 
@@ -32,6 +35,19 @@ export default async (req: Request, res: Response) => {
       });
       return;
     }
+
+    if (post.is_temp) {
+      if (!user || !user.is_admin) {
+        logger.yellow("[GET] 권한 없음.");
+        res.status(403).json({
+          status: 403,
+          message: "권한 없음.",
+        });
+        return;
+      }
+    }
+
+    //Get Comment Count 로직
 
     logger.green("[GET] 글 조회 성공.");
     res.status(200).json({
