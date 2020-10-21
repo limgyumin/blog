@@ -11,8 +11,8 @@ export default async (req: Request, res: Response) => {
 
   if (isNaN(idx)) {
     logger.yellow("[PUT] 검증 오류. idx is NaN.");
-    res.status(401).json({
-      status: 401,
+    res.status(400).json({
+      status: 400,
       message: "검증 오류.",
     });
     return;
@@ -61,7 +61,7 @@ export default async (req: Request, res: Response) => {
       message: "카테고리 수정 성공.",
     });
   } catch (error) {
-    logger.red("[PUT] 카테고리 수정 서버 오류.");
+    logger.red("[PUT] 카테고리 수정 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",

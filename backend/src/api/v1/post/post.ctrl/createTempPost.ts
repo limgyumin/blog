@@ -62,7 +62,7 @@ export default async (req: AuthRequest, res: Response) => {
       message: "임시 글 작성 성공.",
     });
   } catch (error) {
-    logger.red("[POST] 임시 글 작성 서버 오류.");
+    logger.red("[POST] 임시 글 작성 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",

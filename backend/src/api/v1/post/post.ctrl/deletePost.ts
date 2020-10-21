@@ -11,8 +11,8 @@ export default async (req: AuthRequest, res: Response) => {
 
   if (isNaN(idx)) {
     logger.yellow("[DELETE] 검증 오류. idx is NaN");
-    res.status(401).json({
-      status: 401,
+    res.status(400).json({
+      status: 400,
       message: "검증 오류.",
     });
     return;
@@ -51,7 +51,7 @@ export default async (req: AuthRequest, res: Response) => {
       message: "글 삭제 성공.",
     });
   } catch (error) {
-    logger.red("[DELETE] 글 삭제 서버 오류.");
+    logger.red("[DELETE] 글 삭제 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",

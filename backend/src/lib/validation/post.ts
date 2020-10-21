@@ -31,7 +31,7 @@ export const validateModify = (req: Request, res: Response): boolean => {
     title: Joi.string().min(1).max(255),
     description: Joi.string().max(255),
     content: Joi.string(),
-    is_temp: Joi.boolean,
+    is_temp: Joi.boolean(),
     category_idx: Joi.number().integer(),
     thumbnail: Joi.string().max(800).allow(null),
   });

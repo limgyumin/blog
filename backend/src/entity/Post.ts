@@ -61,7 +61,7 @@ export default class Post extends BaseEntity {
   user: User;
 
   //카테고리 별 분류를 위해 category 외래키 연결
-  @ManyToOne((type) => Category, { onDelete: "SET NULL" })
+  @ManyToOne((type) => Category, { onDelete: "CASCADE" })
   @JoinColumn({ name: "fk_category_idx" })
   category: Category;
 

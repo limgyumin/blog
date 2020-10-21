@@ -21,7 +21,7 @@ export default async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    logger.red("[GET] 카테고리 목록 조회 서버 오류.");
+    logger.red("[GET] 카테고리 목록 조회 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",
