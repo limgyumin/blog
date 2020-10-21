@@ -26,6 +26,7 @@ export default async (req: AuthRequest, res: Response) => {
     description: string;
     content: string;
     thumbnail: string;
+    is_temp?: boolean;
     category_idx: number;
   };
 
@@ -75,11 +76,32 @@ export default async (req: AuthRequest, res: Response) => {
       }
 
       post.category = category;
+    } else {
+      //category_idx가 없을 때
+      //만약 temp가 아니라면......
+      if (
+        (data.is_temp !== null && data.is_temp === false) ||
+        post.is_temp === false
+      ) {
+        logger.yellow("[PUT] 검증 오류. not temp but no category.");
+        res.status(400).json({
+          status: 400,
+          message: "검증 오류.",
+        });
+        return;
+      }
+    }
+
+    //data.is_temp가 false이고 post.is_temp가 true이면
+    //새 글이 작성되므로 작성시간을 새로 할당해줘뇨~
+    if (!data.is_temp && post.is_temp) {
+      post.created_at = new Date();
     }
 
     post.updated_at = new Date();
     post.title = data.title || post.title;
     post.description = data.description || post.description;
+    post.is_temp = data.is_temp === null ? post.is_temp : data.is_temp;
     post.content = data.content || post.content;
     post.thumbnail = data.thumbnail;
 
