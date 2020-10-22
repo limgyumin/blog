@@ -9,11 +9,13 @@ import modifyOrderCategory from "./category.ctrl/modifyOrderCategory";
 
 const router = Router();
 
+router.put("/order", authMiddleWare.admin, modifyOrderCategory);
+
 router.get("/:idx", getCategory);
 router.get("/", getCategories);
+
 router.post("/", authMiddleWare.admin, createCategory);
 router.put("/:idx", authMiddleWare.admin, modifyCategory);
-router.put("/", authMiddleWare.admin, modifyOrderCategory);
 router.delete("/:idx", authMiddleWare.admin, deleteCategory);
 
 export default router;

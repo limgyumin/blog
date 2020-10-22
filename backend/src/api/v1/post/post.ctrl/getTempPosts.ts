@@ -6,7 +6,7 @@ import logger from "../../../../lib/logger";
 export default async (req: Request, res: Response) => {
   try {
     const postRepo = getRepository(Post);
-    const tempPosts: Post[] = await postRepo.find({
+    const posts: Post[] = await postRepo.find({
       select: ["idx", "title", "description", "created_at"],
       where: {
         is_temp: true,
@@ -21,7 +21,7 @@ export default async (req: Request, res: Response) => {
       status: 200,
       message: "임시 글 조회 성공.",
       data: {
-        tempPosts,
+        posts,
       },
     });
   } catch (error) {
