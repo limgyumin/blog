@@ -5,6 +5,8 @@ import Post from "../../../../entity/Post";
 import logger from "../../../../lib/logger";
 import User from "../../../../entity/User";
 import PostCommentType from "../../../../type/PostCommentType";
+import Comment from "../../../../entity/Comment";
+import Reply from "../../../../entity/Reply";
 
 export default async (req: AuthRequest, res: Response) => {
   const user: User = req.user;
@@ -47,7 +49,27 @@ export default async (req: AuthRequest, res: Response) => {
       }
     }
 
-    //Get Comment Count 로직
+    let total_count: number = 0;
+
+    const commentRepo = getRepository(Comment);
+    const [comments, comment_count] = await commentRepo.findAndCount({
+      where: {
+        post: post,
+      },
+    });
+
+    //total_count에는 글의 모든 댓글과 답글 수를 할당해야해뇨~
+    total_count += comment_count;
+    for (let i in comments) {
+      const replyRepo = getRepository(Reply);
+      const reply_count = await replyRepo.count({
+        where: {
+          comment: comments[i],
+        },
+      });
+      total_count += reply_count;
+    }
+    post.comment_count = total_count;
 
     logger.green("[GET] 글 조회 성공.");
     res.status(200).json({
