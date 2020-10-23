@@ -84,7 +84,7 @@ const admin = async (req: AuthRequest, res: Response, next: NextFunction) => {
   }
 };
 
-const guest = async (req: AuthRequest, res: Response, next: NextFunction) => {
+const user = async (req: AuthRequest, res: Response, next: NextFunction) => {
   try {
     const user: User = await validateAuth(req);
     req.user = user;
@@ -117,7 +117,31 @@ const guest = async (req: AuthRequest, res: Response, next: NextFunction) => {
   }
 };
 
+const guest = async (req: any, res: Response, next: NextFunction) => {
+  try {
+    const user: User = await validateAuth(req);
+    req.user = user;
+    next();
+  } catch (err) {
+    switch (err.message) {
+      case "TOKEN_IS_ARRAY":
+      case "NO_TOKEN":
+      case "INVALID_TOKEN":
+      case "NO_USER":
+      case "EXPIRED_TOKEN":
+        return next();
+      default:
+        logger.red("토큰 검증 서버 오류.", err.message);
+        res.status(500).json({
+          status: 500,
+          message: "서버 오류.",
+        });
+    }
+  }
+};
+
 export default {
   admin,
   guest,
+  user,
 };
