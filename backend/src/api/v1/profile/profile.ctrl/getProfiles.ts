@@ -7,9 +7,12 @@ export default async (req: Request, res: Response) => {
   try {
     const userRepo = getRepository(User);
     const [users, user_count] = await userRepo.findAndCount({
-      select: ["idx", "id", "name", "bio", "created_at"],
+      select: ["idx", "avatar", "id", "name", "bio", "created_at"],
       where: {
         is_admin: false,
+      },
+      order: {
+        idx: "ASC",
       },
     });
 

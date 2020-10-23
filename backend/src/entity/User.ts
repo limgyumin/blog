@@ -12,6 +12,12 @@ export default class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   idx: number;
 
+  @Column({
+    length: 255,
+    nullable: false,
+  })
+  avatar: string;
+
   //아이디
   @Column({
     length: 255,

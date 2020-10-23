@@ -5,6 +5,7 @@ import logger from "../../../../lib/logger";
 import findOrCreate from "../../../../lib/findOrCreate";
 import User from "../../../../entity/User";
 import { createToken } from "../../../../lib/token";
+import UserDataType from "../../../../type/UserDataType";
 
 export default async (req: Request, res: Response) => {
   type RequestBody = {
@@ -38,10 +39,14 @@ export default async (req: Request, res: Response) => {
       },
     });
 
-    const id = githubAPI.data.login;
-    const name = githubAPI.data.name;
+    const data: UserDataType = {
+      avatar: githubAPI.data.avatar_url,
+      id: githubAPI.data.login,
+      name: githubAPI.data.name,
+      bio: githubAPI.data.bio,
+    };
 
-    const isExist: User = await findOrCreate(id, name);
+    const isExist: User = await findOrCreate(data);
 
     if (!isExist) {
       logger.yellow("[POST] 로그인 인증 실패.");
