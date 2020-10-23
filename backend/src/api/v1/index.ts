@@ -11,7 +11,7 @@ const router = Router();
 router.use("/auth", auth);
 router.use("/profile", profile);
 router.use("/category", category);
-router.use("/commet", comment);
+router.use("/comment", comment);
 router.use("/post", post);
 router.use("/reply", reply);
 
