@@ -79,10 +79,7 @@ export default async (req: AuthRequest, res: Response) => {
     } else {
       //category_idx가 없을 때
       //만약 temp가 아니라면......
-      console.log("카테고리 업는디");
-      console.log(data.is_temp !== null);
-      console.log(data.is_temp === false);
-      console.log(post.is_temp === false);
+
       if (
         (data.is_temp !== null && data.is_temp === false) ||
         post.is_temp === false

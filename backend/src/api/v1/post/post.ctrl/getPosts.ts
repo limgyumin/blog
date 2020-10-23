@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getRepository } from "typeorm";
+import { FindManyOptions, getRepository } from "typeorm";
 import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
@@ -8,11 +8,7 @@ import PostCommentType from "../../../../type/PostCommentType";
 
 export default async (req: Request, res: Response) => {
   try {
-    const postRepo = getRepository(Post);
-    const [posts, post_count]: [
-      PostCommentType[],
-      number
-    ] = await postRepo.findAndCount({
+    const postOptions: FindManyOptions = {
       select: [
         "idx",
         "title",
@@ -27,7 +23,13 @@ export default async (req: Request, res: Response) => {
       order: {
         idx: "ASC",
       },
-    });
+    };
+
+    const postRepo = getRepository(Post);
+    const [posts, post_count]: [
+      PostCommentType[],
+      number
+    ] = await postRepo.findAndCount(postOptions);
 
     for (let i in posts) {
       let total_count = 0;
