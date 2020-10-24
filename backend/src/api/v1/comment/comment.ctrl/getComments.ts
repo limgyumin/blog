@@ -3,6 +3,7 @@ import { getRepository } from "typeorm";
 import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
+import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
 import CommentListType from "../../../../type/CommentListType";
 
@@ -42,7 +43,13 @@ export default async (req: Request, res: Response) => {
         },
       });
 
+      const userRepo = getRepository(User);
+      const user: User = await userRepo.findOne({
+        idx: comments[i].fk_user_idx,
+      });
+
       comments[i].reply_count = reply_count;
+      comments[i].user_name = user.name;
     }
 
     logger.green("[GET] 댓글 목록 조회 성공.");
