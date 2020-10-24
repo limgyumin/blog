@@ -7,6 +7,7 @@ import User from "../../../../entity/User";
 import PostCommentType from "../../../../type/PostCommentType";
 import Comment from "../../../../entity/Comment";
 import Reply from "../../../../entity/Reply";
+import generateURL from "../../../../lib/util/generateURL";
 
 export default async (req: AuthRequest, res: Response) => {
   const user: User = req.user;
@@ -70,6 +71,10 @@ export default async (req: AuthRequest, res: Response) => {
       total_count += reply_count;
     }
     post.comment_count = total_count;
+
+    if (post.thumbnail) {
+      post.thumbnail = generateURL(req, post.thumbnail);
+    }
 
     logger.green("[GET] 글 조회 성공.");
     res.status(200).json({

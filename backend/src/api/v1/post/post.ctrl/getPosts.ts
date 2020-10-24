@@ -4,6 +4,7 @@ import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
 import logger from "../../../../lib/logger";
+import generateURL from "../../../../lib/util/generateURL";
 import PostCommentType from "../../../../type/PostCommentType";
 
 export default async (req: Request, res: Response) => {
@@ -33,6 +34,11 @@ export default async (req: Request, res: Response) => {
 
     for (let i in posts) {
       let total_count = 0;
+
+      if (posts[i].thumbnail) {
+        posts[i].thumbnail = generateURL(req, posts[i].thumbnail);
+      }
+
       const commentRepo = getRepository(Comment);
       const [comments, comment_count] = await commentRepo.findAndCount({
         where: {
