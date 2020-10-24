@@ -3,7 +3,9 @@ import { getRepository } from "typeorm";
 import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
+import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
+import ReplyUserType from "../../../../type/ReplyUserType";
 
 export default async (req: Request, res: Response) => {
   const commentIdx = req.query.comment;
@@ -42,9 +44,19 @@ export default async (req: Request, res: Response) => {
     }
 
     const replyRepo = getRepository(Reply);
-    const replies: Reply[] = await replyRepo.find({
+    const replies: ReplyUserType[] = await replyRepo.find({
       comment,
     });
+
+    for (let i in replies) {
+      const userRepo = getRepository(User);
+      const user: User = await userRepo.findOne({
+        where: {
+          idx: replies[i].fk_user_idx,
+        },
+      });
+      replies[i].user_name = user.name;
+    }
 
     logger.green("[GET] 답글 목록 조회 성공.");
     res.status(200).json({
