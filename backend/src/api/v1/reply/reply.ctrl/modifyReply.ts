@@ -41,6 +41,15 @@ export default async (req: AuthRequest, res: Response) => {
       return;
     }
 
+    if (reply.fk_user_idx !== user.idx && !user.is_admin) {
+      logger.yellow("[PUT] 권한 없음.");
+      res.status(403).json({
+        status: 403,
+        message: "권한 없음.",
+      });
+      return;
+    }
+
     reply.content = content;
     reply.updated_at = new Date();
 
