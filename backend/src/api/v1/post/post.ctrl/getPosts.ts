@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { number } from "joi";
 import { FindManyOptions, getRepository } from "typeorm";
 import Category from "../../../../entity/Category";
 import Comment from "../../../../entity/Comment";
+import Like from "../../../../entity/Like";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
 import logger from "../../../../lib/logger";
 import generateURL from "../../../../lib/util/generateURL";
-import PostCommentType from "../../../../type/PostCommentType";
+import PostListType from "../../../../type/PostListType";
 
 export default async (req: Request, res: Response) => {
   const categoryIdx = req.query.category;
@@ -55,7 +55,7 @@ export default async (req: Request, res: Response) => {
 
     const postRepo = getRepository(Post);
     const [posts, post_count]: [
-      PostCommentType[],
+      PostListType[],
       number
     ] = await postRepo.findAndCount(queryConditions);
 
@@ -73,6 +73,13 @@ export default async (req: Request, res: Response) => {
         },
       });
 
+      const likeRepo = getRepository(Like);
+      const like_count = await likeRepo.count({
+        where: {
+          post: posts[i],
+        },
+      });
+
       total_count += comment_count;
 
       for (let j in comments) {
@@ -84,7 +91,9 @@ export default async (req: Request, res: Response) => {
         });
         total_count += reply_count;
       }
+
       posts[i].comment_count = total_count;
+      posts[i].like_count = like_count;
     }
 
     logger.green("[GET] 글 목록 조회 성공.");

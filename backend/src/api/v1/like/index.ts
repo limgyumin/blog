@@ -1,15 +1,15 @@
 import { Router } from "express";
 import authMiddleWare from "../../../lib/middleware/auth";
-import createLike from "./like.ctrl/createLike";
-import deleteLike from "./like.ctrl/deleteLike";
+import postLike from "./like.ctrl/postLike";
 import getLikeCount from "./like.ctrl/getLikeCount";
 import getLikeUsers from "./like.ctrl/getLikeUsers";
+import getIsLiked from "./like.ctrl/getIsLiked";
 
 const router = Router();
 
-router.post("/", authMiddleWare.user, createLike);
+router.post("/", authMiddleWare.user, postLike);
 router.get("/", authMiddleWare.guest, getLikeUsers);
+router.get("/liked", authMiddleWare.user, getIsLiked);
 router.get("/count", authMiddleWare.guest, getLikeCount);
-router.delete("/:idx", authMiddleWare.user, deleteLike);
 
 export default router;

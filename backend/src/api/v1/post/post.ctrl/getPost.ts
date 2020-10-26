@@ -4,7 +4,7 @@ import { getRepository } from "typeorm";
 import Post from "../../../../entity/Post";
 import logger from "../../../../lib/logger";
 import User from "../../../../entity/User";
-import PostCommentType from "../../../../type/PostCommentType";
+import PostListType from "../../../../type/PostListType";
 import Comment from "../../../../entity/Comment";
 import Reply from "../../../../entity/Reply";
 import generateURL from "../../../../lib/util/generateURL";
@@ -24,7 +24,7 @@ export default async (req: AuthRequest, res: Response) => {
 
   try {
     const postRepo = getRepository(Post);
-    const post: PostCommentType = await postRepo.findOne({
+    const post: PostListType = await postRepo.findOne({
       where: {
         idx,
       },
