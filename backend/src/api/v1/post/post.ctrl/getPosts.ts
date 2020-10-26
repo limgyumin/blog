@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { number } from "joi";
 import { FindManyOptions, getRepository } from "typeorm";
+import Category from "../../../../entity/Category";
 import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
@@ -8,29 +10,54 @@ import generateURL from "../../../../lib/util/generateURL";
 import PostCommentType from "../../../../type/PostCommentType";
 
 export default async (req: Request, res: Response) => {
+  const categoryIdx = req.query.category;
+
+  const queryConditions: FindManyOptions = {
+    select: [
+      "idx",
+      "title",
+      "description",
+      "thumbnail",
+      "fk_category_idx",
+      "created_at",
+    ],
+    where: {
+      category: null,
+      is_temp: false,
+    },
+    order: {
+      created_at: "DESC",
+    },
+  };
+
   try {
-    const postOptions: FindManyOptions = {
-      select: [
-        "idx",
-        "title",
-        "description",
-        "thumbnail",
-        "fk_category_idx",
-        "created_at",
-      ],
-      where: {
-        is_temp: false,
-      },
-      order: {
-        idx: "ASC",
-      },
-    };
+    if (categoryIdx) {
+      const categoryRepo = getRepository(Category);
+      const category = await categoryRepo.findOne({
+        where: {
+          idx: categoryIdx,
+        },
+      });
+
+      if (!category) {
+        logger.yellow("[GET] 카테고리 없음.");
+        res.status(404).json({
+          status: 404,
+          message: "카테고리 없음.",
+        });
+        return;
+      }
+
+      queryConditions.where["category"] = category;
+    } else {
+      delete queryConditions.where["category"];
+    }
 
     const postRepo = getRepository(Post);
     const [posts, post_count]: [
       PostCommentType[],
       number
-    ] = await postRepo.findAndCount(postOptions);
+    ] = await postRepo.findAndCount(queryConditions);
 
     for (let i in posts) {
       let total_count = 0;
@@ -47,6 +74,7 @@ export default async (req: Request, res: Response) => {
       });
 
       total_count += comment_count;
+
       for (let j in comments) {
         const replyRepo = getRepository(Reply);
         const reply_count = await replyRepo.count({
