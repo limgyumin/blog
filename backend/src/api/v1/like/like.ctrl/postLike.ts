@@ -39,29 +39,24 @@ export default async (req: AuthRequest, res: Response) => {
       },
     });
 
-    if (like) {
-      logger.yellow("[POST] 이미 좋아요 누름.");
-      res.status(400).json({
-        status: 400,
-        message: "이미 좋아요 누름.",
-      });
-      return;
+    if (!like) {
+      like = new Like();
+
+      like.post = post;
+      like.user = user;
+
+      await likeRepo.save(like);
+    } else {
+      await likeRepo.remove(like);
     }
 
-    like = new Like();
-
-    like.post = post;
-    like.user = user;
-
-    await likeRepo.save(like);
-
-    logger.green("[POST] 좋아요 생성 성공.");
+    logger.green("[POST] 좋아요 처리 성공.");
     res.status(200).json({
       status: 200,
-      message: "좋아요 생성 성공.",
+      message: "좋아요 처리 성공.",
     });
   } catch (error) {
-    logger.red("[POST] 좋아요 생성 서버 오류.", error.message);
+    logger.red("[POST] 좋아요 처리 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",
