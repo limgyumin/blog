@@ -36,7 +36,7 @@ export default async (req: AuthRequest, res: Response) => {
     }
 
     const commentRepo = getRepository(Comment);
-    const comment: Comment = new Comment();
+    const comment = new Comment();
 
     comment.content = data.content;
     comment.post = post;

@@ -6,6 +6,7 @@ import comment from "./comment";
 import post from "./post";
 import reply from "./reply";
 import upload from "./upload";
+import like from "./like";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/upload", upload);
 router.use("/post", post);
 router.use("/comment", comment);
 router.use("/reply", reply);
+router.use("/like", like);
 
 export default router;

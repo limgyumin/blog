@@ -45,7 +45,9 @@ export default async (req: Request, res: Response) => {
 
       const userRepo = getRepository(User);
       const user: User = await userRepo.findOne({
-        idx: comments[i].fk_user_idx,
+        where: {
+          idx: comments[i].fk_user_idx,
+        },
       });
 
       comments[i].reply_count = reply_count;
