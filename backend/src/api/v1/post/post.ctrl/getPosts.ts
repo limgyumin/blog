@@ -18,12 +18,13 @@ export default async (req: Request, res: Response) => {
       "title",
       "description",
       "thumbnail",
-      "fk_category_idx",
       "created_at",
+      "fk_category_idx",
     ],
     where: {
       category: null,
       is_temp: false,
+      is_deleted: false,
     },
     order: {
       created_at: "DESC",
@@ -80,6 +81,13 @@ export default async (req: Request, res: Response) => {
         },
       });
 
+      const categoryRepo = getRepository(Category);
+      const category: Category = await categoryRepo.findOne({
+        where: {
+          idx: posts[i].fk_category_idx,
+        },
+      });
+
       total_count += comment_count;
 
       for (let j in comments) {
@@ -92,6 +100,7 @@ export default async (req: Request, res: Response) => {
         total_count += reply_count;
       }
 
+      posts[i].category_name = category.name;
       posts[i].comment_count = total_count;
       posts[i].like_count = like_count;
     }

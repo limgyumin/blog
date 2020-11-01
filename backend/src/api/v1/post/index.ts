@@ -8,12 +8,14 @@ import modifyPost from "./post.ctrl/modifyPost";
 import deletePost from "./post.ctrl/deletePost";
 import createTempPost from "./post.ctrl/createTempPost";
 import getTempPosts from "./post.ctrl/getTempPosts";
+import searchPost from "./post.ctrl/searchPost";
 
 const router = Router();
 
 router.post("/temp", authMiddleWare.admin, createTempPost);
 router.post("/", authMiddleWare.admin, createPost);
 
+router.get("/search", authMiddleWare.guest, searchPost);
 router.get("/temp", authMiddleWare.admin, getTempPosts);
 router.get("/", getPosts);
 router.get("/:idx", authMiddleWare.guest, getPost);
