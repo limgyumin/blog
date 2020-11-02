@@ -13,14 +13,7 @@ export default async (req: Request, res: Response) => {
   const categoryIdx = req.query.category;
 
   const queryConditions: FindManyOptions = {
-    select: [
-      "idx",
-      "title",
-      "description",
-      "thumbnail",
-      "created_at",
-      "fk_category_idx",
-    ],
+    select: ["idx", "title", "description", "thumbnail", "created_at"],
     where: {
       category: null,
       is_temp: false,
@@ -81,13 +74,6 @@ export default async (req: Request, res: Response) => {
         },
       });
 
-      const categoryRepo = getRepository(Category);
-      const category: Category = await categoryRepo.findOne({
-        where: {
-          idx: posts[i].fk_category_idx,
-        },
-      });
-
       total_count += comment_count;
 
       for (let j in comments) {
@@ -100,7 +86,6 @@ export default async (req: Request, res: Response) => {
         total_count += reply_count;
       }
 
-      posts[i].category_name = category.name;
       posts[i].comment_count = total_count;
       posts[i].like_count = like_count;
     }
