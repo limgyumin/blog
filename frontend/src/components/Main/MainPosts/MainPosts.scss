@@ -1,0 +1,13 @@
+.Main-Posts {
+  display: flex;
+  flex: 1 1 0%;
+  margin-top: 3rem;
+
+  &-Container {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 3rem;
+  }
+}
