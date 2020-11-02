@@ -1,0 +1,15 @@
+.Header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4rem;
+
+  &-Image {
+    height: 1.5rem;
+  }
+
+  &-Profile {
+  }
+}
