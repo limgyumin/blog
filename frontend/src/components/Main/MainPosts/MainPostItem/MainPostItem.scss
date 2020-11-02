@@ -1,0 +1,76 @@
+.Main-Post-Item {
+  width: 23rem;
+  height: 22rem;
+  border-radius: 0.3rem;
+  -webkit-box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  &-Thumbnail {
+    background-color: gray;
+    width: 100%;
+    height: 10rem;
+  }
+
+  &-Content {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    padding: 1rem;
+
+    &-Title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    &-Description {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #717171;
+      height: 4.3rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    border-top: 1px #f3f3f3 solid;
+
+    &-CreatedAt {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #b9b9b9;
+    }
+
+    &-Count {
+      display: flex;
+
+      &-Comment {
+        display: flex;
+        align-items: center;
+
+        & > span {
+          margin-left: 0.4rem;
+          font-size: 0.9rem;
+        }
+      }
+
+      &-Like {
+        display: flex;
+        align-items: center;
+        margin-left: 0.8rem;
+
+        & > span {
+          margin-left: 0.4rem;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
