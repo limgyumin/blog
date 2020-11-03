@@ -21,12 +21,15 @@ interface CategoryType {
 @autobind
 class CategoryStore {
   @observable categories: CategoryType[] = [];
+  @observable totalPostCount: number = 0;
 
   @action
   handleCategories = async (): Promise<CategoryResponseType> => {
     try {
       const response: CategoryResponseType = await Category.getCategories();
-      this.categories = response.data["categories"];
+
+      this.categories = response.data.categories;
+      this.totalPostCount = response.data.total;
 
       return new Promise((resolve, reject) => {
         resolve(response);

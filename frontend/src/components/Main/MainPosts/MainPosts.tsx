@@ -12,7 +12,9 @@ interface PostType {
   title: string;
   description: string;
   thumbnail: string;
+  fk_category_idx: number;
   created_at: Date;
+  category_name: string;
   comment_count: number;
   like_count: number;
 }
