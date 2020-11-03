@@ -55,6 +55,12 @@ export default class Post extends BaseEntity {
   })
   is_temp: boolean;
 
+  @Column({
+    default: false,
+    nullable: false,
+  })
+  is_main: boolean;
+
   //글쓴이를 가져오기 위해 user 외래키 연결
   @ManyToOne((type) => User, { onDelete: "SET NULL" })
   @JoinColumn({ name: "fk_user_idx" })
