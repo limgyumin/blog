@@ -12,16 +12,17 @@ import searchPost from "./post.ctrl/searchPost";
 
 const router = Router();
 
+router.get("/temp", authMiddleWare.admin, getTempPosts);
+router.get("/search", authMiddleWare.guest, searchPost);
+router.put("/:idx", authMiddleWare.admin, modifyPost);
+
 router.post("/temp", authMiddleWare.admin, createTempPost);
 router.post("/", authMiddleWare.admin, createPost);
 
-router.get("/search", authMiddleWare.guest, searchPost);
-router.get("/temp", authMiddleWare.admin, getTempPosts);
 router.get("/", getPosts);
 router.get("/:idx", authMiddleWare.guest, getPost);
 router.get("/comment/:idx", getPostCommentCount);
 
-router.put("/:idx", authMiddleWare.admin, modifyPost);
 router.delete("/:idx", authMiddleWare.admin, deletePost);
 
 export default router;

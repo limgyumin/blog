@@ -10,10 +10,41 @@ import generateURL from "../../../../lib/util/generateURL";
 import PostListType from "../../../../type/PostListType";
 
 export default async (req: Request, res: Response) => {
-  const categoryIdx = req.query.category;
+  type RequestQuery = {
+    category?: number;
+    page?: number;
+    limit?: number;
+  };
+
+  const query: RequestQuery = req.query;
+  if (!query.page || !query.limit) {
+    logger.yellow("[GET] 검증 오류. page or limit is null");
+    res.status(400).json({
+      status: 400,
+      message: "검증 오류.",
+    });
+    return;
+  }
+
+  if (query.page < 1) {
+    logger.yellow("[GET] 검증 오류. page is not valid");
+    res.status(400).json({
+      status: 400,
+      message: "검증 오류.",
+    });
+    return;
+  }
 
   const queryConditions: FindManyOptions = {
-    select: ["idx", "title", "description", "thumbnail", "created_at"],
+    select: [
+      "idx",
+      "title",
+      "description",
+      "thumbnail",
+      "fk_category_idx",
+      "created_at",
+      "is_main",
+    ],
     where: {
       category: null,
       is_temp: false,
@@ -22,14 +53,16 @@ export default async (req: Request, res: Response) => {
     order: {
       created_at: "DESC",
     },
+    skip: (query.page - 1) * query.limit,
+    take: query.limit,
   };
 
   try {
-    if (categoryIdx) {
+    if (query.category) {
       const categoryRepo = getRepository(Category);
       const category = await categoryRepo.findOne({
         where: {
-          idx: categoryIdx,
+          idx: query.category,
         },
       });
 
@@ -60,15 +93,22 @@ export default async (req: Request, res: Response) => {
         posts[i].thumbnail = generateURL(req, posts[i].thumbnail);
       }
 
-      const commentRepo = getRepository(Comment);
-      const [comments, comment_count] = await commentRepo.findAndCount({
+      const categoryRepo = getRepository(Category);
+      const category: Category = await categoryRepo.findOne({
         where: {
-          post: posts[i],
+          idx: posts[i].fk_category_idx,
         },
       });
 
       const likeRepo = getRepository(Like);
       const like_count = await likeRepo.count({
+        where: {
+          post: posts[i],
+        },
+      });
+
+      const commentRepo = getRepository(Comment);
+      const [comments, comment_count] = await commentRepo.findAndCount({
         where: {
           post: posts[i],
         },
@@ -86,8 +126,9 @@ export default async (req: Request, res: Response) => {
         total_count += reply_count;
       }
 
-      posts[i].comment_count = total_count;
+      posts[i].category_name = category.name;
       posts[i].like_count = like_count;
+      posts[i].comment_count = total_count;
     }
 
     logger.green("[GET] 글 목록 조회 성공.");
