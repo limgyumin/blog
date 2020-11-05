@@ -1,28 +1,18 @@
 import React from "react";
+import PostType from "../../util/types/PostType";
 import "./Main.scss";
 import MainPosts from "./MainPosts";
 
 interface MainProps {
+  fixedPost: PostType;
   posts: PostType[];
   loading: boolean;
 }
 
-interface PostType {
-  idx: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  fk_category_idx: number;
-  created_at: Date;
-  category_name: string;
-  comment_count: number;
-  like_count: number;
-}
-
-const Main = ({ posts, loading }: MainProps) => {
+const Main = ({ fixedPost, posts, loading }: MainProps) => {
   return (
     <>
-      <MainPosts posts={posts} loading={loading} />
+      <MainPosts fixedPost={fixedPost} posts={posts} loading={loading} />
     </>
   );
 };
