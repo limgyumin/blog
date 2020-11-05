@@ -1,0 +1,138 @@
+@mixin ellipsis($line-cnt, $line-height) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-cnt;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: $line-height;
+  height: $line-height * $line-cnt;
+}
+
+.Main-Fixed-Post {
+  &-Container {
+    width: 70%;
+    height: 24rem;
+    display: flex;
+    // border: 1px rgb(224, 224, 224) solid;
+    margin-bottom: 3rem;
+    cursor: pointer;
+
+    &-Thumbnail {
+      width: 55%;
+      height: 100%;
+      border-radius: 0.6rem;
+      background-color: #1e1e1e;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #ffffff;
+      font-size: 4rem;
+      font-weight: 700;
+      margin-right: 2.6rem;
+    }
+
+    &-Area {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &-Content {
+        display: flex;
+        flex-direction: column;
+        &-Category {
+          margin-bottom: 0.8rem;
+          color: #989898;
+          font-weight: 400;
+
+          & > span {
+            color: #1e1e1e;
+            font-weight: 600;
+          }
+        }
+
+        &-Title {
+          color: #1e1e1e;
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 0.6rem;
+          @include ellipsis(3, 2.8rem);
+        }
+
+        &-Description {
+          color: #6e6e6e;
+          font-size: 1rem;
+          font-weight: 500;
+          @include ellipsis(4, 1.6rem);
+        }
+      }
+
+      &-Information {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &-Profile {
+          display: flex;
+          align-items: center;
+
+          &-Avatar {
+            width: 3.6rem;
+            height: 3.6rem;
+            border-radius: 50%;
+            margin-right: 0.4rem;
+          }
+
+          &-Name {
+            color: #1e1e1e;
+            font-size: 1rem;
+            font-weight: 600;
+
+            & > span {
+              color: #8d8d8d;
+              font-weight: 500;
+            }
+          }
+        }
+
+        &-Count {
+          display: flex;
+          align-items: center;
+          margin-right: 0.4rem;
+
+          &-Comment {
+            display: flex;
+            align-items: center;
+
+            & > img {
+              width: 1.2rem;
+              height: 1.2rem;
+            }
+
+            & > span {
+              margin-left: 0.4rem;
+              font-size: 1.2rem;
+            }
+          }
+
+          &-Like {
+            display: flex;
+            align-items: center;
+            margin-left: 1.2rem;
+
+            & > img {
+              width: 1.2rem;
+              height: 1.2rem;
+            }
+
+            & > span {
+              margin-left: 0.4rem;
+              font-size: 1.2rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
