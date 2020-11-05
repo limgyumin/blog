@@ -3,8 +3,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import queryString from "query-string";
 
 import Main from "../../components/Main";
-import CategoryStore from "../../stores/CategoryStore";
-import PostStore from "../../stores/PostStore";
+import CategoryStore from "../../stores/Category";
+import PostStore from "../../stores/Post";
 import PostType from "../../util/types/PostType";
 
 interface MainContainerProps {

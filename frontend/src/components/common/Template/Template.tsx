@@ -1,5 +1,5 @@
 import React from "react";
-import HeaderContainer from "../../../containers/HeaderContainer/HeaderContainer";
+import HeaderContainer from "../../../containers/Header/HeaderContainer";
 
 interface TemplateProps {
   children: React.ReactNode;

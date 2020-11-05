@@ -12,7 +12,9 @@ interface MainProps {
 const Main = ({ fixedPost, posts, loading }: MainProps) => {
   return (
     <>
-      <MainPosts fixedPost={fixedPost} posts={posts} loading={loading} />
+      <div className="Main">
+        <MainPosts fixedPost={fixedPost} posts={posts} loading={loading} />
+      </div>
     </>
   );
 };

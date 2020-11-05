@@ -1,10 +1,19 @@
-import { boolean } from "joi";
+import { inject, observer } from "mobx-react";
 import React, { useEffect, useState, useRef } from "react";
 import Header from "../../components/common/Header";
+import LoginStore from "../../stores/Login";
 
-interface HeaderContainerProps {}
+interface HeaderContainerProps {
+  store?: StoreType;
+}
 
-const HeaderContainer = ({}: HeaderContainerProps) => {
+interface StoreType {
+  LoginStore: LoginStore;
+}
+
+const HeaderContainer = ({ store }: HeaderContainerProps) => {
+  const { showModal } = store!.LoginStore;
+
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
@@ -15,7 +24,6 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
     const shadow = pageYOffset > 50 && deltaY < 0;
-    console.log(pageYOffset);
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
@@ -29,9 +37,9 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
 
   return (
     <>
-      <Header shadow={shadow} hide={hide} />
+      <Header shadow={shadow} hide={hide} showModal={showModal} />
     </>
   );
 };
 
-export default HeaderContainer;
+export default inject("store")(observer(HeaderContainer));
