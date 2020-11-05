@@ -3,15 +3,28 @@ import "./Header.scss";
 import logo from "../../../assets/images/logo.svg";
 import Button from "../Button";
 
-interface HeaderProps {}
+interface HeaderProps {
+  shadow: boolean;
+  hide: boolean;
+}
 
-const Header = ({}: HeaderProps) => {
+const Header = ({ shadow, hide }: HeaderProps) => {
   return (
     <>
       <div className="Header">
-        <img className="Header-Image" src={logo} alt={logo} />
-        <div className="Header-Profile">
-          <Button text="로그인" />
+        <div
+          className={
+            hide
+              ? "Header-Container-Hide Header-Container"
+              : shadow
+              ? "Header-Container-Shadow Header-Container"
+              : "Header-Container"
+          }
+        >
+          <img className="Header-Container-Image" src={logo} alt={logo} />
+          <div className="Header-Container-Profile">
+            <Button text="로그인" />
+          </div>
         </div>
       </div>
     </>

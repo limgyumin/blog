@@ -1,15 +1,35 @@
 .Header {
   width: 100%;
   height: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 4rem;
+  position: relative;
 
-  &-Image {
-    height: 1.5rem;
-  }
+  &-Container {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 4rem;
+    background-color: #ffffff;
+    transition: 0.3s ease;
 
-  &-Profile {
+    &-Hide {
+      transform: translateY(-4rem);
+    }
+
+    &-Shadow {
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    }
+
+    &-Image {
+      height: 1.4rem;
+    }
+
+    &-Profile {
+    }
   }
 }
