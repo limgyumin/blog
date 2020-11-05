@@ -5,6 +5,7 @@ import Comment from "../../../../entity/Comment";
 import Like from "../../../../entity/Like";
 import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
+import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
 import generateURL from "../../../../lib/util/generateURL";
 import PostListType from "../../../../type/PostListType";
@@ -42,13 +43,15 @@ export default async (req: Request, res: Response) => {
       "description",
       "thumbnail",
       "fk_category_idx",
+      "fk_user_idx",
       "created_at",
-      "is_main",
+      "is_fixed",
     ],
     where: {
       category: null,
       is_temp: false,
       is_deleted: false,
+      is_fixed: false,
     },
     order: {
       created_at: "DESC",
@@ -87,8 +90,6 @@ export default async (req: Request, res: Response) => {
     ] = await postRepo.findAndCount(queryConditions);
 
     for (let i in posts) {
-      let total_count = 0;
-
       if (posts[i].thumbnail) {
         posts[i].thumbnail = generateURL(req, posts[i].thumbnail);
       }
@@ -107,12 +108,21 @@ export default async (req: Request, res: Response) => {
         },
       });
 
+      const userRepo = getRepository(User);
+      const user: User = await userRepo.findOne({
+        where: {
+          idx: posts[i].fk_user_idx,
+        },
+      });
+
       const commentRepo = getRepository(Comment);
       const [comments, comment_count] = await commentRepo.findAndCount({
         where: {
           post: posts[i],
         },
       });
+
+      let total_count = 0;
 
       total_count += comment_count;
 
@@ -126,6 +136,8 @@ export default async (req: Request, res: Response) => {
         total_count += reply_count;
       }
 
+      posts[i].user_avatar = user.avatar;
+      posts[i].user_name = user.name;
       posts[i].category_name = category.name;
       posts[i].like_count = like_count;
       posts[i].comment_count = total_count;
