@@ -59,7 +59,7 @@ export default class Post extends BaseEntity {
     default: false,
     nullable: false,
   })
-  is_main: boolean;
+  is_fixed: boolean;
 
   //글쓴이를 가져오기 위해 user 외래키 연결
   @ManyToOne((type) => User, { onDelete: "SET NULL" })

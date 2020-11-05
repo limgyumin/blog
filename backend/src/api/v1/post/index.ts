@@ -9,9 +9,11 @@ import deletePost from "./post.ctrl/deletePost";
 import createTempPost from "./post.ctrl/createTempPost";
 import getTempPosts from "./post.ctrl/getTempPosts";
 import searchPost from "./post.ctrl/searchPost";
+import getFixedPost from "./post.ctrl/getFixedPost";
 
 const router = Router();
 
+router.get("/fixed", authMiddleWare.guest, getFixedPost);
 router.get("/temp", authMiddleWare.admin, getTempPosts);
 router.get("/search", authMiddleWare.guest, searchPost);
 router.put("/:idx", authMiddleWare.admin, modifyPost);
