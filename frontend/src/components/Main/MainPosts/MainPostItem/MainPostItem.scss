@@ -1,29 +1,51 @@
-.Main-Post-Item {
-  width: 23rem;
-  height: 22rem;
-  border-radius: 0.3rem;
-  -webkit-box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.1);
-  margin: 1rem;
+@mixin ellipsis($line-cnt, $line-height) {
   overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line-cnt;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  line-height: $line-height;
+  height: $line-height * $line-cnt;
+}
+
+.Main-Post-Item {
+  width: 26rem;
+  height: 25rem;
+  margin: 1rem;
   cursor: pointer;
 
   &-Thumbnail {
     background-color: gray;
     width: 100%;
-    height: 10rem;
+    height: 55%;
+    border-radius: 0.4rem;
   }
 
   &-Content {
+    height: 36%;
     display: flex;
-    flex: 1 1 0%;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0.8rem 0.6rem;
+
+    &-Category {
+      margin-bottom: 0.5rem;
+      color: #989898;
+      font-size: 0.8rem;
+      font-weight: 400;
+
+      & > span {
+        color: #1e1e1e;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+    }
 
     &-Title {
       font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      @include ellipsis(1, 1.3rem);
     }
 
     &-Description {
@@ -31,25 +53,44 @@
       font-weight: 500;
       color: #717171;
       height: 4.3rem;
-      margin-bottom: 1rem;
+      @include ellipsis(3, 1.2rem);
     }
   }
 
   &-Bottom {
+    height: 9%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.7rem 1rem;
-    border-top: 1px #f3f3f3 solid;
+    padding: 0.4rem 0.6rem;
 
-    &-CreatedAt {
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: #b9b9b9;
+    &-Profile {
+      display: flex;
+      align-items: center;
+
+      &-Avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        margin-right: 0.3rem;
+      }
+
+      &-Name {
+        color: #1e1e1e;
+        font-size: 0.8rem;
+        font-weight: 600;
+
+        & > span {
+          color: #8d8d8d;
+          font-weight: 500;
+        }
+      }
     }
 
     &-Count {
       display: flex;
+      align-items: center;
+      margin-right: 0.4rem;
 
       &-Comment {
         display: flex;
