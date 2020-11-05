@@ -1,14 +1,14 @@
 import React from "react";
 import "./Header.scss";
 import logo from "../../../assets/images/logo.svg";
-import Button from "../Button";
 
 interface HeaderProps {
   shadow: boolean;
   hide: boolean;
+  showModal: () => void;
 }
 
-const Header = ({ shadow, hide }: HeaderProps) => {
+const Header = ({ shadow, hide, showModal }: HeaderProps) => {
   return (
     <>
       <div className="Header">
@@ -23,7 +23,12 @@ const Header = ({ shadow, hide }: HeaderProps) => {
         >
           <img className="Header-Container-Image" src={logo} alt={logo} />
           <div className="Header-Container-Profile">
-            <Button text="로그인" />
+            <button
+              className="Header-Container-Profile-Button"
+              onClick={() => showModal()}
+            >
+              로그인
+            </button>
           </div>
         </div>
       </div>
