@@ -22,6 +22,18 @@ class Post {
       throw new Error(`${error}`);
     }
   }
+
+  async GetFixedPost() {
+    try {
+      let url = `${SERVER}/v1/post/fixed`;
+
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Post();
