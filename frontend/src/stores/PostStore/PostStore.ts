@@ -1,6 +1,7 @@
 import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
+import PostType from "../../util/types/PostType";
 
 interface PostParamsType {
   page: number;
@@ -8,7 +9,7 @@ interface PostParamsType {
   category?: number;
 }
 
-interface PostResponseType {
+interface PostsResponseType {
   status: number;
   message: string;
   data: {
@@ -17,27 +18,24 @@ interface PostResponseType {
   };
 }
 
-interface PostType {
-  idx: number;
-  title: string;
-  description: string;
-  thumbnail: string;
-  fk_category_idx: number;
-  created_at: Date;
-  category_name: string;
-  comment_count: number;
-  like_count: number;
+interface PostFixedResponseType {
+  status: number;
+  message: string;
+  data: {
+    post: PostType;
+  };
 }
 
 @autobind
 class PostStore {
+  @observable fixedPost: PostType = <PostType>{};
   @observable posts: PostType[] = [];
 
   @action
-  handlePosts = async (query: PostParamsType): Promise<PostResponseType> => {
+  handlePosts = async (query: PostParamsType): Promise<PostsResponseType> => {
     try {
       // 일단 response를 받고
-      const response: PostResponseType = await Post.GetPosts(query);
+      const response: PostsResponseType = await Post.GetPosts(query);
 
       // page가 1을 초과하면 posts 배열에 response.data.posts를 추가해요.
       if (query.page > 1) {
@@ -56,6 +54,25 @@ class PostStore {
       } else {
         // 아니면 그냥 넣어주고.........
         this.posts = response.data.posts;
+      }
+
+      return new Promise((resolve, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject) => {
+        reject(new Error(`${error}`));
+      });
+    }
+  };
+
+  @action
+  handleFixedPost = async (): Promise<PostFixedResponseType> => {
+    try {
+      const response: PostFixedResponseType = await Post.GetFixedPost();
+
+      if (response.data.post) {
+        this.fixedPost = response.data.post;
       }
 
       return new Promise((resolve, reject) => {

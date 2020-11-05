@@ -5,6 +5,7 @@ import queryString from "query-string";
 import Main from "../../components/Main";
 import CategoryStore from "../../stores/CategoryStore";
 import PostStore from "../../stores/PostStore";
+import PostType from "../../util/types/PostType";
 
 interface MainContainerProps {
   store?: StoreType;
@@ -21,16 +22,37 @@ interface PostParamsType {
   category?: number;
 }
 
+interface PostsResponseType {
+  status: number;
+  message: string;
+  data: {
+    post_count: number;
+    posts: PostType[];
+  };
+}
+
+interface PostFixedResponseType {
+  status: number;
+  message: string;
+  data: {
+    post: PostType;
+  };
+}
+
 const MainContainer = ({ store }: MainContainerProps) => {
-  const { posts, handlePosts } = store!.PostStore;
+  const { fixedPost, posts, handleFixedPost, handlePosts } = store!.PostStore;
   const { categories, handleCategories } = store!.CategoryStore;
 
   const [postCount, setPostCount] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [notFound, setNotFound] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
 
+  const requestHandleFixedPost = useCallback(async () => {
+    await handleFixedPost().then((res: PostFixedResponseType) => {});
+  }, []);
+
   const requestHandlePosts = useCallback(async () => {
-    setLoading(true);
     const query: PostParamsType = {
       page: page,
       limit: 18,
@@ -46,11 +68,25 @@ const MainContainer = ({ store }: MainContainerProps) => {
       delete query.category;
     }
 
-    await handlePosts(query).then((res: any) => {
+    await handlePosts(query).then((res: PostsResponseType) => {
       setPostCount(res.data["post_count"]);
-      setLoading(false);
+      if (res.data.posts.length > 0 || page > 1) {
+        setNotFound(false);
+      } else {
+        setNotFound(true);
+      }
     });
   }, [page]);
+
+  const requestPosts = async () => {
+    setLoading(true);
+    const requestPostsPromise: Promise<void>[] = [
+      requestHandleFixedPost(),
+      requestHandlePosts(),
+    ];
+    await Promise.all(requestPostsPromise);
+    setLoading(false);
+  };
 
   const requestHandleCategories = useCallback(() => {
     if (categories.length === 0) {
@@ -65,16 +101,12 @@ const MainContainer = ({ store }: MainContainerProps) => {
   }, []);
 
   useEffect(() => {
-    console.log(categories);
-  });
-
-  useEffect(() => {
-    requestHandlePosts();
+    requestPosts();
   }, []);
 
   return (
     <>
-      <Main posts={posts} loading={loading} />
+      <Main fixedPost={fixedPost} posts={posts} loading={loading} />
     </>
   );
 };
