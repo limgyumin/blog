@@ -39,10 +39,12 @@ const Login = ({}: LoginProps) => {
               </a>
             </div>
           </div>
-          <button className="Login-Container-Content-Button" onClick={() => {}}>
-            <img src={github_logo} alt={github_logo} />
-            GitHub로 로그인
-          </button>
+          <a href="https://github.com/login/oauth/authorize?client_id=8dcacc15c1bc58fea589&redirect_uri=http://localhost:3000/success">
+            <button className="Login-Container-Content-Button">
+              <img src={github_logo} alt={github_logo} />
+              GitHub로 로그인
+            </button>
+          </a>
         </div>
       </div>
     </>

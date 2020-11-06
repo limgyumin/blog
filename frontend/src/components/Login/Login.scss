@@ -21,6 +21,10 @@
     justify-content: space-between;
     padding: 3rem 2rem;
 
+    & > a {
+      text-decoration: none;
+    }
+
     &-Content {
       display: flex;
       flex-direction: column;

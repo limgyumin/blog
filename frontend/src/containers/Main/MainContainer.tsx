@@ -48,11 +48,11 @@ const MainContainer = ({ store }: MainContainerProps) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
 
-  const requestHandleFixedPost = useCallback(async () => {
+  const handleFixedPostCallback = useCallback(async () => {
     await handleFixedPost().then((res: PostFixedResponseType) => {});
   }, []);
 
-  const requestHandlePosts = useCallback(async () => {
+  const handlePostsCallback = useCallback(async () => {
     const query: PostParamsType = {
       page: page,
       limit: 18,
@@ -81,14 +81,14 @@ const MainContainer = ({ store }: MainContainerProps) => {
   const requestPosts = async () => {
     setLoading(true);
     const requestPostsPromise: Promise<void>[] = [
-      requestHandleFixedPost(),
-      requestHandlePosts(),
+      handleFixedPostCallback(),
+      handlePostsCallback(),
     ];
     await Promise.all(requestPostsPromise);
     setLoading(false);
   };
 
-  const requestHandleCategories = useCallback(() => {
+  const handleCategoriesCallback = useCallback(() => {
     if (categories.length === 0) {
       handleCategories().catch(() => {
         console.log("오 ㅈㄴ 큰 문제가 있네요");
@@ -97,7 +97,7 @@ const MainContainer = ({ store }: MainContainerProps) => {
   }, []);
 
   useEffect(() => {
-    requestHandleCategories();
+    handleCategoriesCallback();
   }, []);
 
   useEffect(() => {

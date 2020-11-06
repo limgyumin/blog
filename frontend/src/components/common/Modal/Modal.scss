@@ -17,7 +17,7 @@
     background-color: rgba(0, 0, 0, 0.3);
 
     &-Active {
-      animation: fadeIn ease 0.6s;
+      animation: fadeIn ease 0.5s;
 
       @keyframes fadeIn {
         0% {
@@ -30,7 +30,7 @@
     }
 
     &-Leave {
-      animation: fadeOut ease 0.6s;
+      animation: fadeOut ease 0.5s;
 
       @keyframes fadeOut {
         0% {
@@ -52,7 +52,7 @@
     box-shadow: 0 0 1.4rem 0 rgba(0, 0, 0, 0.25);
 
     &-Active {
-      animation: risingUp ease 0.6s;
+      animation: risingUp ease 0.5s;
       transform-origin: bottom;
 
       @keyframes risingUp {
@@ -66,7 +66,7 @@
     }
 
     &-Leave {
-      animation: risingDown ease 0.6s;
+      animation: risingDown ease 0.5s;
 
       @keyframes risingDown {
         0% {
