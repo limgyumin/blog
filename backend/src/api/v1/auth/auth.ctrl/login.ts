@@ -29,6 +29,17 @@ export default async (req: Request, res: Response) => {
       }
     );
 
+    if (response.data.error) {
+      logger.yellow("[POST] 검증 오류. code is invalid");
+      res.status(400).json({
+        status: 400,
+        message: "검증 오류.",
+      });
+      return;
+    }
+
+    console.log(response.data);
+
     const { access_token } = response.data;
 
     const githubAPI = await axios.get("https://api.github.com/user", {
@@ -66,7 +77,7 @@ export default async (req: Request, res: Response) => {
       },
     });
   } catch (error) {
-    logger.red("[POST] 로그인 서버 오류");
+    logger.red("[POST] 로그인 서버 오류", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",
