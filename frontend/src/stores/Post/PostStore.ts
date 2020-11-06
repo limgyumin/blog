@@ -9,7 +9,7 @@ interface PostParamsType {
   category?: number;
 }
 
-interface PostsResponseType {
+interface PostsResponse {
   status: number;
   message: string;
   data: {
@@ -18,7 +18,7 @@ interface PostsResponseType {
   };
 }
 
-interface PostFixedResponseType {
+interface PostFixedResponse {
   status: number;
   message: string;
   data: {
@@ -32,10 +32,10 @@ class PostStore {
   @observable posts: PostType[] = [];
 
   @action
-  handlePosts = async (query: PostParamsType): Promise<PostsResponseType> => {
+  handlePosts = async (query: PostParamsType): Promise<PostsResponse> => {
     try {
       // 일단 response를 받고
-      const response: PostsResponseType = await Post.GetPosts(query);
+      const response: PostsResponse = await Post.GetPosts(query);
 
       // page가 1을 초과하면 posts 배열에 response.data.posts를 추가해요.
       if (query.page > 1) {
@@ -67,9 +67,9 @@ class PostStore {
   };
 
   @action
-  handleFixedPost = async (): Promise<PostFixedResponseType> => {
+  handleFixedPost = async (): Promise<PostFixedResponse> => {
     try {
-      const response: PostFixedResponseType = await Post.GetFixedPost();
+      const response: PostFixedResponse = await Post.GetFixedPost();
 
       if (response.data.post) {
         this.fixedPost = response.data.post;

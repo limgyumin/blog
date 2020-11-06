@@ -11,7 +11,7 @@ class LoginStore {
     if (this.isShowed) {
       setTimeout(() => {
         this.isShowed = !this.isShowed;
-      }, 300);
+      }, 500);
     } else {
       this.isShowed = !this.isShowed;
     }
