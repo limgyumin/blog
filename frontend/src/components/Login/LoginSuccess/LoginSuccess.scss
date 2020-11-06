@@ -1,0 +1,73 @@
+.Login-Success {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &-Check {
+    z-index: 10;
+    margin-left: 1rem;
+    transform: translateY(1rem);
+    animation: upAndDown ease 1s infinite;
+    @keyframes upAndDown {
+      0% {
+        transform: translateY(1rem);
+      }
+
+      50% {
+        transform: translateY(0rem);
+      }
+
+      100% {
+        transform: translateY(1rem);
+      }
+    }
+  }
+
+  &-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-Image {
+      display: flex;
+      flex-direction: column;
+
+      &-Shadow {
+        width: 10rem;
+        margin-bottom: 2rem;
+        animation: bigAndSmall ease 1s infinite;
+        @keyframes bigAndSmall {
+          0% {
+            transform: scale(1, 1);
+          }
+
+          50% {
+            transform: scale(0.9, 0.9);
+          }
+
+          100% {
+            transform: scale(1, 1);
+          }
+        }
+      }
+    }
+
+    &-Title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #1e1e1e;
+    }
+
+    &-Subtitle {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #6e6e6e;
+    }
+  }
+}
