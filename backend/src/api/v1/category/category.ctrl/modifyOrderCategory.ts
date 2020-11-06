@@ -37,15 +37,14 @@ export default async (req: Request, res: Response) => {
       return;
     }
 
-    const categoryUpdatePromise: Promise<Category>[] = [];
-
     const tempOrderCategory: number = willUpdateCategory.order_number;
-
     willUpdateCategory.order_number = order_number;
-    categoryUpdatePromise.push(categoryRepo.save(willUpdateCategory));
-
     toUpdateCategory.order_number = tempOrderCategory;
-    categoryUpdatePromise.push(categoryRepo.save(toUpdateCategory));
+
+    const categoryUpdatePromise: Promise<Category>[] = [
+      categoryRepo.save(willUpdateCategory),
+      categoryRepo.save(toUpdateCategory),
+    ];
 
     await Promise.all(categoryUpdatePromise);
 
