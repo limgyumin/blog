@@ -28,13 +28,13 @@ const Login = ({}: LoginProps) => {
               저와 소통하고 싶으시다면... 😏
             </p>
             <div className="Login-Container-Content-SNS">
-              <a href={FACEBOOK}>
+              <a href={FACEBOOK} target="_blank">
                 <img src={facebook} alt={facebook} />
               </a>
-              <a href={INSTAGRAM}>
+              <a href={INSTAGRAM} target="_blank">
                 <img src={instagram} alt={instagram} />
               </a>
-              <a href={GITHUB}>
+              <a href={GITHUB} target="_blank">
                 <img src={github} alt={github} />
               </a>
             </div>

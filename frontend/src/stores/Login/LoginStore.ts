@@ -4,11 +4,18 @@ import { autobind } from "core-decorators";
 @autobind
 class LoginStore {
   @observable isShowed: boolean = false;
+  @observable isOpen: boolean = false;
 
   @action
   showModal() {
-    this.isShowed = !this.isShowed;
-    console.log(this.isShowed);
+    if (this.isShowed) {
+      setTimeout(() => {
+        this.isShowed = !this.isShowed;
+      }, 300);
+    } else {
+      this.isShowed = !this.isShowed;
+    }
+    this.isOpen = !this.isOpen;
   }
 }
 

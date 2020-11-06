@@ -41,7 +41,7 @@
       }
 
       &-Subtitle {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: #1e1e1e;
         margin-bottom: 1.6rem;
@@ -51,6 +51,14 @@
         & > a {
           margin-right: 2rem;
           cursor: pointer;
+
+          & > img {
+            transition: opacity 0.2s;
+
+            &:hover {
+              opacity: 0.6;
+            }
+          }
         }
       }
 

@@ -13,14 +13,12 @@ interface StoreType {
 }
 
 const LoginContainer = ({ store }: LoginContainerProps) => {
-  const { isShowed, showModal } = store!.LoginStore;
+  const { isShowed, isOpen, showModal } = store!.LoginStore;
   return (
     <>
-      {isShowed ? (
-        <Modal isShowed={isShowed} showModal={showModal}>
-          <Login />
-        </Modal>
-      ) : null}
+      <Modal isShowed={isShowed} isOpen={isOpen} showModal={showModal}>
+        <Login />
+      </Modal>
     </>
   );
 };
