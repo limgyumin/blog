@@ -38,8 +38,6 @@ export default async (req: Request, res: Response) => {
       return;
     }
 
-    console.log(response.data);
-
     const { access_token } = response.data;
 
     const githubAPI = await axios.get("https://api.github.com/user", {
