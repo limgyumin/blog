@@ -1,18 +1,15 @@
 .Main-Posts {
   display: flex;
-  margin-top: 6rem;
+  flex: 1 1 0%;
 
   &-Container {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    flex: 1 1 0%;
-    margin: 0 6rem;
 
     &-List {
-      width: 85rem;
       display: flex;
       flex-wrap: wrap;
-      margin: -1rem;
     }
   }
 }

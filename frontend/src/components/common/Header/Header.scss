@@ -34,16 +34,19 @@
 
     &-Profile {
       &-Button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
-        width: 5rem;
-        height: 2rem;
+        width: 2.85rem;
+        height: 2.85rem;
         background-color: #1a1a1a;
         color: white;
         font-size: 1rem;
         font-weight: 600;
         outline: none;
         border: none;
-        border-radius: 1rem;
+        border-radius: 50%;
         box-shadow: none;
         transition: background-color 0.3s, box-shadow 0.2s;
         -webkit-transition: background-color 0.3s, box-shadow 0.2s;

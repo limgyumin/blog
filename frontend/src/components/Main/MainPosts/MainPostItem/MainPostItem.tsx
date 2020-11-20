@@ -13,7 +13,9 @@ const MainPostItem = ({ post }: MainPostItemProps) => {
   return (
     <>
       <div className="Main-Post-Item">
-        <div className="Main-Post-Item-Thumbnail"></div>
+        <div className="Main-Post-Item-Thumbnail">
+          <div className="Main-Post-Item-Thumbnail-Image" />
+        </div>
         <div className="Main-Post-Item-Content">
           <span className="Main-Post-Item-Content-Category">
             <span>{post.category_name}</span> ·{" "}

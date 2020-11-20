@@ -1,14 +1,15 @@
 import React from "react";
 import "./Header.scss";
-import logo from "../../../assets/images/logo.svg";
+import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
+import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
+import { OAUTH } from "../../../config/config.json";
 
 interface HeaderProps {
   shadow: boolean;
   hide: boolean;
-  showModal: () => void;
 }
 
-const Header = ({ shadow, hide, showModal }: HeaderProps) => {
+const Header = ({ shadow, hide }: HeaderProps) => {
   return (
     <>
       <div
@@ -21,14 +22,11 @@ const Header = ({ shadow, hide, showModal }: HeaderProps) => {
         }
       >
         <div className="Header-Container">
-          <img className="Header-Container-Image" src={logo} alt={logo} />
+          <Logo className="Header-Container-Image" />
           <div className="Header-Container-Profile">
-            <button
-              className="Header-Container-Profile-Button"
-              onClick={() => showModal()}
-            >
-              로그인
-            </button>
+            <a href={OAUTH} className="Header-Container-Profile-Button">
+              <GitHub />
+            </a>
           </div>
         </div>
       </div>

@@ -1,32 +1,35 @@
-@mixin ellipsis($line-cnt, $line-height) {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: $line-cnt;
-  -webkit-box-orient: vertical;
-  word-wrap: break-word;
-  line-height: $line-height;
-  height: $line-height * $line-cnt;
-}
+@import "../../../../util/lib.scss";
 
 .Main-Post-Item {
   width: 26rem;
-  height: 25rem;
   margin: 1rem;
   cursor: pointer;
+  transition: transform ease 0.2s;
+
+  &:hover {
+    transform: translateY(-1rem);
+  }
 
   &-Thumbnail {
-    background-color: gray;
-    width: 100%;
-    height: 55%;
-    border-radius: 0.4rem;
+    position: relative;
+    padding-top: 60%;
+
+    &-Image {
+      width: 100%;
+      height: 100%;
+      background-color: gray;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      margin-bottom: 0.4rem;
+      position: absolute;
+      top: 0;
+    }
   }
 
   &-Content {
-    height: 36%;
     display: flex;
     flex-direction: column;
-    padding: 0.8rem 0.6rem;
+    padding: 0.6rem;
 
     &-Category {
       margin-bottom: 0.5rem;
@@ -45,20 +48,18 @@
       font-size: 1rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
-      @include ellipsis(1, 1.3rem);
+      @include ellipsis(1);
     }
 
     &-Description {
       font-size: 0.9rem;
       font-weight: 500;
       color: #717171;
-      height: 4.3rem;
-      @include ellipsis(3, 1.2rem);
+      @include ellipsis(3);
     }
   }
 
   &-Bottom {
-    height: 9%;
     display: flex;
     justify-content: space-between;
     align-items: center;

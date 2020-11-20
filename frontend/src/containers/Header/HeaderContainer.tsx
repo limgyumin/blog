@@ -6,9 +6,6 @@ import useStore from "../../util/lib/hooks/useStore";
 interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
-  const { store } = useStore();
-  const { showModal } = store.ModalStore;
-
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
@@ -32,7 +29,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
 
   return (
     <>
-      <Header shadow={shadow} hide={hide} showModal={showModal} />
+      <Header shadow={shadow} hide={hide} />
     </>
   );
 };

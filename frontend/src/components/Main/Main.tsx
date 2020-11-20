@@ -14,12 +14,14 @@ const Main = ({ fixedPost, posts, notFound, loading }: MainProps) => {
   return (
     <>
       <div className="Main">
-        <MainPosts
-          fixedPost={fixedPost}
-          posts={posts}
-          notFound={notFound}
-          loading={loading}
-        />
+        <div className="Main-Container">
+          <MainPosts
+            fixedPost={fixedPost}
+            posts={posts}
+            notFound={notFound}
+            loading={loading}
+          />
+        </div>
       </div>
     </>
   );
