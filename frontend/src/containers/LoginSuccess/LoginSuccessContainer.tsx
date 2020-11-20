@@ -1,28 +1,24 @@
 import React, { useCallback, useEffect } from "react";
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import queryString from "query-string";
-import LoginSuccess from "../../../components/Login/LoginSuccess";
-import UserStore from "../../../stores/User";
+import LoginSuccess from "../../components/LoginSuccess";
+import { useHistory } from "react-router-dom";
+import useStore from "../../util/lib/hooks/useStore";
 
-interface LoginSuccessContainerProps {
-  store?: StoreType;
-}
+interface LoginSuccessContainerProps {}
 
-interface StoreType {
-  UserStore: UserStore;
-}
-
-const LoginSuccessContainer = ({ store }: LoginSuccessContainerProps) => {
-  const { handleLogin } = store!.UserStore;
+const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
+  const { store } = useStore();
+  const { handleLogin } = store.UserStore;
+  const history = useHistory();
 
   const handleLoginCallback = useCallback(async () => {
     const { code } = queryString.parse(location.search);
 
-    console.log(String(code));
-
     await handleLogin(String(code)).then((res: any) => {
       localStorage.setItem("access_token", res.data.access_token);
       console.log("히힝 로그인 왕료");
+      history.push("/");
     });
   }, []);
 
@@ -37,4 +33,4 @@ const LoginSuccessContainer = ({ store }: LoginSuccessContainerProps) => {
   );
 };
 
-export default inject("store")(observer(LoginSuccessContainer));
+export default observer(LoginSuccessContainer);

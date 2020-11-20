@@ -1,20 +1,13 @@
-import { inject, observer } from "mobx-react";
+import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
 import queryString from "query-string";
 
 import Main from "../../components/Main";
-import CategoryStore from "../../stores/Category";
-import PostStore from "../../stores/Post";
-import PostType from "../../util/types/PostType";
+import PostType from "../../util/types/Post";
+import useStore from "../../util/lib/hooks/useStore";
+import { PostFixedResponse, PostsResponse } from "../../util/types/Response";
 
-interface MainContainerProps {
-  store?: StoreType;
-}
-
-interface StoreType {
-  PostStore: PostStore;
-  CategoryStore: CategoryStore;
-}
+interface MainContainerProps {}
 
 interface PostParamsType {
   page: number;
@@ -22,26 +15,10 @@ interface PostParamsType {
   category?: number;
 }
 
-interface PostsResponseType {
-  status: number;
-  message: string;
-  data: {
-    post_count: number;
-    posts: PostType[];
-  };
-}
-
-interface PostFixedResponseType {
-  status: number;
-  message: string;
-  data: {
-    post: PostType;
-  };
-}
-
-const MainContainer = ({ store }: MainContainerProps) => {
-  const { fixedPost, posts, handleFixedPost, handlePosts } = store!.PostStore;
-  const { categories, handleCategories } = store!.CategoryStore;
+const MainContainer = ({}: MainContainerProps) => {
+  const { store } = useStore();
+  const { fixedPost, posts, handleFixedPost, handlePosts } = store.PostStore;
+  const { categories, handleCategories } = store.CategoryStore;
 
   const [postCount, setPostCount] = useState<number>(0);
   const [notFound, setNotFound] = useState<boolean>(true);
@@ -49,7 +26,7 @@ const MainContainer = ({ store }: MainContainerProps) => {
   const [page, setPage] = useState<number>(1);
 
   const handleFixedPostCallback = useCallback(async () => {
-    await handleFixedPost().then((res: PostFixedResponseType) => {});
+    await handleFixedPost().then((res: PostFixedResponse) => {});
   }, []);
 
   const handlePostsCallback = useCallback(async () => {
@@ -68,7 +45,7 @@ const MainContainer = ({ store }: MainContainerProps) => {
       delete query.category;
     }
 
-    await handlePosts(query).then((res: PostsResponseType) => {
+    await handlePosts(query).then((res: PostsResponse) => {
       setPostCount(res.data["post_count"]);
       if (res.data.posts.length > 0 || page > 1) {
         setNotFound(false);
@@ -106,9 +83,14 @@ const MainContainer = ({ store }: MainContainerProps) => {
 
   return (
     <>
-      <Main fixedPost={fixedPost} posts={posts} loading={loading} />
+      <Main
+        fixedPost={fixedPost}
+        posts={posts}
+        notFound={notFound}
+        loading={loading}
+      />
     </>
   );
 };
 
-export default inject("store")(observer(MainContainer));
+export default observer(MainContainer);

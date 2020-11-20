@@ -1,7 +1,7 @@
 import React from "react";
 import "./LoginSuccess.scss";
-import check from "../../../assets/images/check.svg";
-import shadow from "../../../assets/images/shadow.svg";
+import { ReactComponent as Check } from "../../assets/images/check.svg";
+import { ReactComponent as Shadow } from "../../assets/images/shadow.svg";
 
 interface LoginSuccessProps {}
 
@@ -9,14 +9,10 @@ const LoginSuccess = ({}: LoginSuccessProps) => {
   return (
     <>
       <div className="Login-Success">
-        <img className="Login-Success-Check" src={check} alt={check} />
+        <Check className="Login-Success-Check" />
         <div className="Login-Success-Container">
           <div className="Login-Success-Container-Image">
-            <img
-              className="Login-Success-Container-Image-Shadow"
-              src={shadow}
-              alt={shadow}
-            />
+            <Shadow className="Login-Success-Container-Image-Shadow" />
           </div>
           <p className="Login-Success-Container-Title">
             로그인이 완료되었습니다!

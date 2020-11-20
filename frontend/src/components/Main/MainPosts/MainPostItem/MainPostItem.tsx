@@ -3,7 +3,7 @@ import "./MainPostItem.scss";
 import moment from "moment";
 import chat from "../../../../assets/images/chat.svg";
 import like from "../../../../assets/images/like.svg";
-import PostType from "../../../../util/types/PostType";
+import PostType from "../../../../util/types/Post";
 
 interface MainPostItemProps {
   post: PostType;

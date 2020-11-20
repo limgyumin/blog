@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 
 @autobind
-class LoginStore {
+class ModalStore {
   @observable isShowed: boolean = false;
   @observable isOpen: boolean = false;
 
@@ -19,4 +19,4 @@ class LoginStore {
   }
 }
 
-export default LoginStore;
+export default ModalStore;

@@ -11,16 +11,16 @@ interface HeaderProps {
 const Header = ({ shadow, hide, showModal }: HeaderProps) => {
   return (
     <>
-      <div className="Header">
-        <div
-          className={
-            hide
-              ? "Header-Container-Hide Header-Container"
-              : shadow
-              ? "Header-Container-Shadow Header-Container"
-              : "Header-Container"
-          }
-        >
+      <div
+        className={
+          hide
+            ? "Header-Hide Header"
+            : shadow
+            ? "Header-Shadow Header"
+            : "Header"
+        }
+      >
+        <div className="Header-Container">
           <img className="Header-Container-Image" src={logo} alt={logo} />
           <div className="Header-Container-Profile">
             <button

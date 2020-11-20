@@ -2,21 +2,7 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Login from "../../assets/api/Login";
 import Profile from "../../assets/api/Profile";
-
-interface GetProfileResponse {
-  status: number;
-  message: string;
-  data: {
-    user: {
-      avatar: string;
-      id: string;
-      name: string;
-      bio: string;
-      is_admin: boolean;
-      created_at: Date;
-    };
-  };
-}
+import { GetProfileResponse } from "../../util/types/Response";
 
 @autobind
 class UserStore {

@@ -1,9 +1,9 @@
 import React from "react";
 import moment from "moment";
 import "./MainFixedPost.scss";
-import PostType from "../../../../util/types/PostType";
 import chat from "../../../../assets/images/chat.svg";
 import like from "../../../../assets/images/like.svg";
+import PostType from "../../../../util/types/Post";
 
 interface MainFixedPostProps {
   fixedPost: PostType;

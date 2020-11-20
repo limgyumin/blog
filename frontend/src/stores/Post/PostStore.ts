@@ -1,29 +1,13 @@
 import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
-import PostType from "../../util/types/PostType";
+import PostType from "../../util/types/Post";
+import { PostFixedResponse, PostsResponse } from "../../util/types/Response";
 
 interface PostParamsType {
   page: number;
   limit: number;
   category?: number;
-}
-
-interface PostsResponse {
-  status: number;
-  message: string;
-  data: {
-    post_count: number;
-    posts: PostType[];
-  };
-}
-
-interface PostFixedResponse {
-  status: number;
-  message: string;
-  data: {
-    post: PostType;
-  };
 }
 
 @autobind

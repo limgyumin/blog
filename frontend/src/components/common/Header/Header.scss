@@ -1,29 +1,32 @@
 .Header {
   width: 100%;
-  height: 4rem;
-  position: relative;
+  display: flex;
+  padding: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  transition: 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+  &-Hide {
+    transform: translateY(-4rem);
+  }
+
+  &-Shadow {
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  }
 
   &-Container {
     width: 100%;
-    height: 4rem;
+    max-width: 1700px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 0 6rem;
-    background-color: #ffffff;
-    transition: 0.3s ease;
-
-    &-Hide {
-      transform: translateY(-4rem);
-    }
-
-    &-Shadow {
-      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-      -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-    }
+    justify-content: space-between;
+    padding: 0 1rem;
 
     &-Image {
       height: 1.4rem;
