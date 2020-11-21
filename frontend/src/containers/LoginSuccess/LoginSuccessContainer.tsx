@@ -15,11 +15,17 @@ const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
   const handleLoginCallback = useCallback(async () => {
     const { code } = queryString.parse(location.search);
 
-    await handleLogin(String(code)).then((res: any) => {
-      localStorage.setItem("access_token", res.data.access_token);
-      console.log("히힝 로그인 왕료");
-      history.push("/");
-    });
+    await handleLogin(String(code))
+      .then((res: any) => {
+        localStorage.setItem("access_token", res.data.access_token);
+        console.log("히힝 로그인 왕료");
+        history.push("/");
+      })
+      .catch((err: Error) => {
+        if (err.message.indexOf("400")) {
+          history.push("/");
+        }
+      });
   }, []);
 
   useEffect(() => {

@@ -5,6 +5,11 @@
   display: flex;
   margin: 0 1rem 2rem;
   cursor: pointer;
+  transition: transform ease 0.3s;
+
+  &:hover {
+    transform: translateX(-1rem);
+  }
 
   &-Thumbnail {
     position: relative;

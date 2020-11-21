@@ -3,6 +3,7 @@ import "./Header.scss";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
 import { OAUTH } from "../../../config/config.json";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   shadow: boolean;
@@ -22,10 +23,12 @@ const Header = ({ shadow, hide }: HeaderProps) => {
         }
       >
         <div className="Header-Container">
-          <Logo className="Header-Container-Image" />
+          <Link to="/">
+            <Logo className="Header-Container-Image" />
+          </Link>
           <div className="Header-Container-Profile">
             <a href={OAUTH} className="Header-Container-Profile-Button">
-              <GitHub />
+              <GitHub className="Header-Container-Profile-Button-Logo" />
             </a>
           </div>
         </div>

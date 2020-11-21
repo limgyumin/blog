@@ -1,0 +1,82 @@
+.Main-Post-Item-Loading {
+  width: 26rem;
+  margin: 1rem;
+  cursor: pointer;
+  transition: transform ease 0.2s;
+
+  &:hover {
+    transform: translateY(-1rem);
+  }
+
+  &-Thumbnail {
+    position: relative;
+    padding-top: 60%;
+
+    &-Image {
+      width: 100%;
+      height: 100%;
+      background-color: #ececec;
+      object-fit: cover;
+      border-radius: 0.8rem;
+      margin-bottom: 0.4rem;
+      position: absolute;
+      top: 0;
+    }
+  }
+
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    padding: 0.6rem;
+
+    &-Category {
+      margin-bottom: 0.5rem;
+      background-color: #ececec;
+      border-radius: 0.3rem;
+      width: 10rem;
+      height: 0.7rem;
+    }
+
+    &-Title {
+      background-color: #ececec;
+      border-radius: 0.3rem;
+      width: 20rem;
+      height: 1.4rem;
+      margin-bottom: 0.6rem;
+    }
+
+    &-Description {
+      background-color: #ececec;
+      border-radius: 0.3rem;
+      width: 22rem;
+      height: 1rem;
+    }
+  }
+
+  &-Bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 0.6rem;
+
+    &-Profile {
+      display: flex;
+      align-items: center;
+
+      &-Avatar {
+        width: 2rem;
+        height: 2rem;
+        background-color: #ececec;
+        border-radius: 50%;
+        margin-right: 0.3rem;
+      }
+
+      &-Name {
+        background-color: #ececec;
+        border-radius: 0.3rem;
+        width: 7rem;
+        height: 1rem;
+      }
+    }
+  }
+}

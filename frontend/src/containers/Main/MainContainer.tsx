@@ -21,8 +21,8 @@ const MainContainer = ({}: MainContainerProps) => {
   const { categories, handleCategories } = store.CategoryStore;
 
   const [postCount, setPostCount] = useState<number>(0);
-  const [notFound, setNotFound] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [notFound, setNotFound] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
   const handleFixedPostCallback = useCallback(async () => {
