@@ -10,4 +10,5 @@ export default interface PostType {
   comment_count: number;
   like_count: number;
   is_fixed: boolean;
+  fk_category_idx: number;
 }
