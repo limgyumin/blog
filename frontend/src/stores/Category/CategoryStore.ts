@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Category from "../../assets/api/Category";
 import { CategoryType } from "../../util/types/Category";
-import { CategoryResponse } from "../../util/types/Response";
+import { CategoriesResponse } from "../../util/types/Response";
 
 @autobind
 class CategoryStore {
@@ -10,9 +10,9 @@ class CategoryStore {
   @observable totalPostCount: number = 0;
 
   @action
-  handleCategories = async (): Promise<CategoryResponse> => {
+  handleCategories = async (): Promise<CategoriesResponse> => {
     try {
-      const response: CategoryResponse = await Category.getCategories();
+      const response: CategoriesResponse = await Category.getCategories();
 
       this.categories = response.data.categories;
       this.totalPostCount = response.data.total;

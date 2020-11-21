@@ -19,7 +19,7 @@ export interface PostFixedResponse extends Response {
   };
 }
 
-export interface CategoryResponse extends Response {
+export interface CategoriesResponse extends Response {
   data: {
     total: number;
     categories: CategoryType[];

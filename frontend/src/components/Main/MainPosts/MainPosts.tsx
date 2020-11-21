@@ -3,7 +3,6 @@ import PostType from "../../../util/types/Post";
 import MainFixedPost from "./MainFixedPost";
 import MainPostItem from "./MainPostItem";
 import MainPostItemLoading from "./MainPostItemLoading";
-import MainPostNotFound from "./MainPostNotFound";
 import "./MainPosts.scss";
 
 interface MainPostsProps {
@@ -17,28 +16,28 @@ const MainPosts = ({ fixedPost, posts, loading }: MainPostsProps) => {
     <>
       <div className="Main-Posts">
         <div className="Main-Posts-Container">
-          {loading ? (
-            <div className="Main-Posts-Container-List">
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-            </div>
-          ) : (
-            <>
-              {fixedPost && <MainFixedPost fixedPost={fixedPost} />}
-              <div className="Main-Posts-Container-List">
+          <div className="Main-Posts-Container-List">
+            {loading ? (
+              <>
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+                <MainPostItemLoading />
+              </>
+            ) : (
+              <>
+                {fixedPost && <MainFixedPost fixedPost={fixedPost} />}
                 {posts.map((post: PostType, idx: number) => (
                   <MainPostItem key={idx} post={post} />
                 ))}
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
       </div>
     </>
