@@ -1,0 +1,30 @@
+.Main-Category-Item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.2rem;
+  transition: transform ease 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateX(-0.6rem);
+  }
+
+  &-Name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #848484;
+    margin-right: 0.2rem;
+    transition: color ease 0.2s;
+
+    &-Active {
+      color: #1e1e1e;
+    }
+  }
+
+  &-Count {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #a2a2a2;
+  }
+}
