@@ -1,27 +1,42 @@
 import React from "react";
+import { CategoryType } from "../../util/types/Category";
 import PostType from "../../util/types/Post";
 import "./Main.scss";
+import MainCategories from "./MainCategories";
 import MainPosts from "./MainPosts";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
 
 interface MainProps {
   fixedPost: PostType;
   posts: PostType[];
+  categories: CategoryType[];
+  totalPostCount: number;
   notFound: boolean;
   loading: boolean;
 }
 
-const Main = ({ fixedPost, posts, notFound, loading }: MainProps) => {
+const Main = ({
+  fixedPost,
+  posts,
+  categories,
+  totalPostCount,
+  notFound,
+  loading,
+}: MainProps) => {
   return (
     <>
       <div className="Main">
-        {notFound ? (
-          <MainPostNotFound />
-        ) : (
-          <div className="Main-Container">
+        <div className="Main-Container">
+          {notFound ? (
+            <MainPostNotFound />
+          ) : (
             <MainPosts fixedPost={fixedPost} posts={posts} loading={loading} />
-          </div>
-        )}
+          )}
+          <MainCategories
+            categories={categories}
+            totalPostCount={totalPostCount}
+          />
+        </div>
       </div>
     </>
   );

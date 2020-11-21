@@ -1,11 +1,11 @@
 .Main {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  margin-top: 6rem;
 
   &-Container {
-    margin-top: 6rem;
     width: 100%;
     max-width: 1700px;
+    display: flex;
   }
 }

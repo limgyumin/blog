@@ -1,0 +1,17 @@
+.Main-Categories {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  margin-right: 1rem;
+
+  &-Title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px #cecece solid;
+  }
+
+  &-List {
+    margin: 1rem 0 0 0.6rem;
+  }
+}
