@@ -1,4 +1,5 @@
 import React from "react";
+import useQuery from "../../../util/lib/hooks/useQuery";
 import PostType from "../../../util/types/Post";
 import MainFixedPost from "./MainFixedPost";
 import MainPostItem from "./MainPostItem";
@@ -12,6 +13,7 @@ interface MainPostsProps {
 }
 
 const MainPosts = ({ fixedPost, posts, loading }: MainPostsProps) => {
+  const query = useQuery();
   return (
     <>
       <div className="Main-Posts">
@@ -31,7 +33,12 @@ const MainPosts = ({ fixedPost, posts, loading }: MainPostsProps) => {
               </>
             ) : (
               <>
-                {fixedPost && <MainFixedPost fixedPost={fixedPost} />}
+                {fixedPost && query.get("tab") === null && (
+                  <MainFixedPost fixedPost={fixedPost} />
+                )}
+                {Number(query.get("tab")) === fixedPost.fk_category_idx && (
+                  <MainPostItem post={fixedPost} />
+                )}
                 {posts.map((post: PostType, idx: number) => (
                   <MainPostItem key={idx} post={post} />
                 ))}

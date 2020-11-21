@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useQuery from "../../../../util/lib/hooks/useQuery";
 import { CategoryType } from "../../../../util/types/Category";
 import "./MainCategoryItem.scss";
