@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react";
-import queryString from "query-string";
 import LoginSuccess from "../../components/LoginSuccess";
 import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
+import useQuery from "../../util/lib/hooks/useQuery";
+import { LoginResponse } from "../../util/types/Response";
 
 interface LoginSuccessContainerProps {}
 
@@ -11,14 +12,14 @@ const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
   const { store } = useStore();
   const { handleLogin } = store.UserStore;
   const history = useHistory();
+  const query = useQuery();
 
   const handleLoginCallback = useCallback(async () => {
-    const { code } = queryString.parse(location.search);
+    const code = query.get("code");
 
     await handleLogin(String(code))
-      .then((res: any) => {
+      .then((res: LoginResponse) => {
         localStorage.setItem("access_token", res.data.access_token);
-        console.log("히힝 로그인 왕료");
         history.push("/");
       })
       .catch((err: Error) => {
@@ -30,7 +31,7 @@ const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
 
   useEffect(() => {
     handleLoginCallback();
-  }, []);
+  }, [handleLoginCallback]);
 
   return (
     <>

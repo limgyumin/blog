@@ -17,11 +17,13 @@ class CategoryStore {
       this.categories = response.data.categories;
       this.totalPostCount = response.data.total;
 
-      return new Promise((resolve, reject) => {
-        resolve(response);
-      });
+      return new Promise(
+        (resolve: (response: CategoriesResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
     } catch (error) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject: (error: Error) => void) => {
         reject(new Error(`${error}`));
       });
     }

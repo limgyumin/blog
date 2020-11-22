@@ -1,5 +1,6 @@
 import { CategoryType } from "./Category";
 import PostType from "./Post";
+import UserType from "./User";
 
 export type Response = {
   status: number;
@@ -26,15 +27,14 @@ export interface CategoriesResponse extends Response {
   };
 }
 
-export interface GetProfileResponse extends Response {
+export interface GetMyProfileResponse extends Response {
   data: {
-    user: {
-      avatar: string;
-      id: string;
-      name: string;
-      bio: string;
-      is_admin: boolean;
-      created_at: Date;
-    };
+    user: UserType;
+  };
+}
+
+export interface LoginResponse extends Response {
+  data: {
+    access_token: string;
   };
 }

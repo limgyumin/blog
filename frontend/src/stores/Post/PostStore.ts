@@ -40,11 +40,13 @@ class PostStore {
         this.posts = response.data.posts;
       }
 
-      return new Promise((resolve, reject) => {
-        resolve(response);
-      });
+      return new Promise(
+        (resolve: (response: PostsResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
     } catch (error) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject: (error: Error) => void) => {
         reject(new Error(`${error}`));
       });
     }
@@ -59,11 +61,13 @@ class PostStore {
         this.fixedPost = response.data.post;
       }
 
-      return new Promise((resolve, reject) => {
-        resolve(response);
-      });
+      return new Promise(
+        (resolve: (response: PostFixedResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
     } catch (error) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject: (error: Error) => void) => {
         reject(new Error(`${error}`));
       });
     }
