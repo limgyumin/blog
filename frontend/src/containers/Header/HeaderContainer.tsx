@@ -1,11 +1,15 @@
 import { observer } from "mobx-react";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../../components/common/Header";
 import useStore from "../../util/lib/hooks/useStore";
+import axios from "axios";
 
 interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
+  const { store } = useStore();
+  const { admin, login, user, handleMyProfile } = store.UserStore;
+
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
@@ -21,6 +25,23 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     setPageY(pageYOffset);
   };
 
+  const handleMyProfileCallback = useCallback(async () => {
+    if (!login && localStorage.getItem("access_token")) {
+      axios.defaults.headers.common["access_token"] = `${localStorage.getItem(
+        "access_token"
+      )}`;
+      handleMyProfile().catch((err: Error) => {
+        if (err.message.indexOf("410")) {
+          console.log("토큰이 만료됐떵.");
+        }
+      });
+    }
+  }, [login]);
+
+  useEffect(() => {
+    handleMyProfileCallback();
+  }, [handleMyProfileCallback]);
+
   useEffect(() => {
     documentRef.current.addEventListener("scroll", handleScroll);
     return () =>
@@ -29,7 +50,13 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
 
   return (
     <>
-      <Header shadow={shadow} hide={hide} />
+      <Header
+        shadow={shadow}
+        hide={hide}
+        admin={admin}
+        login={login}
+        user={user}
+      />
     </>
   );
 };
