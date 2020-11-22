@@ -1,18 +1,26 @@
-import "dotenv/config";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import AuthRequest from "../../../../type/AuthRequest";
 
-export default async (req: AuthRequest, res: Response) => {
-  const { id } = req.user;
+export default async (req: Request, res: Response) => {
+  const idx: number = Number(req.params.idx);
+
+  if (isNaN(idx)) {
+    logger.yellow("[GET] 검증 오류. idx is NaN");
+    res.status(400).json({
+      status: 400,
+      message: "검증 오류.",
+    });
+    return;
+  }
 
   try {
     const userRepo = getRepository(User);
     const user: User = await userRepo.findOne({
-      select: ["avatar", "id", "name", "bio", "is_admin", "created_at"],
-      where: { id },
+      where: {
+        idx,
+      },
     });
 
     if (!user) {
@@ -33,10 +41,10 @@ export default async (req: AuthRequest, res: Response) => {
       },
     });
   } catch (error) {
-    logger.red("[GET] 프로필 조회 서버 오류");
+    logger.red("[GET] 유저 프로필 조회 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
-      message: "서버 오류",
+      message: "서버 오류.",
     });
   }
 };
