@@ -1,7 +1,6 @@
 .Main-Posts {
-  width: 100%;
+  width: calc(100% - 18rem);
   display: flex;
-  // flex: 1 1 0%;
 
   &-Container {
     display: flex;

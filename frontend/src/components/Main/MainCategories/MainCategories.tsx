@@ -20,12 +20,14 @@ const MainCategories = ({
   return (
     <>
       <div className="Main-Categories">
-        <p className="Main-Categories-Title">카테고리</p>
-        <div className="Main-Categories-List">
-          <MainCategoryItem category={total_view} />
-          {categories.map((category, idx) => (
-            <MainCategoryItem key={idx} category={category} />
-          ))}
+        <div className="Main-Categories-Container">
+          <p className="Main-Categories-Container-Title">카테고리</p>
+          <div className="Main-Categories-Container-List">
+            <MainCategoryItem category={total_view} />
+            {categories.map((category, idx) => (
+              <MainCategoryItem key={idx} category={category} />
+            ))}
+          </div>
         </div>
       </div>
     </>

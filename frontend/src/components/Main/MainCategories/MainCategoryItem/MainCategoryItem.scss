@@ -1,8 +1,10 @@
+@import "../../../../util/color.scss";
+
 .Main-Category-Item {
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin-bottom: 0.2rem;
+  line-height: 1.8rem;
   transition: transform ease 0.2s;
   text-decoration: none;
 
@@ -18,7 +20,7 @@
     transition: color ease 0.2s;
 
     &-Active {
-      color: #1e1e1e;
+      color: $bg-black;
     }
   }
 

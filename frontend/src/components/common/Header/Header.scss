@@ -1,3 +1,5 @@
+@import "../../../util/color.scss";
+
 .Header {
   width: 100%;
   display: flex;
@@ -35,11 +37,42 @@
       display: flex;
       align-items: center;
 
+      &-Write {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5rem;
+        height: 2.1rem;
+        background-color: $bg-black;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #ffffff;
+        border-radius: 2rem;
+        margin-right: 1.4rem;
+        cursor: pointer;
+        box-shadow: none;
+        transition: all ease-in-out 0.3s;
+
+        &:hover {
+          background-color: #5e5e5e;
+        }
+
+        &:active {
+          box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
+        }
+      }
+
       &-Avatar {
-        width: 2.85rem;
-        height: 2.85rem;
+        width: 2.7rem;
+        height: 2.7rem;
         border-radius: 50%;
         box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+      }
+
+      &-Option {
+        width: 0.7rem;
+        margin-left: 0.8rem;
         cursor: pointer;
       }
 
@@ -48,9 +81,9 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        width: 2.85rem;
-        height: 2.85rem;
-        background-color: #1a1a1a;
+        width: 2.7rem;
+        height: 2.7rem;
+        background-color: $bg-black;
         border-radius: 50%;
         box-shadow: none;
         transition: all ease-in-out 0.3s;

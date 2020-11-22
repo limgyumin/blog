@@ -1,4 +1,5 @@
 @import "../../../../util/lib.scss";
+@import "../../../../util/color.scss";
 
 .Main-Post-Item {
   width: 26rem;
@@ -22,7 +23,7 @@
       height: 100%;
       background-color: gray;
       object-fit: cover;
-      border-radius: 0.8rem;
+      border-radius: 0.4rem;
       margin-bottom: 0.4rem;
       position: absolute;
       top: 0;
@@ -44,7 +45,7 @@
       font-weight: 400;
 
       & > span {
-        color: #1e1e1e;
+        color: $bg-black;
         font-size: 0.8rem;
         font-weight: 600;
       }
@@ -61,7 +62,7 @@
       font-size: 0.9rem;
       font-weight: 500;
       color: #717171;
-      @include ellipsis(3);
+      @include ellipsis(2);
     }
   }
 
@@ -83,7 +84,7 @@
       }
 
       &-Name {
-        color: #1e1e1e;
+        color: $bg-black;
         font-size: 0.8rem;
         font-weight: 600;
 
