@@ -62,18 +62,28 @@
         }
       }
 
-      &-Avatar {
-        width: 2.7rem;
-        height: 2.7rem;
-        border-radius: 50%;
-        box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+      &-User {
+        display: flex;
+        align-items: center;
         cursor: pointer;
-      }
 
-      &-Option {
-        width: 0.7rem;
-        margin-left: 0.8rem;
-        cursor: pointer;
+        &-Avatar {
+          width: 2.7rem;
+          height: 2.7rem;
+          border-radius: 50%;
+          box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+        }
+
+        &-Option {
+          width: 0.7rem;
+          margin-left: 0.8rem;
+        }
+
+        &:hover {
+          .Header-Container-Profile-User-Option > path {
+            fill: $bg-black;
+          }
+        }
       }
 
       &-Button {

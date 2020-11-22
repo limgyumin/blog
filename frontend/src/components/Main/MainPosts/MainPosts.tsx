@@ -17,34 +17,32 @@ const MainPosts = ({ fixedPost, posts, loading }: MainPostsProps) => {
   return (
     <>
       <div className="Main-Posts">
-        <div className="Main-Posts-Container">
-          <div className="Main-Posts-Container-List">
-            {loading ? (
-              <>
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-                <MainPostItemLoading />
-              </>
-            ) : (
-              <>
-                {fixedPost && query.get("tab") === null && (
-                  <MainFixedPost fixedPost={fixedPost} />
-                )}
-                {Number(query.get("tab")) === fixedPost.fk_category_idx && (
-                  <MainPostItem post={fixedPost} />
-                )}
-                {posts.map((post: PostType, idx: number) => (
-                  <MainPostItem key={idx} post={post} />
-                ))}
-              </>
-            )}
-          </div>
+        <div className="Main-Posts-List">
+          {loading ? (
+            <>
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+              <MainPostItemLoading />
+            </>
+          ) : (
+            <>
+              {fixedPost && query.get("tab") === null && (
+                <MainFixedPost fixedPost={fixedPost} />
+              )}
+              {Number(query.get("tab")) === fixedPost.fk_category_idx && (
+                <MainPostItem post={fixedPost} />
+              )}
+              {posts.map((post: PostType, idx: number) => (
+                <MainPostItem key={idx} post={post} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </>

@@ -37,12 +37,14 @@ const Header = ({ shadow, hide, admin, login, user }: HeaderProps) => {
                 {admin && (
                   <div className="Header-Container-Profile-Write">글 쓰기</div>
                 )}
-                <img
-                  src={user?.avatar}
-                  alt="Profile"
-                  className="Header-Container-Profile-Avatar"
-                />
-                <Option className="Header-Container-Profile-Option" />
+                <div className="Header-Container-Profile-User">
+                  <img
+                    src={user?.avatar}
+                    alt="Profile"
+                    className="Header-Container-Profile-User-Avatar"
+                  />
+                  <Option className="Header-Container-Profile-User-Option" />
+                </div>
               </>
             ) : (
               <a href={OAUTH} className="Header-Container-Profile-Button">
