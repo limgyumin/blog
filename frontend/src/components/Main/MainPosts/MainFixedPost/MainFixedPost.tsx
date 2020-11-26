@@ -1,8 +1,8 @@
 import React from "react";
 import moment from "moment";
 import "./MainFixedPost.scss";
-import chat from "../../../../assets/images/chat.svg";
-import like from "../../../../assets/images/like.svg";
+import { ReactComponent as Chat } from "../../../../assets/images/chat.svg";
+import { ReactComponent as Like } from "../../../../assets/images/like.svg";
 import PostType from "../../../../util/types/Post";
 
 interface MainFixedPostProps {
@@ -47,11 +47,11 @@ const MainFixedPost = ({ fixedPost }: MainFixedPostProps) => {
               </div>
               <div className="Main-Fixed-Post-Area-Information-Count">
                 <div className="Main-Fixed-Post-Area-Information-Count-Comment">
-                  <img src={chat} alt={chat} />
+                  <Chat />
                   <span>{fixedPost.comment_count}</span>
                 </div>
                 <div className="Main-Fixed-Post-Area-Information-Count-Like">
-                  <img src={like} alt={like} />
+                  <Like />
                   <span>{fixedPost.like_count}</span>
                 </div>
               </div>

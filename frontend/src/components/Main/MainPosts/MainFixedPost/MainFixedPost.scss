@@ -38,9 +38,11 @@
     &-Content {
       display: flex;
       flex-direction: column;
+      width: 100%;
+
       &-Category {
         margin-bottom: 0.8rem;
-        color: #989898;
+        color: $v-light-gray;
         font-weight: 400;
 
         & > span {
@@ -54,14 +56,23 @@
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        @include ellipsis(3);
+        @include ellipsis(2);
+
+        @media screen and (max-width: 980px) {
+          font-size: 1.4rem;
+          @include ellipsis(1);
+        }
       }
 
       &-Description {
         color: $light-gray;
         font-size: 1rem;
         font-weight: 500;
-        @include ellipsis(4);
+        @include ellipsis(3);
+
+        @media screen and (max-width: 980px) {
+          @include ellipsis(2);
+        }
       }
     }
 
@@ -102,7 +113,7 @@
           display: flex;
           align-items: center;
 
-          & > img {
+          & > svg {
             width: 1.2rem;
             height: 1.2rem;
           }
@@ -118,7 +129,7 @@
           align-items: center;
           margin-left: 1.2rem;
 
-          & > img {
+          & > svg {
             width: 1.2rem;
             height: 1.2rem;
           }
@@ -126,6 +137,93 @@
           & > span {
             margin-left: 0.4rem;
             font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 730px) {
+    flex-direction: column;
+    margin: 1rem;
+    width: 100%;
+
+    &:hover {
+      transform: translateY(-0.5rem);
+    }
+
+    &-Thumbnail {
+      padding: 60% 0 0 0;
+      margin-right: 0;
+
+      &-Image {
+        left: auto;
+        margin-bottom: 0.4rem;
+      }
+    }
+
+    &-Area {
+      width: 100%;
+      position: relative;
+
+      &-Content {
+        height: 100%;
+        padding: 0.6rem;
+        position: relative;
+
+        &-Category {
+          margin-bottom: 0.5rem;
+          font-size: 0.8rem;
+        }
+
+        &-Title {
+          font-size: 1rem;
+          margin-bottom: 0.5rem;
+        }
+
+        &-Description {
+          font-size: 0.9rem;
+        }
+      }
+
+      &-Information {
+        padding: 0.4rem 0.6rem;
+
+        &-Profile {
+          &-Avatar {
+            width: 2rem;
+            height: 2rem;
+            margin-right: 0.3rem;
+          }
+
+          &-Name {
+            font-size: 0.8rem;
+          }
+        }
+
+        &-Count {
+          &-Comment {
+            & > svg {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            & > span {
+              font-size: 0.9rem;
+            }
+          }
+
+          &-Like {
+            margin-left: 0.8rem;
+
+            & > svg {
+              width: 1rem;
+              height: 1rem;
+            }
+
+            & > span {
+              font-size: 0.9rem;
+            }
           }
         }
       }
