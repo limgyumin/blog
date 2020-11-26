@@ -51,7 +51,6 @@ export default async (req: Request, res: Response) => {
       category: null,
       is_temp: false,
       is_deleted: false,
-      is_fixed: false,
     },
     order: {
       created_at: "DESC",
