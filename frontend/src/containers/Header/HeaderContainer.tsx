@@ -3,11 +3,13 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../../components/common/Header";
 import useStore from "../../util/lib/hooks/useStore";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
   const { store } = useStore();
+  const { categories, totalPostCount } = store.CategoryStore;
   const { handleLoginState, handleAdminState } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
@@ -16,6 +18,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   const [shadow, setShadow] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
+  const { pathname } = useLocation();
 
   const handleScroll = () => {
     const { pageYOffset } = window;
@@ -88,6 +91,9 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
         setShowOption={setShowOption}
         closeOption={closeOption}
         handleLogout={handleLogout}
+        totalPostCount={totalPostCount}
+        categories={categories}
+        pathname={pathname}
       />
     </>
   );

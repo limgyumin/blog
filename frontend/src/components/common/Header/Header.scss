@@ -3,7 +3,6 @@
 .Header {
   width: 100%;
   display: flex;
-  padding: 0.8rem 0;
   justify-content: center;
   align-items: center;
   background-color: $white;
@@ -18,102 +17,118 @@
   }
 
   &-Shadow {
-    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 0.6rem 0 rgba(0, 0, 0, 0.2);
   }
 
   &-Container {
     width: 100%;
     max-width: 1700px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     padding: 0 1rem;
 
-    &-Image {
-      height: 1.4rem;
-    }
-
-    &-Profile {
+    &-Content {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
 
-      &-Write {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 5rem;
-        height: 2.1rem;
-        background-color: $black;
-        font-size: 1rem;
-        font-weight: 500;
-        color: $white;
-        border-radius: 2rem;
-        margin-right: 1.4rem;
-        cursor: pointer;
-        box-shadow: none;
-        transition: all ease-in-out 0.2s;
-
-        &:hover {
-          background-color: $gray;
-        }
-
-        &:active {
-          box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
-        }
+      &-Image {
+        height: 1.4rem;
       }
 
-      &-Wrapper {
-        position: relative;
+      &-Profile {
+        display: flex;
+        align-items: center;
 
-        &-User {
+        &-Write {
           display: flex;
+          justify-content: center;
           align-items: center;
+          width: 5rem;
+          height: 2.1rem;
+          background-color: $black;
+          font-size: 1rem;
+          font-weight: 500;
+          color: $white;
+          border-radius: 2rem;
+          margin-right: 1.4rem;
           cursor: pointer;
+          box-shadow: none;
+          transition: all ease-in-out 0.2s;
 
-          &-Avatar {
-            width: 2.7rem;
-            height: 2.7rem;
-            border-radius: 50%;
-            box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+          &:hover {
+            background-color: $gray;
           }
 
-          &-Option {
-            width: 0.7rem;
-            margin-left: 0.8rem;
+          &:active {
+            box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
           }
+        }
 
-          &:hover > &-Option {
-            path {
-              fill: $black;
+        &-Wrapper {
+          position: relative;
+
+          &-User {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            &-Avatar {
+              width: 2.7rem;
+              height: 2.7rem;
+              border-radius: 50%;
+              box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+            }
+
+            &-Option {
+              width: 0.7rem;
+              margin-left: 0.8rem;
+            }
+
+            &:hover > &-Option {
+              path {
+                fill: $black;
+              }
             }
           }
         }
+
+        &-Button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          width: 2.7rem;
+          height: 2.7rem;
+          background-color: $black;
+          border-radius: 50%;
+          box-shadow: none;
+          transition: all ease-in-out 0.3s;
+
+          &-Logo {
+            width: 1.85rem;
+            height: 1.85rem;
+          }
+
+          &:hover {
+            background-color: $gray;
+          }
+
+          &:active {
+            box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
+          }
+        }
       }
+    }
+    &-Categories {
+      width: 100%;
+      display: none;
+      flex-wrap: wrap;
+      padding-bottom: 0.5rem;
 
-      &-Button {
+      @media screen and (max-width: 1537px) {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        width: 2.7rem;
-        height: 2.7rem;
-        background-color: $black;
-        border-radius: 50%;
-        box-shadow: none;
-        transition: all ease-in-out 0.3s;
-
-        &-Logo {
-          width: 1.85rem;
-          height: 1.85rem;
-        }
-
-        &:hover {
-          background-color: $gray;
-        }
-
-        &:active {
-          box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
-        }
       }
     }
   }

@@ -7,6 +7,8 @@ import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";
 import HeaderOption from "./HeaderOption";
+import { CategoryType } from "../../../util/types/Category";
+import HeaderCategoryItem from "./HeaderCategoryItem";
 
 interface HeaderProps {
   shadow: boolean;
@@ -18,6 +20,9 @@ interface HeaderProps {
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   closeOption: (e: any) => void;
   handleLogout: () => void;
+  totalPostCount: number;
+  categories: CategoryType[];
+  pathname: string;
 }
 
 const Header = ({
@@ -30,7 +35,15 @@ const Header = ({
   setShowOption,
   closeOption,
   handleLogout,
+  totalPostCount,
+  categories,
+  pathname,
 }: HeaderProps) => {
+  const total_view = {
+    idx: 0,
+    name: "전체",
+    post_count: totalPostCount,
+  };
   return (
     <>
       <div
@@ -43,42 +56,57 @@ const Header = ({
         }
       >
         <div className="Header-Container">
-          <Link to="/">
-            <Logo className="Header-Container-Image" />
-          </Link>
-          <div className="Header-Container-Profile">
-            {login ? (
-              <>
-                {admin && (
-                  <div className="Header-Container-Profile-Write">글 쓰기</div>
-                )}
-                <div className="Header-Container-Profile-Wrapper">
-                  <div
-                    className="Header-Container-Profile-Wrapper-User"
-                    onClick={() => setShowOption(true)}
-                  >
-                    <img
-                      src={user?.avatar}
-                      alt="Profile"
-                      className="Header-Container-Profile-Wrapper-User-Avatar"
-                    />
-                    <Option className="Header-Container-Profile-Wrapper-User-Option" />
-                  </div>
-                  {showOption && (
-                    <HeaderOption
-                      admin={admin}
-                      closeOption={closeOption}
-                      handleLogout={handleLogout}
-                    />
+          <div className="Header-Container-Content">
+            <Link to="/">
+              <Logo className="Header-Container-Content-Image" />
+            </Link>
+            <div className="Header-Container-Content-Profile">
+              {login ? (
+                <>
+                  {admin && (
+                    <div className="Header-Container-Content-Profile-Write">
+                      글 쓰기
+                    </div>
                   )}
-                </div>
-              </>
-            ) : (
-              <a href={OAUTH} className="Header-Container-Profile-Button">
-                <GitHub className="Header-Container-Profile-Button-Logo" />
-              </a>
-            )}
+                  <div className="Header-Container-Content-Profile-Wrapper">
+                    <div
+                      className="Header-Container-Content-Profile-Wrapper-User"
+                      onClick={() => setShowOption(true)}
+                    >
+                      <img
+                        src={user?.avatar}
+                        alt="Profile"
+                        className="Header-Container-Content-Profile-Wrapper-User-Avatar"
+                      />
+                      <Option className="Header-Container-Content-Profile-Wrapper-User-Option" />
+                    </div>
+                    {showOption && (
+                      <HeaderOption
+                        admin={admin}
+                        closeOption={closeOption}
+                        handleLogout={handleLogout}
+                      />
+                    )}
+                  </div>
+                </>
+              ) : (
+                <a
+                  href={OAUTH}
+                  className="Header-Container-Content-Profile-Button"
+                >
+                  <GitHub className="Header-Container-Content-Profile-Button-Logo" />
+                </a>
+              )}
+            </div>
           </div>
+          {pathname === "/" && (
+            <div className="Header-Container-Categories">
+              <HeaderCategoryItem category={total_view} />
+              {categories.map((category, idx) => (
+                <HeaderCategoryItem key={idx} category={category} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>

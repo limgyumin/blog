@@ -4,12 +4,12 @@
 .Main-Fixed-Post {
   width: 82rem;
   display: flex;
-  margin: 0 1rem 2rem;
+  margin: 1rem 1rem 2rem;
   cursor: pointer;
   transition: transform ease 0.3s;
 
   &:hover {
-    transform: translateX(-1rem);
+    transform: translateX(-0.5rem);
   }
 
   &-Thumbnail {
@@ -22,7 +22,7 @@
       height: 100%;
       background-color: $vvv-light-gray;
       object-fit: cover;
-      border-radius: 0.6rem;
+      border-radius: 0.4rem;
       position: absolute;
       top: 0;
       left: 0;

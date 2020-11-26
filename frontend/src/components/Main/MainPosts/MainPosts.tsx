@@ -35,9 +35,6 @@ const MainPosts = ({ fixedPost, posts, loading }: MainPostsProps) => {
               {fixedPost && query.get("tab") === null && (
                 <MainFixedPost fixedPost={fixedPost} />
               )}
-              {Number(query.get("tab")) === fixedPost.fk_category_idx && (
-                <MainPostItem post={fixedPost} />
-              )}
               {posts.map((post: PostType, idx: number) => (
                 <MainPostItem key={idx} post={post} />
               ))}
