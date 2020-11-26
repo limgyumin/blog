@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.scss";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
 import { ReactComponent as Option } from "../../../assets/images/option.svg";
+import { ReactComponent as Arrows } from "../../../assets/images/arrows.svg";
 import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";
@@ -23,6 +24,8 @@ interface HeaderProps {
   totalPostCount: number;
   categories: CategoryType[];
   pathname: string;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = ({
@@ -38,12 +41,15 @@ const Header = ({
   totalPostCount,
   categories,
   pathname,
+  open,
+  setOpen,
 }: HeaderProps) => {
   const total_view = {
     idx: 0,
     name: "전체",
     post_count: totalPostCount,
   };
+
   return (
     <>
       <div
@@ -100,12 +106,32 @@ const Header = ({
             </div>
           </div>
           {pathname === "/" && (
-            <div className="Header-Container-Categories">
-              <HeaderCategoryItem category={total_view} />
-              {categories.map((category, idx) => (
-                <HeaderCategoryItem key={idx} category={category} />
-              ))}
-            </div>
+            <>
+              <div
+                className={
+                  open
+                    ? "Header-Container-Categories-Open Header-Container-Categories"
+                    : "Header-Container-Categories"
+                }
+              >
+                <HeaderCategoryItem category={total_view} />
+                {categories.map((category, idx) => (
+                  <HeaderCategoryItem key={idx} category={category} />
+                ))}
+              </div>
+              <div
+                className="Header-Container-UpDown"
+                onClick={() => setOpen(!open)}
+              >
+                <Arrows
+                  className={
+                    open
+                      ? "Header-Container-UpDown-Icon-Open Header-Container-UpDown-Icon"
+                      : "Header-Container-UpDown-Icon"
+                  }
+                />
+              </div>
+            </>
           )}
         </div>
       </div>

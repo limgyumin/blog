@@ -13,6 +13,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   const { handleLoginState, handleAdminState } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
+  const [open, setOpen] = useState<boolean>(false);
   const [showOption, setShowOption] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
@@ -24,7 +25,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
-    const shadow = pageYOffset > 30 && deltaY < 0;
+    const shadow = (pageYOffset > 30 && deltaY < 0) || open;
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
@@ -70,6 +71,10 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   };
 
   useEffect(() => {
+    setShadow(open);
+  }, [open]);
+
+  useEffect(() => {
     handleMyProfileCallback();
   }, [handleMyProfileCallback]);
 
@@ -94,6 +99,8 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
         totalPostCount={totalPostCount}
         categories={categories}
         pathname={pathname}
+        open={open}
+        setOpen={setOpen}
       />
     </>
   );
