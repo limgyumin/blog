@@ -6,6 +6,7 @@ import { ReactComponent as Option } from "../../../assets/images/option.svg";
 import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";
+import HeaderOption from "./HeaderOption";
 
 interface HeaderProps {
   shadow: boolean;
@@ -13,9 +14,23 @@ interface HeaderProps {
   admin: boolean;
   login: boolean;
   user?: UserType;
+  showOption: boolean;
+  setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
+  closeOption: (e: any) => void;
+  handleLogout: () => void;
 }
 
-const Header = ({ shadow, hide, admin, login, user }: HeaderProps) => {
+const Header = ({
+  shadow,
+  hide,
+  admin,
+  login,
+  user,
+  showOption,
+  setShowOption,
+  closeOption,
+  handleLogout,
+}: HeaderProps) => {
   return (
     <>
       <div
@@ -37,13 +52,25 @@ const Header = ({ shadow, hide, admin, login, user }: HeaderProps) => {
                 {admin && (
                   <div className="Header-Container-Profile-Write">글 쓰기</div>
                 )}
-                <div className="Header-Container-Profile-User">
-                  <img
-                    src={user?.avatar}
-                    alt="Profile"
-                    className="Header-Container-Profile-User-Avatar"
-                  />
-                  <Option className="Header-Container-Profile-User-Option" />
+                <div className="Header-Container-Profile-Wrapper">
+                  <div
+                    className="Header-Container-Profile-Wrapper-User"
+                    onClick={() => setShowOption(true)}
+                  >
+                    <img
+                      src={user?.avatar}
+                      alt="Profile"
+                      className="Header-Container-Profile-Wrapper-User-Avatar"
+                    />
+                    <Option className="Header-Container-Profile-Wrapper-User-Option" />
+                  </div>
+                  {showOption && (
+                    <HeaderOption
+                      admin={admin}
+                      closeOption={closeOption}
+                      handleLogout={handleLogout}
+                    />
+                  )}
                 </div>
               </>
             ) : (

@@ -8,8 +8,10 @@ interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
   const { store } = useStore();
+  const { handleLoginState, handleAdminState } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
+  const [showOption, setShowOption] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
@@ -19,7 +21,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
-    const shadow = pageYOffset > 50 && deltaY < 0;
+    const shadow = pageYOffset > 30 && deltaY < 0;
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
@@ -37,6 +39,32 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
       });
     }
   }, [login]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("access_token");
+    axios.defaults.headers.common["access_token"] = "";
+    handleLoginState(false);
+    handleAdminState(false);
+  };
+
+  const closeOption = (e: any) => {
+    if (
+      e.target &&
+      !(
+        e.target.classList.contains("Header-Option") ||
+        e.target.classList.contains("Header-Option-MyProfile") ||
+        e.target.classList.contains("Header-Option-MyProfile-Text") ||
+        e.target.classList.contains("Header-Option-ReadList") ||
+        e.target.classList.contains("Header-Option-ReadList-Text") ||
+        e.target.classList.contains("Header-Option-TempList") ||
+        e.target.classList.contains("Header-Option-TempList-Text") ||
+        e.target.classList.contains("Header-Option-Logout") ||
+        e.target.classList.contains("Header-Option-Logout-Text")
+      )
+    ) {
+      setShowOption(false);
+    }
+  };
 
   useEffect(() => {
     handleMyProfileCallback();
@@ -56,6 +84,10 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
         admin={admin}
         login={login}
         user={user}
+        showOption={showOption}
+        setShowOption={setShowOption}
+        closeOption={closeOption}
+        handleLogout={handleLogout}
       />
     </>
   );

@@ -38,6 +38,11 @@ class UserStore {
   };
 
   @action
+  handleAdminState(state: boolean) {
+    this.admin = state;
+  }
+
+  @action
   handleLoginState(state: boolean) {
     this.login = state;
   }

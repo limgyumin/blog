@@ -1,0 +1,30 @@
+@import "../../../../util/color.scss";
+
+.Header-Option {
+  top: 4rem;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+  background: $white;
+  width: 12rem;
+  height: auto;
+  position: absolute;
+  border-radius: 0.2rem;
+
+  & > div {
+    width: 100%;
+    padding: 0.6rem;
+    cursor: pointer;
+    &:hover {
+      background-color: $vvvv-light-gray;
+    }
+
+    span {
+      font-size: 1rem;
+      font-weight: 500;
+      color: $black;
+    }
+  }
+}
