@@ -1,3 +1,5 @@
+@import "../../../util/color.scss";
+
 .Main-Categories {
   display: flex;
   flex-direction: column;
@@ -9,11 +11,12 @@
   &-Container {
     position: fixed;
     width: inherit;
+
     &-Title {
       font-size: 1.2rem;
       font-weight: 600;
       padding-bottom: 0.7rem;
-      border-bottom: 1px #cecece solid;
+      border-bottom: 1px $vvv-light-gray solid;
     }
 
     &-List {

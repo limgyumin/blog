@@ -15,18 +15,18 @@
   &-Name {
     font-size: 1rem;
     font-weight: 600;
-    color: #848484;
+    color: $vv-light-gray;
     margin-right: 0.2rem;
     transition: color ease 0.2s;
 
     &-Active {
-      color: $bg-black;
+      color: $black;
     }
   }
 
   &-Count {
     font-size: 0.9rem;
     font-weight: 500;
-    color: #a2a2a2;
+    color: $vv-light-gray;
   }
 }

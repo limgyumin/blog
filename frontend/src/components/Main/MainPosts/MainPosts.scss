@@ -1,11 +1,12 @@
 .Main-Posts {
+  width: 100%;
   display: flex;
   flex: 1 1 0%;
 
   &-List {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
     position: relative;
   }
 }
