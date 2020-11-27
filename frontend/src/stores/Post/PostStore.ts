@@ -2,7 +2,11 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
 import PostType from "../../util/types/Post";
-import { PostFixedResponse, PostsResponse } from "../../util/types/Response";
+import {
+  PostFixedResponse,
+  PostResponse,
+  PostsResponse,
+} from "../../util/types/Response";
 
 interface PostParamsType {
   page: number;
@@ -14,6 +18,28 @@ interface PostParamsType {
 class PostStore {
   @observable fixedPost: PostType = <PostType>{};
   @observable posts: PostType[] = [];
+  @observable post?: PostType;
+
+  @action
+  handleFixedPost = async (): Promise<PostFixedResponse> => {
+    try {
+      const response: PostFixedResponse = await Post.GetFixedPost();
+
+      if (response.data.post) {
+        this.fixedPost = response.data.post;
+      }
+
+      return new Promise(
+        (resolve: (response: PostFixedResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
 
   @action
   handlePosts = async (query: PostParamsType): Promise<PostsResponse> => {
@@ -47,28 +73,25 @@ class PostStore {
       );
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(new Error(`${error}`));
+        reject(error);
       });
     }
   };
 
   @action
-  handleFixedPost = async (): Promise<PostFixedResponse> => {
+  handlePost = async (idx: number): Promise<PostResponse> => {
     try {
-      const response: PostFixedResponse = await Post.GetFixedPost();
-
-      if (response.data.post) {
-        this.fixedPost = response.data.post;
-      }
+      const response: PostResponse = await Post.GetPost(idx);
+      this.post = response.data.post;
 
       return new Promise(
-        (resolve: (response: PostFixedResponse) => void, reject) => {
+        (resolve: (response: PostResponse) => void, reject) => {
           resolve(response);
         }
       );
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(new Error(`${error}`));
+        reject(error);
       });
     }
   };

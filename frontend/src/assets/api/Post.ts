@@ -8,6 +8,18 @@ interface PostParamsType {
 }
 
 class Post {
+  async GetFixedPost() {
+    try {
+      let url = `${SERVER}/v1/post/fixed`;
+
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async GetPosts(query: PostParamsType) {
     try {
       let url = `${SERVER}/v1/post/?page=${query.page}&limit=${query.limit}`;
@@ -23,12 +35,11 @@ class Post {
     }
   }
 
-  async GetFixedPost() {
+  async GetPost(idx: number) {
     try {
-      let url = `${SERVER}/v1/post/fixed`;
+      const url = `${SERVER}/v1/post/${idx}`;
 
       const { data } = await axios.get(url);
-
       return data;
     } catch (error) {
       throw new Error(`${error}`);

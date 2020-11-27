@@ -7,6 +7,12 @@ export type Response = {
   message: string;
 };
 
+export interface PostResponse extends Response {
+  data: {
+    post: PostType;
+  };
+}
+
 export interface PostsResponse extends Response {
   data: {
     post_count: number;
@@ -27,7 +33,7 @@ export interface CategoriesResponse extends Response {
   };
 }
 
-export interface GetMyProfileResponse extends Response {
+export interface MyProfileResponse extends Response {
   data: {
     user: UserType;
   };
