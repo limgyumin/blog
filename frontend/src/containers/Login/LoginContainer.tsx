@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react";
-import LoginSuccess from "../../components/LoginSuccess";
+import Login from "../../components/Login";
 import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
 import useQuery from "../../util/lib/hooks/useQuery";
 import { LoginResponse } from "../../util/types/Response";
 
-interface LoginSuccessContainerProps {}
+interface LoginContainerProps {}
 
-const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
+const LoginContainer = ({}: LoginContainerProps) => {
   const { store } = useStore();
   const { handleLogin } = store.UserStore;
   const history = useHistory();
@@ -35,9 +35,9 @@ const LoginSuccessContainer = ({}: LoginSuccessContainerProps) => {
 
   return (
     <>
-      <LoginSuccess />
+      <Login />
     </>
   );
 };
 
-export default observer(LoginSuccessContainer);
+export default observer(LoginContainer);

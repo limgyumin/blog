@@ -9,6 +9,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-0.5rem);
@@ -60,6 +61,7 @@
     }
 
     &-Title {
+      color: $black;
       font-size: 1rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
@@ -113,7 +115,8 @@
         align-items: center;
 
         & > span {
-          margin-left: 0.4rem;
+          color: $black;
+          margin-left: 0.3rem;
           font-size: 0.9rem;
         }
       }
@@ -124,7 +127,8 @@
         margin-left: 0.8rem;
 
         & > span {
-          margin-left: 0.4rem;
+          color: $black;
+          margin-left: 0.3rem;
           font-size: 0.9rem;
         }
       }

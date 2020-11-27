@@ -4,6 +4,7 @@ import moment from "moment";
 import chat from "../../../../assets/images/chat.svg";
 import like from "../../../../assets/images/like.svg";
 import PostType from "../../../../util/types/Post";
+import { Link } from "react-router-dom";
 
 interface MainPostItemProps {
   post: PostType;
@@ -12,7 +13,7 @@ interface MainPostItemProps {
 const MainPostItem = ({ post }: MainPostItemProps) => {
   return (
     <>
-      <div className="Main-Post-Item">
+      <Link to={`/post/${post.idx}`} className="Main-Post-Item">
         <div className="Main-Post-Item-Thumbnail">
           <div className="Main-Post-Item-Thumbnail-Image" />
         </div>
@@ -49,7 +50,7 @@ const MainPostItem = ({ post }: MainPostItemProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

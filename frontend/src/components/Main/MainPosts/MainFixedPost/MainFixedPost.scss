@@ -4,9 +4,10 @@
 .Main-Fixed-Post {
   width: 82rem;
   display: flex;
-  margin: 1rem 1rem 2rem;
+  margin: 0 1rem 2rem;
   cursor: pointer;
   transition: transform ease 0.3s;
+  text-decoration: none;
 
   &:hover {
     transform: translateX(-0.5rem);
@@ -41,19 +42,28 @@
       width: 100%;
 
       &-Category {
+        display: flex;
+        align-items: center;
         margin-bottom: 0.8rem;
         color: $v-light-gray;
         font-weight: 400;
 
+        & > svg {
+          width: 1rem;
+          height: 1rem;
+          margin-right: 0.2rem;
+        }
+
         & > span {
           color: $black;
           font-weight: 600;
+          margin-right: 0.2rem;
         }
       }
 
       &-Title {
         color: $black;
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 700;
         margin-bottom: 1rem;
         @include ellipsis(2);
@@ -119,6 +129,7 @@
           }
 
           & > span {
+            color: $black;
             margin-left: 0.4rem;
             font-size: 1.2rem;
           }
@@ -135,6 +146,7 @@
           }
 
           & > span {
+            color: $black;
             margin-left: 0.4rem;
             font-size: 1.2rem;
           }
