@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Login from "../../assets/api/Login";
 import Profile from "../../assets/api/Profile";
-import { GetMyProfileResponse, LoginResponse } from "../../util/types/Response";
+import { MyProfileResponse, LoginResponse } from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ class UserStore {
       );
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(new Error(`${error}`));
+        reject(error);
       });
     }
   };
@@ -48,9 +48,9 @@ class UserStore {
   }
 
   @action
-  handleMyProfile = async (): Promise<GetMyProfileResponse> => {
+  handleMyProfile = async (): Promise<MyProfileResponse> => {
     try {
-      const response: GetMyProfileResponse = await Profile.GetMyProfile();
+      const response: MyProfileResponse = await Profile.GetMyProfile();
 
       if (response["status"] === 200) {
         this.user = response.data.user;
@@ -59,14 +59,14 @@ class UserStore {
       }
 
       return new Promise(
-        (resolve: (Response: GetMyProfileResponse) => void, reject) => {
+        (resolve: (Response: MyProfileResponse) => void, reject) => {
           resolve(response);
         }
       );
     } catch (error) {
       this.admin = false;
       return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(new Error(`${error}`));
+        reject(error);
       });
     }
   };

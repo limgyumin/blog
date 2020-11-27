@@ -1,0 +1,10 @@
+.Post {
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+
+  &-Container {
+    width: 100%;
+    max-width: 1300px;
+  }
+}

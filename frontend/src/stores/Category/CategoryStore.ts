@@ -24,7 +24,7 @@ class CategoryStore {
       );
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(new Error(`${error}`));
+        reject(error);
       });
     }
   };
