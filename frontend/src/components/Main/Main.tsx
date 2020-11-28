@@ -13,6 +13,8 @@ interface MainProps {
   totalPostCount: number;
   notFound: boolean;
   loading: boolean;
+  postCount: number;
+  postRef: (node?: Element | null | undefined) => void;
 }
 
 const Main = ({
@@ -22,6 +24,8 @@ const Main = ({
   totalPostCount,
   notFound,
   loading,
+  postCount,
+  postRef,
 }: MainProps) => {
   return (
     <>
@@ -30,7 +34,13 @@ const Main = ({
           {notFound ? (
             <MainPostNotFound />
           ) : (
-            <MainPosts fixedPost={fixedPost} posts={posts} loading={loading} />
+            <MainPosts
+              fixedPost={fixedPost}
+              posts={posts}
+              loading={loading}
+              postCount={postCount}
+              postRef={postRef}
+            />
           )}
           <MainCategories
             categories={categories}

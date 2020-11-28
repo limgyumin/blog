@@ -5,6 +5,7 @@ import useStore from "../../util/lib/hooks/useStore";
 import { CategoriesResponse, PostsResponse } from "../../util/types/Response";
 import useQuery from "../../util/lib/hooks/useQuery";
 import { useLocation } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 interface MainContainerProps {}
 
@@ -26,6 +27,8 @@ const MainContainer = ({}: MainContainerProps) => {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
+
+  const [ref, inView] = useInView();
 
   const handleFixedPostCallback = useCallback(async () => {
     await handleFixedPost().catch((err: Error) => {
@@ -76,6 +79,13 @@ const MainContainer = ({}: MainContainerProps) => {
   }, []);
 
   useEffect(() => {
+    if (inView && !loading) {
+      setPage((page) => page + 1);
+      console.log(1);
+    }
+  }, [inView]);
+
+  useEffect(() => {
     handleCategoriesCallback();
   }, [handleCategoriesCallback]);
 
@@ -92,6 +102,8 @@ const MainContainer = ({}: MainContainerProps) => {
         totalPostCount={totalPostCount}
         notFound={notFound}
         loading={loading}
+        postCount={postCount}
+        postRef={ref}
       />
     </>
   );
