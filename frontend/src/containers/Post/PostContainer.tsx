@@ -17,9 +17,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
 
+  const { idx } = match.params;
+
   const handlePostCallback = useCallback(async () => {
     setLoading(true);
-    const { idx } = match.params;
     handlePost(Number(idx))
       .then((res: PostResponse) => {
         setLoading(false);

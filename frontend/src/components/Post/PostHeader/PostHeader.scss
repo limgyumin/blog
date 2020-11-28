@@ -1,0 +1,49 @@
+@import "../../../util/color.scss";
+
+.Post-Header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &-Title {
+      color: $black;
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+    }
+
+    &-Category {
+      display: flex;
+      align-items: center;
+
+      &-Name {
+        background-color: $vvv-light-gray;
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 0.2rem 0.7rem;
+        border-radius: 0.4rem;
+        color: $black;
+        margin-right: 0.3rem;
+      }
+
+      &-Date {
+        font-size: 1rem;
+        font-weight: 400;
+        color: $light-gray;
+      }
+    }
+  }
+
+  &-Thumbnail {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100vh;
+    margin-top: 4rem;
+  }
+}

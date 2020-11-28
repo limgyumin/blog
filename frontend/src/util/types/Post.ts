@@ -3,6 +3,7 @@ export default interface PostType {
   title: string;
   description: string;
   thumbnail: string;
+  content: string;
   created_at: Date;
   category_name: string;
   user_avatar: string;
