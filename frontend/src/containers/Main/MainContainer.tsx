@@ -2,7 +2,7 @@ import { observer } from "mobx-react";
 import React, { useCallback, useEffect, useState } from "react";
 import Main from "../../components/Main";
 import useStore from "../../util/lib/hooks/useStore";
-import { CategoriesResponse, PostsResponse } from "../../util/types/Response";
+import { PostsResponse } from "../../util/types/Response";
 import useQuery from "../../util/lib/hooks/useQuery";
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
@@ -20,23 +20,42 @@ const MainContainer = ({}: MainContainerProps) => {
   const query = useQuery();
 
   const { store } = useStore();
-  const { fixedPost, posts, handleFixedPost, handlePosts } = store.PostStore;
+  const {
+    fixedPost,
+    posts,
+    handleFixedPost,
+    handlePosts,
+    initPosts,
+    initFixedPost,
+  } = store.PostStore;
   const { totalPostCount, categories, handleCategories } = store.CategoryStore;
 
   const [postCount, setPostCount] = useState<number>(0);
   const [notFound, setNotFound] = useState<boolean>(false);
+  const [fixedLoading, setFixedLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
-  const [ref, inView] = useInView();
+  const [ref, inView] = useInView({ threshold: 0.5 });
 
   const handleFixedPostCallback = useCallback(async () => {
-    await handleFixedPost().catch((err: Error) => {
-      console.log(err);
-    });
+    if (search === "") {
+      setFixedLoading(true);
+      await handleFixedPost()
+        .then(() => {
+          setFixedLoading(false);
+        })
+        .catch((err: Error) => {
+          console.log(err);
+        });
+    } else {
+      initFixedPost();
+    }
   }, [search]);
 
   const handlePostsCallback = useCallback(async () => {
+    setLoading(true);
+
     const param: PostParamsType = {
       page: page,
       limit: 18,
@@ -49,8 +68,8 @@ const MainContainer = ({}: MainContainerProps) => {
     } else {
       delete param.category;
     }
-
     await handlePosts(param).then((res: PostsResponse) => {
+      setLoading(false);
       setPostCount(res.data["post_count"]);
       if (res.data["posts"].length > 0 || page > 1) {
         setNotFound(false);
@@ -60,38 +79,32 @@ const MainContainer = ({}: MainContainerProps) => {
     });
   }, [page, search]);
 
-  const requestPosts = async () => {
-    setLoading(true);
-    const requestPostsPromise: Promise<void>[] = [
-      handleFixedPostCallback(),
-      handlePostsCallback(),
-    ];
-    await Promise.all(requestPostsPromise);
-    setLoading(false);
-  };
-
   const handleCategoriesCallback = useCallback(async () => {
-    await handleCategories()
-      .then((res: CategoriesResponse) => {})
-      .catch((err: Error) => {
+    if (categories.length === 0) {
+      await handleCategories().catch((err: Error) => {
         console.log(err);
       });
+    }
   }, []);
 
   useEffect(() => {
-    if (inView && !loading) {
+    if (inView && !loading && posts.length < postCount) {
+      setLoading(true);
       setPage((page) => page + 1);
-      console.log(1);
     }
-  }, [inView]);
+  }, [inView, postCount, page, loading]);
 
   useEffect(() => {
     handleCategoriesCallback();
   }, [handleCategoriesCallback]);
 
   useEffect(() => {
-    requestPosts();
-  }, [handleFixedPostCallback, handlePostsCallback]);
+    handleFixedPostCallback();
+  }, [handleFixedPostCallback]);
+
+  useEffect(() => {
+    handlePostsCallback();
+  }, [handlePostsCallback]);
 
   return (
     <>
@@ -102,7 +115,7 @@ const MainContainer = ({}: MainContainerProps) => {
         totalPostCount={totalPostCount}
         notFound={notFound}
         loading={loading}
-        postCount={postCount}
+        fixedLoading={fixedLoading}
         postRef={ref}
       />
     </>
