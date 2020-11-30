@@ -65,8 +65,6 @@ const MainContainer = ({}: MainContainerProps) => {
 
     if (category) {
       param.category = category;
-      initPosts();
-      setPage(1);
     } else {
       delete param.category;
     }
@@ -96,6 +94,15 @@ const MainContainer = ({}: MainContainerProps) => {
       setPage((page) => page + 1);
     }
   }, [inView, postCount, page, loading]);
+
+  const initPostsCallback = useCallback(() => {
+    initPosts();
+    setPage(1);
+  }, [search]);
+
+  useEffect(() => {
+    initPostsCallback();
+  }, [initPostsCallback]);
 
   useEffect(() => {
     handleCategoriesCallback();
