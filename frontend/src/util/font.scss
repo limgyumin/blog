@@ -1,4 +1,5 @@
 $NOTO_SANS_KR_URL: "../assets/font/NotoSansKR/NotoSansKR";
+$MALGUN_GOTHIC_URL: "../assets/font/MalgunGothic/MalgunGothic";
 
 @mixin font_face($weight, $url) {
   font-family: NotoSansKR;
@@ -10,6 +11,15 @@ $NOTO_SANS_KR_URL: "../assets/font/NotoSansKR/NotoSansKR";
     url($url + ".otf") format("truetype");
 }
 
+@mixin font_face_m($weight, $url) {
+  font-family: MalgunGothic;
+  font-display: block;
+  font-weight: $weight;
+  src: url($url + ".eot");
+  src: url($url + ".eot?#iefix") format("embedded-opentype"),
+    url($url + ".ttf") format("truetype");
+}
+
 $NOTO_SANS_KR_THIN_WEIGHT: 100;
 $NOTO_SANS_KR_LIGHT_WEIGHT: 300;
 $NOTO_SANS_KR_DEMILIGHT_WEIGHT: 400;
@@ -17,6 +27,10 @@ $NOTO_SANS_KR_REGULAR_WEIGHT: 500;
 $NOTO_SANS_KR_MEDIUM_WEIGHT: 600;
 $NOTO_SANS_KR_BOLD_WEIGHT: 700;
 $NOTO_SANS_KR_BLACK_WEIGHT: 800;
+
+$MALGUN_GOTHIC_SEMILIGHT_WEIGHT: 300;
+$MALGUN_GOTHIC_REGULAR_WEIGHT: 500;
+$MALGUN_GOTHIC_BOLD_WEIGHT: 700;
 
 @font-face {
   @include font_face($NOTO_SANS_KR_THIN_WEIGHT, $NOTO_SANS_KR_URL + "-Thin");
@@ -47,4 +61,23 @@ $NOTO_SANS_KR_BLACK_WEIGHT: 800;
 }
 @font-face {
   @include font_face($NOTO_SANS_KR_BLACK_WEIGHT, $NOTO_SANS_KR_URL + "-Black");
+}
+
+@font-face {
+  @include font_face_m(
+    $MALGUN_GOTHIC_SEMILIGHT_WEIGHT,
+    $MALGUN_GOTHIC_URL + "-Semilight"
+  );
+}
+@font-face {
+  @include font_face_m(
+    $MALGUN_GOTHIC_REGULAR_WEIGHT,
+    $MALGUN_GOTHIC_URL + "-Regular"
+  );
+}
+@font-face {
+  @include font_face_m(
+    $MALGUN_GOTHIC_BOLD_WEIGHT,
+    $MALGUN_GOTHIC_URL + "-Bold"
+  );
 }

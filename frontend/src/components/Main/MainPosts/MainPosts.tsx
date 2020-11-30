@@ -2,6 +2,7 @@ import React from "react";
 import useQuery from "../../../util/lib/hooks/useQuery";
 import PostType from "../../../util/types/Post";
 import MainFixedPost from "./MainFixedPost";
+import MainFixedPostLoading from "./MainFixedPostLoading";
 import MainPostItem from "./MainPostItem";
 import MainPostItemLoading from "./MainPostItemLoading";
 import "./MainPosts.scss";
@@ -10,7 +11,7 @@ interface MainPostsProps {
   fixedPost: PostType;
   posts: PostType[];
   loading: boolean;
-  postCount: number;
+  fixedLoading: boolean;
   postRef: (node?: Element | null | undefined) => void;
 }
 
@@ -18,7 +19,7 @@ const MainPosts = ({
   fixedPost,
   posts,
   loading,
-  postCount,
+  fixedLoading,
   postRef,
 }: MainPostsProps) => {
   const query = useQuery();
@@ -26,20 +27,24 @@ const MainPosts = ({
     <>
       <div className="Main-Posts">
         <div className="Main-Posts-List">
-          <>
-            {fixedPost && query.get("tab") === null && (
-              <MainFixedPost fixedPost={fixedPost} />
-            )}
-            {posts.map((post: PostType, idx: number) => (
-              <React.Fragment key={idx}>
-                {posts.length - 1 === idx && postCount - 1 !== idx ? (
-                  <MainPostItem post={post} postRef={postRef} />
-                ) : (
-                  <MainPostItem post={post} />
-                )}
-              </React.Fragment>
-            ))}
-          </>
+          {fixedPost.idx && (
+            <>
+              {fixedLoading ? (
+                <MainFixedPostLoading />
+              ) : (
+                <MainFixedPost fixedPost={fixedPost} />
+              )}
+            </>
+          )}
+          {posts.map((post: PostType, idx: number) => (
+            <React.Fragment key={idx}>
+              {posts.length - 1 === idx ? (
+                <MainPostItem post={post} postRef={postRef} />
+              ) : (
+                <MainPostItem post={post} />
+              )}
+            </React.Fragment>
+          ))}
           {loading && (
             <>
               <MainPostItemLoading />
