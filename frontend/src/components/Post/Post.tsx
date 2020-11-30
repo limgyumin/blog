@@ -1,10 +1,11 @@
 import React from "react";
+import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
 import PostType from "../../util/types/Post";
 import "./Post.scss";
-import PostComponent from "./PostComponent";
+import PostHeader from "./PostHeader";
 
 interface PostProps {
-  post?: PostType;
+  post: PostType;
   loading: boolean;
   notFound: boolean;
 }
@@ -17,7 +18,23 @@ const Post = ({ post, loading, notFound }: PostProps) => {
           <p>아무것도 없떵</p>
         ) : (
           <div className="Post-Container">
-            {loading ? <p>로딩중이양</p> : <PostComponent post={post} />}
+            <>
+              {loading ? (
+                <p>로딩중이양</p>
+              ) : (
+                <>
+                  <PostHeader
+                    title={post.title}
+                    categoryName={post.category_name}
+                    createdAt={post.created_at}
+                    thumbnail={post.thumbnail}
+                  />
+                  <MarkDownContainer className="Post-Content">
+                    {post.content || post.content}
+                  </MarkDownContainer>
+                </>
+              )}
+            </>
           </div>
         )}
       </div>

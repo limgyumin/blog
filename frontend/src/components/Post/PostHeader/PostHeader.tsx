@@ -3,10 +3,10 @@ import React from "react";
 import "./PostHeader.scss";
 
 interface PostHeaderProps {
-  title?: string;
-  categoryName?: string;
-  createdAt?: Date;
-  thumbnail?: string;
+  title: string;
+  categoryName: string;
+  createdAt: Date;
+  thumbnail: string;
 }
 
 const PostHeader = ({
