@@ -17,8 +17,18 @@ interface PostParamsType {
 @autobind
 class PostStore {
   @observable fixedPost: PostType = <PostType>{};
+  @observable post: PostType = <PostType>{};
   @observable posts: PostType[] = [];
-  @observable post?: PostType;
+
+  @action
+  initPosts = () => {
+    this.posts = [];
+  };
+
+  @action
+  initFixedPost = () => {
+    this.fixedPost = <PostType>{};
+  };
 
   @action
   handleFixedPost = async (): Promise<PostFixedResponse> => {

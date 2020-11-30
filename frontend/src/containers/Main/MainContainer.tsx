@@ -65,9 +65,12 @@ const MainContainer = ({}: MainContainerProps) => {
 
     if (category) {
       param.category = category;
+      initPosts();
+      setPage(1);
     } else {
       delete param.category;
     }
+
     await handlePosts(param).then((res: PostsResponse) => {
       setLoading(false);
       setPostCount(res.data["post_count"]);
