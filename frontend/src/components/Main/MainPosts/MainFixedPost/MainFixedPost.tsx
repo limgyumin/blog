@@ -15,16 +15,22 @@ const MainFixedPost = ({ fixedPost }: MainFixedPostProps) => {
   return (
     <>
       <Link to={`/post/${fixedPost.idx}`} className="Main-Fixed-Post">
-        <div className="Main-Fixed-Post-Thumbnail">
-          <div className="Main-Fixed-Post-Thumbnail-Image" />
-        </div>
+        {fixedPost.thumbnail && (
+          <div className="Main-Fixed-Post-Thumbnail">
+            <img
+              src={fixedPost.thumbnail}
+              alt="Thumbnail"
+              className="Main-Fixed-Post-Thumbnail-Image"
+            />
+          </div>
+        )}
         <div className="Main-Fixed-Post-Area">
           <div className="Main-Fixed-Post-Area-Content">
             <div className="Main-Fixed-Post-Area-Content-Category">
               <Pin />
               <span>{fixedPost.category_name}</span>
               {" · "}
-              {moment(fixedPost.created_at).format("YYYY년 MM월 DD일")}
+              {moment(fixedPost.created_at).format("YYYY년 M월 D일")}
             </div>
             <span className="Main-Fixed-Post-Area-Content-Title">
               {fixedPost.title}

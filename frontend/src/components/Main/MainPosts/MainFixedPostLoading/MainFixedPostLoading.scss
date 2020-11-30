@@ -1,13 +1,31 @@
 @import "../../../../util/lib.scss";
 @import "../../../../util/color.scss";
 
-.Main-Fixed-Post {
+.Main-Fixed-Post-Loading {
   width: 82rem;
   display: flex;
   margin: 0 1rem 2rem;
   cursor: pointer;
   transition: transform ease 0.3s;
   text-decoration: none;
+
+  span {
+    background-color: $load-dark-gray;
+    animation: colorChange ease 1s infinite;
+    @keyframes colorChange {
+      0% {
+        background-color: $load-dark-gray;
+      }
+
+      50% {
+        background-color: $load-light-gray;
+      }
+
+      100% {
+        background-color: $load-dark-gray;
+      }
+    }
+  }
 
   &:hover {
     transform: translateX(-0.5rem);
@@ -44,43 +62,45 @@
         display: flex;
         align-items: center;
         margin-bottom: 0.8rem;
-        color: $v-light-gray;
         font-weight: 400;
 
-        & > svg {
-          width: 1rem;
-          height: 1rem;
-          margin-right: 0.2rem;
-        }
-
         & > span {
-          color: $black;
-          font-weight: 600;
-          margin-right: 0.2rem;
+          border-radius: 0.2rem;
+          width: 6rem;
+          height: 1rem;
+          margin-right: 0.5rem;
         }
       }
 
       &-Title {
-        color: $black;
-        font-size: 1.8rem;
-        font-weight: 700;
+        display: flex;
+        align-items: center;
         margin-bottom: 1rem;
-        @include ellipsis(2);
+
+        & > span {
+          width: 5.5rem;
+          height: 2rem;
+          border-radius: 0.2rem;
+          margin-right: 0.5rem;
+        }
 
         @media screen and (max-width: 980px) {
-          font-size: 1.4rem;
-          @include ellipsis(1);
+          height: 1.2rem;
         }
       }
 
       &-Description {
-        color: $light-gray;
-        font-size: 1rem;
-        font-weight: 500;
-        @include ellipsis(3);
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        align-items: center;
+        margin-bottom: 1rem;
 
-        @media screen and (max-width: 980px) {
-          @include ellipsis(2);
+        & > span {
+          width: 4rem;
+          height: 1.2rem;
+          border-radius: 0.2rem;
+          margin-right: 0.5rem;
         }
       }
     }
@@ -98,56 +118,18 @@
           width: 3.6rem;
           height: 3.6rem;
           border-radius: 50%;
-          margin-right: 0.4rem;
+          margin-right: 1rem;
         }
 
         &-Name {
-          color: $black;
-          font-size: 1rem;
-          font-weight: 600;
-
-          & > span {
-            color: $v-light-gray;
-            font-weight: 500;
-          }
-        }
-      }
-
-      &-Count {
-        display: flex;
-        align-items: center;
-        margin-right: 0.4rem;
-
-        &-Comment {
           display: flex;
           align-items: center;
 
-          & > svg {
-            width: 1.2rem;
-            height: 1.2rem;
-          }
-
           & > span {
-            color: $black;
-            margin-left: 0.4rem;
-            font-size: 1.2rem;
-          }
-        }
-
-        &-Like {
-          display: flex;
-          align-items: center;
-          margin-left: 1.2rem;
-
-          & > svg {
-            width: 1.2rem;
-            height: 1.2rem;
-          }
-
-          & > span {
-            color: $black;
-            margin-left: 0.4rem;
-            font-size: 1.2rem;
+            width: 4rem;
+            height: 1.4rem;
+            border-radius: 0.2rem;
+            margin-right: 0.5rem;
           }
         }
       }
@@ -183,17 +165,11 @@
         position: relative;
 
         &-Category {
-          margin-bottom: 0.5rem;
-          font-size: 0.8rem;
+          margin-bottom: 1rem;
         }
 
         &-Title {
-          font-size: 1rem;
-          margin-bottom: 0.5rem;
-        }
-
-        &-Description {
-          font-size: 0.9rem;
+          margin-bottom: 1rem;
         }
       }
 
@@ -204,37 +180,11 @@
           &-Avatar {
             width: 2rem;
             height: 2rem;
-            margin-right: 0.3rem;
+            margin-right: 1rem;
           }
 
           &-Name {
-            font-size: 0.8rem;
-          }
-        }
-
-        &-Count {
-          &-Comment {
-            & > svg {
-              width: 1rem;
-              height: 1rem;
-            }
-
-            & > span {
-              font-size: 0.9rem;
-            }
-          }
-
-          &-Like {
-            margin-left: 0.8rem;
-
-            & > svg {
-              width: 1rem;
-              height: 1rem;
-            }
-
-            & > span {
-              font-size: 0.9rem;
-            }
+            height: 0.6rem;
           }
         }
       }

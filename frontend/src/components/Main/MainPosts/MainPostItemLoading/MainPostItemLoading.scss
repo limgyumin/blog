@@ -6,6 +6,32 @@
   cursor: pointer;
   transition: transform ease 0.2s;
 
+  span {
+    background-color: $load-dark-gray;
+    animation: colorChange ease 1s infinite;
+    @keyframes colorChange {
+      0% {
+        background-color: $load-dark-gray;
+      }
+
+      50% {
+        background-color: $load-light-gray;
+      }
+
+      100% {
+        background-color: $load-dark-gray;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1360px) {
+    width: calc(50% - 2rem);
+  }
+
+  @media screen and (max-width: 730px) {
+    width: 100%;
+  }
+
   &:hover {
     transform: translateY(-1rem);
   }
@@ -17,7 +43,6 @@
     &-Image {
       width: 100%;
       height: 100%;
-      background-color: $vvv-light-gray;
       object-fit: cover;
       border-radius: 0.4rem;
       margin-bottom: 0.4rem;
@@ -32,26 +57,41 @@
     padding: 0.6rem;
 
     &-Category {
+      display: flex;
+      align-items: center;
       margin-bottom: 0.5rem;
-      background-color: $vvv-light-gray;
-      border-radius: 0.3rem;
-      width: 10rem;
-      height: 0.7rem;
+
+      & > span {
+        border-radius: 0.2rem;
+        width: 2.6rem;
+        height: 0.8rem;
+        margin-right: 0.5rem;
+      }
     }
 
     &-Title {
-      background-color: $vvv-light-gray;
-      border-radius: 0.3rem;
-      width: 20rem;
-      height: 1.4rem;
+      display: flex;
+      align-items: center;
       margin-bottom: 0.6rem;
+
+      & > span {
+        border-radius: 0.3rem;
+        width: 5rem;
+        height: 1.4rem;
+        margin-right: 0.5rem;
+      }
     }
 
     &-Description {
-      background-color: $vvv-light-gray;
-      border-radius: 0.3rem;
-      width: 22rem;
-      height: 1rem;
+      display: flex;
+      align-items: center;
+
+      & > span {
+        border-radius: 0.3rem;
+        width: 4.2rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+      }
     }
   }
 
@@ -68,16 +108,20 @@
       &-Avatar {
         width: 2rem;
         height: 2rem;
-        background-color: $vvv-light-gray;
         border-radius: 50%;
-        margin-right: 0.3rem;
+        margin-right: 0.8rem;
       }
 
       &-Name {
-        background-color: $vvv-light-gray;
-        border-radius: 0.3rem;
-        width: 7rem;
-        height: 1rem;
+        display: flex;
+        align-items: center;
+
+        & > span {
+          border-radius: 0.3rem;
+          width: 4.3rem;
+          height: 1rem;
+          margin-right: 0.5rem;
+        }
       }
     }
   }
