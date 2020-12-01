@@ -113,6 +113,11 @@
         display: flex;
         align-items: center;
 
+        & > svg {
+          width: 1rem;
+          height: 1rem;
+        }
+
         & > span {
           color: $black;
           margin-left: 0.3rem;
@@ -124,6 +129,11 @@
         display: flex;
         align-items: center;
         margin-left: 0.8rem;
+
+        & > svg {
+          width: 1rem;
+          height: 1rem;
+        }
 
         & > span {
           color: $black;

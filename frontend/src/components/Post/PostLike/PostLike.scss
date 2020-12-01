@@ -1,0 +1,86 @@
+@import "../../../util/color.scss";
+
+.Post-Like {
+  position: absolute;
+  top: 2rem;
+  left: -6rem;
+
+  @media screen and (max-width: 1025px) {
+    display: none;
+  }
+
+  &-Area {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3rem;
+    border: 1.8px solid $v-light-gray;
+    background-color: $white;
+    padding: 0.75rem;
+    transition: all ease 0.1s;
+    cursor: pointer;
+
+    &-Active,
+    &-Active:hover {
+      border-color: $light-black !important;
+    }
+
+    &:hover {
+      border-color: $light-gray;
+    }
+
+    &:hover > &-Button {
+      & > path {
+        fill: $light-gray;
+      }
+
+      &-Active {
+        & > path {
+          fill: $light-black;
+        }
+      }
+    }
+
+    &:hover > &-Count {
+      color: $light-gray;
+
+      &-Active {
+        color: $light-black;
+      }
+    }
+
+    &-Button {
+      width: 1.8rem;
+      height: 1.8rem;
+      margin-bottom: 0.4rem;
+      transition: all ease 0.1s;
+      transform: translateY(0.135rem);
+
+      & > path {
+        transition: all ease 0.1s;
+        fill: $v-light-gray;
+      }
+
+      &-Active {
+        animation: active ease 0.8s;
+
+        & > path {
+          fill: $black;
+        }
+      }
+    }
+
+    &-Count {
+      color: $v-light-gray;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: MalgunGothic;
+
+      &-Active {
+        color: $black;
+      }
+    }
+  }
+}
