@@ -1,5 +1,4 @@
 import React from "react";
-import useQuery from "../../../util/lib/hooks/useQuery";
 import PostType from "../../../util/types/Post";
 import MainFixedPost from "./MainFixedPost";
 import MainFixedPostLoading from "./MainFixedPostLoading";
@@ -22,7 +21,6 @@ const MainPosts = ({
   fixedLoading,
   postRef,
 }: MainPostsProps) => {
-  const query = useQuery();
   return (
     <>
       <div className="Main-Posts">

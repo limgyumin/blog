@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
 import useQuery from "../../util/lib/hooks/useQuery";
 import { LoginResponse } from "../../util/types/Response";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface LoginContainerProps {}
 
@@ -24,6 +26,9 @@ const LoginContainer = ({}: LoginContainerProps) => {
       })
       .catch((err: Error) => {
         if (err.message.indexOf("400")) {
+          history.push("/");
+        } else {
+          toast.error("이런! 어딘가 문제가 있어요.");
           history.push("/");
         }
       });

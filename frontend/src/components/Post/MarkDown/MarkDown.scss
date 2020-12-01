@@ -93,8 +93,8 @@
     margin-right: 0px;
     color: $black;
     border-left: 4px solid;
-    border-color: $light-gray;
-    background-color: $vvvv-light-gray;
+    border-color: $v-light-gray;
+    background-color: $vvvvv-light-gray;
     padding: 1rem 1rem 1rem 2rem;
 
     & :first-child {
@@ -123,7 +123,7 @@
   }
 
   p > code {
-    background: $black;
+    background: $vvv-light-gray;
     padding: 0.2em 0.4em;
     border-radius: 5px;
     font-size: 85%;
@@ -154,17 +154,17 @@
     overflow: auto;
 
     tr:nth-child(2n) {
-      background-color: $vvvv-light-gray;
+      background-color: $vvvvv-light-gray;
     }
 
     tr {
       background-color: $white;
-      border-top: 1px solid $vv-light-gray;
+      border-top: 1px solid $vvv-light-gray;
     }
 
     td,
     th {
-      padding: 6px 13px;
+      padding: 0 13px;
       border: 1px solid $vvv-light-gray;
     }
   }

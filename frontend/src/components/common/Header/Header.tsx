@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Header.scss";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
@@ -119,11 +119,9 @@ const Header = ({
                   <HeaderCategoryItem key={idx} category={category} />
                 ))}
               </div>
-              <div
-                className="Header-Container-UpDown"
-                onClick={() => setOpen(!open)}
-              >
+              <div className="Header-Container-UpDown">
                 <Arrows
+                  onClick={() => setOpen(!open)}
                   className={
                     open
                       ? "Header-Container-UpDown-Icon-Open Header-Container-UpDown-Icon"

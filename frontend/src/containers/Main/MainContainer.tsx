@@ -6,6 +6,8 @@ import { PostsResponse } from "../../util/types/Response";
 import useQuery from "../../util/lib/hooks/useQuery";
 import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface MainContainerProps {}
 
@@ -46,7 +48,7 @@ const MainContainer = ({}: MainContainerProps) => {
           setFixedLoading(false);
         })
         .catch((err: Error) => {
-          console.log(err);
+          toast.error("이런! 어딘가 문제가 있어요.");
         });
     } else {
       initFixedPost();
@@ -69,21 +71,25 @@ const MainContainer = ({}: MainContainerProps) => {
       delete param.category;
     }
 
-    await handlePosts(param).then((res: PostsResponse) => {
-      setLoading(false);
-      setPostCount(res.data["post_count"]);
-      if (res.data["posts"].length > 0 || page > 1) {
-        setNotFound(false);
-      } else {
-        setNotFound(true);
-      }
-    });
+    await handlePosts(param)
+      .then((res: PostsResponse) => {
+        setLoading(false);
+        setPostCount(res.data["post_count"]);
+        if (res.data["posts"].length > 0 || page > 1) {
+          setNotFound(false);
+        } else {
+          setNotFound(true);
+        }
+      })
+      .catch((err: Error) => {
+        toast.error("이런! 어딘가 문제가 있어요.");
+      });
   }, [page, search]);
 
   const handleCategoriesCallback = useCallback(async () => {
     if (categories.length === 0) {
       await handleCategories().catch((err: Error) => {
-        console.log(err);
+        toast.error("이런! 어딘가 문제가 있어요.");
       });
     }
   }, []);

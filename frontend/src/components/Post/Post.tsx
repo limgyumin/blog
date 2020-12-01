@@ -30,7 +30,7 @@ const Post = ({ post, loading, notFound }: PostProps) => {
                     thumbnail={post.thumbnail}
                   />
                   <MarkDownContainer className="Post-Content">
-                    {post.content || post.content}
+                    {post.content}
                   </MarkDownContainer>
                 </>
               )}

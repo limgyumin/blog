@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import Post from "../../components/Post";
 import useStore from "../../util/lib/hooks/useStore";
-import { RouteComponentProps, withRouter } from "react-router-dom";
+import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
 import { PostResponse } from "../../util/types/Response";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface PostContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -12,6 +14,7 @@ interface MatchType {
 }
 
 const PostContainer = ({ match }: PostContainerProps) => {
+  const history = useHistory();
   const { store } = useStore();
   const { post, handlePost } = store.PostStore;
   const [loading, setLoading] = useState<boolean>(false);
@@ -28,6 +31,9 @@ const PostContainer = ({ match }: PostContainerProps) => {
       .catch((err: Error) => {
         if (err.message.indexOf("404")) {
           setNotFound(true);
+        } else {
+          toast.error("이런! 어딘가 문제가 있어요.");
+          history.push("/");
         }
       });
   }, []);
