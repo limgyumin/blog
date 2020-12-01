@@ -3,11 +3,12 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../../components/common/Header";
 import useStore from "../../util/lib/hooks/useStore";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
+  const history = useHistory();
   const { store } = useStore();
   const { categories, totalPostCount } = store.CategoryStore;
   const { handleLoginState, handleAdminState } = store.UserStore;
@@ -38,7 +39,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
       )}`;
       handleMyProfile().catch((err: Error) => {
         if (err.message.indexOf("410")) {
-          console.log("토큰이 만료됐떵.");
+          handleLogout();
         }
       });
     }
@@ -49,6 +50,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     axios.defaults.headers.common["access_token"] = "";
     handleLoginState(false);
     handleAdminState(false);
+    history.push("/");
   };
 
   const closeOption = (e: any) => {

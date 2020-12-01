@@ -22,6 +22,11 @@ class PostStore {
   @observable posts: PostType[] = [];
 
   @action
+  initPost = () => {
+    this.post = <PostType>{};
+  };
+
+  @action
   initPosts = () => {
     this.posts = [];
   };

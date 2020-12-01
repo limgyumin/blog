@@ -16,7 +16,14 @@ interface MatchType {
 const PostContainer = ({ match }: PostContainerProps) => {
   const history = useHistory();
   const { store } = useStore();
-  const { post, handlePost, handlePostLike, handleLikeInfo } = store.PostStore;
+  const {
+    post,
+    initPost,
+    handlePost,
+    handlePostLike,
+    handleLikeInfo,
+  } = store.PostStore;
+  const { login } = store.UserStore;
 
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
@@ -35,21 +42,25 @@ const PostContainer = ({ match }: PostContainerProps) => {
         if (err.message.indexOf("404")) {
           setNotFound(true);
         } else {
-          toast.error("이런! 어딘가 문제가 있어요.");
+          toast.error("이런! 글 조회에 실패했어요.");
           history.push("/");
         }
       });
   }, []);
 
   const handlePostLikeCallback = useCallback(async () => {
-    await handlePostLike(Number(idx))
-      .then((res: Response) => {
-        handleGetLikeInfoCallback();
-      })
-      .catch((err: Error) => {
-        toast.error("이런! 어딘가 문제가 있어요.");
-        history.push("/");
-      });
+    if (login) {
+      await handlePostLike(Number(idx))
+        .then((res: Response) => {
+          handleGetLikeInfoCallback();
+        })
+        .catch((err: Error) => {
+          toast.error("이런! 어딘가 문제가 있어요.");
+          history.push("/");
+        });
+    } else {
+      toast.info("로그인 후 좋아요를 누르실 수 있어요.");
+    }
   }, []);
 
   const handleGetLikeInfoCallback = useCallback(async () => {
@@ -59,13 +70,14 @@ const PostContainer = ({ match }: PostContainerProps) => {
         setLiked(res.data["liked"]);
       })
       .catch((err: Error) => {
-        toast.error("이런! 어딘가 문제가 있어요.");
+        toast.error("저런! 좋아요 정보 조회에 실패했어요.");
         history.push("/");
       });
   }, []);
 
   useEffect(() => {
     handlePostCallback();
+    return () => initPost();
   }, [handlePostCallback]);
 
   useEffect(() => {

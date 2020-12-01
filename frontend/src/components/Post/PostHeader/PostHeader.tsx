@@ -47,9 +47,7 @@ const PostHeader = ({
                   ? "Post-Header-Container-Category-Like-Active Post-Header-Container-Category-Like"
                   : "Post-Header-Container-Category-Like"
               }
-              onClick={() => {
-                handlePostLikeCallback();
-              }}
+              onClick={handlePostLikeCallback}
             >
               <Like
                 className={

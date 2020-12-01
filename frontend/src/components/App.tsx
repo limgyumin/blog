@@ -8,7 +8,7 @@ import PostPage from "../pages/PostPage";
 const App = () => {
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer autoClose={4000} />
       <Switch>
         <Route exact path="/" component={MainPage} />
         <Route path="/success" component={LoginPage} />

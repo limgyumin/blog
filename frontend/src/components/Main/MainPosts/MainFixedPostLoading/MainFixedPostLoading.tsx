@@ -29,6 +29,9 @@ const MainFixedPostLoading = ({}: MainFixedPostLoadingProps) => {
               <span />
               <span />
               <span />
+              <span />
+              <span />
+              <span />
             </div>
           </div>
           <div className="Main-Fixed-Post-Loading-Area-Information">

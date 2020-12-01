@@ -3,6 +3,7 @@ import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
 import PostType from "../../util/types/Post";
 import "./Post.scss";
 import PostHeader from "./PostHeader";
+import PostLoading from "./PostLoading";
 
 interface PostProps {
   post: PostType;
@@ -29,7 +30,7 @@ const Post = ({
         ) : (
           <div className="Post-Container">
             {loading ? (
-              <p>로딩중이양</p>
+              <PostLoading />
             ) : (
               <>
                 <PostHeader

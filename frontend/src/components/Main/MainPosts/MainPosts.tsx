@@ -25,14 +25,10 @@ const MainPosts = ({
     <>
       <div className="Main-Posts">
         <div className="Main-Posts-List">
-          {fixedPost.idx && (
-            <>
-              {fixedLoading ? (
-                <MainFixedPostLoading />
-              ) : (
-                <MainFixedPost fixedPost={fixedPost} />
-              )}
-            </>
+          {fixedLoading ? (
+            <MainFixedPostLoading />
+          ) : (
+            fixedPost.idx && <MainFixedPost fixedPost={fixedPost} />
           )}
           {posts.map((post: PostType, idx: number) => (
             <React.Fragment key={idx}>

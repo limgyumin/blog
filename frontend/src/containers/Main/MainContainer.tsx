@@ -48,7 +48,7 @@ const MainContainer = ({}: MainContainerProps) => {
           setFixedLoading(false);
         })
         .catch((err: Error) => {
-          toast.error("이런! 어딘가 문제가 있어요.");
+          toast.error("이런! 고정 글 조회에 실패했어요.");
         });
     } else {
       initFixedPost();
@@ -82,14 +82,14 @@ const MainContainer = ({}: MainContainerProps) => {
         }
       })
       .catch((err: Error) => {
-        toast.error("이런! 어딘가 문제가 있어요.");
+        toast.error("으악! 글 목록 조회에 실패했어요.");
       });
   }, [page, search]);
 
   const handleCategoriesCallback = useCallback(async () => {
     if (categories.length === 0) {
       await handleCategories().catch((err: Error) => {
-        toast.error("이런! 어딘가 문제가 있어요.");
+        toast.error("앗! 카테고리 조회에 실패했어요.");
       });
     }
   }, []);
