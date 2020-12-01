@@ -1,6 +1,7 @@
 import Post from "../entity/Post";
 
 export default interface PostListType extends Post {
+  is_liked?: boolean;
   user_avatar?: string;
   user_name?: string;
   category_name?: string;

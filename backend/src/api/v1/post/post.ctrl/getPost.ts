@@ -1,13 +1,16 @@
 import AuthRequest from "../../../../type/AuthRequest";
 import { Response } from "express";
 import { getRepository } from "typeorm";
-import Post from "../../../../entity/Post";
 import logger from "../../../../lib/logger";
+
+import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import PostListType from "../../../../type/PostListType";
 import Comment from "../../../../entity/Comment";
 import Reply from "../../../../entity/Reply";
 import generateURL from "../../../../lib/util/generateURL";
+import Category from "../../../../entity/Category";
+import Like from "../../../../entity/Like";
 
 export default async (req: AuthRequest, res: Response) => {
   const user: User = req.user;
@@ -25,6 +28,19 @@ export default async (req: AuthRequest, res: Response) => {
   try {
     const postRepo = getRepository(Post);
     const post: PostListType = await postRepo.findOne({
+      select: [
+        "idx",
+        "title",
+        "description",
+        "content",
+        "thumbnail",
+        "fk_user_idx",
+        "fk_category_idx",
+        "is_deleted",
+        "is_temp",
+        "created_at",
+        "updated_at",
+      ],
       where: {
         idx,
       },
@@ -50,7 +66,36 @@ export default async (req: AuthRequest, res: Response) => {
       }
     }
 
-    let total_count: number = 0;
+    const categoryRepo = getRepository(Category);
+    const category = await categoryRepo.findOne({
+      select: ["name"],
+      where: {
+        idx: post.fk_category_idx,
+      },
+    });
+
+    const likeRepo = getRepository(Like);
+    const like_count: number = await likeRepo.count({
+      where: {
+        post,
+      },
+    });
+
+    const like: Like = await likeRepo.findOne({
+      where: {
+        post,
+        user,
+      },
+    });
+
+    let liked = like ? true : false;
+
+    const userRepo = getRepository(User);
+    const userInfo: User = await userRepo.findOne({
+      where: {
+        idx: post.fk_user_idx,
+      },
+    });
 
     const commentRepo = getRepository(Comment);
     const [comments, comment_count] = await commentRepo.findAndCount({
@@ -59,8 +104,11 @@ export default async (req: AuthRequest, res: Response) => {
       },
     });
 
+    let total_count: number = 0;
+
     //total_count에는 글의 모든 댓글과 답글 수를 할당해야해뇨~
     total_count += comment_count;
+
     for (let i in comments) {
       const replyRepo = getRepository(Reply);
       const reply_count = await replyRepo.count({
@@ -70,6 +118,15 @@ export default async (req: AuthRequest, res: Response) => {
       });
       total_count += reply_count;
     }
+
+    delete post.fk_user_idx;
+    delete post.fk_category_idx;
+
+    post.is_liked = liked;
+    post.user_avatar = userInfo.avatar;
+    post.user_name = userInfo.name;
+    post.category_name = category.name;
+    post.like_count = like_count;
     post.comment_count = total_count;
 
     if (post.thumbnail) {
