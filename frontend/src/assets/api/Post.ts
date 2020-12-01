@@ -45,6 +45,31 @@ class Post {
       throw new Error(`${error}`);
     }
   }
+
+  async PostLike(post_idx: number) {
+    try {
+      const url = `${SERVER}/v1/like`;
+      const body = {
+        post_idx,
+      };
+
+      const { data } = await axios.post(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
+  async GetLikeInfo(idx: number) {
+    try {
+      const url = `${SERVER}/v1/like/${idx}`;
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Post();

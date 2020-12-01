@@ -7,6 +7,13 @@ export type Response = {
   message: string;
 };
 
+export interface LikeInfoResponse extends Response {
+  data: {
+    like_count: number;
+    liked: boolean;
+  };
+}
+
 export interface PostResponse extends Response {
   data: {
     post: PostType;

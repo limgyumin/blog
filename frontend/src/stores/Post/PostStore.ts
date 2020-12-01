@@ -3,6 +3,7 @@ import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
 import PostType from "../../util/types/Post";
 import {
+  LikeInfoResponse,
   PostFixedResponse,
   PostResponse,
   PostsResponse,
@@ -96,6 +97,38 @@ class PostStore {
 
       return new Promise(
         (resolve: (response: PostResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handlePostLike = async (post_idx: number): Promise<Response> => {
+    try {
+      const response: Response = await Post.PostLike(post_idx);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleLikeInfo = async (idx: number): Promise<LikeInfoResponse> => {
+    try {
+      const response: LikeInfoResponse = await Post.GetLikeInfo(idx);
+
+      return new Promise(
+        (resolve: (response: LikeInfoResponse) => void, reject) => {
           resolve(response);
         }
       );
