@@ -10,7 +10,6 @@ import Comment from "../../../../entity/Comment";
 import Reply from "../../../../entity/Reply";
 import generateURL from "../../../../lib/util/generateURL";
 import Category from "../../../../entity/Category";
-import Like from "../../../../entity/Like";
 
 export default async (req: AuthRequest, res: Response) => {
   const user: User = req.user;
@@ -74,22 +73,6 @@ export default async (req: AuthRequest, res: Response) => {
       },
     });
 
-    const likeRepo = getRepository(Like);
-    const like_count: number = await likeRepo.count({
-      where: {
-        post,
-      },
-    });
-
-    const like: Like = await likeRepo.findOne({
-      where: {
-        post,
-        user,
-      },
-    });
-
-    let liked = like ? true : false;
-
     const userRepo = getRepository(User);
     const userInfo: User = await userRepo.findOne({
       where: {
@@ -122,11 +105,9 @@ export default async (req: AuthRequest, res: Response) => {
     delete post.fk_user_idx;
     delete post.fk_category_idx;
 
-    post.is_liked = liked;
     post.user_avatar = userInfo.avatar;
     post.user_name = userInfo.name;
     post.category_name = category.name;
-    post.like_count = like_count;
     post.comment_count = total_count;
 
     if (post.thumbnail) {
