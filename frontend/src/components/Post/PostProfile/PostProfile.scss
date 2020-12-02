@@ -7,7 +7,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: MalgunGothic;
   border-bottom: 1px solid $vvv-light-gray;
 
   &-Container {
@@ -19,7 +18,7 @@
       height: 6rem;
       border-radius: 50%;
       border: 1px solid $vvv-light-gray;
-      margin-right: 1.5rem;
+      margin-right: 1.2rem;
     }
 
     &-Info {

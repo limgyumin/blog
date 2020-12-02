@@ -1,4 +1,5 @@
 import { CategoryType } from "./Category";
+import CommentType from "./Comment";
 import PostType from "./Post";
 import UserType from "./User";
 
@@ -49,5 +50,17 @@ export interface MyProfileResponse extends Response {
 export interface LoginResponse extends Response {
   data: {
     access_token: string;
+  };
+}
+
+export interface CommentsResponse extends Response {
+  data: {
+    comments: CommentType[];
+  };
+}
+
+export interface CommentCountResponse extends Response {
+  data: {
+    total_count: number;
   };
 }

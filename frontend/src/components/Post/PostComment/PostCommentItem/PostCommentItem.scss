@@ -1,0 +1,45 @@
+@import "../../../../util/color.scss";
+
+.Post-Comment-Item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.3rem;
+  border-left: 8px solid $vvv-light-gray;
+  background-color: $vvvvv-light-gray;
+  margin-bottom: 1.5rem;
+
+  &-Wrapper {
+    display: flex;
+    align-items: center;
+
+    & > img {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      border: 1px solid $vvv-light-gray;
+      margin-right: 1rem;
+    }
+
+    &-Container {
+      display: flex;
+      flex-direction: column;
+
+      & > h3 {
+        font-size: 1.125rem;
+        margin-bottom: 0.25rem;
+        color: $black;
+      }
+
+      & > p {
+        font-size: 0.9rem;
+        color: $light-gray;
+      }
+    }
+  }
+
+  & > p {
+    margin-top: 1rem;
+    color: $black;
+    font-size: 1.125rem;
+  }
+}

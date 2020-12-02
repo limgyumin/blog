@@ -11,7 +11,7 @@ class UserStore {
   @observable admin: boolean = false;
   @observable login: boolean = false;
 
-  @observable user?: UserType;
+  @observable user: UserType = <UserType>{};
 
   @action
   handleLogin = async (code: string): Promise<LoginResponse> => {
