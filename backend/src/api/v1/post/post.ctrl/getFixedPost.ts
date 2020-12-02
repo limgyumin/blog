@@ -76,8 +76,7 @@ export default async (req: Request, res: Response) => {
         total_count += reply_count;
       }
 
-      post.user_avatar = user.avatar;
-      post.user_name = user.name;
+      post.user = user;
       post.category_name = category.name;
       post.comment_count = total_count;
       post.like_count = like_count;

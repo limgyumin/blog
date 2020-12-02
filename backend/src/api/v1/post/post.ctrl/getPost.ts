@@ -35,13 +35,12 @@ export default async (req: AuthRequest, res: Response) => {
         "thumbnail",
         "fk_user_idx",
         "fk_category_idx",
-        "is_deleted",
-        "is_temp",
         "created_at",
         "updated_at",
       ],
       where: {
         idx,
+        is_deleted: false,
       },
     });
 
@@ -105,8 +104,7 @@ export default async (req: AuthRequest, res: Response) => {
     delete post.fk_user_idx;
     delete post.fk_category_idx;
 
-    post.user_avatar = userInfo.avatar;
-    post.user_name = userInfo.name;
+    post.user = userInfo;
     post.category_name = category.name;
     post.comment_count = total_count;
 

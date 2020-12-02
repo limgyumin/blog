@@ -138,8 +138,7 @@ export default async (req: Request, res: Response) => {
       delete posts[i].fk_category_idx;
       delete posts[i].fk_user_idx;
 
-      posts[i].user_avatar = user.avatar;
-      posts[i].user_name = user.name;
+      posts[i].user = user;
       posts[i].category_name = category.name;
       posts[i].like_count = like_count;
       posts[i].comment_count = total_count;
