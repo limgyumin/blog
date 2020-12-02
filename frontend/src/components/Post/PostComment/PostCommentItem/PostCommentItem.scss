@@ -3,43 +3,151 @@
 .Post-Comment-Item {
   display: flex;
   flex-direction: column;
-  padding: 1rem 1.3rem;
+  padding: 1.3rem;
   border-left: 8px solid $vvv-light-gray;
   background-color: $vvvvv-light-gray;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.3rem;
 
   &-Wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
 
-    & > img {
-      width: 4rem;
-      height: 4rem;
-      border-radius: 50%;
-      border: 1px solid $vvv-light-gray;
-      margin-right: 1rem;
-    }
-
-    &-Container {
+    &-Info {
       display: flex;
-      flex-direction: column;
+      align-items: center;
 
-      & > h3 {
-        font-size: 1.125rem;
-        margin-bottom: 0.25rem;
-        color: $black;
+      & > img {
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 50%;
+        border: 1px solid $vvv-light-gray;
+        margin-right: 0.8rem;
       }
 
-      & > p {
-        font-size: 0.9rem;
-        color: $light-gray;
+      &-Container {
+        display: flex;
+        flex-direction: column;
+
+        & > h3 {
+          font-size: 1.125rem;
+          margin-bottom: 0.25rem;
+          color: $black;
+        }
+
+        & > p {
+          font-size: 0.9rem;
+          color: $light-gray;
+        }
+      }
+    }
+
+    &-Control {
+      display: flex;
+      align-items: center;
+      color: $v-light-gray;
+      font-size: 0.9rem;
+
+      &-Edit {
+        cursor: pointer;
+        margin-right: 0.6rem;
+
+        &:hover {
+          color: $vv-light-gray;
+          text-decoration: underline;
+        }
+      }
+
+      &-Delete {
+        cursor: pointer;
+
+        &:hover {
+          color: $vv-light-gray;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &-Input {
+    display: flex;
+    flex-direction: column;
+
+    &-Box {
+      width: 100%;
+      min-height: 6.125rem;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: MalgunGothic;
+      color: $black;
+      outline: none;
+      border-radius: 0.2rem;
+      border: 1px solid $vvv-light-gray;
+      background-color: $vvvv-light-gray;
+      resize: none;
+      transition: border ease 0.2s;
+      margin-bottom: 1rem;
+
+      &::placeholder {
+        transition: color ease 0.2s;
+        color: $vv-light-gray;
+      }
+
+      &:focus {
+        border: 1px solid $v-light-gray;
+        &::placeholder {
+          color: $v-light-gray;
+        }
+      }
+    }
+
+    &-Wrapper {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      &-Button {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 0.3rem;
+        padding: 0.4rem 1rem;
+        background-color: $black;
+        color: $white;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all ease 0.2s;
+        margin-right: 0.6rem;
+
+        &:hover {
+          background-color: $light-black;
+        }
+      }
+
+      &-Cancel {
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 0.3rem;
+        padding: 0.4rem 1rem;
+        background-color: $v-light-gray;
+        color: $white;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all ease 0.2s;
+
+        &:hover {
+          background-color: $vv-light-gray;
+        }
       }
     }
   }
 
   & > p {
-    margin-top: 1rem;
     color: $black;
     font-size: 1.125rem;
+    white-space: pre-wrap;
   }
 }
