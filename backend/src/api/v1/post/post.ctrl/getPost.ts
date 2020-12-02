@@ -6,8 +6,6 @@ import logger from "../../../../lib/logger";
 import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import PostListType from "../../../../type/PostListType";
-import Comment from "../../../../entity/Comment";
-import Reply from "../../../../entity/Reply";
 import generateURL from "../../../../lib/util/generateURL";
 import Category from "../../../../entity/Category";
 
@@ -79,34 +77,11 @@ export default async (req: AuthRequest, res: Response) => {
       },
     });
 
-    const commentRepo = getRepository(Comment);
-    const [comments, comment_count] = await commentRepo.findAndCount({
-      where: {
-        post: post,
-      },
-    });
-
-    let total_count: number = 0;
-
-    //total_count에는 글의 모든 댓글과 답글 수를 할당해야해뇨~
-    total_count += comment_count;
-
-    for (let i in comments) {
-      const replyRepo = getRepository(Reply);
-      const reply_count = await replyRepo.count({
-        where: {
-          comment: comments[i],
-        },
-      });
-      total_count += reply_count;
-    }
-
     delete post.fk_user_idx;
     delete post.fk_category_idx;
 
     post.user = userInfo;
     post.category_name = category.name;
-    post.comment_count = total_count;
 
     if (post.thumbnail) {
       post.thumbnail = generateURL(req, post.thumbnail);

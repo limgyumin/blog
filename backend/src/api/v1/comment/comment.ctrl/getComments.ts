@@ -33,6 +33,9 @@ export default async (req: Request, res: Response) => {
       where: {
         post,
       },
+      order: {
+        created_at: "DESC",
+      },
     });
 
     for (let i in comments) {
@@ -51,7 +54,10 @@ export default async (req: Request, res: Response) => {
       });
 
       comments[i].reply_count = reply_count;
-      comments[i].user_name = user.name;
+      comments[i].user = user;
+
+      delete comments[i].fk_user_idx;
+      delete comments[i].fk_post_idx;
     }
 
     logger.green("[GET] 댓글 목록 조회 성공.");
