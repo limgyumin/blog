@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 interface MainContainerProps {}
 
@@ -124,6 +125,20 @@ const MainContainer = ({}: MainContainerProps) => {
 
   return (
     <>
+      <Helmet>
+        <title>Untitled</title>
+        <meta name="description" content="개발자를 꿈꾸는 한 학생의 이야기" />
+        <meta name="og:title" content="Untitled" />
+        <meta
+          property="og:description"
+          content="개발자를 꿈꾸는 한 학생의 이야기"
+        />
+        <meta name="twitter:title" content="Untitled" />
+        <meta
+          property="twitter:description"
+          content="개발자를 꿈꾸는 한 학생의 이야기"
+        />
+      </Helmet>
       <Main
         fixedPost={fixedPost}
         posts={posts}

@@ -11,6 +11,7 @@ import {
 } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Helmet } from "react-helmet";
 
 interface PostContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -66,8 +67,12 @@ const PostContainer = ({ match }: PostContainerProps) => {
           handleLikeInfoCallback();
         })
         .catch((err: Error) => {
-          toast.error("이런! 어딘가 문제가 있어요.");
-          history.push("/");
+          if (err.message.indexOf("401")) {
+            toast.info("로그인 후 좋아요를 누르실 수 있어요.");
+          } else {
+            toast.error("이런! 어딘가 문제가 있어요.");
+            history.push("/");
+          }
         });
     } else {
       toast.info("로그인 후 좋아요를 누르실 수 있어요.");
@@ -104,9 +109,13 @@ const PostContainer = ({ match }: PostContainerProps) => {
           handleCommentCountCallback();
           handleCommentsCallback();
         })
-        .catch(() => {
-          toast.error("으악! 댓글 작성에 실패했어요.");
-          history.push("/");
+        .catch((err: Error) => {
+          if (err.message.indexOf("401")) {
+            toast.info("로그인 후 댓글을 작성하실 수 있어요.");
+          } else {
+            toast.error("으악! 댓글 작성에 실패했어요.");
+            history.push("/");
+          }
         });
     } else {
       toast.info("로그인 후 댓글을 작성하실 수 있어요.");
@@ -147,6 +156,40 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   return (
     <>
+      {post.idx && post && (
+        <Helmet>
+          <title>{post.title}</title>
+          <meta
+            name="description"
+            content={post.description
+              .replace(/ +/g, " ")
+              .replace(
+                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
+                ""
+              )}
+          />
+          <meta property="og:title" content={post.title} />
+          <meta
+            property="og:description"
+            content={post.description
+              .replace(/ +/g, " ")
+              .replace(
+                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
+                ""
+              )}
+          />
+          <meta property="twitter:title" content={post.title} />
+          <meta
+            property="twitter:description"
+            content={post.description
+              .replace(/ +/g, " ")
+              .replace(
+                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
+                ""
+              )}
+          />
+        </Helmet>
+      )}
       <Post
         post={post}
         loading={loading}
