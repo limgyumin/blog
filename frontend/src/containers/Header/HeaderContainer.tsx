@@ -27,9 +27,16 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
     const shadow = (pageYOffset > 30 && deltaY < 0) || open;
+
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
+  };
+
+  const handleResize = () => {
+    if (window.innerWidth > 1537) {
+      setOpen(false);
+    }
   };
 
   const handleMyProfileCallback = useCallback(async () => {
@@ -73,10 +80,6 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   };
 
   useEffect(() => {
-    setShadow(open);
-  }, [open]);
-
-  useEffect(() => {
     handleMyProfileCallback();
   }, [handleMyProfileCallback]);
 
@@ -85,6 +88,15 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     return () =>
       documentRef.current.removeEventListener("scroll", handleScroll);
   }, [pageY]);
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    setShadow(open);
+  }, [open]);
 
   return (
     <>

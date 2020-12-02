@@ -16,7 +16,7 @@ interface HeaderProps {
   hide: boolean;
   admin: boolean;
   login: boolean;
-  user?: UserType;
+  user: UserType;
   showOption: boolean;
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   closeOption: (e: any) => void;
@@ -80,7 +80,7 @@ const Header = ({
                       onClick={() => setShowOption(true)}
                     >
                       <img
-                        src={user?.avatar}
+                        src={user.avatar}
                         alt="Profile"
                         className="Header-Container-Content-Profile-Wrapper-User-Avatar"
                       />
