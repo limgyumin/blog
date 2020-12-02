@@ -18,9 +18,13 @@ interface PostProps {
   comment: string;
   setComment: React.Dispatch<React.SetStateAction<string>>;
   handleCreateCommentCallback: () => Promise<void>;
+  handleModifyCommentCallback: (
+    commentIdx: number,
+    content: string
+  ) => Promise<void>;
   comments: CommentType[];
   commentCount: number;
-  keyPressListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const Post = ({
@@ -33,9 +37,10 @@ const Post = ({
   comment,
   setComment,
   handleCreateCommentCallback,
+  handleModifyCommentCallback,
   comments,
   commentCount,
-  keyPressListener,
+  keyDownListener,
 }: PostProps) => {
   return (
     <>
@@ -74,7 +79,8 @@ const Post = ({
                     comment={comment}
                     setComment={setComment}
                     handleCreateCommentCallback={handleCreateCommentCallback}
-                    keyPressListener={keyPressListener}
+                    handleModifyCommentCallback={handleModifyCommentCallback}
+                    keyDownListener={keyDownListener}
                   />
                 </>
               )}

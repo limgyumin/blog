@@ -12,6 +12,8 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
+import removeLastBlank from "../../util/lib/removeLastBlank";
+import validateContent from "../../util/lib/validateContent";
 
 interface PostContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -24,15 +26,19 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const { store } = useStore();
   const {
     post,
-    comments,
     initPost,
     handlePost,
     handlePostLike,
     handleLikeInfo,
+  } = store.PostStore;
+  const {
+    comments,
+    initComments,
     handleCommentCount,
     handleCreateComment,
     handleComments,
-  } = store.PostStore;
+    handleModifyComment,
+  } = store.CommentStore;
   const { login } = store.UserStore;
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -99,14 +105,17 @@ const PostContainer = ({ match }: PostContainerProps) => {
       .catch((err: Error) => {
         history.push("/");
       });
-  }, []);
+  }, [comments]);
 
   const handleCreateCommentCallback = useCallback(async () => {
     if (login) {
+      if (!validateContent(comment)) {
+        toast.error("내용을 작성해주세요.");
+        return;
+      }
       await handleCreateComment(Number(idx), comment)
         .then((res: Response) => {
           setComment("");
-          handleCommentCountCallback();
           handleCommentsCallback();
         })
         .catch((err: Error) => {
@@ -131,8 +140,26 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, []);
 
-  const keyPressListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if ((e.key === "Enter" || e.key === "NumpadEnter") && comment !== "") {
+  const handleModifyCommentCallback = useCallback(
+    async (commentIdx: number, content: string) => {
+      await handleModifyComment(commentIdx, removeLastBlank(content))
+        .then((res: Response) => {
+          handleCommentsCallback();
+        })
+        .catch((err: Error) => {
+          toast.error("이런! 댓글 수정에 실패했어요.");
+          history.push("/");
+        });
+    },
+    []
+  );
+
+  const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (
+      validateContent(comment) &&
+      (e.key === "Enter" || e.key === "NumpadEnter") &&
+      !e.shiftKey
+    ) {
       handleCreateCommentCallback();
     }
   };
@@ -143,6 +170,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   useEffect(() => {
     handleCommentsCallback();
+    return () => initComments();
   }, [handleCommentsCallback]);
 
   useEffect(() => {
@@ -200,9 +228,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
         comment={comment}
         setComment={setComment}
         handleCreateCommentCallback={handleCreateCommentCallback}
+        handleModifyCommentCallback={handleModifyCommentCallback}
         comments={comments}
         commentCount={commentCount}
-        keyPressListener={keyPressListener}
+        keyDownListener={keyDownListener}
       />
     </>
   );

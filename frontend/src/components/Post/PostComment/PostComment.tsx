@@ -1,7 +1,7 @@
 import React from "react";
+import PostCommentItemContainer from "../../../containers/Post/PostCommentItemContainer";
 import CommentType from "../../../util/types/Comment";
 import "./PostComment.scss";
-import PostCommentItem from "./PostCommentItem";
 
 interface PostCommentProps {
   comments: CommentType[];
@@ -9,7 +9,11 @@ interface PostCommentProps {
   comment: string;
   setComment: React.Dispatch<React.SetStateAction<string>>;
   handleCreateCommentCallback: () => Promise<void>;
-  keyPressListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  handleModifyCommentCallback: (
+    commentIdx: number,
+    content: string
+  ) => Promise<void>;
+  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const PostComment = ({
@@ -18,7 +22,8 @@ const PostComment = ({
   comment,
   setComment,
   handleCreateCommentCallback,
-  keyPressListener,
+  handleModifyCommentCallback,
+  keyDownListener,
 }: PostCommentProps) => {
   return (
     <>
@@ -31,7 +36,7 @@ const PostComment = ({
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              onKeyPress={(e) => keyPressListener(e)}
+              onKeyDown={(e) => keyDownListener(e)}
               placeholder="댓글을 작성해주세요."
               className="Post-Comment-Container-Input-Box"
             />
@@ -47,7 +52,11 @@ const PostComment = ({
         </div>
         <div className="Post-Comment-List">
           {comments.map((comment, idx) => (
-            <PostCommentItem key={idx} comment={comment} />
+            <PostCommentItemContainer
+              key={idx}
+              comment={comment}
+              handleModifyCommentCallback={handleModifyCommentCallback}
+            />
           ))}
         </div>
       </div>

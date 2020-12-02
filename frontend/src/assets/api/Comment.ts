@@ -42,6 +42,22 @@ class Comment {
       throw new Error(`${error}`);
     }
   }
+
+  async ModifyComment(idx: number, content: string) {
+    try {
+      const url = `${SERVER}/v1/comment/${idx}`;
+
+      const body = {
+        content,
+      };
+
+      const { data } = await axios.put(url, body);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Comment();

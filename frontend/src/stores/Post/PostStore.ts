@@ -3,15 +3,11 @@ import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
 import PostType from "../../util/types/Post";
 import {
-  CommentCountResponse,
-  CommentsResponse,
   LikeInfoResponse,
   PostFixedResponse,
   PostResponse,
   PostsResponse,
 } from "../../util/types/Response";
-import Comment from "../../assets/api/Comment";
-import CommentType from "../../util/types/Comment";
 
 interface PostParamsType {
   page: number;
@@ -24,7 +20,6 @@ class PostStore {
   @observable fixedPost: PostType = <PostType>{};
   @observable post: PostType = <PostType>{};
   @observable posts: PostType[] = [];
-  @observable comments: CommentType[] = [];
 
   @action
   initPost = () => {
@@ -139,60 +134,6 @@ class PostStore {
 
       return new Promise(
         (resolve: (response: LikeInfoResponse) => void, reject) => {
-          resolve(response);
-        }
-      );
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
-  };
-
-  @action
-  handleCommentCount = async (idx: number): Promise<CommentCountResponse> => {
-    try {
-      const response: CommentCountResponse = await Comment.GetCommentCount(idx);
-
-      return new Promise(
-        (resolve: (response: CommentCountResponse) => void, reject) => {
-          resolve(response);
-        }
-      );
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
-  };
-
-  @action
-  handleCreateComment = async (
-    idx: number,
-    content: string
-  ): Promise<Response> => {
-    try {
-      const response: Response = await Comment.CreateComment(idx, content);
-
-      return new Promise((resolve: (response: Response) => void, reject) => {
-        resolve(response);
-      });
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
-  };
-
-  @action
-  handleComments = async (post: number): Promise<CommentsResponse> => {
-    try {
-      const response: CommentsResponse = await Comment.GetComments(post);
-
-      this.comments = response.data.comments;
-
-      return new Promise(
-        (resolve: (response: CommentsResponse) => void, reject) => {
           resolve(response);
         }
       );
