@@ -1,0 +1,56 @@
+@import "../../../util/color.scss";
+
+.Post-Profile {
+  width: 100%;
+  padding: 4rem 1rem 2.5rem 0;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: MalgunGothic;
+  border-bottom: 1px solid $vvv-light-gray;
+
+  &-Container {
+    display: flex;
+    align-items: center;
+
+    &-Image {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      border: 1px solid $vvv-light-gray;
+      margin-right: 1.5rem;
+    }
+
+    &-Info {
+      display: flex;
+      flex-direction: column;
+
+      & > h2 {
+        color: $black;
+        margin-bottom: 0.4rem;
+      }
+
+      & > p {
+        color: $v-light-gray;
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  & > a {
+    & > svg {
+      width: 2.6rem;
+      height: 2.6rem;
+
+      & > path {
+        transition: all ease 0.2s;
+        fill: $vv-light-gray;
+      }
+    }
+
+    &:hover > svg > path {
+      fill: $black;
+    }
+  }
+}

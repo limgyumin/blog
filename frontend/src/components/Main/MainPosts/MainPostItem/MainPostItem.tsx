@@ -38,12 +38,12 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
           <div className="Main-Post-Item-Bottom-Profile">
             <img
               className="Main-Post-Item-Bottom-Profile-Avatar"
-              src={post.user_avatar}
-              alt={post.user_avatar}
+              src={post.user.avatar}
+              alt={post.user.avatar}
             />
             <span className="Main-Post-Item-Bottom-Profile-Name">
               <span>by </span>
-              {post.user_name}
+              {post.user.name}
             </span>
           </div>
           <div className="Main-Post-Item-Bottom-Count">

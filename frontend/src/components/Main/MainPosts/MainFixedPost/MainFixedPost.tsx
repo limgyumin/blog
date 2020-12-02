@@ -43,12 +43,12 @@ const MainFixedPost = ({ fixedPost }: MainFixedPostProps) => {
             <div className="Main-Fixed-Post-Area-Information-Profile">
               <img
                 className="Main-Fixed-Post-Area-Information-Profile-Avatar"
-                src={fixedPost.user_avatar}
-                alt={fixedPost.user_avatar}
+                src={fixedPost.user.avatar}
+                alt={fixedPost.user.avatar}
               />
               <span className="Main-Fixed-Post-Area-Information-Profile-Name">
                 <span>by </span>
-                {fixedPost.user_name}
+                {fixedPost.user.name}
               </span>
             </div>
             <div className="Main-Fixed-Post-Area-Information-Count">
