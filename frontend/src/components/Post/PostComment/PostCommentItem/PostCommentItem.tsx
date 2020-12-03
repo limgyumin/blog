@@ -1,4 +1,4 @@
-import React, { ReactNodeArray } from "react";
+import React from "react";
 import CommentType from "../../../../util/types/Comment";
 import "./PostCommentItem.scss";
 import moment from "moment";
@@ -15,6 +15,7 @@ interface PostCommentItemProps {
   modifyTryCallback: () => void;
   modifyCancelCallback: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  deleteClickListener: (idx: number) => void;
 }
 
 const PostCommentItem = ({
@@ -28,6 +29,7 @@ const PostCommentItem = ({
   modifyTryCallback,
   modifyCancelCallback,
   keyDownListener,
+  deleteClickListener,
 }: PostCommentItemProps) => {
   return (
     <>
@@ -50,7 +52,10 @@ const PostCommentItem = ({
                   >
                     수정
                   </p>
-                  <p className="Post-Comment-Item-Wrapper-Control-Delete">
+                  <p
+                    className="Post-Comment-Item-Wrapper-Control-Delete"
+                    onClick={() => deleteClickListener(comment.idx)}
+                  >
                     삭제
                   </p>
                 </div>

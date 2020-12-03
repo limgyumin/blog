@@ -17,6 +17,8 @@ interface PostProps {
   handlePostLikeCallback: () => Promise<void>;
   comment: string;
   setComment: React.Dispatch<React.SetStateAction<string>>;
+  setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
+  showModal: () => void;
   handleCreateCommentCallback: () => Promise<void>;
   handleModifyCommentCallback: (
     commentIdx: number,
@@ -36,6 +38,8 @@ const Post = ({
   handlePostLikeCallback,
   comment,
   setComment,
+  setCommentIdx,
+  showModal,
   handleCreateCommentCallback,
   handleModifyCommentCallback,
   comments,
@@ -78,6 +82,8 @@ const Post = ({
                     commentCount={commentCount}
                     comment={comment}
                     setComment={setComment}
+                    setCommentIdx={setCommentIdx}
+                    showModal={showModal}
                     handleCreateCommentCallback={handleCreateCommentCallback}
                     handleModifyCommentCallback={handleModifyCommentCallback}
                     keyDownListener={keyDownListener}

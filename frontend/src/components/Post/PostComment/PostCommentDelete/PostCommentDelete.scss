@@ -1,0 +1,61 @@
+@import "../../../../util/color.scss";
+
+.Post-Comment-Delete {
+  display: flex;
+  flex-direction: column;
+  font-family: MalgunGothic;
+  width: 20rem;
+
+  &-Content {
+    display: flex;
+    flex-direction: column;
+    color: $black;
+
+    & > p {
+      margin: 0.8rem 0;
+    }
+  }
+
+  &-Button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-top: 1.4rem;
+
+    &-Delete {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.4rem 1rem;
+      background-color: $black;
+      color: $white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all ease 0.2s;
+      margin-right: 0.6rem;
+
+      &:hover {
+        background-color: $light-black;
+      }
+    }
+
+    &-Cancel {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.4rem 1rem;
+      background-color: $v-light-gray;
+      color: $white;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all ease 0.2s;
+
+      &:hover {
+        background-color: $vv-light-gray;
+      }
+    }
+  }
+}

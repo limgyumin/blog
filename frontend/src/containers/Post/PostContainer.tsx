@@ -14,6 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 import validateContent from "../../util/lib/validateContent";
+import PostCommentDelete from "../../components/Post/PostComment/PostCommentDelete";
+import ModalContainer from "../Modal/ModalContainer";
 
 interface PostContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -38,8 +40,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
     handleCreateComment,
     handleComments,
     handleModifyComment,
+    handleDeleteComment,
   } = store.CommentStore;
   const { login } = store.UserStore;
+  const { showModal } = store.ModalStore;
 
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
@@ -48,6 +52,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   const [comment, setComment] = useState<string>("");
   const [commentCount, setCommentCount] = useState<number>(0);
+  const [commentIdx, setCommentIdx] = useState<number>(0);
 
   const { idx } = match.params;
   const handlePostCallback = useCallback(async () => {
@@ -154,6 +159,18 @@ const PostContainer = ({ match }: PostContainerProps) => {
     []
   );
 
+  const handleDeleteCommentCallback = useCallback(async () => {
+    await handleDeleteComment(commentIdx)
+      .then((res: Response) => {
+        handleCommentsCallback();
+        showModal();
+      })
+      .catch((err: Error) => {
+        toast.error("이런! 댓글 삭제에 실패했어요.");
+        history.push("/");
+      });
+  }, [commentIdx]);
+
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
       validateContent(comment) &&
@@ -218,6 +235,12 @@ const PostContainer = ({ match }: PostContainerProps) => {
           />
         </Helmet>
       )}
+      <ModalContainer>
+        <PostCommentDelete
+          showModal={showModal}
+          handleDeleteCommentCallback={handleDeleteCommentCallback}
+        />
+      </ModalContainer>
       <Post
         post={post}
         loading={loading}
@@ -227,6 +250,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
         handlePostLikeCallback={handlePostLikeCallback}
         comment={comment}
         setComment={setComment}
+        setCommentIdx={setCommentIdx}
+        showModal={showModal}
         handleCreateCommentCallback={handleCreateCommentCallback}
         handleModifyCommentCallback={handleModifyCommentCallback}
         comments={comments}

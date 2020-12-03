@@ -10,6 +10,8 @@ import validateContent from "../../util/lib/validateContent";
 
 interface PostCommentItemContainerProps {
   comment: CommentType;
+  showModal: () => void;
+  setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
   handleModifyCommentCallback: (
     commentIdx: number,
     content: string
@@ -18,6 +20,8 @@ interface PostCommentItemContainerProps {
 
 const PostCommentItemContainer = ({
   comment,
+  showModal,
+  setCommentIdx,
   handleModifyCommentCallback,
 }: PostCommentItemContainerProps) => {
   const { store } = useStore();
@@ -50,6 +54,11 @@ const PostCommentItemContainer = ({
     }
   };
 
+  const deleteClickListener = (idx: number) => {
+    setCommentIdx(idx);
+    showModal();
+  };
+
   useEffect(() => {
     setEdit(comment.content);
   }, [comment]);
@@ -67,6 +76,7 @@ const PostCommentItemContainer = ({
         modifyTryCallback={modifyTryCallback}
         modifyCancelCallback={modifyCancelCallback}
         keyDownListener={keyDownListener}
+        deleteClickListener={deleteClickListener}
       />
     </>
   );
