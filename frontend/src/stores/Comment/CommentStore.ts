@@ -89,6 +89,21 @@ class CommentStore {
       });
     }
   };
+
+  @action
+  handleDeleteComment = async (idx: number): Promise<Response> => {
+    try {
+      const response: Response = await Comment.DeleteComment(idx);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
 }
 
 export default CommentStore;
