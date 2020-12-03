@@ -3,19 +3,19 @@ import { autobind } from "core-decorators";
 
 @autobind
 class ModalStore {
-  @observable isShowed: boolean = false;
-  @observable isOpen: boolean = false;
+  @observable show: boolean = false;
+  @observable open: boolean = false;
 
   @action
   showModal() {
-    if (this.isShowed) {
+    if (this.show) {
       setTimeout(() => {
-        this.isShowed = !this.isShowed;
+        this.show = !this.show;
       }, 500);
     } else {
-      this.isShowed = !this.isShowed;
+      this.show = !this.show;
     }
-    this.isOpen = !this.isOpen;
+    this.open = !this.open;
   }
 }
 

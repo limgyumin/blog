@@ -1,30 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Modal.scss";
 
 interface ModalProps {
-  isShowed: boolean;
-  isOpen: boolean;
+  open: boolean;
+  show: boolean;
   showModal: () => void;
   children: React.ReactNode;
 }
 
-const Modal = ({ isShowed, isOpen, showModal, children }: ModalProps) => {
-  useEffect(() => {
-    isOpen
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "unset");
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
-
+const Modal = ({ open, show, showModal, children }: ModalProps) => {
   return (
     <>
-      {isShowed ? (
+      {show ? (
         <div className="Modal">
           <div
             className={
-              isOpen
+              open
                 ? "Modal-Overlay-Active Modal-Overlay"
                 : "Modal-Overlay-Leave Modal-Overlay"
             }
@@ -32,9 +23,7 @@ const Modal = ({ isShowed, isOpen, showModal, children }: ModalProps) => {
           />
           <div
             className={
-              isOpen
-                ? "Modal-Box-Active Modal-Box"
-                : "Modal-Box-Leave Modal-Box"
+              open ? "Modal-Box-Active Modal-Box" : "Modal-Box-Leave Modal-Box"
             }
           >
             {children}
