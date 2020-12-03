@@ -5,7 +5,6 @@ import Post from "../../../../entity/Post";
 import Reply from "../../../../entity/Reply";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import ReplyUserType from "../../../../type/ReplyUserType";
 
 export default async (req: Request, res: Response) => {
   const commentIdx = req.query.comment;
@@ -44,8 +43,13 @@ export default async (req: Request, res: Response) => {
     }
 
     const replyRepo = getRepository(Reply);
-    const replies: ReplyUserType[] = await replyRepo.find({
-      comment,
+    const replies: Reply[] = await replyRepo.find({
+      where: {
+        comment,
+      },
+      order: {
+        created_at: "ASC",
+      },
     });
 
     for (let i in replies) {
@@ -55,7 +59,11 @@ export default async (req: Request, res: Response) => {
           idx: replies[i].fk_user_idx,
         },
       });
-      replies[i].user_name = user.name;
+
+      replies[i].user = user;
+
+      delete replies[i].fk_user_idx;
+      delete replies[i].fk_comment_idx;
     }
 
     logger.green("[GET] 답글 목록 조회 성공.");

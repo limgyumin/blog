@@ -4,7 +4,7 @@ import Like from "../../../../entity/Like";
 import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import LikeUserType from "../../../../type/LikeUserType";
+import LikeListType from "../../../../type/LikeListType";
 
 export default async (req: Request, res: Response) => {
   const postIdx = req.query.post;
@@ -29,7 +29,7 @@ export default async (req: Request, res: Response) => {
 
     const likeRepo = getRepository(Like);
     const [likes, like_count]: [
-      LikeUserType[],
+      LikeListType[],
       number
     ] = await likeRepo.findAndCount({
       where: {
