@@ -39,8 +39,6 @@ class CommentStore {
     content: string
   ): Promise<Response> => {
     try {
-      content = content.replace(/^\s+|\s+$/g, "");
-
       const response: Response = await Comment.CreateComment(idx, content);
 
       return new Promise((resolve: (response: Response) => void, reject) => {

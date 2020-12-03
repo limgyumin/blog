@@ -1,6 +1,7 @@
 import { CategoryType } from "./Category";
 import CommentType from "./Comment";
 import PostType from "./Post";
+import ReplyType from "./Reply";
 import UserType from "./User";
 
 export type Response = {
@@ -62,5 +63,11 @@ export interface CommentsResponse extends Response {
 export interface CommentCountResponse extends Response {
   data: {
     total_count: number;
+  };
+}
+
+export interface RepliesResponse extends Response {
+  data: {
+    replies: ReplyType[];
   };
 }
