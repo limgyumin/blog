@@ -1,10 +1,10 @@
 import React from "react";
 import "./MainPostItem.scss";
-import moment from "moment";
 import { ReactComponent as Chat } from "../../../../assets/images/chat.svg";
 import { ReactComponent as Like } from "../../../../assets/images/like.svg";
 import PostType from "../../../../util/types/Post";
 import { Link } from "react-router-dom";
+import getTimeCount from "../../../../util/lib/getTimeCount";
 
 interface MainPostItemProps {
   post: PostType;
@@ -26,8 +26,7 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
         )}
         <div className="Main-Post-Item-Content">
           <span className="Main-Post-Item-Content-Category">
-            <span>{post.category_name}</span> ·{" "}
-            {moment(post.created_at).format("YYYY년 M월 D일")}
+            <span>{post.category_name}</span> · {getTimeCount(post.created_at)}
           </span>
           <span className="Main-Post-Item-Content-Title">{post.title}</span>
           <span className="Main-Post-Item-Content-Description">

@@ -1,8 +1,12 @@
 import React from "react";
 import CommentType from "../../../../util/types/Comment";
 import "./PostCommentItem.scss";
-import moment from "moment";
 import UserType from "../../../../util/types/User";
+import { IoIosArrowDown } from "react-icons/io";
+import { BiMessageSquareAdd, BiMessageSquareMinus } from "react-icons/bi";
+import getTimeCount from "../../../../util/lib/getTimeCount";
+import ReplyType from "../../../../util/types/Reply";
+import PostReplyContainer from "../../../../containers/Post/PostReplyContainer";
 
 interface PostCommentItemProps {
   user: UserType;
@@ -39,7 +43,7 @@ const PostCommentItem = ({
             <img src={comment.user.avatar} alt={comment.user.avatar} />
             <div className="Post-Comment-Item-Wrapper-Info-Container">
               <h3>{comment.user.name}</h3>
-              <p>{moment(comment.created_at).format("YYYY년 M월 D일")}</p>
+              <p>{getTimeCount(comment.created_at)}</p>
             </div>
           </div>
           {login && comment.user.idx === user.idx && (
@@ -90,6 +94,7 @@ const PostCommentItem = ({
         ) : (
           <p>{comment.content}</p>
         )}
+        <PostReplyContainer comment={comment} />
       </div>
     </>
   );

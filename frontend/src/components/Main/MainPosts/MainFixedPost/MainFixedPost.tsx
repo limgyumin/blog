@@ -1,11 +1,11 @@
 import React from "react";
-import moment from "moment";
 import "./MainFixedPost.scss";
 import { ReactComponent as Chat } from "../../../../assets/images/chat.svg";
 import { ReactComponent as Like } from "../../../../assets/images/like.svg";
 import { ReactComponent as Pin } from "../../../../assets/images/pin.svg";
 import PostType from "../../../../util/types/Post";
 import { Link } from "react-router-dom";
+import getTimeCount from "../../../../util/lib/getTimeCount";
 
 interface MainFixedPostProps {
   fixedPost: PostType;
@@ -30,7 +30,7 @@ const MainFixedPost = ({ fixedPost }: MainFixedPostProps) => {
               <Pin />
               <span>{fixedPost.category_name}</span>
               {" · "}
-              {moment(fixedPost.created_at).format("YYYY년 M월 D일")}
+              {getTimeCount(fixedPost.created_at)}
             </div>
             <span className="Main-Fixed-Post-Area-Content-Title">
               {fixedPost.title}
