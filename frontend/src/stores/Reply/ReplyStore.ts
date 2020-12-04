@@ -2,11 +2,26 @@ import { autobind } from "core-decorators";
 import { action, observable } from "mobx";
 import Reply from "../../assets/api/Reply";
 import ReplyType from "../../util/types/Reply";
-import { RepliesResponse } from "../../util/types/Response";
+import { RepliesResponse, ReplyCountResponse } from "../../util/types/Response";
 
 @autobind
 class ReplyStore {
-  @observable replies: ReplyType[] = [];
+  @action
+  handleReplyCount = async (idx: number): Promise<ReplyCountResponse> => {
+    try {
+      const response: ReplyCountResponse = await Reply.GetReplyCount(idx);
+
+      return new Promise(
+        (resolve: (response: ReplyCountResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
 
   @action
   handleCreateReply = async (
@@ -30,7 +45,6 @@ class ReplyStore {
   handleReplies = async (comment: number): Promise<RepliesResponse> => {
     try {
       const response: RepliesResponse = await Reply.GetReplies(comment);
-      this.replies = response.data.replies;
 
       return new Promise(
         (resolve: (response: RepliesResponse) => void, reject) => {

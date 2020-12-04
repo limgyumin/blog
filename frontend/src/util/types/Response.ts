@@ -71,3 +71,9 @@ export interface RepliesResponse extends Response {
     replies: ReplyType[];
   };
 }
+
+export interface ReplyCountResponse extends Response {
+  data: {
+    reply_count: number;
+  };
+}

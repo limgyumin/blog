@@ -2,6 +2,18 @@ import { SERVER } from "../../config/config.json";
 import axios from "axios";
 
 class Reply {
+  async GetReplyCount(idx: number) {
+    try {
+      const url = `${SERVER}/v1/comment/reply/${idx}`;
+
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async CreateReply(comment_idx: number, content: string) {
     try {
       const url = `${SERVER}/v1/reply`;
