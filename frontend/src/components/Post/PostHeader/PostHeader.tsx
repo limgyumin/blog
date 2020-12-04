@@ -1,6 +1,7 @@
 import moment from "moment";
 import React from "react";
 import { ReactComponent as Like } from "../../../assets/images/like.svg";
+import getTimeCount from "../../../util/lib/getTimeCount";
 import PostLike from "../PostLike";
 import "./PostHeader.scss";
 
@@ -38,7 +39,7 @@ const PostHeader = ({
               <p className="Post-Header-Container-Category-Wrapper-Info">
                 <span>{writer}</span>
                 {" · "}
-                {moment(createdAt).format("YYYY년 M월 D일")}
+                {getTimeCount(createdAt)}
               </p>
             </div>
             <div
