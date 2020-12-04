@@ -1,5 +1,6 @@
 import React from "react";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
+import PostCommentContainer from "../../containers/Post/PostCommentContainer";
 import CommentType from "../../util/types/Comment";
 import PostType from "../../util/types/Post";
 import "./Post.scss";
@@ -15,18 +16,7 @@ interface PostProps {
   likeCount: number;
   liked: boolean;
   handlePostLikeCallback: () => Promise<void>;
-  comment: string;
-  setComment: React.Dispatch<React.SetStateAction<string>>;
-  setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
-  showModal: () => void;
-  handleCreateCommentCallback: () => Promise<void>;
-  handleModifyCommentCallback: (
-    commentIdx: number,
-    content: string
-  ) => Promise<void>;
-  comments: CommentType[];
-  commentCount: number;
-  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  postIdx: number;
 }
 
 const Post = ({
@@ -36,15 +26,7 @@ const Post = ({
   likeCount,
   liked,
   handlePostLikeCallback,
-  comment,
-  setComment,
-  setCommentIdx,
-  showModal,
-  handleCreateCommentCallback,
-  handleModifyCommentCallback,
-  comments,
-  commentCount,
-  keyDownListener,
+  postIdx,
 }: PostProps) => {
   return (
     <>
@@ -77,17 +59,7 @@ const Post = ({
                     bio={post.user.bio}
                     id={post.user.id}
                   />
-                  <PostComment
-                    comments={comments}
-                    commentCount={commentCount}
-                    comment={comment}
-                    setComment={setComment}
-                    setCommentIdx={setCommentIdx}
-                    showModal={showModal}
-                    handleCreateCommentCallback={handleCreateCommentCallback}
-                    handleModifyCommentCallback={handleModifyCommentCallback}
-                    keyDownListener={keyDownListener}
-                  />
+                  <PostCommentContainer postIdx={postIdx} />
                 </>
               )}
             </div>
