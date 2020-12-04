@@ -11,11 +11,15 @@ import { useHistory } from "react-router-dom";
 
 interface PostReplyItemContainerProps {
   reply: ReplyType;
+  setReplyIdx: React.Dispatch<React.SetStateAction<number>>;
+  showModal: () => void;
   handleRepliesCallback: () => Promise<void>;
 }
 
 const PostReplyItemContainer = ({
   reply,
+  setReplyIdx,
+  showModal,
   handleRepliesCallback,
 }: PostReplyItemContainerProps) => {
   const history = useHistory();
@@ -49,6 +53,11 @@ const PostReplyItemContainer = ({
     setContent(reply.content);
   }, [reply]);
 
+  const deleteClickListener = (idx: number) => {
+    setReplyIdx(idx);
+    showModal();
+  };
+
   // 답글 수정 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
@@ -74,6 +83,7 @@ const PostReplyItemContainer = ({
         setEnable={setEnable}
         content={content}
         setContent={setContent}
+        deleteClickListener={deleteClickListener}
         handleModifyReplyCallback={handleModifyReplyCallback}
         handleModifyCancelCallback={handleModifyCancelCallback}
         keyDownListener={keyDownListener}

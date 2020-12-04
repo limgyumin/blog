@@ -5,7 +5,7 @@ interface PostReplyCreateProps {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   handleCreateReplyCallback: () => Promise<void>;
-  handleCreateCancel: () => void;
+  handleCreateCancelCallback: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -13,7 +13,7 @@ const PostReplyCreate = ({
   content,
   setContent,
   handleCreateReplyCallback,
-  handleCreateCancel,
+  handleCreateCancelCallback,
   keyDownListener,
 }: PostReplyCreateProps) => {
   return (
@@ -35,7 +35,7 @@ const PostReplyCreate = ({
           </button>
           <button
             className="Post-Reply-Create-Wrapper-Cancel"
-            onClick={() => handleCreateCancel()}
+            onClick={() => handleCreateCancelCallback()}
           >
             취소
           </button>

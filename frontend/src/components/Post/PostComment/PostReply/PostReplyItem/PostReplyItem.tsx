@@ -12,6 +12,7 @@ interface PostReplyItemProps {
   setEnable: React.Dispatch<React.SetStateAction<boolean>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  deleteClickListener: (idx: number) => void;
   handleModifyReplyCallback: () => Promise<void>;
   handleModifyCancelCallback: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -25,6 +26,7 @@ const PostReplyItem = ({
   setEnable,
   content,
   setContent,
+  deleteClickListener,
   handleModifyReplyCallback,
   handleModifyCancelCallback,
   keyDownListener,
@@ -52,7 +54,7 @@ const PostReplyItem = ({
                   </p>
                   <p
                     className="Post-Reply-Item-Wrapper-Control-Delete"
-                    onClick={() => {}}
+                    onClick={() => deleteClickListener(reply.idx)}
                   >
                     삭제
                   </p>

@@ -14,9 +14,11 @@ interface PostReplyProps {
   replyCount: number;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  setReplyIdx: React.Dispatch<React.SetStateAction<number>>;
+  showModal: () => void;
   handleCreateReplyCallback: () => Promise<void>;
+  handleCreateCancelCallback: () => void;
   handleRepliesCallback: () => Promise<void>;
-  handleCreateCancel: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -29,9 +31,11 @@ const PostReply = ({
   replyCount,
   content,
   setContent,
+  setReplyIdx,
+  showModal,
   handleCreateReplyCallback,
+  handleCreateCancelCallback,
   handleRepliesCallback,
-  handleCreateCancel,
   keyDownListener,
 }: PostReplyProps) => {
   return (
@@ -50,6 +54,8 @@ const PostReply = ({
                     <PostReplyItemContainer
                       key={reply.idx}
                       reply={reply}
+                      setReplyIdx={setReplyIdx}
+                      showModal={showModal}
                       handleRepliesCallback={handleRepliesCallback}
                     />
                   ))}
@@ -58,7 +64,7 @@ const PostReply = ({
                       content={content}
                       setContent={setContent}
                       handleCreateReplyCallback={handleCreateReplyCallback}
-                      handleCreateCancel={handleCreateCancel}
+                      handleCreateCancelCallback={handleCreateCancelCallback}
                       keyDownListener={keyDownListener}
                     />
                   ) : (
@@ -75,7 +81,7 @@ const PostReply = ({
                   content={content}
                   setContent={setContent}
                   handleCreateReplyCallback={handleCreateReplyCallback}
-                  handleCreateCancel={handleCreateCancel}
+                  handleCreateCancelCallback={handleCreateCancelCallback}
                   keyDownListener={keyDownListener}
                 />
               )}

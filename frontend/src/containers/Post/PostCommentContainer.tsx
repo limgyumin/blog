@@ -28,10 +28,12 @@ interface PostCommentContainerProps {
 const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   const { store } = useStore();
   const history = useHistory();
-  const { showModal } = store.ModalStore;
   const { login } = store.UserStore;
   const {
     comments,
+    isOpen,
+    isShow,
+    showModal,
     handleCommentCount,
     handleCreateComment,
     handleComments,
@@ -124,7 +126,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
 
   return (
     <>
-      <ModalContainer>
+      <ModalContainer isOpen={isOpen} isShow={isShow}>
         <PostCommentDelete
           handleDeleteCommentCallback={handleDeleteCommentCallback}
           showModal={showModal}

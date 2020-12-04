@@ -1,6 +1,5 @@
 import CategoryStore from "../../stores/Category";
 import CommentStore from "../../stores/Comment";
-import ModalStore from "../../stores/Modal";
 import PostStore from "../../stores/Post";
 import ReplyStore from "../../stores/Reply";
 import UserStore from "../../stores/User";
@@ -12,7 +11,6 @@ type StoreType = {
     CommentStore: CommentStore;
     ReplyStore: ReplyStore;
     CategoryStore: CategoryStore;
-    ModalStore: ModalStore;
   };
 };
 

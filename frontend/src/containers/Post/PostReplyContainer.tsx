@@ -4,12 +4,13 @@ import useStore from "../../util/lib/hooks/useStore";
 import PostReply from "../../components/Post/PostComment/PostReply";
 import validateContent from "../../util/lib/validateContent";
 import { RepliesResponse, ReplyCountResponse } from "../../util/types/Response";
-import CommentType from "../../util/types/Comment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 import { observer } from "mobx-react";
 import ReplyType from "../../util/types/Reply";
+import ModalContainer from "../Modal/ModalContainer";
+import PostReplyDelete from "../../components/Post/PostComment/PostReply/PostReplyDelete";
 
 /**
  * commentIdx가 필요 -> PostReplyContainer에서 처리
@@ -27,6 +28,9 @@ const PostReplyContainer = ({
 }: PostReplyContainerProps) => {
   const { store } = useStore();
   const {
+    isShow,
+    isOpen,
+    showModal,
     handleReplyCount,
     handleCreateReply,
     handleReplies,
@@ -93,8 +97,10 @@ const PostReplyContainer = ({
   const handleDeleteReplyCallback = useCallback(async () => {
     await handleDeleteReply(replyIdx)
       .then((res: Response) => {
+        handleCommentCountCallback();
         handleReplyCountCallback();
         handleRepliesCallback();
+        showModal();
       })
       .catch((err: Error) => {
         toast.error("이런! 답글 삭제에 실패했어요.");
@@ -103,7 +109,7 @@ const PostReplyContainer = ({
   }, [replyIdx]);
 
   // 답글 생성 취소시 작성 내용 초기화
-  const handleCreateCancel = useCallback(() => {
+  const handleCreateCancelCallback = useCallback(() => {
     if (replyCount) {
       setEnable(false);
     } else {
@@ -127,6 +133,8 @@ const PostReplyContainer = ({
     handleReplyCountCallback();
   }, [handleReplyCountCallback]);
 
+  // show 상태가 아니라는건 숨기기를 클릭했다는 뜻.
+  // 따라서 답글 작성 폼도 숨겨져야해요.
   useEffect(() => {
     if (!show) {
       setEnable(false);
@@ -135,6 +143,12 @@ const PostReplyContainer = ({
 
   return (
     <>
+      <ModalContainer isOpen={isOpen} isShow={isShow}>
+        <PostReplyDelete
+          showModal={showModal}
+          handleDeleteReplyCallback={handleDeleteReplyCallback}
+        />
+      </ModalContainer>
       <PostReply
         show={show}
         setShow={setShow}
@@ -144,9 +158,11 @@ const PostReplyContainer = ({
         replyCount={replyCount}
         content={content}
         setContent={setContent}
+        setReplyIdx={setReplyIdx}
+        showModal={showModal}
         handleCreateReplyCallback={handleCreateReplyCallback}
+        handleCreateCancelCallback={handleCreateCancelCallback}
         handleRepliesCallback={handleRepliesCallback}
-        handleCreateCancel={handleCreateCancel}
         keyDownListener={keyDownListener}
       />
     </>
