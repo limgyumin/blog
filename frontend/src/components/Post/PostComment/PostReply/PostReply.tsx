@@ -37,34 +37,57 @@ const PostReply = ({
   return (
     <>
       <div className="Post-Reply">
-        {replyCount ? (
-          <div
-            className={
-              show
-                ? "Post-Reply-Count-Active Post-Reply-Count"
-                : "Post-Reply-Count"
-            }
-            onClick={() => setShow(!show)}
-          >
-            {show ? (
-              <>
-                <BiMessageSquareMinus />
-                <span>숨기기</span>
-              </>
-            ) : (
-              <>
-                <BiMessageSquareAdd />
-                <span>{replyCount}개의 답글</span>
-              </>
-            )}
-          </div>
+        {show ? (
+          <>
+            <div className="Post-Reply-Count" onClick={() => setShow(!show)}>
+              <BiMessageSquareMinus />
+              <span>숨기기</span>
+            </div>
+            <div className="Post-Reply-Container">
+              {replyCount ? (
+                <>
+                  {replies.map((reply) => (
+                    <PostReplyItemContainer
+                      key={reply.idx}
+                      reply={reply}
+                      handleRepliesCallback={handleRepliesCallback}
+                    />
+                  ))}
+                  {enable ? (
+                    <PostReplyCreate
+                      content={content}
+                      setContent={setContent}
+                      handleCreateReplyCallback={handleCreateReplyCallback}
+                      handleCreateCancel={handleCreateCancel}
+                      keyDownListener={keyDownListener}
+                    />
+                  ) : (
+                    <button
+                      className="Post-Reply-Container-Create"
+                      onClick={() => setEnable(true)}
+                    >
+                      답글 작성하기
+                    </button>
+                  )}
+                </>
+              ) : (
+                <PostReplyCreate
+                  content={content}
+                  setContent={setContent}
+                  handleCreateReplyCallback={handleCreateReplyCallback}
+                  handleCreateCancel={handleCreateCancel}
+                  keyDownListener={keyDownListener}
+                />
+              )}
+            </div>
+          </>
         ) : (
           <>
-            <div className="Post-Reply-Add" onClick={() => setEnable(!enable)}>
-              {enable ? (
+            <div className="Post-Reply-Count" onClick={() => setShow(!show)}>
+              {replyCount ? (
                 <>
-                  <BiMessageSquareMinus />
-                  <span>숨기기</span>
+                  <BiMessageSquareAdd />
+                  <span>{replyCount}개의 답글</span>
                 </>
               ) : (
                 <>
@@ -73,45 +96,9 @@ const PostReply = ({
                 </>
               )}
             </div>
-            {enable && (
-              <PostReplyCreate
-                content={content}
-                setContent={setContent}
-                handleCreateReplyCallback={handleCreateReplyCallback}
-                handleCreateCancel={handleCreateCancel}
-                keyDownListener={keyDownListener}
-              />
-            )}
           </>
         )}
       </div>
-      {replyCount && show ? (
-        <div className="Post-Reply-Container">
-          {replies.map((reply) => (
-            <PostReplyItemContainer
-              key={reply.idx}
-              reply={reply}
-              handleRepliesCallback={handleRepliesCallback}
-            />
-          ))}
-          {enable ? (
-            <PostReplyCreate
-              content={content}
-              setContent={setContent}
-              handleCreateReplyCallback={handleCreateReplyCallback}
-              handleCreateCancel={handleCreateCancel}
-              keyDownListener={keyDownListener}
-            />
-          ) : (
-            <button
-              className="Post-Reply-Container-Create"
-              onClick={() => setEnable(true)}
-            >
-              답글 작성하기
-            </button>
-          )}
-        </div>
-      ) : null}
     </>
   );
 };

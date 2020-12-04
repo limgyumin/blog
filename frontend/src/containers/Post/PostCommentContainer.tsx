@@ -138,6 +138,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
         setCommentIdx={setCommentIdx}
         showModal={showModal}
         handleCreateCommentCallback={handleCreateCommentCallback}
+        handleCommentCountCallback={handleCommentCountCallback}
         handleCommentsCallback={handleCommentsCallback}
         keyDownListener={keyDownListener}
       />

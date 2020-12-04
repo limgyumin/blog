@@ -18,9 +18,13 @@ import ReplyType from "../../util/types/Reply";
 
 interface PostReplyContainerProps {
   commentIdx: number;
+  handleCommentCountCallback: () => Promise<void>;
 }
 
-const PostReplyContainer = ({ commentIdx }: PostReplyContainerProps) => {
+const PostReplyContainer = ({
+  commentIdx,
+  handleCommentCountCallback,
+}: PostReplyContainerProps) => {
   const { store } = useStore();
   const {
     handleReplyCount,
@@ -47,8 +51,10 @@ const PostReplyContainer = ({ commentIdx }: PostReplyContainerProps) => {
     await handleCreateReply(commentIdx, removeLastBlank(content))
       .then((res: Response) => {
         setContent("");
+        handleCommentCountCallback();
         handleReplyCountCallback();
         handleRepliesCallback();
+        setEnable(true);
       })
       .catch((err: Error) => {
         toast.error("이런! 답글 작성에 실패했어요.");
@@ -78,8 +84,6 @@ const PostReplyContainer = ({ commentIdx }: PostReplyContainerProps) => {
         } else {
           setReplies([]);
         }
-        // setShow(false);
-        // setEnable(false);
       })
       .catch((err: Error) => {
         history.push("/");
@@ -99,10 +103,14 @@ const PostReplyContainer = ({ commentIdx }: PostReplyContainerProps) => {
   }, [replyIdx]);
 
   // 답글 생성 취소시 작성 내용 초기화
-  const handleCreateCancel = () => {
-    setEnable(false);
+  const handleCreateCancel = useCallback(() => {
+    if (replyCount) {
+      setEnable(false);
+    } else {
+      setShow(false);
+    }
     setContent("");
-  };
+  }, [replyCount]);
 
   // 답글 작성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

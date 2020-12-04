@@ -15,6 +15,7 @@ interface PostCommentProps {
   setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
   showModal: () => void;
   handleCreateCommentCallback: () => Promise<void>;
+  handleCommentCountCallback: () => Promise<void>;
   handleCommentsCallback: () => Promise<void>;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
@@ -27,6 +28,7 @@ const PostComment = ({
   setCommentIdx,
   showModal,
   handleCreateCommentCallback,
+  handleCommentCountCallback,
   handleCommentsCallback,
   keyDownListener,
 }: PostCommentProps) => {
@@ -62,6 +64,7 @@ const PostComment = ({
               comment={comment}
               showModal={showModal}
               setCommentIdx={setCommentIdx}
+              handleCommentCountCallback={handleCommentCountCallback}
               handleCommentsCallback={handleCommentsCallback}
             />
           ))}

@@ -14,6 +14,7 @@ interface PostCommentItemContainerProps {
   comment: CommentType;
   showModal: () => void;
   setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
+  handleCommentCountCallback: () => Promise<void>;
   handleCommentsCallback: () => Promise<void>;
 }
 
@@ -21,6 +22,7 @@ const PostCommentItemContainer = ({
   comment,
   showModal,
   setCommentIdx,
+  handleCommentCountCallback,
   handleCommentsCallback,
 }: PostCommentItemContainerProps) => {
   const history = useHistory();
@@ -91,6 +93,7 @@ const PostCommentItemContainer = ({
         setEnable={setEnable}
         content={content}
         setContent={setContent}
+        handleCommentCountCallback={handleCommentCountCallback}
         handleModifyCommentCallback={handleModifyCommentCallback}
         handleModifyCancelCallback={handleModifyCancelCallback}
         keyDownListener={keyDownListener}

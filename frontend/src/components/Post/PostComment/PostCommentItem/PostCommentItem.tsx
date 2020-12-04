@@ -13,6 +13,7 @@ interface PostCommentItemProps {
   setEnable: React.Dispatch<React.SetStateAction<boolean>>;
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
+  handleCommentCountCallback: () => Promise<void>;
   handleModifyCommentCallback: () => void;
   handleModifyCancelCallback: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
@@ -27,6 +28,7 @@ const PostCommentItem = ({
   setEnable,
   content,
   setContent,
+  handleCommentCountCallback,
   handleModifyCommentCallback,
   handleModifyCancelCallback,
   keyDownListener,
@@ -91,7 +93,10 @@ const PostCommentItem = ({
         ) : (
           <p>{comment.content}</p>
         )}
-        <PostReplyContainer commentIdx={comment.idx} />
+        <PostReplyContainer
+          commentIdx={comment.idx}
+          handleCommentCountCallback={handleCommentCountCallback}
+        />
       </div>
     </>
   );
