@@ -3,30 +3,31 @@ import PostCommentItemContainer from "../../../containers/Post/PostCommentItemCo
 import CommentType from "../../../util/types/Comment";
 import "./PostComment.scss";
 
+/**
+ * 댓글 개수, 댓글 생성 담당
+ */
+
 interface PostCommentProps {
   comments: CommentType[];
   commentCount: number;
-  comment: string;
-  setComment: React.Dispatch<React.SetStateAction<string>>;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
   setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
   showModal: () => void;
   handleCreateCommentCallback: () => Promise<void>;
-  handleModifyCommentCallback: (
-    commentIdx: number,
-    content: string
-  ) => Promise<void>;
+  handleCommentsCallback: () => Promise<void>;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const PostComment = ({
   comments,
   commentCount,
-  comment,
-  setComment,
+  content,
+  setContent,
   setCommentIdx,
   showModal,
   handleCreateCommentCallback,
-  handleModifyCommentCallback,
+  handleCommentsCallback,
   keyDownListener,
 }: PostCommentProps) => {
   return (
@@ -38,8 +39,8 @@ const PostComment = ({
           </p>
           <div className="Post-Comment-Container-Input">
             <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
               placeholder="댓글을 작성해주세요."
               className="Post-Comment-Container-Input-Box"
@@ -55,13 +56,13 @@ const PostComment = ({
           </div>
         </div>
         <div className="Post-Comment-List">
-          {comments.map((comment, idx) => (
+          {comments.map((comment) => (
             <PostCommentItemContainer
-              key={idx}
+              key={comment.idx}
               comment={comment}
               showModal={showModal}
               setCommentIdx={setCommentIdx}
-              handleModifyCommentCallback={handleModifyCommentCallback}
+              handleCommentsCallback={handleCommentsCallback}
             />
           ))}
         </div>

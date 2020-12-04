@@ -3,19 +3,15 @@ import { observer } from "mobx-react";
 import Post from "../../components/Post";
 import useStore from "../../util/lib/hooks/useStore";
 import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
-import {
-  CommentCountResponse,
-  CommentsResponse,
-  LikeInfoResponse,
-  PostResponse,
-} from "../../util/types/Response";
+import { LikeInfoResponse, PostResponse } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
-import removeLastBlank from "../../util/lib/removeLastBlank";
-import validateContent from "../../util/lib/validateContent";
-import PostCommentDelete from "../../components/Post/PostComment/PostCommentDelete";
-import ModalContainer from "../Modal/ModalContainer";
+
+/**
+ * PostContainer에서는 정말 Post에 관련된 로직만!!
+ * Comment 로직에는 절대 관여하지 않아요.
+ */
 
 interface PostContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -33,31 +29,20 @@ const PostContainer = ({ match }: PostContainerProps) => {
     handlePostLike,
     handleLikeInfo,
   } = store.PostStore;
-  const {
-    comments,
-    initComments,
-    handleCommentCount,
-    handleCreateComment,
-    handleComments,
-    handleModifyComment,
-    handleDeleteComment,
-  } = store.CommentStore;
   const { login } = store.UserStore;
-  const { showModal } = store.ModalStore;
 
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
 
-  const [comment, setComment] = useState<string>("");
-  const [commentCount, setCommentCount] = useState<number>(0);
-  const [commentIdx, setCommentIdx] = useState<number>(0);
+  // 글의 Idx
+  const postIdx = Number(match.params.idx);
 
-  const { idx } = match.params;
+  // 글 조회
   const handlePostCallback = useCallback(async () => {
     setLoading(true);
-    await handlePost(Number(idx))
+    await handlePost(postIdx)
       .then((res: PostResponse) => {
         setLoading(false);
       })
@@ -71,9 +56,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, []);
 
+  // 글 좋아요 및 좋아요 취소
   const handlePostLikeCallback = useCallback(async () => {
     if (login) {
-      await handlePostLike(Number(idx))
+      await handlePostLike(postIdx)
         .then((res: Response) => {
           handleLikeInfoCallback();
         })
@@ -90,105 +76,18 @@ const PostContainer = ({ match }: PostContainerProps) => {
     }
   }, [login]);
 
+  // 글 좋아요 여부 조회
   const handleLikeInfoCallback = useCallback(async () => {
-    await handleLikeInfo(Number(idx))
+    await handleLikeInfo(postIdx)
       .then((res: LikeInfoResponse) => {
         setLikeCount(res.data["like_count"]);
         setLiked(res.data["liked"]);
       })
       .catch((err: Error) => {
-        toast.error("저런! 좋아요 정보 조회에 실패했어요.");
+        toast.error("이런! 좋아요 정보 조회에 실패했어요.");
         history.push("/");
       });
   }, []);
-
-  const handleCommentCountCallback = useCallback(async () => {
-    await handleCommentCount(Number(idx))
-      .then((res: CommentCountResponse) => {
-        setCommentCount(res.data["total_count"]);
-      })
-      .catch((err: Error) => {
-        history.push("/");
-      });
-  }, [comments]);
-
-  const handleCreateCommentCallback = useCallback(async () => {
-    if (login) {
-      if (!validateContent(comment)) {
-        toast.error("내용을 작성해주세요.");
-        return;
-      }
-      await handleCreateComment(Number(idx), comment)
-        .then((res: Response) => {
-          setComment("");
-          handleCommentsCallback();
-        })
-        .catch((err: Error) => {
-          if (err.message.indexOf("401")) {
-            toast.info("로그인 후 댓글을 작성하실 수 있어요.");
-          } else {
-            toast.error("으악! 댓글 작성에 실패했어요.");
-            history.push("/");
-          }
-        });
-    } else {
-      toast.info("로그인 후 댓글을 작성하실 수 있어요.");
-    }
-  }, [comment, login]);
-
-  const handleCommentsCallback = useCallback(async () => {
-    await handleComments(Number(idx))
-      .then((res: CommentsResponse) => {})
-      .catch(() => {
-        toast.error("앗! 댓글 조회에 실패했어요.");
-        history.push("/");
-      });
-  }, []);
-
-  const handleModifyCommentCallback = useCallback(
-    async (commentIdx: number, content: string) => {
-      await handleModifyComment(commentIdx, removeLastBlank(content))
-        .then((res: Response) => {
-          handleCommentsCallback();
-        })
-        .catch((err: Error) => {
-          toast.error("이런! 댓글 수정에 실패했어요.");
-          history.push("/");
-        });
-    },
-    []
-  );
-
-  const handleDeleteCommentCallback = useCallback(async () => {
-    await handleDeleteComment(commentIdx)
-      .then((res: Response) => {
-        handleCommentsCallback();
-        showModal();
-      })
-      .catch((err: Error) => {
-        toast.error("이런! 댓글 삭제에 실패했어요.");
-        history.push("/");
-      });
-  }, [commentIdx]);
-
-  const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (
-      validateContent(comment) &&
-      (e.key === "Enter" || e.key === "NumpadEnter") &&
-      !e.shiftKey
-    ) {
-      handleCreateCommentCallback();
-    }
-  };
-
-  useEffect(() => {
-    handleCommentCountCallback();
-  }, [handleCommentCountCallback]);
-
-  useEffect(() => {
-    handleCommentsCallback();
-    return () => initComments();
-  }, [handleCommentsCallback]);
 
   useEffect(() => {
     handlePostCallback();
@@ -235,12 +134,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
           />
         </Helmet>
       )}
-      <ModalContainer>
-        <PostCommentDelete
-          showModal={showModal}
-          handleDeleteCommentCallback={handleDeleteCommentCallback}
-        />
-      </ModalContainer>
+
       <Post
         post={post}
         loading={loading}
@@ -248,15 +142,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         likeCount={likeCount}
         liked={liked}
         handlePostLikeCallback={handlePostLikeCallback}
-        comment={comment}
-        setComment={setComment}
-        setCommentIdx={setCommentIdx}
-        showModal={showModal}
-        handleCreateCommentCallback={handleCreateCommentCallback}
-        handleModifyCommentCallback={handleModifyCommentCallback}
-        comments={comments}
-        commentCount={commentCount}
-        keyDownListener={keyDownListener}
+        postIdx={postIdx}
       />
     </>
   );

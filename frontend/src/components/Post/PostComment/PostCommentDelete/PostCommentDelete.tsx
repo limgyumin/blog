@@ -2,13 +2,13 @@ import React from "react";
 import "./PostCommentDelete.scss";
 
 interface PostCommentDeleteProps {
-  showModal: () => void;
   handleDeleteCommentCallback: () => Promise<void>;
+  showModal: () => void;
 }
 
 const PostCommentDelete = ({
-  showModal,
   handleDeleteCommentCallback,
+  showModal,
 }: PostCommentDeleteProps) => {
   return (
     <>

@@ -2,10 +2,7 @@ import React from "react";
 import CommentType from "../../../../util/types/Comment";
 import "./PostCommentItem.scss";
 import UserType from "../../../../util/types/User";
-import { IoIosArrowDown } from "react-icons/io";
-import { BiMessageSquareAdd, BiMessageSquareMinus } from "react-icons/bi";
 import getTimeCount from "../../../../util/lib/getTimeCount";
-import ReplyType from "../../../../util/types/Reply";
 import PostReplyContainer from "../../../../containers/Post/PostReplyContainer";
 
 interface PostCommentItemProps {
@@ -14,10 +11,10 @@ interface PostCommentItemProps {
   comment: CommentType;
   enable: boolean;
   setEnable: React.Dispatch<React.SetStateAction<boolean>>;
-  edit: string;
-  setEdit: React.Dispatch<React.SetStateAction<string>>;
-  modifyTryCallback: () => void;
-  modifyCancelCallback: () => void;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+  handleModifyCommentCallback: () => void;
+  handleModifyCancelCallback: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
   deleteClickListener: (idx: number) => void;
 }
@@ -28,10 +25,10 @@ const PostCommentItem = ({
   comment,
   enable,
   setEnable,
-  edit,
-  setEdit,
-  modifyTryCallback,
-  modifyCancelCallback,
+  content,
+  setContent,
+  handleModifyCommentCallback,
+  handleModifyCancelCallback,
   keyDownListener,
   deleteClickListener,
 }: PostCommentItemProps) => {
@@ -70,8 +67,8 @@ const PostCommentItem = ({
         {enable ? (
           <div className="Post-Comment-Item-Input">
             <textarea
-              value={edit}
-              onChange={(e) => setEdit(e.target.value)}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
               placeholder="댓글을 작성해주세요."
               className="Post-Comment-Item-Input-Box"
@@ -79,13 +76,13 @@ const PostCommentItem = ({
             <div className="Post-Comment-Item-Input-Wrapper">
               <button
                 className="Post-Comment-Item-Input-Wrapper-Button"
-                onClick={() => modifyTryCallback()}
+                onClick={() => handleModifyCommentCallback()}
               >
                 수정하기
               </button>
               <button
                 className="Post-Comment-Item-Input-Wrapper-Cancel"
-                onClick={() => modifyCancelCallback()}
+                onClick={() => handleModifyCancelCallback()}
               >
                 취소
               </button>
@@ -94,7 +91,7 @@ const PostCommentItem = ({
         ) : (
           <p>{comment.content}</p>
         )}
-        <PostReplyContainer comment={comment} />
+        <PostReplyContainer commentIdx={comment.idx} />
       </div>
     </>
   );
