@@ -55,7 +55,7 @@ export default async (req: AuthRequest, res: Response) => {
 
     await replyRepo.save(reply);
 
-    logger.green("[DELETE] 답글 수정 성공.");
+    logger.green("[PUT] 답글 수정 성공.");
     res.status(200).json({
       status: 200,
       message: "답글 수정 성공.",
