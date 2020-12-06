@@ -21,6 +21,7 @@
     resize: none;
     transition: border ease 0.2s;
     margin-bottom: 1rem;
+    overflow-y: hidden;
 
     &::placeholder {
       transition: color ease 0.2s;
@@ -28,7 +29,7 @@
     }
 
     &:focus {
-      border: 1px solid $v-light-gray;
+      border: 1px solid $vv-light-gray;
       &::placeholder {
         color: $v-light-gray;
       }

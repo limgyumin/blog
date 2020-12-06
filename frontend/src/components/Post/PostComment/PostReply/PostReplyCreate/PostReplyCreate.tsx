@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./PostReplyCreate.scss";
 
 interface PostReplyCreateProps {
@@ -18,10 +18,19 @@ const PostReplyCreate = ({
   keyDownListener,
   label,
 }: PostReplyCreateProps) => {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    textAreaRef.current!.style.height = "0px";
+    const scrollHeight = textAreaRef.current!.scrollHeight;
+    textAreaRef.current!.style.height = scrollHeight + "px";
+  }, [content]);
+
   return (
     <>
       <div className="Post-Reply-Create">
         <textarea
+          ref={textAreaRef}
           value={content}
           autoFocus
           onChange={(e) => setContent(e.target.value)}
