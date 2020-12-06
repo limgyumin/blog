@@ -34,7 +34,7 @@ export default async (req: Request, res: Response) => {
         post,
       },
       order: {
-        created_at: "DESC",
+        created_at: "ASC",
       },
     });
 

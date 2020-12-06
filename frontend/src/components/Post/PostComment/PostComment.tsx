@@ -18,6 +18,8 @@ interface PostCommentProps {
   handleCommentCountCallback: () => Promise<void>;
   handleCommentsCallback: () => Promise<void>;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  commentRef: React.RefObject<HTMLDivElement>;
+  textAreaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
 const PostComment = ({
@@ -31,6 +33,8 @@ const PostComment = ({
   handleCommentCountCallback,
   handleCommentsCallback,
   keyDownListener,
+  commentRef,
+  textAreaRef,
 }: PostCommentProps) => {
   return (
     <>
@@ -41,6 +45,7 @@ const PostComment = ({
           </p>
           <div className="Post-Comment-Container-Input">
             <textarea
+              ref={textAreaRef}
               value={content}
               onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
@@ -69,6 +74,7 @@ const PostComment = ({
             />
           ))}
         </div>
+        <div ref={commentRef} />
       </div>
     </>
   );

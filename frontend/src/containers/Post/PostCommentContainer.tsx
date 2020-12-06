@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import PostComment from "../../components/Post/PostComment";
 import PostCommentDelete from "../../components/Post/PostComment/PostCommentDelete";
@@ -47,6 +47,10 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // 댓글이 생성되면 가장 아래로 이동하기 위한 ref
+  const commentRef = useRef<HTMLDivElement>(null);
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
   // 댓글 개수 조회
   const handleCommentCountCallback = useCallback(async () => {
     await handleCommentCount(postIdx)
@@ -68,7 +72,9 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
       await handleCreateComment(postIdx, removeLastBlank(content))
         .then((res: Response) => {
           setContent("");
-          handleCommentsCallback();
+          handleCommentsCallback().then(() => {
+            scrollToBottom();
+          });
         })
         .catch((err: Error) => {
           if (err.message.indexOf("401")) {
@@ -128,6 +134,16 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
     }
   };
 
+  const scrollToBottom = useCallback(() => {
+    commentRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [comments]);
+
+  useEffect(() => {
+    textAreaRef.current!.style.height = "0px";
+    const scrollHeight = textAreaRef.current!.scrollHeight;
+    textAreaRef.current!.style.height = scrollHeight + "px";
+  }, [content]);
+
   useEffect(() => {
     handleCommentCountCallback();
   }, [handleCommentCountCallback]);
@@ -157,6 +173,8 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
         handleCommentCountCallback={handleCommentCountCallback}
         handleCommentsCallback={handleCommentsCallback}
         keyDownListener={keyDownListener}
+        commentRef={commentRef}
+        textAreaRef={textAreaRef}
       />
     </>
   );
