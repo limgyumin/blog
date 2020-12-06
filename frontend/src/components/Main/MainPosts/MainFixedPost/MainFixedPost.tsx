@@ -2,7 +2,7 @@ import React from "react";
 import "./MainFixedPost.scss";
 import { ReactComponent as Chat } from "../../../../assets/images/chat.svg";
 import { ReactComponent as Like } from "../../../../assets/images/like.svg";
-import { ReactComponent as Pin } from "../../../../assets/images/pin.svg";
+import { AiFillPushpin } from "react-icons/ai";
 import PostType from "../../../../util/types/Post";
 import { Link } from "react-router-dom";
 import getTimeCount from "../../../../util/lib/getTimeCount";
@@ -27,7 +27,7 @@ const MainFixedPost = ({ fixedPost }: MainFixedPostProps) => {
         <div className="Main-Fixed-Post-Area">
           <div className="Main-Fixed-Post-Area-Content">
             <div className="Main-Fixed-Post-Area-Content-Category">
-              <Pin />
+              <AiFillPushpin />
               <span>{fixedPost.category_name}</span>
               {" · "}
               {getTimeCount(fixedPost.created_at)}

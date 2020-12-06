@@ -12,14 +12,14 @@ import { useHistory } from "react-router-dom";
 interface PostReplyItemContainerProps {
   reply: ReplyType;
   setReplyIdx: React.Dispatch<React.SetStateAction<number>>;
-  showModal: () => void;
+  showModalCallback: () => void;
   handleRepliesCallback: () => Promise<void>;
 }
 
 const PostReplyItemContainer = ({
   reply,
   setReplyIdx,
-  showModal,
+  showModalCallback,
   handleRepliesCallback,
 }: PostReplyItemContainerProps) => {
   const history = useHistory();
@@ -55,7 +55,7 @@ const PostReplyItemContainer = ({
 
   const deleteClickListener = (idx: number) => {
     setReplyIdx(idx);
-    showModal();
+    showModalCallback();
   };
 
   // 답글 수정 Enter키 처리 (Enter + Shift 줄바꿈)

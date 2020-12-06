@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 
 interface PostCommentItemContainerProps {
   comment: CommentType;
-  showModal: () => void;
+  showModalCallback: () => void;
   setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
   handleCommentCountCallback: () => Promise<void>;
   handleCommentsCallback: () => Promise<void>;
@@ -20,7 +20,7 @@ interface PostCommentItemContainerProps {
 
 const PostCommentItemContainer = ({
   comment,
-  showModal,
+  showModalCallback,
   setCommentIdx,
   handleCommentCountCallback,
   handleCommentsCallback,
@@ -75,7 +75,7 @@ const PostCommentItemContainer = ({
   // 삭제 버튼 클릭 시 모달 생성 및 선택한 Comment의 Idx를 저장
   const deleteClickListener = (idx: number) => {
     setCommentIdx(idx);
-    showModal();
+    showModalCallback();
   };
 
   // 새 Comment가 생성 될 시 생성된 Comment의 Content를 저장

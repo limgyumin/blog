@@ -5,22 +5,6 @@ import { RepliesResponse, ReplyCountResponse } from "../../util/types/Response";
 
 @autobind
 class ReplyStore {
-  // 모달 관련 State
-  @observable isShow: boolean = false;
-  @observable isOpen: boolean = false;
-
-  @action
-  showModal() {
-    if (this.isShow) {
-      setTimeout(() => {
-        this.isShow = !this.isShow;
-      }, 500);
-    } else {
-      this.isShow = !this.isShow;
-    }
-    this.isOpen = !this.isOpen;
-  }
-
   @action
   handleReplyCount = async (idx: number): Promise<ReplyCountResponse> => {
     try {

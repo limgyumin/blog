@@ -3,12 +3,12 @@ import "./PostCommentDelete.scss";
 
 interface PostCommentDeleteProps {
   handleDeleteCommentCallback: () => Promise<void>;
-  showModal: () => void;
+  showModalCallback: () => void;
 }
 
 const PostCommentDelete = ({
   handleDeleteCommentCallback,
-  showModal,
+  showModalCallback,
 }: PostCommentDeleteProps) => {
   return (
     <>
@@ -26,7 +26,7 @@ const PostCommentDelete = ({
           </button>
           <button
             className="Post-Comment-Delete-Button-Cancel"
-            onClick={() => showModal()}
+            onClick={() => showModalCallback()}
           >
             취소
           </button>

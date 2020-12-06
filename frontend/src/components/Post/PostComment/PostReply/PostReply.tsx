@@ -15,7 +15,7 @@ interface PostReplyProps {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   setReplyIdx: React.Dispatch<React.SetStateAction<number>>;
-  showModal: () => void;
+  showModalCallback: () => void;
   handleCreateReplyCallback: () => Promise<void>;
   handleCreateCancelCallback: () => void;
   handleRepliesCallback: () => Promise<void>;
@@ -32,7 +32,7 @@ const PostReply = ({
   content,
   setContent,
   setReplyIdx,
-  showModal,
+  showModalCallback,
   handleCreateReplyCallback,
   handleCreateCancelCallback,
   handleRepliesCallback,
@@ -55,7 +55,7 @@ const PostReply = ({
                       key={reply.idx}
                       reply={reply}
                       setReplyIdx={setReplyIdx}
-                      showModal={showModal}
+                      showModalCallback={showModalCallback}
                       handleRepliesCallback={handleRepliesCallback}
                     />
                   ))}
@@ -63,8 +63,8 @@ const PostReply = ({
                     <PostReplyCreate
                       content={content}
                       setContent={setContent}
-                      handleCreateReplyCallback={handleCreateReplyCallback}
-                      handleCreateCancelCallback={handleCreateCancelCallback}
+                      confirmListener={handleCreateReplyCallback}
+                      cancelListener={handleCreateCancelCallback}
                       keyDownListener={keyDownListener}
                     />
                   ) : (
@@ -80,8 +80,8 @@ const PostReply = ({
                 <PostReplyCreate
                   content={content}
                   setContent={setContent}
-                  handleCreateReplyCallback={handleCreateReplyCallback}
-                  handleCreateCancelCallback={handleCreateCancelCallback}
+                  confirmListener={handleCreateReplyCallback}
+                  cancelListener={handleCreateCancelCallback}
                   keyDownListener={keyDownListener}
                 />
               )}

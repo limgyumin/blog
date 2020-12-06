@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import validateContent from "../../util/lib/validateContent";
 import removeLastBlank from "../../util/lib/removeLastBlank";
+import Portal from "../../components/common/Portal";
 
 /**
  * postIdx가 필요 -> PostCommentContainer에서 처리
@@ -31,9 +32,6 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   const { login } = store.UserStore;
   const {
     comments,
-    isOpen,
-    isShow,
-    showModal,
     handleCommentCount,
     handleCreateComment,
     handleComments,
@@ -45,6 +43,9 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   // delete 모달 때문에 commentIdx를 직접 가져와야함 ㅠ .ㅠ
   const [commentIdx, setCommentIdx] = useState<number>(0);
   const [content, setContent] = useState<string>("");
+
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // 댓글 개수 조회
   const handleCommentCountCallback = useCallback(async () => {
@@ -97,13 +98,24 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
     await handleDeleteComment(commentIdx)
       .then((res: Response) => {
         handleCommentsCallback();
-        showModal();
+        showModalCallback();
       })
       .catch((err: Error) => {
         toast.error("이런! 댓글 삭제에 실패했어요.");
         history.push("/");
       });
   }, [commentIdx]);
+
+  const showModalCallback = useCallback(() => {
+    if (isShow) {
+      setTimeout(() => {
+        setIsShow(!isShow);
+      }, 500);
+    } else {
+      setIsShow(!isShow);
+    }
+    setIsOpen(!isOpen);
+  }, [isShow, isOpen]);
 
   // 댓글 생성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -126,19 +138,21 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
 
   return (
     <>
-      <ModalContainer isOpen={isOpen} isShow={isShow}>
-        <PostCommentDelete
-          handleDeleteCommentCallback={handleDeleteCommentCallback}
-          showModal={showModal}
-        />
-      </ModalContainer>
+      <Portal elementId="modal-root">
+        <ModalContainer isOpen={isOpen} isShow={isShow}>
+          <PostCommentDelete
+            handleDeleteCommentCallback={handleDeleteCommentCallback}
+            showModalCallback={showModalCallback}
+          />
+        </ModalContainer>
+      </Portal>
       <PostComment
         comments={comments}
         commentCount={commentCount}
         content={content}
         setContent={setContent}
         setCommentIdx={setCommentIdx}
-        showModal={showModal}
+        showModalCallback={showModalCallback}
         handleCreateCommentCallback={handleCreateCommentCallback}
         handleCommentCountCallback={handleCommentCountCallback}
         handleCommentsCallback={handleCommentsCallback}

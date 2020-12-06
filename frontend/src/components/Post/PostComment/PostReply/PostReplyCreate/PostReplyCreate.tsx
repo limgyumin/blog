@@ -4,23 +4,26 @@ import "./PostReplyCreate.scss";
 interface PostReplyCreateProps {
   content: string;
   setContent: React.Dispatch<React.SetStateAction<string>>;
-  handleCreateReplyCallback: () => Promise<void>;
-  handleCreateCancelCallback: () => void;
+  confirmListener: () => Promise<void>;
+  cancelListener: () => void;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  label?: string;
 }
 
 const PostReplyCreate = ({
   content,
   setContent,
-  handleCreateReplyCallback,
-  handleCreateCancelCallback,
+  confirmListener,
+  cancelListener,
   keyDownListener,
+  label,
 }: PostReplyCreateProps) => {
   return (
     <>
       <div className="Post-Reply-Create">
         <textarea
           value={content}
+          autoFocus
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => keyDownListener(e)}
           placeholder="답글을 작성해주세요."
@@ -29,13 +32,13 @@ const PostReplyCreate = ({
         <div className="Post-Reply-Create-Wrapper">
           <button
             className="Post-Reply-Create-Wrapper-Button"
-            onClick={() => handleCreateReplyCallback()}
+            onClick={() => confirmListener()}
           >
-            작성하기
+            {label || "작성하기"}
           </button>
           <button
             className="Post-Reply-Create-Wrapper-Cancel"
-            onClick={() => handleCreateCancelCallback()}
+            onClick={() => cancelListener()}
           >
             취소
           </button>

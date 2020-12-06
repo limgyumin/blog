@@ -2,6 +2,7 @@ import React from "react";
 import getTimeCount from "../../../../../util/lib/getTimeCount";
 import ReplyType from "../../../../../util/types/Reply";
 import UserType from "../../../../../util/types/User";
+import PostReplyCreate from "../PostReplyCreate";
 import "./PostReplyItem.scss";
 
 interface PostReplyItemProps {
@@ -64,29 +65,14 @@ const PostReplyItem = ({
           )}
         </div>
         {enable ? (
-          <div className="Post-Comment-Item-Input">
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              onKeyDown={(e) => keyDownListener(e)}
-              placeholder="답글을 작성해주세요."
-              className="Post-Comment-Item-Input-Box"
-            />
-            <div className="Post-Comment-Item-Input-Wrapper">
-              <button
-                className="Post-Comment-Item-Input-Wrapper-Button"
-                onClick={() => handleModifyReplyCallback()}
-              >
-                수정하기
-              </button>
-              <button
-                className="Post-Comment-Item-Input-Wrapper-Cancel"
-                onClick={() => handleModifyCancelCallback()}
-              >
-                취소
-              </button>
-            </div>
-          </div>
+          <PostReplyCreate
+            content={content}
+            setContent={setContent}
+            confirmListener={handleModifyReplyCallback}
+            cancelListener={handleModifyCancelCallback}
+            keyDownListener={keyDownListener}
+            label="수정하기"
+          />
         ) : (
           <p>{reply.content}</p>
         )}

@@ -11,6 +11,7 @@ import { observer } from "mobx-react";
 import ReplyType from "../../util/types/Reply";
 import ModalContainer from "../Modal/ModalContainer";
 import PostReplyDelete from "../../components/Post/PostComment/PostReply/PostReplyDelete";
+import Portal from "../../components/common/Portal";
 
 /**
  * commentIdx가 필요 -> PostReplyContainer에서 처리
@@ -28,9 +29,6 @@ const PostReplyContainer = ({
 }: PostReplyContainerProps) => {
   const { store } = useStore();
   const {
-    isShow,
-    isOpen,
-    showModal,
     handleReplyCount,
     handleCreateReply,
     handleReplies,
@@ -45,6 +43,9 @@ const PostReplyContainer = ({
   const [enable, setEnable] = useState<boolean>(false);
   const [show, setShow] = useState<boolean>(false);
   const [content, setContent] = useState<string>("");
+
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   // 답글 생성
   const handleCreateReplyCallback = useCallback(async () => {
@@ -100,7 +101,7 @@ const PostReplyContainer = ({
         handleCommentCountCallback();
         handleReplyCountCallback();
         handleRepliesCallback();
-        showModal();
+        showModalCallback();
       })
       .catch((err: Error) => {
         toast.error("이런! 답글 삭제에 실패했어요.");
@@ -117,6 +118,17 @@ const PostReplyContainer = ({
     }
     setContent("");
   }, [replyCount]);
+
+  const showModalCallback = useCallback(() => {
+    if (isShow) {
+      setTimeout(() => {
+        setIsShow(!isShow);
+      }, 500);
+    } else {
+      setIsShow(!isShow);
+    }
+    setIsOpen(!isOpen);
+  }, [isShow, isOpen]);
 
   // 답글 작성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -143,12 +155,14 @@ const PostReplyContainer = ({
 
   return (
     <>
-      <ModalContainer isOpen={isOpen} isShow={isShow}>
-        <PostReplyDelete
-          showModal={showModal}
-          handleDeleteReplyCallback={handleDeleteReplyCallback}
-        />
-      </ModalContainer>
+      <Portal elementId="modal-root">
+        <ModalContainer isOpen={isOpen} isShow={isShow}>
+          <PostReplyDelete
+            showModal={showModalCallback}
+            handleDeleteReplyCallback={handleDeleteReplyCallback}
+          />
+        </ModalContainer>
+      </Portal>
       <PostReply
         show={show}
         setShow={setShow}
@@ -159,7 +173,7 @@ const PostReplyContainer = ({
         content={content}
         setContent={setContent}
         setReplyIdx={setReplyIdx}
-        showModal={showModal}
+        showModalCallback={showModalCallback}
         handleCreateReplyCallback={handleCreateReplyCallback}
         handleCreateCancelCallback={handleCreateCancelCallback}
         handleRepliesCallback={handleRepliesCallback}
