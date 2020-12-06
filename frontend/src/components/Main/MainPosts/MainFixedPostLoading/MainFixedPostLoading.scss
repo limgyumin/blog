@@ -74,7 +74,7 @@
       &-Title {
         display: flex;
         align-items: center;
-        margin-bottom: 1rem;
+        margin-bottom: 1.4rem;
 
         & > span {
           width: 5.5rem;
@@ -99,7 +99,7 @@
           width: 4rem;
           height: 1.2rem;
           border-radius: 0.2rem;
-          margin-right: 0.5rem;
+          margin: 0 0.5rem 0.5rem 0;
         }
       }
     }

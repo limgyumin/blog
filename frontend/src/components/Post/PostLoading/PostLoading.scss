@@ -4,6 +4,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-top: 8rem;
   align-items: center;
 
   span {
@@ -26,14 +27,15 @@
 
   &-Wrap {
     width: 100%;
+
     &-Title {
       display: flex;
       align-items: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
 
       & > span {
-        width: 8rem;
-        height: 3rem;
+        width: 6rem;
+        height: 3.6rem;
         border-radius: 0.2rem;
         margin-right: 0.8rem;
       }
@@ -46,7 +48,7 @@
 
       & > span {
         width: 4rem;
-        height: 2rem;
+        height: 1.4rem;
         border-radius: 0.2rem;
         margin-right: 0.8rem;
       }
@@ -58,5 +60,24 @@
     max-height: 100vh;
     width: 100%;
     padding-top: 60%;
+  }
+
+  &-Wrapper {
+    width: 100%;
+    margin: 3rem 0;
+
+    &-Content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 2rem;
+
+      & > span {
+        width: 4rem;
+        height: 1.4rem;
+        border-radius: 0.2rem;
+        margin: 0 0.8rem 0.6rem 0;
+      }
+    }
   }
 }

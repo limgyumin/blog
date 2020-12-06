@@ -58,20 +58,16 @@ const MainContainer = ({}: MainContainerProps) => {
 
   const handlePostsCallback = useCallback(async () => {
     setLoading(true);
-
     const param: PostParamsType = {
       page: page,
       limit: 18,
     };
-
     const category: number = Number(query.get("tab"));
-
     if (category) {
       param.category = category;
     } else {
       delete param.category;
     }
-
     await handlePosts(param)
       .then((res: PostsResponse) => {
         setLoading(false);
