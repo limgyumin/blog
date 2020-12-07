@@ -37,12 +37,13 @@ const PostContainer = ({ match }: PostContainerProps) => {
   } = store.PostStore;
   const { login } = store.UserStore;
 
+  const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
 
-  const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
+  const [scroll, setScroll] = useState<number>(0);
 
   // 글의 Idx
   const postIdx = Number(match.params.idx);
@@ -109,6 +110,21 @@ const PostContainer = ({ match }: PostContainerProps) => {
   }, [postIdx]);
 
   useEffect(() => {
+    let progressBarHandler = () => {
+      const totalScroll = document.documentElement.scrollTop;
+      const windowHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+      const progress = totalScroll / windowHeight;
+
+      setScroll(progress);
+    };
+
+    window.addEventListener("scroll", progressBarHandler);
+    return () => window.removeEventListener("scroll", progressBarHandler);
+  });
+
+  useEffect(() => {
     handlePostCallback();
     return () => initPost();
   }, [handlePostCallback]);
@@ -167,6 +183,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         handlePostLikeCallback={handlePostLikeCallback}
         postIdx={postIdx}
         otherPosts={otherPosts}
+        scroll={scroll}
       />
     </>
   );

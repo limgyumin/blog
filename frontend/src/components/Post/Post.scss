@@ -1,3 +1,5 @@
+@import "../../util/color.scss";
+
 .Post {
   display: flex;
   justify-content: center;
@@ -12,5 +14,21 @@
 
   &-Content {
     margin: 3rem 0;
+  }
+
+  &-ProgressBar {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.25);
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 6px;
+
+    &-Container {
+      background: $black;
+      transform-origin: top left;
+      transform: scale(0, 0);
+      height: 6px;
+    }
   }
 }

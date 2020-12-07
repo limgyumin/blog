@@ -18,6 +18,7 @@ interface PostProps {
   handlePostLikeCallback: () => Promise<void>;
   postIdx: number;
   otherPosts: Partial<OtherPostsType>;
+  scroll: number;
 }
 
 const Post = ({
@@ -29,6 +30,7 @@ const Post = ({
   handlePostLikeCallback,
   postIdx,
   otherPosts,
+  scroll,
 }: PostProps) => {
   return (
     <>
@@ -70,6 +72,12 @@ const Post = ({
             )}
           </div>
         )}
+        <div className="Post-ProgressBar">
+          <div
+            className="Post-ProgressBar-Container"
+            style={{ transform: `scale(${scroll}, 1)` }}
+          />
+        </div>
       </div>
     </>
   );
