@@ -10,9 +10,11 @@ import createTempPost from "./post.ctrl/createTempPost";
 import getTempPosts from "./post.ctrl/getTempPosts";
 import searchPost from "./post.ctrl/searchPost";
 import getFixedPost from "./post.ctrl/getFixedPost";
+import getOtherPosts from "./post.ctrl/getOtherPosts";
 
 const router = Router();
 
+router.get("/other/:idx", authMiddleWare.guest, getOtherPosts);
 router.get("/fixed", authMiddleWare.guest, getFixedPost);
 router.get("/temp", authMiddleWare.admin, getTempPosts);
 router.get("/search", authMiddleWare.guest, searchPost);
