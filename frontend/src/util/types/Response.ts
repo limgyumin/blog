@@ -1,5 +1,6 @@
 import { CategoryType } from "./Category";
 import CommentType from "./Comment";
+import OtherPostsType from "./OtherPosts";
 import PostType from "./Post";
 import ReplyType from "./Reply";
 import UserType from "./User";
@@ -13,6 +14,12 @@ export interface LikeInfoResponse extends Response {
   data: {
     like_count: number;
     liked: boolean;
+  };
+}
+
+export interface OtherPostsResponse extends Response {
+  data: {
+    other_posts: OtherPostsType;
   };
 }
 

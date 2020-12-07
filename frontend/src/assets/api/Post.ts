@@ -13,7 +13,6 @@ class Post {
       let url = `${SERVER}/v1/post/fixed`;
 
       const { data } = await axios.get(url);
-
       return data;
     } catch (error) {
       throw new Error(`${error}`);
@@ -22,7 +21,7 @@ class Post {
 
   async GetPosts(query: PostParamsType) {
     try {
-      let url = `${SERVER}/v1/post/?page=${query.page}&limit=${query.limit}`;
+      let url = `${SERVER}/v1/post?page=${query.page}&limit=${query.limit}`;
 
       if (query.category) {
         url += `&category=${query.category}`;
@@ -38,6 +37,17 @@ class Post {
   async GetPost(idx: number) {
     try {
       const url = `${SERVER}/v1/post/${idx}`;
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
+  async GetOtherPosts(idx: number) {
+    try {
+      const url = `${SERVER}/v1/post/other/${idx}`;
 
       const { data } = await axios.get(url);
       return data;

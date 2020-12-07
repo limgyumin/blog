@@ -1,0 +1,150 @@
+@import "../../../util/color.scss";
+@import "../../../util/lib.scss";
+
+.Post-List {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+  }
+
+  &-Previous {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    transition: all ease 0.1s;
+
+    &:hover {
+      transform: scale(1.03, 1.03);
+    }
+
+    @media screen and (max-width: 780px) {
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    &-Container {
+      margin-right: 0.5rem;
+      width: 100%;
+      max-width: 24rem;
+      background-color: $vvvvv-light-gray;
+      padding: 1rem 1.5rem;
+      border-radius: 0.2rem;
+      text-decoration: none;
+      transition: all ease 0.1s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      &:hover {
+        background-color: $vvvv-light-gray;
+        & > svg {
+          animation: scale ease 0.7s infinite;
+          @keyframes scale {
+            0% {
+              transform: translateX(0.3rem);
+            }
+
+            50% {
+              transform: translateX(0rem);
+            }
+
+            100% {
+              transform: translateX(0.3rem);
+            }
+          }
+        }
+      }
+
+      & > svg {
+        font-size: 1.6rem;
+      }
+
+      &-Content {
+        max-width: 17rem;
+
+        &-Name {
+          color: $light-black;
+          font-size: 0.8rem;
+        }
+
+        &-Title {
+          color: $black;
+          font-weight: 600;
+          font-size: 1.125rem;
+          margin-top: 0.4rem;
+          @include ellipsis(1);
+        }
+      }
+    }
+  }
+
+  &-Next {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    transition: all ease 0.1s;
+
+    &:hover {
+      transform: scale(1.03, 1.03);
+    }
+
+    &-Container {
+      margin-left: 0.5rem;
+      width: 100%;
+      max-width: 24rem;
+      background-color: $vvvvv-light-gray;
+      padding: 1rem 1.5rem;
+      border-radius: 0.2rem;
+      text-decoration: none;
+      transition: all ease 0.1s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      &:hover {
+        background-color: $vvvv-light-gray;
+        & > svg {
+          animation: scale ease 0.7s infinite;
+          @keyframes scale {
+            0% {
+              transform: translateX(-0.3rem);
+            }
+
+            50% {
+              transform: translateX(0rem);
+            }
+
+            100% {
+              transform: translateX(-0.3rem);
+            }
+          }
+        }
+      }
+
+      & > svg {
+        font-size: 1.6rem;
+      }
+
+      &-Content {
+        max-width: 17rem;
+
+        &-Name {
+          color: $light-black;
+          font-size: 0.8rem;
+        }
+
+        &-Title {
+          color: $black;
+          font-weight: 600;
+          font-size: 1.125rem;
+          margin-top: 0.4rem;
+          @include ellipsis(1);
+        }
+      }
+    }
+  }
+}

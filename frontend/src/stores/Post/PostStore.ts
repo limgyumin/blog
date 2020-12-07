@@ -4,6 +4,7 @@ import Post from "../../assets/api/Post";
 import PostType from "../../util/types/Post";
 import {
   LikeInfoResponse,
+  OtherPostsResponse,
   PostFixedResponse,
   PostResponse,
   PostsResponse,
@@ -102,6 +103,23 @@ class PostStore {
 
       return new Promise(
         (resolve: (response: PostResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleOtherPosts = async (idx: number): Promise<OtherPostsResponse> => {
+    try {
+      const response: OtherPostsResponse = await Post.GetOtherPosts(idx);
+
+      return new Promise(
+        (resolve: (response: OtherPostsResponse) => void, reject) => {
           resolve(response);
         }
       );

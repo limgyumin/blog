@@ -98,13 +98,13 @@
           width: 3.6rem;
           height: 3.6rem;
           border-radius: 50%;
-          margin-right: 0.4rem;
         }
 
         &-Name {
           color: $black;
           font-size: 1rem;
           font-weight: 600;
+          margin-left: 0.5rem;
 
           & > span {
             color: $v-light-gray;

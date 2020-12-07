@@ -3,10 +3,15 @@ import { observer } from "mobx-react";
 import Post from "../../components/Post";
 import useStore from "../../util/lib/hooks/useStore";
 import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
-import { LikeInfoResponse, PostResponse } from "../../util/types/Response";
+import {
+  LikeInfoResponse,
+  OtherPostsResponse,
+  PostResponse,
+} from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
+import OtherPostsType from "../../util/types/OtherPosts";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -26,6 +31,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
     post,
     initPost,
     handlePost,
+    handleOtherPosts,
     handlePostLike,
     handleLikeInfo,
   } = store.PostStore;
@@ -35,6 +41,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
+
+  const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
 
   // 글의 Idx
   const postIdx = Number(match.params.idx);
@@ -54,7 +62,18 @@ const PostContainer = ({ match }: PostContainerProps) => {
           history.push("/");
         }
       });
-  }, []);
+  }, [postIdx]);
+
+  const handleOtherPostsCallback = useCallback(async () => {
+    await handleOtherPosts(postIdx)
+      .then((res: OtherPostsResponse) => {
+        setOtherPosts(res.data.other_posts);
+      })
+      .catch((err: Error) => {
+        toast.error("이런! 어딘가 문제가 있어요.");
+        history.push("/");
+      });
+  }, [postIdx]);
 
   // 글 좋아요 및 좋아요 취소
   const handlePostLikeCallback = useCallback(async () => {
@@ -87,12 +106,16 @@ const PostContainer = ({ match }: PostContainerProps) => {
         toast.error("이런! 좋아요 정보 조회에 실패했어요.");
         history.push("/");
       });
-  }, []);
+  }, [postIdx]);
 
   useEffect(() => {
     handlePostCallback();
     return () => initPost();
   }, [handlePostCallback]);
+
+  useEffect(() => {
+    handleOtherPostsCallback();
+  }, [handleOtherPostsCallback]);
 
   useEffect(() => {
     handleLikeInfoCallback();
@@ -143,6 +166,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         liked={liked}
         handlePostLikeCallback={handlePostLikeCallback}
         postIdx={postIdx}
+        otherPosts={otherPosts}
       />
     </>
   );
