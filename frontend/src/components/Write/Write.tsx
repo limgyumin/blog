@@ -6,7 +6,10 @@ import { HiOutlinePencil } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
 import { FiImage, FiSave } from "react-icons/fi";
 import { TiDelete } from "react-icons/ti";
+import { ReactComponent as Option } from "../../assets/images/option.svg";
 import "./Write.scss";
+import { CategoryType } from "../../util/types/Category";
+import WriteCategoryOption from "./WriteCategoryOption";
 
 interface WriteProps {
   title: string;
@@ -23,6 +26,12 @@ interface WriteProps {
   preview: string | ArrayBuffer | null;
   fileName: string;
   clearImageHandler: () => void;
+  categories: CategoryType[];
+  category: string;
+  showOption: boolean;
+  setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
+  categoryItemHandler: (name: string, idx: number) => void;
+  handleWritePostCallback: () => Promise<void>;
 }
 
 const Write = ({
@@ -40,6 +49,12 @@ const Write = ({
   preview,
   fileName,
   clearImageHandler,
+  categories,
+  category,
+  showOption,
+  setShowOption,
+  categoryItemHandler,
+  handleWritePostCallback,
 }: WriteProps) => {
   return (
     <>
@@ -80,6 +95,20 @@ const Write = ({
                 <TiDelete onClick={() => clearImageHandler()} />
               </div>
             )}
+            <div
+              className="Write-Container-Input-Category"
+              onClick={() => setShowOption(true)}
+            >
+              {category || "카테고리"}
+              <Option />
+              {showOption && (
+                <WriteCategoryOption
+                  categories={categories}
+                  setShowOption={setShowOption}
+                  categoryItemHandler={categoryItemHandler}
+                />
+              )}
+            </div>
           </div>
           <textarea
             ref={contentRef}
@@ -109,7 +138,10 @@ const Write = ({
           </MarkDownContainer>
         </div>
         <div className="Write-Control">
-          <button className="Write-Control-Confirm" onClick={() => {}}>
+          <button
+            className="Write-Control-Confirm"
+            onClick={() => handleWritePostCallback()}
+          >
             <HiOutlinePencil />
           </button>
           <button className="Write-Control-Save" onClick={() => {}}>

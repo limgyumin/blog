@@ -84,14 +84,15 @@
         cursor: pointer;
         border: 1px solid $vvv-light-gray;
         border-radius: 0.2rem;
-        margin-right: 1rem;
+        margin-right: 0.6rem;
+        transition: all ease 0.1s;
 
         & > svg {
           margin-right: 0.4rem;
         }
 
         &:hover {
-          background-color: $vvvv-light-gray;
+          background-color: $vvvvv-light-gray;
         }
       }
 
@@ -114,15 +115,39 @@
         border: 1px solid $vvv-light-gray;
         border-radius: 0.2rem;
         padding: 0.5rem 0.75rem;
+        margin-right: 0.6rem;
 
         & > svg {
           margin-left: 0.3rem;
           font-size: 1.3rem;
           cursor: pointer;
+          transition: all ease 0.1s;
 
           &:hover {
             color: $vv-light-gray;
           }
+        }
+      }
+
+      &-Category {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background-color: $white;
+        color: $v-light-gray;
+        border: 1px solid $vvv-light-gray;
+        border-radius: 0.2rem;
+        padding: 0.5rem 0.75rem;
+        transition: all ease 0.1s;
+        position: relative;
+
+        &:hover {
+          background-color: $vvvvv-light-gray;
+        }
+
+        & > svg {
+          width: 0.7rem;
+          margin-left: 0.3rem;
         }
       }
     }
@@ -151,6 +176,7 @@
     width: 50%;
     height: 100%;
     padding: 2rem 2.5rem;
+    overflow-x: hidden;
 
     @media screen and (max-width: 840px) {
       display: none;
