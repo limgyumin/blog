@@ -2,6 +2,10 @@ import React from "react";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
 import { RiPencilRuler2Line } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
+import { HiOutlinePencil } from "react-icons/hi";
+import { IoMdExit } from "react-icons/io";
+import { FiImage, FiSave } from "react-icons/fi";
+import { TiDelete } from "react-icons/ti";
 import "./Write.scss";
 
 interface WriteProps {
@@ -15,6 +19,10 @@ interface WriteProps {
   setContent: React.Dispatch<React.SetStateAction<string>>;
   contentRef: React.RefObject<HTMLTextAreaElement>;
   writeCancelHandler: () => void;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  preview: string | ArrayBuffer | null;
+  fileName: string;
+  clearImageHandler: () => void;
 }
 
 const Write = ({
@@ -28,6 +36,10 @@ const Write = ({
   setContent,
   contentRef,
   writeCancelHandler,
+  handleImageChange,
+  preview,
+  fileName,
+  clearImageHandler,
 }: WriteProps) => {
   return (
     <>
@@ -51,12 +63,30 @@ const Write = ({
             className="Write-Container-Description"
             placeholder="설명을 입력해주세요."
           />
+          <div className="Write-Container-Input">
+            <label htmlFor="file">
+              <FiImage />
+              업로드
+            </label>
+            <input
+              id="file"
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={(e) => handleImageChange(e)}
+            />
+            {fileName && (
+              <div className="Write-Container-Input-Name">
+                {fileName}
+                <TiDelete onClick={() => clearImageHandler()} />
+              </div>
+            )}
+          </div>
           <textarea
             ref={contentRef}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             className="Write-Container-Content"
-            placeholder="내용을 입력해주세요."
+            placeholder="자! 이제 마음껏 이야기를 써보죠!"
           />
         </div>
         <div className="Write-Preview">
@@ -66,19 +96,30 @@ const Write = ({
           </p>
           <p className="Write-Preview-Title">{title}</p>
           <p className="Write-Preview-Description">{desc}</p>
+          {preview && (
+            <div className="Write-Preview-Thumbnail">
+              <img
+                src={preview.toString()}
+                className="Write-Preview-Thumbnail-Image"
+              />
+            </div>
+          )}
           <MarkDownContainer className="Write-Preview-Content">
             {content}
           </MarkDownContainer>
         </div>
         <div className="Write-Control">
           <button className="Write-Control-Confirm" onClick={() => {}}>
-            작성하기
+            <HiOutlinePencil />
+          </button>
+          <button className="Write-Control-Save" onClick={() => {}}>
+            <FiSave />
           </button>
           <button
             className="Write-Control-Cancel"
             onClick={() => writeCancelHandler()}
           >
-            취소
+            <IoMdExit />
           </button>
         </div>
       </div>
