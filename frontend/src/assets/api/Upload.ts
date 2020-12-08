@@ -7,7 +7,7 @@ class Upload {
       const url = `${SERVER}/v1/upload`;
 
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("files", file);
 
       const { data } = await axios.post(url, formData);
       return data;
