@@ -8,6 +8,31 @@ interface PostParamsType {
 }
 
 class Post {
+  async CreatePost(
+    title: string,
+    description: string,
+    content: string,
+    category_idx: number,
+    thumbnail?: string
+  ) {
+    try {
+      const url = `${SERVER}/v1/post`;
+
+      const body = {
+        title,
+        description,
+        content,
+        thumbnail: thumbnail || null,
+        category_idx,
+      };
+
+      const { data } = await axios.post(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async GetFixedPost() {
     try {
       let url = `${SERVER}/v1/post/fixed`;

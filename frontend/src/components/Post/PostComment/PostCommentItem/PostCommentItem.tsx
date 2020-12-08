@@ -70,6 +70,7 @@ const PostCommentItem = ({
           <div className="Post-Comment-Item-Input">
             <textarea
               value={content}
+              autoFocus
               onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
               placeholder="댓글을 작성해주세요."

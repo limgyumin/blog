@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import PostReplyItem from "../../components/Post/PostComment/PostReply/PostReplyItem";
 import useStore from "../../util/lib/hooks/useStore";
-import validateContent from "../../util/lib/validateContent";
+import isEmpty from "../../util/lib/isEmpty";
 import ReplyType from "../../util/types/Reply";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,7 +32,7 @@ const PostReplyItemContainer = ({
 
   // 답글 수정
   const handleModifyReplyCallback = useCallback(async () => {
-    if (!validateContent(content)) {
+    if (isEmpty(content)) {
       toast.error("내용을 작성해주세요.");
       return;
     }
@@ -61,7 +61,7 @@ const PostReplyItemContainer = ({
   // 답글 수정 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
-      validateContent(content) &&
+      !isEmpty(content) &&
       (e.key === "Enter" || e.key === "NumpadEnter") &&
       !e.shiftKey
     ) {

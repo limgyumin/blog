@@ -11,7 +11,7 @@ import {
 import ModalContainer from "../Modal/ModalContainer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import validateContent from "../../util/lib/validateContent";
+import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 import Portal from "../../components/common/Portal";
 
@@ -65,7 +65,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   // 댓글 생성
   const handleCreateCommentCallback = useCallback(async () => {
     if (login) {
-      if (!validateContent(content)) {
+      if (isEmpty(content)) {
         toast.error("내용을 작성해주세요.");
         return;
       }
@@ -126,7 +126,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   // 댓글 생성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
-      validateContent(content) &&
+      !isEmpty(content) &&
       (e.key === "Enter" || e.key === "NumpadEnter") &&
       !e.shiftKey
     ) {

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
 import PostReply from "../../components/Post/PostComment/PostReply";
-import validateContent from "../../util/lib/validateContent";
+import isEmpty from "../../util/lib/isEmpty";
 import { RepliesResponse, ReplyCountResponse } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,7 +49,7 @@ const PostReplyContainer = ({
 
   // 답글 생성
   const handleCreateReplyCallback = useCallback(async () => {
-    if (!validateContent(content)) {
+    if (isEmpty(content)) {
       toast.error("내용을 작성해주세요.");
       return;
     }
@@ -133,7 +133,7 @@ const PostReplyContainer = ({
   // 답글 작성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
-      validateContent(content) &&
+      !isEmpty(content) &&
       (e.key === "Enter" || e.key === "NumpadEnter") &&
       !e.shiftKey
     ) {

@@ -32,6 +32,7 @@ interface WriteProps {
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   categoryItemHandler: (name: string, idx: number) => void;
   handleWritePostCallback: () => Promise<void>;
+  keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
 const Write = ({
@@ -55,6 +56,7 @@ const Write = ({
   setShowOption,
   categoryItemHandler,
   handleWritePostCallback,
+  keyDownHandler,
 }: WriteProps) => {
   return (
     <>
@@ -113,6 +115,7 @@ const Write = ({
           <textarea
             ref={contentRef}
             value={content}
+            onKeyDown={(e) => keyDownHandler(e)}
             onChange={(e) => setContent(e.target.value)}
             className="Write-Container-Content"
             placeholder="자! 이제 마음껏 이야기를 써보죠!"

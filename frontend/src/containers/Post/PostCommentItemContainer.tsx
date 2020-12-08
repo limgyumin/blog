@@ -6,7 +6,7 @@ import PostCommentItem from "../../components/Post/PostComment/PostCommentItem";
 import CommentType from "../../util/types/Comment";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import validateContent from "../../util/lib/validateContent";
+import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 import { useHistory } from "react-router-dom";
 
@@ -37,7 +37,7 @@ const PostCommentItemContainer = ({
   // Modify 함수 실행 전 수정한 내용 검증
   const handleModifyCommentCallback = useCallback(async () => {
     if (login) {
-      if (!validateContent(content)) {
+      if (isEmpty(content)) {
         toast.error("내용을 작성해주세요.");
         return;
       }
@@ -64,7 +64,7 @@ const PostCommentItemContainer = ({
   // 댓글 수정 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (
-      validateContent(content) &&
+      !isEmpty(content) &&
       (e.key === "Enter" || e.key === "NumpadEnter") &&
       !e.shiftKey
     ) {

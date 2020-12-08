@@ -4,6 +4,7 @@ import Header from "../../components/common/Header";
 import useStore from "../../util/lib/hooks/useStore";
 import axios from "axios";
 import { useHistory, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface HeaderContainerProps {}
 
@@ -46,6 +47,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
       )}`;
       handleMyProfile().catch((err: Error) => {
         if (err.message.indexOf("410")) {
+          toast.info("다시 로그인을 해주세요.");
           handleLogout();
         }
       });
