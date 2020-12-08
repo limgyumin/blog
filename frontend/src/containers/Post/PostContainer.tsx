@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
 import Post from "../../components/Post";
 import useStore from "../../util/lib/hooks/useStore";
@@ -42,8 +42,9 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
-
   const [scroll, setScroll] = useState<number>(0);
+
+  const postTopRef = useRef<HTMLDivElement>(null);
 
   // 글의 Idx
   const postIdx = Number(match.params.idx);
@@ -109,20 +110,28 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, [postIdx]);
 
+  const progressBarHandler = () => {
+    const totalScroll = document.documentElement.scrollTop;
+    const windowHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const progress = totalScroll / windowHeight;
+
+    setScroll(progress);
+  };
+
+  const scrollToTop = () => {
+    postTopRef.current?.scrollIntoView();
+  };
+
   useEffect(() => {
-    let progressBarHandler = () => {
-      const totalScroll = document.documentElement.scrollTop;
-      const windowHeight =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const progress = totalScroll / windowHeight;
+    scrollToTop();
+  }, [postIdx]);
 
-      setScroll(progress);
-    };
-
+  useEffect(() => {
     window.addEventListener("scroll", progressBarHandler);
     return () => window.removeEventListener("scroll", progressBarHandler);
-  });
+  }, []);
 
   useEffect(() => {
     handlePostCallback();
@@ -184,6 +193,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         postIdx={postIdx}
         otherPosts={otherPosts}
         scroll={scroll}
+        postTopRef={postTopRef}
       />
     </>
   );

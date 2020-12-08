@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage";
 import PostPage from "../pages/PostPage";
+import WritePage from "../pages/WritePage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route exact path="/" component={MainPage} />
         <Route path="/success" component={LoginPage} />
         <Route path="/post/:idx" component={PostPage} />
+        <Route path="/write" component={WritePage} />
       </Switch>
     </div>
   );

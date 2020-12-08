@@ -163,11 +163,23 @@
         position: relative;
 
         &-Category {
-          margin-bottom: 1rem;
+          margin: 0.5rem 0;
+
+          & > span {
+            height: 0.8rem;
+          }
         }
 
         &-Title {
           margin-bottom: 1rem;
+
+          & > span {
+            height: 1.4rem;
+          }
+        }
+
+        &-Description {
+          margin-bottom: 0.4rem;
         }
       }
 

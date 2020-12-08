@@ -70,9 +70,12 @@ const Header = ({
               {login ? (
                 <>
                   {admin && (
-                    <div className="Header-Container-Content-Profile-Write">
+                    <Link
+                      to="/write"
+                      className="Header-Container-Content-Profile-Write"
+                    >
                       글 쓰기
-                    </div>
+                    </Link>
                   )}
                   <div className="Header-Container-Content-Profile-Wrapper">
                     <div

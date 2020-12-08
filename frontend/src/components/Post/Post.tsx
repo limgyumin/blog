@@ -19,6 +19,7 @@ interface PostProps {
   postIdx: number;
   otherPosts: Partial<OtherPostsType>;
   scroll: number;
+  postTopRef: React.RefObject<HTMLDivElement>;
 }
 
 const Post = ({
@@ -31,10 +32,11 @@ const Post = ({
   postIdx,
   otherPosts,
   scroll,
+  postTopRef,
 }: PostProps) => {
   return (
     <>
-      <div className="Post">
+      <div className="Post" ref={postTopRef}>
         {notFound ? (
           <p>아무것도 없떵</p>
         ) : (

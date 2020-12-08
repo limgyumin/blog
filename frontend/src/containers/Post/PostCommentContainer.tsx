@@ -134,9 +134,9 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
     }
   };
 
-  const scrollToBottom = useCallback(() => {
+  const scrollToBottom = () => {
     commentRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [comments]);
+  };
 
   useEffect(() => {
     textAreaRef.current!.style.height = "0px";

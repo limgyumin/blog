@@ -22,7 +22,6 @@ const MainFixedPostLoading = ({}: MainFixedPostLoadingProps) => {
               <span />
               <span style={{ width: "4rem" }} />
               <span style={{ width: "8rem" }} />
-              <span style={{ width: "3rem" }} />
             </div>
             <div className="Main-Fixed-Post-Loading-Area-Content-Description">
               <span style={{ width: "3rem" }} />
@@ -30,8 +29,6 @@ const MainFixedPostLoading = ({}: MainFixedPostLoadingProps) => {
               <span style={{ width: "6rem" }} />
               <span style={{ width: "2rem" }} />
               <span style={{ width: "7rem" }} />
-              <span style={{ width: "5rem" }} />
-              <span style={{ width: "6rem" }} />
               <span style={{ width: "5rem" }} />
               <span style={{ width: "6rem" }} />
               <span style={{ width: "2rem" }} />
@@ -42,8 +39,6 @@ const MainFixedPostLoading = ({}: MainFixedPostLoadingProps) => {
               <span style={{ width: "8rem" }} />
               <span style={{ width: "4rem" }} />
               <span style={{ width: "2rem" }} />
-              <span style={{ width: "4rem" }} />
-              <span style={{ width: "4rem" }} />
             </div>
           </div>
           <div className="Main-Fixed-Post-Loading-Area-Information">

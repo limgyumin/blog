@@ -1,0 +1,180 @@
+@import "../../util/color.scss";
+
+.Write {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  font-family: MalgunGothic;
+
+  &-Container {
+    width: 50%;
+    min-height: 100%;
+    background-color: $vvvvv-light-gray;
+    padding: 2rem 2.5rem;
+
+    @media screen and (max-width: 840px) {
+      width: 100%;
+    }
+
+    &-Label {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $semi-light-gray;
+
+      & > svg {
+        margin-right: 0.4rem;
+      }
+    }
+
+    &-Title {
+      resize: none;
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      margin-top: 3rem;
+      font-family: inherit;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: $black;
+      line-height: 1.45;
+      overflow-y: hidden;
+
+      &::placeholder {
+        font-size: 2.2rem;
+        font-weight: 600;
+        color: $vv-light-gray;
+      }
+    }
+
+    &-Description {
+      resize: none;
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-family: inherit;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: $black;
+      margin: 1rem 0;
+      line-height: 1.5;
+      overflow-y: hidden;
+
+      &::placeholder {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: $vv-light-gray;
+      }
+    }
+
+    &-Content {
+      resize: none;
+      width: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-family: inherit;
+      font-size: 1.125rem;
+      color: $black;
+      margin-top: 2.5rem;
+      line-height: 1.5;
+      overflow-y: hidden;
+
+      &::placeholder {
+        font-size: 1.125rem;
+        color: $vv-light-gray;
+      }
+    }
+  }
+
+  &-Preview {
+    width: 50%;
+    height: 100%;
+    padding: 2rem 2.5rem;
+
+    @media screen and (max-width: 840px) {
+      display: none;
+    }
+
+    &-Label {
+      display: flex;
+      align-items: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $semi-light-gray;
+
+      & > svg {
+        margin-right: 0.4rem;
+      }
+    }
+
+    &-Title {
+      width: 100%;
+      margin-top: 3rem;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: $black;
+      line-height: 1.5;
+    }
+
+    &-Description {
+      width: 100%;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin: 1rem 0;
+      color: $black;
+      line-height: 1.5;
+    }
+
+    &-Content {
+      margin-top: 3.5rem;
+    }
+  }
+
+  &-Control {
+    position: fixed;
+    z-index: 10;
+    bottom: 2rem;
+    right: 2rem;
+
+    &-Confirm {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.4rem 1rem;
+      background-color: $black;
+      color: $white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: all ease 0.2s;
+      margin-right: 1rem;
+      box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background-color: $light-black;
+      }
+    }
+
+    &-Cancel {
+      cursor: pointer;
+      outline: none;
+      border: none;
+      border-radius: 0.3rem;
+      padding: 0.4rem 1rem;
+      background-color: $v-light-gray;
+      color: $white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: all ease 0.2s;
+      box-shadow: 0px 5px 14px 0px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background-color: $vv-light-gray;
+      }
+    }
+  }
+}
