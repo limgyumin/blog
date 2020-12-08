@@ -84,3 +84,9 @@ export interface ReplyCountResponse extends Response {
     reply_count: number;
   };
 }
+
+export interface UploadFileResponse extends Response {
+  data: {
+    files: string[];
+  };
+}
