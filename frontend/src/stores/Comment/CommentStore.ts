@@ -12,6 +12,11 @@ class CommentStore {
   @observable comments: CommentType[] = [];
 
   @action
+  initComments = () => {
+    this.comments = [];
+  };
+
+  @action
   handleCommentCount = async (idx: number): Promise<CommentCountResponse> => {
     try {
       const response: CommentCountResponse = await Comment.GetCommentCount(idx);

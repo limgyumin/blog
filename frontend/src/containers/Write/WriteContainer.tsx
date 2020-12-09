@@ -143,6 +143,7 @@ const WriteContainer = ({}) => {
   const keyDownHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Tab") {
       e.preventDefault();
+      document.execCommand("insertText", false, "\t");
     }
   };
 

@@ -5,6 +5,21 @@
   width: 100%;
   min-height: 100vh;
   font-family: MalgunGothic;
+  animation: fadeIn ease 0.5s;
+
+  @keyframes identifier {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  ::selection {
+    background-color: $vvv-light-gray;
+  }
 
   &-Container {
     width: 50%;
@@ -155,6 +170,7 @@
     &-Content {
       resize: none;
       width: 100%;
+      min-height: 70%;
       border: none;
       outline: none;
       background-color: transparent;
@@ -164,6 +180,7 @@
       margin-top: 2.5rem;
       line-height: 1.5;
       overflow-y: hidden;
+      tab-size: 4;
 
       &::placeholder {
         font-size: 1.125rem;
@@ -201,6 +218,7 @@
       font-weight: 600;
       color: $black;
       line-height: 1.5;
+      word-break: break-all;
     }
 
     &-Description {
@@ -209,6 +227,7 @@
       margin: 1rem 0;
       color: $black;
       line-height: 1.5;
+      word-break: break-all;
     }
 
     &-Thumbnail {

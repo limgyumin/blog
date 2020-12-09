@@ -32,6 +32,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   const { login } = store.UserStore;
   const {
     comments,
+    initComments,
     handleCommentCount,
     handleCreateComment,
     handleComments,
@@ -150,6 +151,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
 
   useEffect(() => {
     handleCommentsCallback();
+    return () => initComments();
   }, [handleCommentsCallback]);
 
   return (
