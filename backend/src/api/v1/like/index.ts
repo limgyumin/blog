@@ -7,7 +7,7 @@ import getLikeInfo from "./like.ctrl/getLikeInfo";
 const router = Router();
 
 router.post("/", authMiddleWare.user, postLike);
-router.get("/:idx", authMiddleWare.guest, getLikeInfo);
 router.get("/users", authMiddleWare.guest, getLikedUsers);
+router.get("/:idx", authMiddleWare.guest, getLikeInfo);
 
 export default router;

@@ -4,7 +4,6 @@ import Like from "../../../../entity/Like";
 import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
-import LikeListType from "../../../../type/LikeListType";
 
 export default async (req: Request, res: Response) => {
   const postIdx = req.query.post;
@@ -28,10 +27,7 @@ export default async (req: Request, res: Response) => {
     }
 
     const likeRepo = getRepository(Like);
-    const [likes, like_count]: [
-      LikeListType[],
-      number
-    ] = await likeRepo.findAndCount({
+    const [likes, like_count]: [Like[], number] = await likeRepo.findAndCount({
       where: {
         post,
       },
@@ -46,20 +42,23 @@ export default async (req: Request, res: Response) => {
         },
       });
 
-      likes[i].user_name = user.name;
+      delete likes[i].fk_post_idx;
+      delete likes[i].fk_user_idx;
+
+      likes[i].user = user;
     }
 
-    logger.green("[GET] 좋아요 목록 조회 성공.");
+    logger.green("[GET] 좋아요 유저 조회 성공.");
     res.status(200).json({
       status: 200,
-      message: "좋아요 목록 조회 성공.",
+      message: "좋아요 유저 목록 조회 성공.",
       data: {
         like_count,
         likes,
       },
     });
   } catch (error) {
-    logger.red("[GET] 좋아요 목록 조회 서버 오류.", error.message);
+    logger.red("[GET] 좋아요 유저 조회 서버 오류.", error.message);
     res.status(500).json({
       status: 500,
       message: "서버 오류.",

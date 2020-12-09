@@ -20,6 +20,7 @@ export default async (req: Request, res: Response) => {
       where: {
         idx: postIdx,
         is_temp: false,
+        is_deleted: false,
       },
     });
 
