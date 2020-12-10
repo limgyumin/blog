@@ -1,16 +1,19 @@
 import React from "react";
 import { CategoryType } from "../../../util/types/Category";
+import { RiEdit2Fill } from "react-icons/ri";
 import "./MainCategories.scss";
 import MainCategoryItem from "./MainCategoryItem";
 
 interface MainCategoriesProps {
   categories: CategoryType[];
   totalPostCount: number;
+  admin: boolean;
 }
 
 const MainCategories = ({
   categories,
   totalPostCount,
+  admin,
 }: MainCategoriesProps) => {
   const total_view = {
     idx: 0,
@@ -21,7 +24,6 @@ const MainCategories = ({
     <>
       <div className="Main-Categories">
         <div className="Main-Categories-Container">
-          <p className="Main-Categories-Container-Title">카테고리</p>
           <div className="Main-Categories-Container-List">
             <MainCategoryItem category={total_view} />
             {categories.map((category, idx) => (

@@ -1,16 +1,120 @@
+@import "../../util/color.scss";
+
 .Main {
   display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-content: center;
-  padding: 6rem 0 4rem 0;
 
-  @media screen and (max-width: 1537px) {
-    padding: 8rem 0 4rem 0;
+  &-Banner {
+    width: 100%;
+    min-height: 93vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $black;
+    position: relative;
+
+    &-Content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & > h1 {
+        color: $white;
+        font-size: 3.4rem;
+        margin-bottom: 0.4rem;
+
+        @media screen and (max-width: 950px) {
+          font-size: 2.6rem;
+        }
+
+        @media screen and (max-width: 730px) {
+          font-size: 2rem;
+        }
+
+        @media screen and (max-width: 550px) {
+          font-size: 1.6rem;
+        }
+      }
+
+      & > p {
+        color: $v-light-gray;
+        font-size: 2.4rem;
+
+        @media screen and (max-width: 950px) {
+          font-size: 1.8rem;
+        }
+
+        @media screen and (max-width: 730px) {
+          font-size: 1.4rem;
+        }
+
+        @media screen and (max-width: 550px) {
+          font-size: 1.2rem;
+        }
+      }
+
+      & > svg {
+        color: $white;
+        font-size: 2rem;
+        position: absolute;
+        bottom: 1rem;
+        cursor: pointer;
+        animation: floating ease 0.8s infinite;
+
+        @keyframes floating {
+          0% {
+            transform: translateY(-0.5rem);
+          }
+          50% {
+            transform: translateY(0rem);
+          }
+          100% {
+            transform: translateY(-0.5rem);
+          }
+        }
+      }
+    }
   }
 
-  &-Container {
+  &-Wrapper {
     width: 100%;
-    max-width: 1700px;
     display: flex;
+    padding: 6rem 0 4rem 0;
+    justify-content: center;
+
+    &-Container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+
+      &-Title {
+        margin-bottom: 3rem;
+        text-align: center;
+
+        & > h1 {
+          font-size: 2.6rem;
+          color: $black;
+
+          @media screen and (max-width: 610px) {
+            font-size: 2rem;
+          }
+
+          @media screen and (max-width: 500px) {
+            font-size: 1.8rem;
+          }
+        }
+
+        & > p {
+          font-size: 1.4rem;
+          color: $light-gray;
+
+          @media screen and (max-width: 610px) {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
   }
 }

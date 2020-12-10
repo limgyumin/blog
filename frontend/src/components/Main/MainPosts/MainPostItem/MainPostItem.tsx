@@ -1,7 +1,7 @@
 import React from "react";
 import "./MainPostItem.scss";
-import { ReactComponent as Chat } from "../../../../assets/images/chat.svg";
-import { ReactComponent as Like } from "../../../../assets/images/like.svg";
+import { RiChat3Line } from "react-icons/ri";
+import { AiOutlineHeart } from "react-icons/ai";
 import PostType from "../../../../util/types/Post";
 import { Link } from "react-router-dom";
 import getTimeCount from "../../../../util/lib/getTimeCount";
@@ -25,12 +25,16 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
           </div>
         )}
         <div className="Main-Post-Item-Content">
+          <div className="Main-Post-Item-Content-Info">
+            <span className="Main-Post-Item-Content-Info-Title">
+              {post.title}
+            </span>
+            <span className="Main-Post-Item-Content-Info-Description">
+              {post.description}
+            </span>
+          </div>
           <span className="Main-Post-Item-Content-Category">
             <span>{post.category_name}</span> · {getTimeCount(post.created_at)}
-          </span>
-          <span className="Main-Post-Item-Content-Title">{post.title}</span>
-          <span className="Main-Post-Item-Content-Description">
-            {post.description}
           </span>
         </div>
         <div className="Main-Post-Item-Bottom">
@@ -47,11 +51,11 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
           </div>
           <div className="Main-Post-Item-Bottom-Count">
             <div className="Main-Post-Item-Bottom-Count-Comment">
-              <Chat />
+              <RiChat3Line />
               <span>{post.comment_count}</span>
             </div>
             <div className="Main-Post-Item-Bottom-Count-Like">
-              <Like />
+              <AiOutlineHeart />
               <span>{post.like_count}</span>
             </div>
           </div>

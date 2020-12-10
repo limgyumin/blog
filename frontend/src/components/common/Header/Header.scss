@@ -5,8 +5,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $white;
-  transition: 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: transform ease 0.3s, box-shadow ease 0.3s;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,12 +17,24 @@
   }
 
   &-Shadow {
-    box-shadow: 0 0 0.6rem 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &-Transparent {
+    background-color: transparent;
+
+    &-Hide {
+      transform: translateY(-20rem);
+    }
+
+    &-Shadow {
+      box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
+    }
   }
 
   &-Container {
     width: 100%;
-    max-width: 1700px;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
     padding: 0 1rem;
@@ -35,6 +47,12 @@
 
       &-Image {
         height: 1.4rem;
+
+        &-White {
+          & > path {
+            fill: $white;
+          }
+        }
       }
 
       &-Profile {
@@ -64,6 +82,16 @@
 
           &:active {
             box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
+          }
+
+          &-White {
+            background-color: $white;
+            color: $black;
+            font-weight: 700;
+
+            &:hover {
+              background-color: $vv-light-gray;
+            }
           }
         }
 
@@ -96,6 +124,12 @@
                 fill: $black;
               }
             }
+
+            &:hover > &-Option-White {
+              path {
+                fill: $vvvv-light-gray;
+              }
+            }
           }
         }
 
@@ -104,16 +138,11 @@
           justify-content: center;
           align-items: center;
           cursor: pointer;
-          padding: 0.5rem;
+          padding: 0.4rem;
           background-color: $black;
           border-radius: 50%;
           box-shadow: none;
-          transition: all ease-in-out 0.3s;
-
-          &-Logo {
-            width: 1.85rem;
-            height: 1.85rem;
-          }
+          transition: all ease-in-out 0.2s;
 
           &:hover {
             background-color: $light-black;
@@ -121,6 +150,23 @@
 
           &:active {
             box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
+          }
+
+          &-White {
+            background-color: $white;
+
+            &:hover {
+              background-color: $vv-light-gray;
+            }
+          }
+
+          &-Logo {
+            width: 1.85rem;
+            height: 1.85rem;
+
+            &-White > path {
+              fill: $black;
+            }
           }
         }
       }
@@ -134,9 +180,9 @@
       max-height: 0rem;
       transition: all ease 1s;
 
-      @media screen and (max-width: 1537px) {
-        display: flex;
-      }
+      // @media screen and (max-width: 990px) {
+      //   display: flex;
+      // }
 
       &-Open {
         max-height: 14rem;
@@ -190,9 +236,9 @@
         }
       }
 
-      @media screen and (max-width: 1537px) {
-        display: flex;
-      }
+      // @media screen and (max-width: 990px) {
+      //   display: flex;
+      // }
     }
   }
 }

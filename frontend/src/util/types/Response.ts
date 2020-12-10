@@ -36,12 +36,6 @@ export interface PostsResponse extends Response {
   };
 }
 
-export interface PostFixedResponse extends Response {
-  data: {
-    post: PostType;
-  };
-}
-
 export interface CategoriesResponse extends Response {
   data: {
     total: number;

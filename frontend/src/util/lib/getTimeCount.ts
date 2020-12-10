@@ -2,10 +2,14 @@ import TimeCounting, { TimeCountingOption } from "time-counting";
 
 export default (time: Date): string => {
   const option: TimeCountingOption = {
-    lang: "ko",
+    lang: "en",
     calculate: {
       justNow: 3601,
     },
   };
-  return TimeCounting(time, option);
+
+  let timeSentence = TimeCounting(time, option);
+  timeSentence = timeSentence === "just now" ? "Just Now" : timeSentence;
+
+  return timeSentence;
 };

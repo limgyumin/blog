@@ -5,7 +5,6 @@ import PostType from "../../util/types/Post";
 import {
   LikeInfoResponse,
   OtherPostsResponse,
-  PostFixedResponse,
   PostResponse,
   PostsResponse,
 } from "../../util/types/Response";
@@ -18,7 +17,6 @@ interface PostParamsType {
 
 @autobind
 class PostStore {
-  @observable fixedPost: PostType = <PostType>{};
   @observable post: PostType = <PostType>{};
   @observable posts: PostType[] = [];
 
@@ -30,32 +28,6 @@ class PostStore {
   @action
   initPosts = () => {
     this.posts = [];
-  };
-
-  @action
-  initFixedPost = () => {
-    this.fixedPost = <PostType>{};
-  };
-
-  @action
-  handleFixedPost = async (): Promise<PostFixedResponse> => {
-    try {
-      const response: PostFixedResponse = await Post.GetFixedPost();
-
-      if (response.data.post) {
-        this.fixedPost = response.data.post;
-      }
-
-      return new Promise(
-        (resolve: (response: PostFixedResponse) => void, reject) => {
-          resolve(response);
-        }
-      );
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
   };
 
   @action

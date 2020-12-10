@@ -19,6 +19,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   const [showOption, setShowOption] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
+  const [transparent, setTransparent] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
   const { pathname } = useLocation();
@@ -28,7 +29,9 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
     const shadow = (pageYOffset > 30 && deltaY < 0) || open;
+    const transparent = pageYOffset < 835 && pathname === "/";
 
+    setTransparent(transparent);
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
@@ -86,6 +89,11 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   }, [handleMyProfileCallback]);
 
   useEffect(() => {
+    const { pageYOffset } = window;
+    setTransparent(pageYOffset === 0);
+  }, []);
+
+  useEffect(() => {
     documentRef.current.addEventListener("scroll", handleScroll);
     return () =>
       documentRef.current.removeEventListener("scroll", handleScroll);
@@ -103,6 +111,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   return (
     <>
       <Header
+        transparent={transparent}
         shadow={shadow}
         hide={hide}
         admin={admin}

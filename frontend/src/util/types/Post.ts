@@ -11,5 +11,4 @@ export default interface PostType {
   user: UserType;
   comment_count: number;
   like_count: number;
-  is_fixed: boolean;
 }

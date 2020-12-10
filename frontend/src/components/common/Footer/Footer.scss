@@ -1,0 +1,11 @@
+@import "../../../util/color.scss";
+
+.Footer {
+  width: 100%;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black;
+  color: $white;
+}

@@ -4,29 +4,46 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  line-height: 1.8rem;
-  transition: transform ease 0.2s;
+  justify-content: center;
   text-decoration: none;
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.4rem;
+  background-color: $vvv-light-gray;
+  transition: background-color ease 0.2s;
+  margin: 0 0.4rem 0.3rem 0;
 
   &:hover {
-    transform: translateX(-0.6rem);
+    background-color: $vv-light-gray;
+  }
+
+  &-Active {
+    background-color: $black;
+
+    &:hover {
+      background-color: $black;
+    }
   }
 
   &-Name {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    color: $vv-light-gray;
+    color: $black;
     margin-right: 0.2rem;
     transition: color ease 0.2s;
 
     &-Active {
-      color: $black;
+      color: $white;
     }
   }
 
   &-Count {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: $vv-light-gray;
+    color: $black;
+    transition: color ease 0.2s;
+
+    &-Active {
+      color: $white;
+    }
   }
 }

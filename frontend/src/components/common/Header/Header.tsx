@@ -12,6 +12,7 @@ import { CategoryType } from "../../../util/types/Category";
 import HeaderCategoryItem from "./HeaderCategoryItem";
 
 interface HeaderProps {
+  transparent: boolean;
   shadow: boolean;
   hide: boolean;
   admin: boolean;
@@ -29,6 +30,7 @@ interface HeaderProps {
 }
 
 const Header = ({
+  transparent,
   shadow,
   hide,
   admin,
@@ -54,7 +56,11 @@ const Header = ({
     <>
       <div
         className={
-          hide
+          transparent
+            ? hide
+              ? "Header-Transparent-Hide Header-Transparent Header"
+              : "Header-Transparent Header"
+            : hide
             ? "Header-Hide Header"
             : shadow
             ? "Header-Shadow Header"
@@ -64,7 +70,13 @@ const Header = ({
         <div className="Header-Container">
           <div className="Header-Container-Content">
             <Link to="/">
-              <Logo className="Header-Container-Content-Image" />
+              <Logo
+                className={
+                  transparent
+                    ? "Header-Container-Content-Image-White Header-Container-Content-Image"
+                    : "Header-Container-Content-Image"
+                }
+              />
             </Link>
             <div className="Header-Container-Content-Profile">
               {login ? (
@@ -72,7 +84,11 @@ const Header = ({
                   {admin && (
                     <Link
                       to="/write"
-                      className="Header-Container-Content-Profile-Write"
+                      className={
+                        transparent
+                          ? "Header-Container-Content-Profile-Write-White Header-Container-Content-Profile-Write"
+                          : "Header-Container-Content-Profile-Write"
+                      }
                     >
                       글 쓰기
                     </Link>
@@ -87,7 +103,13 @@ const Header = ({
                         alt="Profile"
                         className="Header-Container-Content-Profile-Wrapper-User-Avatar"
                       />
-                      <Option className="Header-Container-Content-Profile-Wrapper-User-Option" />
+                      <Option
+                        className={
+                          transparent
+                            ? "Header-Container-Content-Profile-Wrapper-User-Option-White Header-Container-Content-Profile-Wrapper-User-Option"
+                            : "Header-Container-Content-Profile-Wrapper-User-Option"
+                        }
+                      />
                     </div>
                     {showOption && (
                       <HeaderOption
@@ -101,9 +123,19 @@ const Header = ({
               ) : (
                 <a
                   href={OAUTH}
-                  className="Header-Container-Content-Profile-Button"
+                  className={
+                    transparent
+                      ? "Header-Container-Content-Profile-Button-White Header-Container-Content-Profile-Button"
+                      : "Header-Container-Content-Profile-Button"
+                  }
                 >
-                  <GitHub className="Header-Container-Content-Profile-Button-Logo" />
+                  <GitHub
+                    className={
+                      transparent
+                        ? "Header-Container-Content-Profile-Button-Logo-White Header-Container-Content-Profile-Button-Logo"
+                        : "Header-Container-Content-Profile-Button-Logo"
+                    }
+                  />
                 </a>
               )}
             </div>

@@ -1,6 +1,9 @@
+@import "../../../util/color.scss";
+
 .Main-Posts {
   width: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
   flex: 1 1 0%;
 

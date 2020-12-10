@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Main from "../../components/Main";
 import useStore from "../../util/lib/hooks/useStore";
 import { PostsResponse } from "../../util/types/Response";
@@ -23,38 +23,23 @@ const MainContainer = ({}: MainContainerProps) => {
   const query = useQuery();
 
   const { store } = useStore();
-  const {
-    fixedPost,
-    posts,
-    handleFixedPost,
-    handlePosts,
-    initPosts,
-    initFixedPost,
-  } = store.PostStore;
+  const { posts, handlePosts, initPosts } = store.PostStore;
   const { totalPostCount, categories, handleCategories } = store.CategoryStore;
+  const { admin } = store.UserStore;
 
+  //posts
   const [postCount, setPostCount] = useState<number>(0);
   const [notFound, setNotFound] = useState<boolean>(false);
   const [fixedLoading, setFixedLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
-  const [ref, inView] = useInView({ threshold: 0.5 });
+  const mainRef = useRef<HTMLDivElement>(null);
 
-  const handleFixedPostCallback = useCallback(async () => {
-    if (search === "") {
-      setFixedLoading(true);
-      await handleFixedPost()
-        .then(() => {
-          setFixedLoading(false);
-        })
-        .catch((err: Error) => {
-          toast.error("이런! 고정 글 조회에 실패했어요.");
-        });
-    } else {
-      initFixedPost();
-    }
-  }, [search]);
+  //categories
+  const [modify, setModify] = useState<boolean>(false);
+
+  const [ref, inView] = useInView({ threshold: 0.5 });
 
   const handlePostsCallback = useCallback(async () => {
     setLoading(true);
@@ -91,6 +76,10 @@ const MainContainer = ({}: MainContainerProps) => {
     }
   }, []);
 
+  const scrollToTop = () => {
+    mainRef.current!.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     if (inView && !loading && posts.length < postCount) {
       setLoading(true);
@@ -110,10 +99,6 @@ const MainContainer = ({}: MainContainerProps) => {
   useEffect(() => {
     handleCategoriesCallback();
   }, [handleCategoriesCallback]);
-
-  useEffect(() => {
-    handleFixedPostCallback();
-  }, [handleFixedPostCallback]);
 
   useEffect(() => {
     handlePostsCallback();
@@ -136,14 +121,17 @@ const MainContainer = ({}: MainContainerProps) => {
         />
       </Helmet>
       <Main
-        fixedPost={fixedPost}
         posts={posts}
         categories={categories}
         totalPostCount={totalPostCount}
         notFound={notFound}
         loading={loading}
-        fixedLoading={fixedLoading}
         postRef={ref}
+        admin={admin}
+        modify={modify}
+        setModify={setModify}
+        scrollToTop={scrollToTop}
+        mainRef={mainRef}
       />
     </>
   );

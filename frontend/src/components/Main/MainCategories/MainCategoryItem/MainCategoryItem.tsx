@@ -12,34 +12,66 @@ const MainCategoryItem = ({ category }: MainCategoryItemProps) => {
   const query = useQuery();
   const isTotal = category.idx === 0;
   const path = `?tab=${category.idx}`;
+  const isMain = query.get("tab") === null;
+  const isCorrect = Number(query.get("tab")) === category.idx;
 
   return (
     <>
       {isTotal ? (
-        <Link to="/" className="Main-Category-Item">
+        <Link
+          to="/"
+          className={
+            isMain
+              ? "Main-Category-Item-Active Main-Category-Item"
+              : "Main-Category-Item"
+          }
+        >
           <p
             className={
-              query.get("tab") === null
+              isMain
                 ? "Main-Category-Item-Name-Active Main-Category-Item-Name"
                 : "Main-Category-Item-Name"
             }
           >
             {category.name}
           </p>
-          <p className="Main-Category-Item-Count">({category.post_count})</p>
+          <p
+            className={
+              isMain
+                ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
+                : "Main-Category-Item-Count"
+            }
+          >
+            ({category.post_count})
+          </p>
         </Link>
       ) : (
-        <Link to={`/${path}`} className="Main-Category-Item">
+        <Link
+          to={`/${path}`}
+          className={
+            isCorrect
+              ? "Main-Category-Item-Active Main-Category-Item"
+              : "Main-Category-Item"
+          }
+        >
           <p
             className={
-              Number(query.get("tab")) === category.idx
+              isCorrect
                 ? "Main-Category-Item-Name-Active Main-Category-Item-Name"
                 : "Main-Category-Item-Name"
             }
           >
             {category.name}
           </p>
-          <p className="Main-Category-Item-Count">({category.post_count})</p>
+          <p
+            className={
+              isCorrect
+                ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
+                : "Main-Category-Item-Count"
+            }
+          >
+            ({category.post_count})
+          </p>
         </Link>
       )}
     </>
