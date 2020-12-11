@@ -174,15 +174,11 @@
 
     &-Categories {
       width: 100%;
-      display: none;
+      display: flex;
       flex-wrap: wrap;
       overflow: hidden;
       max-height: 0rem;
       transition: all ease 1s;
-
-      // @media screen and (max-width: 990px) {
-      //   display: flex;
-      // }
 
       &-Open {
         max-height: 14rem;
@@ -191,10 +187,9 @@
 
     &-UpDown {
       width: 100%;
-      display: none;
+      display: flex;
       justify-content: center;
       align-items: center;
-      background-color: $white;
       padding: 0.8rem;
 
       &-Icon {
@@ -235,10 +230,6 @@
           animation: float-rotated ease 1s infinite;
         }
       }
-
-      // @media screen and (max-width: 990px) {
-      //   display: flex;
-      // }
     }
   }
 }

@@ -20,17 +20,20 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(false);
+  const [enable, setEnable] = useState<boolean>(false);
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
   const { pathname } = useLocation();
 
-  const handleScroll = () => {
+  const scrollHandler = () => {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
     const shadow = (pageYOffset > 30 && deltaY < 0) || open;
     const transparent = pageYOffset < 835 && pathname === "/";
+    const enable = pageYOffset > 1080 && pathname === "/";
 
+    setEnable(enable);
     setTransparent(transparent);
     setShadow(shadow);
     setHide(hide);
@@ -94,9 +97,9 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   }, []);
 
   useEffect(() => {
-    documentRef.current.addEventListener("scroll", handleScroll);
+    documentRef.current.addEventListener("scroll", scrollHandler);
     return () =>
-      documentRef.current.removeEventListener("scroll", handleScroll);
+      documentRef.current.removeEventListener("scroll", scrollHandler);
   }, [pageY]);
 
   useEffect(() => {
@@ -111,6 +114,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   return (
     <>
       <Header
+        enable={enable}
         transparent={transparent}
         shadow={shadow}
         hide={hide}

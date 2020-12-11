@@ -29,7 +29,6 @@ const Post = ({
   likeCount,
   liked,
   handlePostLikeCallback,
-  postIdx,
   otherPosts,
   scroll,
   postTopRef,
@@ -68,7 +67,7 @@ const Post = ({
                     id={post.user.id}
                   />
                   <PostList otherPosts={otherPosts} />
-                  <PostCommentContainer postIdx={postIdx} />
+                  <PostCommentContainer postIdx={post.idx} />
                 </>
               )
             )}

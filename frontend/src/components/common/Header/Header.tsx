@@ -12,6 +12,7 @@ import { CategoryType } from "../../../util/types/Category";
 import HeaderCategoryItem from "./HeaderCategoryItem";
 
 interface HeaderProps {
+  enable: boolean;
   transparent: boolean;
   shadow: boolean;
   hide: boolean;
@@ -30,6 +31,7 @@ interface HeaderProps {
 }
 
 const Header = ({
+  enable,
   transparent,
   shadow,
   hide,
@@ -140,7 +142,7 @@ const Header = ({
               )}
             </div>
           </div>
-          {pathname === "/" && (
+          {enable && (
             <>
               <div
                 className={
