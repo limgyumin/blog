@@ -1,49 +1,66 @@
 @import "../../../../util/color.scss";
 
 .Main-Category-Item {
+  text-decoration: none;
   cursor: pointer;
+  margin: 0 0.6rem 0.4rem 0;
+  border-radius: 0.35rem;
+  background-color: $vvv-light-gray;
+  transition: background-color ease 0.1s;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  padding: 0.2rem 0.8rem;
-  border-radius: 0.4rem;
-  background-color: $vvv-light-gray;
-  transition: background-color ease 0.2s;
-  margin: 0 0.4rem 0.3rem 0;
+  overflow: hidden;
 
   &:hover {
     background-color: $vv-light-gray;
   }
 
+  &:hover > &-Count {
+    background-color: $v-light-gray;
+  }
+
   &-Active {
-    background-color: $black;
+    background-color: $light-black;
 
     &:hover {
-      background-color: $black;
+      background-color: $light-black;
     }
   }
 
-  &-Name {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: $black;
-    margin-right: 0.2rem;
-    transition: color ease 0.2s;
+  &:hover > &-Count-Active {
+    background-color: $semi-light-black;
+  }
 
-    &-Active {
-      color: $white;
+  &-Wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.3rem 0.2rem 0.6rem;
+
+    &-Name {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $black;
+      margin-right: 0.2rem;
+      transition: color ease 0.2s;
+
+      &-Active {
+        color: $white;
+      }
     }
   }
 
   &-Count {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: $black;
-    transition: color ease 0.2s;
+    transition: background-color ease 0.1s;
+    background-color: $semi-light-gray;
+    padding: 0.2rem 0.4rem;
+    color: $gray;
+    font-weight: 600;
 
     &-Active {
+      background-color: $semi-light-black;
       color: $white;
+      font-weight: 400;
     }
   }
 }

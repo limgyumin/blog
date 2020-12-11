@@ -7,7 +7,6 @@ import MainCategories from "./MainCategories";
 import MainPosts from "./MainPosts";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
 import { BsChevronDoubleDown } from "react-icons/bs";
-import { ReactComponent as Arrows } from "../../assets/images/arrows.svg";
 
 interface MainProps {
   posts: PostType[];

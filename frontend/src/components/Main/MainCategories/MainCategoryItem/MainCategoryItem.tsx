@@ -26,52 +26,56 @@ const MainCategoryItem = ({ category }: MainCategoryItemProps) => {
               : "Main-Category-Item"
           }
         >
-          <p
+          <div className="Main-Category-Item-Wrapper">
+            <p
+              className={
+                isMain
+                  ? "Main-Category-Item-Wrapper-Name-Active Main-Category-Item-Wrapper-Name"
+                  : "Main-Category-Item-Wrapper-Name"
+              }
+            >
+              {category.name}
+            </p>
+          </div>
+          <div
             className={
-              isMain
-                ? "Main-Category-Item-Name-Active Main-Category-Item-Name"
-                : "Main-Category-Item-Name"
-            }
-          >
-            {category.name}
-          </p>
-          <p
-            className={
-              isMain
+              isCorrect
                 ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
                 : "Main-Category-Item-Count"
             }
           >
-            ({category.post_count})
-          </p>
+            {category.post_count}
+          </div>
         </Link>
       ) : (
         <Link
-          to={`/${path}`}
+          to={`${path}`}
           className={
             isCorrect
               ? "Main-Category-Item-Active Main-Category-Item"
               : "Main-Category-Item"
           }
         >
-          <p
-            className={
-              isCorrect
-                ? "Main-Category-Item-Name-Active Main-Category-Item-Name"
-                : "Main-Category-Item-Name"
-            }
-          >
-            {category.name}
-          </p>
-          <p
+          <div className="Main-Category-Item-Wrapper">
+            <p
+              className={
+                isCorrect
+                  ? "Main-Category-Item-Wrapper-Name-Active Main-Category-Item-Wrapper-Name"
+                  : "Main-Category-Item-Wrapper-Name"
+              }
+            >
+              {category.name}
+            </p>
+          </div>
+          <div
             className={
               isCorrect
                 ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
                 : "Main-Category-Item-Count"
             }
           >
-            ({category.post_count})
-          </p>
+            {category.post_count}
+          </div>
         </Link>
       )}
     </>
