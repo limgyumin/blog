@@ -34,7 +34,6 @@ const PostReplyContainer = ({
     handleReplies,
     handleDeleteReply,
   } = store.ReplyStore;
-  const { comments } = store.CommentStore;
 
   const history = useHistory();
   const [replyCount, setReplyCount] = useState<number>(0);
@@ -58,7 +57,6 @@ const PostReplyContainer = ({
         setContent("");
         handleCommentCountCallback();
         handleReplyCountCallback();
-        handleRepliesCallback();
         setEnable(true);
       })
       .catch((err: Error) => {
@@ -93,14 +91,13 @@ const PostReplyContainer = ({
       .catch((err: Error) => {
         history.push("/");
       });
-  }, [commentIdx, handleRepliesCallback, comments]);
+  }, [commentIdx, handleRepliesCallback]);
 
   const handleDeleteReplyCallback = useCallback(async () => {
     await handleDeleteReply(replyIdx)
       .then((res: Response) => {
         handleCommentCountCallback();
         handleReplyCountCallback();
-        handleRepliesCallback();
         showModalCallback();
       })
       .catch((err: Error) => {
@@ -143,8 +140,14 @@ const PostReplyContainer = ({
 
   useEffect(() => {
     handleReplyCountCallback();
+    return () => {
+      setReplyCount(0);
+    };
   }, [handleReplyCountCallback]);
 
+  useEffect(() => {
+    return () => setReplies([]);
+  }, []);
   // show 상태가 아니라는건 숨기기를 클릭했다는 뜻.
   // 따라서 답글 작성 폼도 숨겨져야해요.
   useEffect(() => {

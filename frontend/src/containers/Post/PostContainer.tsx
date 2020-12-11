@@ -140,10 +140,15 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   useEffect(() => {
     handleOtherPostsCallback();
+    return () => setOtherPosts({});
   }, [handleOtherPostsCallback]);
 
   useEffect(() => {
     handleLikeInfoCallback();
+    return () => {
+      setLikeCount(0);
+      setLiked(false);
+    };
   }, [handleLikeInfoCallback]);
 
   return (

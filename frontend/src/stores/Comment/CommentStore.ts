@@ -1,7 +1,6 @@
 import { autobind } from "core-decorators";
 import { action, observable } from "mobx";
 import Comment from "../../assets/api/Comment";
-import CommentType from "../../util/types/Comment";
 import {
   CommentCountResponse,
   CommentsResponse,
@@ -9,13 +8,6 @@ import {
 
 @autobind
 class CommentStore {
-  @observable comments: CommentType[] = [];
-
-  @action
-  initComments = () => {
-    this.comments = [];
-  };
-
   @action
   handleCommentCount = async (idx: number): Promise<CommentCountResponse> => {
     try {
@@ -55,8 +47,6 @@ class CommentStore {
   handleComments = async (post: number): Promise<CommentsResponse> => {
     try {
       const response: CommentsResponse = await Comment.GetComments(post);
-
-      this.comments = response.data.comments;
 
       return new Promise(
         (resolve: (response: CommentsResponse) => void, reject) => {

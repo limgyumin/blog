@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 import Portal from "../../components/common/Portal";
+import CommentType from "../../util/types/Comment";
 
 /**
  * postIdx가 필요 -> PostCommentContainer에서 처리
@@ -31,8 +32,6 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   const history = useHistory();
   const { login } = store.UserStore;
   const {
-    comments,
-    initComments,
     handleCommentCount,
     handleCreateComment,
     handleComments,
@@ -44,6 +43,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   // delete 모달 때문에 commentIdx를 직접 가져와야함 ㅠ .ㅠ
   const [commentIdx, setCommentIdx] = useState<number>(0);
   const [content, setContent] = useState<string>("");
+  const [comments, setComments] = useState<CommentType[]>([]);
 
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -93,7 +93,9 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   // 모든 댓글 조회
   const handleCommentsCallback = useCallback(async () => {
     await handleComments(postIdx)
-      .then((res: CommentsResponse) => {})
+      .then((res: CommentsResponse) => {
+        setComments(res.data.comments);
+      })
       .catch(() => {
         toast.error("이런! 댓글 조회에 실패했어요.");
         history.push("/");
@@ -147,11 +149,12 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
 
   useEffect(() => {
     handleCommentCountCallback();
+    return () => setCommentCount(0);
   }, [handleCommentCountCallback]);
 
   useEffect(() => {
     handleCommentsCallback();
-    return () => initComments();
+    return () => setComments([]);
   }, [handleCommentsCallback]);
 
   return (
