@@ -45,7 +45,6 @@ export default async (req: Request, res: Response) => {
       "fk_category_idx",
       "fk_user_idx",
       "created_at",
-      "is_fixed",
     ],
     where: {
       category: null,
