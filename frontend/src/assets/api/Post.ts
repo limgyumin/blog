@@ -59,6 +59,18 @@ class Post {
     }
   }
 
+  async DeletePost(idx: number) {
+    try {
+      const url = `${SERVER}/v1/post/${idx}`;
+
+      const { data } = await axios.delete(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async GetOtherPosts(idx: number) {
     try {
       const url = `${SERVER}/v1/post/other/${idx}`;
