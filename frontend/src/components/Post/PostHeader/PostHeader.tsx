@@ -12,6 +12,7 @@ interface PostHeaderProps {
   createdAt: Date;
   thumbnail: string;
   handlePostLikeCallback: () => Promise<void>;
+  showModalCallback: () => void;
   likeCount: number;
   liked: boolean;
 }
@@ -23,6 +24,7 @@ const PostHeader = ({
   createdAt,
   thumbnail,
   handlePostLikeCallback,
+  showModalCallback,
   likeCount,
   liked,
 }: PostHeaderProps) => {
@@ -36,7 +38,10 @@ const PostHeader = ({
               <div className="Post-Header-Container-Category-Wrapper-Name">
                 {categoryName}
               </div>
-              <p className="Post-Header-Container-Category-Wrapper-Info">
+              <p
+                className="Post-Header-Container-Category-Wrapper-Info"
+                onClick={() => showModalCallback()}
+              >
                 <span>{writer}</span>
                 {" · "}
                 {getTimeCount(createdAt)}

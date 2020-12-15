@@ -12,6 +12,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import OtherPostsType from "../../util/types/OtherPosts";
+import Portal from "../../components/common/Portal";
+import ModalContainer from "../Modal/ModalContainer";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -31,6 +33,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
     post,
     initPost,
     handlePost,
+    handleDeletePost,
     handleOtherPosts,
     handlePostLike,
     handleLikeInfo,
@@ -43,6 +46,9 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
   const [scroll, setScroll] = useState<number>(0);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isShow, setIsShow] = useState<boolean>(false);
 
   const postTopRef = useRef<HTMLDivElement>(null);
 
@@ -63,6 +69,18 @@ const PostContainer = ({ match }: PostContainerProps) => {
           toast.error("이런! 글 조회에 실패했어요.");
           history.push("/");
         }
+      });
+  }, [postIdx]);
+
+  const handleDeletePostCallback = useCallback(async () => {
+    await handleDeletePost(postIdx)
+      .then((res: Response) => {
+        showModalCallback();
+        history.push("/");
+      })
+      .catch((err: Error) => {
+        toast.error("이런! 글 삭제에 실패했어요.");
+        history.push("/");
       });
   }, [postIdx]);
 
@@ -109,6 +127,17 @@ const PostContainer = ({ match }: PostContainerProps) => {
         history.push("/");
       });
   }, [postIdx]);
+
+  const showModalCallback = useCallback(() => {
+    if (isShow) {
+      setTimeout(() => {
+        setIsShow(!isShow);
+      }, 500);
+    } else {
+      setIsShow(!isShow);
+    }
+    setIsOpen(!isOpen);
+  }, [isShow, isOpen]);
 
   const progressBarHandler = () => {
     const totalScroll = document.documentElement.scrollTop;
@@ -187,7 +216,11 @@ const PostContainer = ({ match }: PostContainerProps) => {
           />
         </Helmet>
       )}
-
+      <Portal elementId="modal-root">
+        <ModalContainer isShow={isShow} isOpen={isOpen}>
+          <div onClick={() => handleDeletePostCallback()}>asdf</div>
+        </ModalContainer>
+      </Portal>
       <Post
         post={post}
         loading={loading}
@@ -195,6 +228,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         likeCount={likeCount}
         liked={liked}
         handlePostLikeCallback={handlePostLikeCallback}
+        showModalCallback={showModalCallback}
         postIdx={postIdx}
         otherPosts={otherPosts}
         scroll={scroll}

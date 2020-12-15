@@ -40,12 +40,6 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     setPageY(pageYOffset);
   };
 
-  const handleResize = () => {
-    if (window.innerWidth > 1537) {
-      setOpen(false);
-    }
-  };
-
   const handleMyProfileCallback = useCallback(async () => {
     if (!login && localStorage.getItem("access_token")) {
       axios.defaults.headers.common["access_token"] = `${localStorage.getItem(
@@ -101,11 +95,6 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     return () =>
       documentRef.current.removeEventListener("scroll", scrollHandler);
   }, [pageY]);
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     setShadow(open);

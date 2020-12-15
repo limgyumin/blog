@@ -16,6 +16,7 @@ interface PostProps {
   likeCount: number;
   liked: boolean;
   handlePostLikeCallback: () => Promise<void>;
+  showModalCallback: () => void;
   postIdx: number;
   otherPosts: Partial<OtherPostsType>;
   scroll: number;
@@ -29,6 +30,7 @@ const Post = ({
   likeCount,
   liked,
   handlePostLikeCallback,
+  showModalCallback,
   otherPosts,
   scroll,
   postTopRef,
@@ -52,6 +54,7 @@ const Post = ({
                     createdAt={post.created_at}
                     thumbnail={post.thumbnail}
                     handlePostLikeCallback={handlePostLikeCallback}
+                    showModalCallback={showModalCallback}
                     likeCount={likeCount}
                     liked={liked}
                   />
