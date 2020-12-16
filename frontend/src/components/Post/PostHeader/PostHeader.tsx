@@ -1,6 +1,6 @@
-import moment from "moment";
 import React from "react";
 import { ReactComponent as Like } from "../../../assets/images/like.svg";
+import { FaTrash, FaPen } from "react-icons/fa";
 import getTimeCount from "../../../util/lib/getTimeCount";
 import PostLike from "../PostLike";
 import "./PostHeader.scss";
@@ -15,6 +15,7 @@ interface PostHeaderProps {
   showModalCallback: () => void;
   likeCount: number;
   liked: boolean;
+  admin: boolean;
 }
 
 const PostHeader = ({
@@ -27,6 +28,7 @@ const PostHeader = ({
   showModalCallback,
   likeCount,
   liked,
+  admin,
 }: PostHeaderProps) => {
   return (
     <>
@@ -38,10 +40,7 @@ const PostHeader = ({
               <div className="Post-Header-Container-Category-Wrapper-Name">
                 {categoryName}
               </div>
-              <p
-                className="Post-Header-Container-Category-Wrapper-Info"
-                onClick={() => showModalCallback()}
-              >
+              <p className="Post-Header-Container-Category-Wrapper-Info">
                 <span>{writer}</span>
                 {" · "}
                 {getTimeCount(createdAt)}
@@ -72,6 +71,12 @@ const PostHeader = ({
                 {likeCount}
               </span>
             </div>
+            {admin && (
+              <div className="Post-Header-Container-Category-Control">
+                <FaPen onClick={() => {}} />
+                <FaTrash onClick={() => showModalCallback()} />
+              </div>
+            )}
           </div>
         </div>
         <div className="Post-Header-Like">

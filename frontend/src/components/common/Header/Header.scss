@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: $white;
   transition: transform ease 0.3s, box-shadow ease 0.3s;
   position: fixed;
   top: 0;

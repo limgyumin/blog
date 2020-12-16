@@ -21,6 +21,7 @@ interface PostProps {
   otherPosts: Partial<OtherPostsType>;
   scroll: number;
   postTopRef: React.RefObject<HTMLDivElement>;
+  admin: boolean;
 }
 
 const Post = ({
@@ -34,6 +35,7 @@ const Post = ({
   otherPosts,
   scroll,
   postTopRef,
+  admin,
 }: PostProps) => {
   return (
     <>
@@ -57,6 +59,7 @@ const Post = ({
                     showModalCallback={showModalCallback}
                     likeCount={likeCount}
                     liked={liked}
+                    admin={admin}
                   />
                   {post.content && (
                     <MarkDownContainer className="Post-Content">
@@ -70,7 +73,7 @@ const Post = ({
                     id={post.user.id}
                   />
                   <PostList otherPosts={otherPosts} />
-                  <PostCommentContainer postIdx={post.idx} />
+                  {admin && <PostCommentContainer postIdx={post.idx} />}
                 </>
               )
             )}

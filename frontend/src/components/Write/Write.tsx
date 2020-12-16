@@ -64,7 +64,7 @@ const Write = ({
         <div className="Write-Container">
           <p className="Write-Container-Label">
             <RiPencilRuler2Line />
-            작성하기
+            Write
           </p>
           <textarea
             ref={titleRef}
@@ -124,7 +124,7 @@ const Write = ({
         <div className="Write-Preview">
           <p className="Write-Preview-Label">
             <AiOutlineEye />
-            미리보기
+            Preview
           </p>
           <p className="Write-Preview-Title">{title}</p>
           <p className="Write-Preview-Description">{desc}</p>

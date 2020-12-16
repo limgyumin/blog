@@ -87,7 +87,8 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
 
   useEffect(() => {
     const { pageYOffset } = window;
-    setTransparent(pageYOffset === 0);
+    const transparent = pageYOffset < 835 && pathname === "/";
+    setTransparent(transparent);
   }, []);
 
   useEffect(() => {

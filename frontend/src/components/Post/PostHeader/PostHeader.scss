@@ -129,6 +129,20 @@
           }
         }
       }
+
+      &-Control {
+        & > svg {
+          cursor: pointer;
+          font-size: 1rem;
+          transition: color ease 0.1s;
+          color: $vv-light-gray;
+          margin-left: 1rem;
+
+          &:hover {
+            color: $light-gray;
+          }
+        }
+      }
     }
   }
 

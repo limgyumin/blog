@@ -14,6 +14,7 @@ import { Helmet } from "react-helmet";
 import OtherPostsType from "../../util/types/OtherPosts";
 import Portal from "../../components/common/Portal";
 import ModalContainer from "../Modal/ModalContainer";
+import PostDelete from "../../components/Post/PostDelete";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -38,7 +39,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
     handlePostLike,
     handleLikeInfo,
   } = store.PostStore;
-  const { login } = store.UserStore;
+  const { login, admin } = store.UserStore;
 
   const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
   const [loading, setLoading] = useState<boolean>(false);
@@ -218,7 +219,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
       )}
       <Portal elementId="modal-root">
         <ModalContainer isShow={isShow} isOpen={isOpen}>
-          <div onClick={() => handleDeletePostCallback()}>asdf</div>
+          <PostDelete
+            handleDeletePostCallback={handleDeletePostCallback}
+            showModalCallback={showModalCallback}
+          />
         </ModalContainer>
       </Portal>
       <Post
@@ -233,6 +237,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
         otherPosts={otherPosts}
         scroll={scroll}
         postTopRef={postTopRef}
+        admin={admin}
       />
     </>
   );
