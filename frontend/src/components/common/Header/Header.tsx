@@ -131,13 +131,7 @@ const Header = ({
                       : "Header-Container-Content-Profile-Button"
                   }
                 >
-                  <GitHub
-                    className={
-                      transparent
-                        ? "Header-Container-Content-Profile-Button-Logo-White Header-Container-Content-Profile-Button-Logo"
-                        : "Header-Container-Content-Profile-Button-Logo"
-                    }
-                  />
+                  <GitHub className="Header-Container-Content-Profile-Button-Logo" />
                 </a>
               )}
             </div>

@@ -96,8 +96,6 @@ const WriteContainer = ({}) => {
         setFileName(file.name);
       };
       reader.readAsDataURL(file);
-    } else {
-      setPreview("");
     }
   };
 

@@ -2,12 +2,12 @@ import React from "react";
 import "./PostDelete.scss";
 
 interface PostDeleteProps {
-  handleDeletePostCallback: () => Promise<void>;
+  deletePostHandler: () => void;
   showModalCallback: () => void;
 }
 
 const PostDelete = ({
-  handleDeletePostCallback,
+  deletePostHandler,
   showModalCallback,
 }: PostDeleteProps) => {
   return (
@@ -20,7 +20,7 @@ const PostDelete = ({
         <div className="Post-Delete-Button">
           <button
             className="Post-Delete-Button-Delete"
-            onClick={() => handleDeletePostCallback()}
+            onClick={() => deletePostHandler()}
           >
             삭제
           </button>

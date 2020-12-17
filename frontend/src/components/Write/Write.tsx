@@ -1,11 +1,9 @@
 import React from "react";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
-import { RiPencilRuler2Line } from "react-icons/ri";
 import { AiOutlineEye } from "react-icons/ai";
 import { HiOutlinePencil } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
-import { FiImage, FiSave } from "react-icons/fi";
-import { TiDelete } from "react-icons/ti";
+import { FiSave } from "react-icons/fi";
 import { ReactComponent as Option } from "../../assets/images/option.svg";
 import "./Write.scss";
 import { CategoryType } from "../../util/types/Category";
@@ -63,7 +61,7 @@ const Write = ({
       <div className="Write">
         <div className="Write-Container">
           <p className="Write-Container-Label">
-            <RiPencilRuler2Line />
+            <HiOutlinePencil />
             Write
           </p>
           <textarea
@@ -81,22 +79,32 @@ const Write = ({
             placeholder="설명을 입력해주세요."
           />
           <div className="Write-Container-Input">
-            <label htmlFor="file">
-              <FiImage />
-              업로드
-            </label>
+            <div className="Write-Container-Input-Button">
+              <p className="Write-Container-Input-Button-FileName">
+                {fileName || "썸네일 이미지를 선택해주세요."}
+              </p>
+              {fileName ? (
+                <div
+                  onClick={() => clearImageHandler()}
+                  className="Write-Container-Input-Button-Delete"
+                >
+                  삭제
+                </div>
+              ) : (
+                <label
+                  htmlFor="file"
+                  className="Write-Container-Input-Button-Label"
+                >
+                  업로드
+                </label>
+              )}
+            </div>
             <input
               id="file"
               type="file"
               accept="image/png, image/jpeg"
               onChange={(e) => handleImageChange(e)}
             />
-            {fileName && (
-              <div className="Write-Container-Input-Name">
-                {fileName}
-                <TiDelete onClick={() => clearImageHandler()} />
-              </div>
-            )}
             <div
               className="Write-Container-Input-Category"
               onClick={() => setShowOption(true)}

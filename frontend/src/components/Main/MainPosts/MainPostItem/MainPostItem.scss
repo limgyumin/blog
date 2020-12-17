@@ -20,7 +20,7 @@
   }
 
   @media screen and (max-width: 730px) {
-    width: 100%;
+    width: calc(100% - 2rem);
   }
 
   &-Thumbnail {

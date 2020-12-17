@@ -77,7 +77,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
     await handleDeletePost(postIdx)
       .then((res: Response) => {
         showModalCallback();
-        history.push("/");
       })
       .catch((err: Error) => {
         toast.error("이런! 글 삭제에 실패했어요.");
@@ -129,6 +128,11 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, [postIdx]);
 
+  const deletePostHandler = () => {
+    handleDeletePostCallback();
+    showModalCallback();
+  };
+
   const showModalCallback = useCallback(() => {
     if (isShow) {
       setTimeout(() => {
@@ -138,7 +142,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
       setIsShow(!isShow);
     }
     setIsOpen(!isOpen);
-  }, [isShow, isOpen]);
+  }, [isShow]);
 
   const progressBarHandler = () => {
     const totalScroll = document.documentElement.scrollTop;
@@ -218,9 +222,9 @@ const PostContainer = ({ match }: PostContainerProps) => {
         </Helmet>
       )}
       <Portal elementId="modal-root">
-        <ModalContainer isShow={isShow} isOpen={isOpen}>
+        <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostDelete
-            handleDeletePostCallback={handleDeletePostCallback}
+            deletePostHandler={deletePostHandler}
             showModalCallback={showModalCallback}
           />
         </ModalContainer>

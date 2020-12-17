@@ -1,4 +1,5 @@
 @import "../../util/color.scss";
+@import "../../util/lib.scss";
 
 .Write {
   display: flex;
@@ -25,7 +26,8 @@
     width: 50%;
     min-height: 100%;
     background-color: $vvvvv-light-gray;
-    padding: 2rem 2.5rem;
+    padding: 2rem 2.5rem 1rem;
+    position: relative;
 
     @media screen and (max-width: 840px) {
       width: 100%;
@@ -35,7 +37,7 @@
       display: flex;
       align-items: center;
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 500;
       color: $semi-light-gray;
 
       & > svg {
@@ -84,30 +86,70 @@
     }
 
     &-Input {
-      width: 100%;
+      position: fixed;
+      align-items: center;
+      z-index: 10;
+      bottom: 2rem;
+      left: 2.5rem;
       display: flex;
 
-      & > label {
+      &-Button {
         display: flex;
         align-items: center;
-        padding: 0.5rem 0.75rem;
-        color: $v-light-gray;
-        font-size: 1rem;
-        line-height: normal;
-        vertical-align: middle;
-        background-color: $white;
-        cursor: pointer;
-        border: 1px solid $vvv-light-gray;
         border-radius: 0.2rem;
-        margin-right: 0.6rem;
-        transition: all ease 0.1s;
+        background-color: $white;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        margin-right: 1.4rem;
 
-        & > svg {
-          margin-right: 0.4rem;
+        &-FileName {
+          font-size: 0.9rem;
+          color: $v-light-gray;
+          padding: 0.2rem 0.8rem;
+          @include ellipsis(1);
+          max-width: 40rem;
         }
 
-        &:hover {
-          background-color: $vvvvv-light-gray;
+        &-Label {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem 0.75rem;
+          color: $white;
+          font-size: 1rem;
+          line-height: normal;
+          vertical-align: middle;
+          background-color: $v-light-gray;
+          cursor: pointer;
+          transition: all ease 0.1s;
+
+          & > svg {
+            margin-right: 0.4rem;
+          }
+
+          &:hover {
+            background-color: $vv-light-gray;
+          }
+        }
+
+        &-Delete {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem 0.75rem;
+          color: $white;
+          font-size: 1rem;
+          line-height: normal;
+          vertical-align: middle;
+          background-color: $light-gray;
+          cursor: pointer;
+          transition: all ease 0.1s;
+
+          & > svg {
+            margin-right: 0.4rem;
+          }
+
+          &:hover {
+            background-color: $v-light-gray;
+          }
         }
       }
 
@@ -122,35 +164,14 @@
         border: 0;
       }
 
-      &-Name {
-        display: flex;
-        align-items: center;
-        background-color: $white;
-        color: $v-light-gray;
-        border: 1px solid $vvv-light-gray;
-        border-radius: 0.2rem;
-        padding: 0.5rem 0.75rem;
-        margin-right: 0.6rem;
-
-        & > svg {
-          margin-left: 0.3rem;
-          font-size: 1.3rem;
-          cursor: pointer;
-          transition: all ease 0.1s;
-
-          &:hover {
-            color: $vv-light-gray;
-          }
-        }
-      }
-
       &-Category {
         cursor: pointer;
         display: flex;
         align-items: center;
         background-color: $white;
         color: $v-light-gray;
-        border: 1px solid $vvv-light-gray;
+        font-size: 0.9rem;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
         border-radius: 0.2rem;
         padding: 0.5rem 0.75rem;
         transition: all ease 0.1s;
@@ -161,8 +182,8 @@
         }
 
         & > svg {
-          width: 0.7rem;
-          margin-left: 0.3rem;
+          width: 0.6rem;
+          margin-left: 0.4rem;
         }
       }
     }
@@ -170,14 +191,14 @@
     &-Content {
       resize: none;
       width: 100%;
-      min-height: 70%;
+      min-height: 68%;
       border: none;
       outline: none;
       background-color: transparent;
       font-family: inherit;
       font-size: 1.125rem;
       color: $black;
-      margin-top: 2.5rem;
+      margin-top: 2rem;
       line-height: 1.5;
       overflow-y: hidden;
       tab-size: 4;
@@ -203,7 +224,7 @@
       display: flex;
       align-items: center;
       font-size: 1.2rem;
-      font-weight: 600;
+      font-weight: 500;
       color: $semi-light-gray;
 
       & > svg {
@@ -260,6 +281,11 @@
     bottom: 2rem;
     right: 2rem;
 
+    @media screen and (max-width: 700px) {
+      bottom: 5.5rem;
+      left: 2.5rem;
+    }
+
     &-Confirm {
       display: flex;
       align-items: center;
@@ -268,7 +294,7 @@
       outline: none;
       border: none;
       border-radius: 0.6rem;
-      padding: 0.8rem;
+      padding: 0.7rem;
       background-color: $black;
       color: $white;
       font-weight: 600;
@@ -290,7 +316,7 @@
       outline: none;
       border: none;
       border-radius: 0.6rem;
-      padding: 0.8rem;
+      padding: 0.7rem;
       background-color: $gray;
       color: $white;
       font-weight: 600;
@@ -312,7 +338,7 @@
       outline: none;
       border: none;
       border-radius: 0.6rem;
-      padding: 0.8rem;
+      padding: 0.7rem;
       background-color: $v-semi-light-gray;
       color: $light-gray;
       font-weight: 600;

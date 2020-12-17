@@ -43,7 +43,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.7rem 0;
+      padding: 0.8rem 0;
 
       &-Image {
         height: 1.4rem;
@@ -153,20 +153,16 @@
           }
 
           &-White {
-            background-color: $white;
+            box-shadow: 0 0 0.6rem 0 rgba(255, 255, 255, 0.4);
 
-            &:hover {
-              background-color: $vv-light-gray;
+            &:active {
+              box-shadow: 0 0 0.6rem 0 rgba(255, 255, 255, 0.4);
             }
           }
 
           &-Logo {
             width: 1.85rem;
             height: 1.85rem;
-
-            &-White > path {
-              fill: $black;
-            }
           }
         }
       }
