@@ -86,6 +86,37 @@ class PostStore {
   };
 
   @action
+  handleModifyPost = async (
+    idx: number,
+    title: string,
+    description: string,
+    content: string,
+    thumbnail: string,
+    category_idx: number,
+    is_temp?: boolean
+  ): Promise<Response> => {
+    try {
+      const response: Response = await Post.ModifyPost(
+        idx,
+        title,
+        description,
+        content,
+        thumbnail,
+        category_idx,
+        is_temp
+      );
+
+      return new Promise((resolve: (response: Response) => void) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleDeletePost = async (idx: number): Promise<Response> => {
     try {
       const response: Response = await Post.DeletePost(idx);

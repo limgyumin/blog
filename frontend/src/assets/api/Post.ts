@@ -59,12 +59,39 @@ class Post {
     }
   }
 
+  async ModifyPost(
+    idx: number,
+    title: string,
+    description: string,
+    content: string,
+    thumbnail: string,
+    category_idx: number,
+    is_temp?: boolean
+  ) {
+    try {
+      const url = `${SERVER}/v1/post/${idx}`;
+
+      const body = {
+        title,
+        description,
+        content,
+        thumbnail,
+        is_temp,
+        category_idx,
+      };
+
+      const { data } = await axios.put(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async DeletePost(idx: number) {
     try {
       const url = `${SERVER}/v1/post/${idx}`;
 
       const { data } = await axios.delete(url);
-
       return data;
     } catch (error) {
       throw new Error(`${error}`);
