@@ -14,7 +14,7 @@
   }
 
   p {
-    margin: 1rem 0;
+    margin: 1.5rem 0;
   }
 
   p + h1,
@@ -33,7 +33,9 @@
   h3,
   h4 {
     line-height: 1.5;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid $vvv-light-gray;
 
     @media screen and (max-width: 730px) {
       margin-bottom: 0.75rem;
@@ -91,9 +93,9 @@
     border-bottom-right-radius: 4px;
     margin-left: 0px;
     margin-right: 0px;
-    color: $black;
+    color: $light-gray;
     border-left: 4px solid;
-    border-color: $v-light-gray;
+    border-color: $vv-light-gray;
     background-color: $vvvvv-light-gray;
     padding: 1rem 1rem 1rem 2rem;
 
@@ -115,6 +117,7 @@
     letter-spacing: 0px;
     padding: 1rem;
     border-radius: 5px;
+    margin-top: 1.5rem;
   }
 
   code {
@@ -144,6 +147,12 @@
     margin: 3rem auto;
   }
 
+  p > a {
+    text-decoration: none;
+    color: $v-light-gray;
+    font-weight: 600;
+  }
+
   table {
     border-collapse: collapse;
     display: block;
@@ -153,6 +162,7 @@
     width: max-content;
     max-width: 100%;
     overflow: auto;
+    margin-top: 1.5rem;
 
     tr:nth-child(2n) {
       background-color: $vvvvv-light-gray;
@@ -165,7 +175,7 @@
 
     td,
     th {
-      padding: 0 13px;
+      padding: 1px 13px;
       border: 1px solid $vvv-light-gray;
     }
   }
