@@ -29,7 +29,7 @@ interface WriteProps {
   showOption: boolean;
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   categoryItemHandler: (name: string, idx: number) => void;
-  handleWritePostCallback: () => Promise<void>;
+  writeClickHandler: () => void;
   keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -53,7 +53,7 @@ const Write = ({
   showOption,
   setShowOption,
   categoryItemHandler,
-  handleWritePostCallback,
+  writeClickHandler,
   keyDownHandler,
 }: WriteProps) => {
   return (
@@ -151,7 +151,7 @@ const Write = ({
         <div className="Write-Control">
           <button
             className="Write-Control-Confirm"
-            onClick={() => handleWritePostCallback()}
+            onClick={() => writeClickHandler()}
           >
             <HiOutlinePencil />
           </button>

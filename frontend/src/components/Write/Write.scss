@@ -107,7 +107,11 @@
           color: $v-light-gray;
           padding: 0.2rem 0.8rem;
           @include ellipsis(1);
-          max-width: 40rem;
+          max-width: 20rem;
+
+          @media screen and (max-width: 1110px) {
+            max-width: 16rem;
+          }
         }
 
         &-Label {

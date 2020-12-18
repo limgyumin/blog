@@ -17,7 +17,7 @@ interface PostProps {
   liked: boolean;
   handlePostLikeCallback: () => Promise<void>;
   showModalCallback: () => void;
-  postIdx: number;
+  modifyClickHandler: () => void;
   otherPosts: Partial<OtherPostsType>;
   scroll: number;
   postTopRef: React.RefObject<HTMLDivElement>;
@@ -32,6 +32,7 @@ const Post = ({
   liked,
   handlePostLikeCallback,
   showModalCallback,
+  modifyClickHandler,
   otherPosts,
   scroll,
   postTopRef,
@@ -57,6 +58,7 @@ const Post = ({
                     thumbnail={post.thumbnail}
                     handlePostLikeCallback={handlePostLikeCallback}
                     showModalCallback={showModalCallback}
+                    modifyClickHandler={modifyClickHandler}
                     likeCount={likeCount}
                     liked={liked}
                     admin={admin}

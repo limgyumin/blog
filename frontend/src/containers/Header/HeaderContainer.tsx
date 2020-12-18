@@ -10,20 +10,22 @@ interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
   const history = useHistory();
+  const { pathname } = useLocation();
+
   const { store } = useStore();
   const { categories, totalPostCount } = store.CategoryStore;
   const { handleLoginState, handleAdminState } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
   const [open, setOpen] = useState<boolean>(false);
-  const [showOption, setShowOption] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
+  const [showOption, setShowOption] = useState<boolean>(false);
   const [transparent, setTransparent] = useState<boolean>(false);
   const [enable, setEnable] = useState<boolean>(false);
+
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
-  const { pathname } = useLocation();
 
   const scrollHandler = () => {
     const { pageYOffset } = window;

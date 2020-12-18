@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/success" component={LoginPage} />
         <Route path="/post/:idx" component={PostPage} />
         <Route path="/write" component={WritePage} />
+        <Route path="/modify/:idx" component={WritePage} />
       </Switch>
     </div>
   );

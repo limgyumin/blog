@@ -86,13 +86,40 @@ class PostStore {
   };
 
   @action
+  handleCreatePost = async (
+    title: string,
+    description: string,
+    content: string,
+    categoryIdx: number,
+    thumbnail?: string
+  ): Promise<Response> => {
+    try {
+      const response: Response = await Post.CreatePost(
+        title,
+        description,
+        content,
+        categoryIdx,
+        thumbnail
+      );
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleModifyPost = async (
     idx: number,
     title: string,
     description: string,
     content: string,
-    thumbnail: string,
     category_idx: number,
+    thumbnail?: string,
     is_temp?: boolean
   ): Promise<Response> => {
     try {
@@ -101,8 +128,8 @@ class PostStore {
         title,
         description,
         content,
-        thumbnail,
         category_idx,
+        thumbnail,
         is_temp
       );
 
@@ -173,33 +200,6 @@ class PostStore {
           resolve(response);
         }
       );
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
-  };
-
-  @action
-  handleCreatePost = async (
-    title: string,
-    description: string,
-    content: string,
-    categoryIdx: number,
-    thumbnail?: string
-  ): Promise<Response> => {
-    try {
-      const response: Response = await Post.CreatePost(
-        title,
-        description,
-        content,
-        categoryIdx,
-        thumbnail
-      );
-
-      return new Promise((resolve: (response: Response) => void, reject) => {
-        resolve(response);
-      });
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
         reject(error);

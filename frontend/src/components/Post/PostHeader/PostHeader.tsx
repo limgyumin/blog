@@ -13,6 +13,7 @@ interface PostHeaderProps {
   thumbnail: string;
   handlePostLikeCallback: () => Promise<void>;
   showModalCallback: () => void;
+  modifyClickHandler: () => void;
   likeCount: number;
   liked: boolean;
   admin: boolean;
@@ -26,6 +27,7 @@ const PostHeader = ({
   thumbnail,
   handlePostLikeCallback,
   showModalCallback,
+  modifyClickHandler,
   likeCount,
   liked,
   admin,
@@ -73,7 +75,7 @@ const PostHeader = ({
             </div>
             {admin && (
               <div className="Post-Header-Container-Category-Control">
-                <FaPen onClick={() => {}} />
+                <FaPen onClick={() => modifyClickHandler()} />
                 <FaTrash onClick={() => showModalCallback()} />
               </div>
             )}

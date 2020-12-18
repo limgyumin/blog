@@ -64,8 +64,8 @@ class Post {
     title: string,
     description: string,
     content: string,
-    thumbnail: string,
     category_idx: number,
+    thumbnail?: string,
     is_temp?: boolean
   ) {
     try {
