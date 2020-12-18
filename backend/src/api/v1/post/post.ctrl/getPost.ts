@@ -78,7 +78,6 @@ export default async (req: AuthRequest, res: Response) => {
     });
 
     delete post.fk_user_idx;
-    delete post.fk_category_idx;
 
     post.user = userInfo;
     post.category_name = category.name;
