@@ -2,7 +2,7 @@ import React from "react";
 import "./PostDelete.scss";
 
 interface PostDeleteProps {
-  deletePostHandler: () => void;
+  deletePostHandler: () => Promise<void>;
   showModalCallback: () => void;
 }
 

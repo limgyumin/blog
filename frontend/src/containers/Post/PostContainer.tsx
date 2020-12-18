@@ -51,6 +51,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
 
+  const [deleting, setDeleting] = useState<boolean>(false);
+
   const postTopRef = useRef<HTMLDivElement>(null);
 
   // 글의 Idx
@@ -74,9 +76,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
   }, [postIdx]);
 
   const handleDeletePostCallback = useCallback(async () => {
+    setDeleting(true);
     await handleDeletePost(postIdx)
       .then((res: Response) => {
-        showModalCallback();
+        setDeleting(false);
       })
       .catch((err: Error) => {
         toast.error("이런! 글 삭제에 실패했어요.");
@@ -128,10 +131,12 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, [postIdx]);
 
-  const deletePostHandler = () => {
-    handleDeletePostCallback();
-    showModalCallback();
-  };
+  const deletePostHandler = useCallback(async () => {
+    await handleDeletePostCallback();
+    if (!deleting) {
+      history.push("/");
+    }
+  }, [deleting]);
 
   const showModalCallback = useCallback(() => {
     if (isShow) {
@@ -143,6 +148,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
     }
     setIsOpen(!isOpen);
   }, [isShow]);
+
+  const modifyClickHandler = () => {
+    history.push(`/modify/${postIdx}`);
+  };
 
   const progressBarHandler = () => {
     const totalScroll = document.documentElement.scrollTop;
@@ -237,11 +246,11 @@ const PostContainer = ({ match }: PostContainerProps) => {
         liked={liked}
         handlePostLikeCallback={handlePostLikeCallback}
         showModalCallback={showModalCallback}
-        postIdx={postIdx}
         otherPosts={otherPosts}
         scroll={scroll}
         postTopRef={postTopRef}
         admin={admin}
+        modifyClickHandler={modifyClickHandler}
       />
     </>
   );
