@@ -15,6 +15,7 @@ import OtherPostsType from "../../util/types/OtherPosts";
 import Portal from "../../components/common/Portal";
 import ModalContainer from "../Modal/ModalContainer";
 import PostDelete from "../../components/Post/PostDelete";
+import PostType from "../../util/types/Post";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -31,8 +32,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const history = useHistory();
   const { store } = useStore();
   const {
-    post,
-    initPost,
     handlePost,
     handleDeletePost,
     handleOtherPosts,
@@ -41,6 +40,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
   } = store.PostStore;
   const { login, admin } = store.UserStore;
 
+  const [post, setPost] = useState<Partial<PostType>>({});
   const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
@@ -64,6 +64,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
     await handlePost(postIdx)
       .then((res: PostResponse) => {
         setLoading(false);
+        setPost(res.data.post);
       })
       .catch((err: Error) => {
         if (err.message.indexOf("404")) {
@@ -178,7 +179,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   useEffect(() => {
     handlePostCallback();
-    return () => initPost();
+    return () => setPost({});
   }, [handlePostCallback]);
 
   useEffect(() => {
@@ -201,8 +202,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
           <title>{post.title}</title>
           <meta
             name="description"
-            content={post.description
-              .replace(/ +/g, " ")
+            content={post
+              .description!.replace(/ +/g, " ")
               .replace(
                 /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
                 ""
@@ -211,8 +212,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
           <meta property="og:title" content={post.title} />
           <meta
             property="og:description"
-            content={post.description
-              .replace(/ +/g, " ")
+            content={post
+              .description!.replace(/ +/g, " ")
               .replace(
                 /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
                 ""
@@ -221,8 +222,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
           <meta property="twitter:title" content={post.title} />
           <meta
             property="twitter:description"
-            content={post.description
-              .replace(/ +/g, " ")
+            content={post
+              .description!.replace(/ +/g, " ")
               .replace(
                 /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
                 ""

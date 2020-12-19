@@ -20,18 +20,6 @@
     box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
   }
 
-  &-Transparent {
-    background-color: transparent;
-
-    &-Hide {
-      transform: translateY(-20rem);
-    }
-
-    &-Shadow {
-      box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
-    }
-  }
-
   &-Container {
     width: 100%;
     max-width: 1200px;
@@ -47,12 +35,6 @@
 
       &-Image {
         height: 1.4rem;
-
-        &-White {
-          & > path {
-            fill: $white;
-          }
-        }
       }
 
       &-Profile {
@@ -82,16 +64,6 @@
 
           &:active {
             box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
-          }
-
-          &-White {
-            background-color: $white;
-            color: $black;
-            font-weight: 700;
-
-            &:hover {
-              background-color: $vv-light-gray;
-            }
           }
         }
 
@@ -124,12 +96,6 @@
                 fill: $black;
               }
             }
-
-            &:hover > &-Option-White {
-              path {
-                fill: $vvvv-light-gray;
-              }
-            }
           }
         }
 
@@ -150,14 +116,6 @@
 
           &:active {
             box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
-          }
-
-          &-White {
-            box-shadow: 0 0 0.6rem 0 rgba(255, 255, 255, 0.4);
-
-            &:active {
-              box-shadow: 0 0 0.6rem 0 rgba(255, 255, 255, 0.4);
-            }
           }
 
           &-Logo {

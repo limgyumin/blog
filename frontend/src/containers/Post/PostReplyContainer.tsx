@@ -148,8 +148,7 @@ const PostReplyContainer = ({
   useEffect(() => {
     return () => setReplies([]);
   }, []);
-  // show 상태가 아니라는건 숨기기를 클릭했다는 뜻.
-  // 따라서 답글 작성 폼도 숨겨져야해요.
+
   useEffect(() => {
     if (!show) {
       setEnable(false);

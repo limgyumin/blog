@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
 import { CategoryType } from "../../../util/types/Category";
-import "./WriteCategoryOption.scss";
+import "./HandleCategoryOption.scss";
 
-interface WriteCategoryOptionProps {
+interface HandleCategoryOptionProps {
   categories: CategoryType[];
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   categoryItemHandler: (name: string, idx: number) => void;
 }
 
-const WriteCategoryOption = ({
+const HandleCategoryOption = ({
   categories,
   setShowOption,
   categoryItemHandler,
-}: WriteCategoryOptionProps) => {
+}: HandleCategoryOptionProps) => {
   const closeOption = (e: any) => {
     if (
       e.target &&
@@ -39,11 +39,11 @@ const WriteCategoryOption = ({
 
   return (
     <>
-      <div className="Write-Category-Option">
+      <div className="Handle-Category-Option">
         {categories.map((category) => (
           <div
             key={category.idx}
-            className="Write-Category-Option-Item"
+            className="Handle-Category-Option-Item"
             onClick={() => categoryItemHandler(category.name, category.idx)}
           >
             <span>{category.name}</span>
@@ -54,4 +54,4 @@ const WriteCategoryOption = ({
   );
 };
 
-export default WriteCategoryOption;
+export default HandleCategoryOption;

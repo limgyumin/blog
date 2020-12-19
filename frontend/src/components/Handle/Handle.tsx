@@ -5,11 +5,11 @@ import { HiOutlinePencil } from "react-icons/hi";
 import { IoMdExit } from "react-icons/io";
 import { FiSave } from "react-icons/fi";
 import { ReactComponent as Option } from "../../assets/images/option.svg";
-import "./Write.scss";
+import "./Handle.scss";
 import { CategoryType } from "../../util/types/Category";
-import WriteCategoryOption from "./WriteCategoryOption";
+import HandleCategoryOption from "./HandleCategoryOption";
 
-interface WriteProps {
+interface HandleProps {
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   titleRef: React.RefObject<HTMLTextAreaElement>;
@@ -33,7 +33,7 @@ interface WriteProps {
   keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
-const Write = ({
+const Handle = ({
   title,
   setTitle,
   titleRef,
@@ -55,12 +55,12 @@ const Write = ({
   categoryItemHandler,
   writeClickHandler,
   keyDownHandler,
-}: WriteProps) => {
+}: HandleProps) => {
   return (
     <>
-      <div className="Write">
-        <div className="Write-Container">
-          <p className="Write-Container-Label">
+      <div className="Handle">
+        <div className="Handle-Container">
+          <p className="Handle-Container-Label">
             <HiOutlinePencil />
             Write
           </p>
@@ -68,32 +68,32 @@ const Write = ({
             ref={titleRef}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="Write-Container-Title"
+            className="Handle-Container-Title"
             placeholder="제목을 입력해주세요."
           />
           <textarea
             ref={descRef}
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
-            className="Write-Container-Description"
+            className="Handle-Container-Description"
             placeholder="설명을 입력해주세요."
           />
-          <div className="Write-Container-Input">
-            <div className="Write-Container-Input-Button">
-              <p className="Write-Container-Input-Button-FileName">
+          <div className="Handle-Container-Input">
+            <div className="Handle-Container-Input-Button">
+              <p className="Handle-Container-Input-Button-FileName">
                 {fileName || "썸네일 이미지를 선택해주세요."}
               </p>
               {fileName ? (
                 <div
                   onClick={() => clearImageHandler()}
-                  className="Write-Container-Input-Button-Delete"
+                  className="Handle-Container-Input-Button-Delete"
                 >
                   삭제
                 </div>
               ) : (
                 <label
                   htmlFor="file"
-                  className="Write-Container-Input-Button-Label"
+                  className="Handle-Container-Input-Button-Label"
                 >
                   업로드
                 </label>
@@ -106,13 +106,13 @@ const Write = ({
               onChange={(e) => handleImageChange(e)}
             />
             <div
-              className="Write-Container-Input-Category"
+              className="Handle-Container-Input-Category"
               onClick={() => setShowOption(true)}
             >
               {category || "카테고리"}
               <Option />
               {showOption && (
-                <WriteCategoryOption
+                <HandleCategoryOption
                   categories={categories}
                   setShowOption={setShowOption}
                   categoryItemHandler={categoryItemHandler}
@@ -125,41 +125,41 @@ const Write = ({
             value={content}
             onKeyDown={(e) => keyDownHandler(e)}
             onChange={(e) => setContent(e.target.value)}
-            className="Write-Container-Content"
+            className="Handle-Container-Content"
             placeholder="자! 이제 마음껏 이야기를 써보죠!"
           />
         </div>
-        <div className="Write-Preview">
-          <p className="Write-Preview-Label">
+        <div className="Handle-Preview">
+          <p className="Handle-Preview-Label">
             <AiOutlineEye />
             Preview
           </p>
-          <p className="Write-Preview-Title">{title}</p>
-          <p className="Write-Preview-Description">{desc}</p>
+          <p className="Handle-Preview-Title">{title}</p>
+          <p className="Handle-Preview-Description">{desc}</p>
           {preview && (
-            <div className="Write-Preview-Thumbnail">
+            <div className="Handle-Preview-Thumbnail">
               <img
                 src={preview.toString()}
-                className="Write-Preview-Thumbnail-Image"
+                className="Handle-Preview-Thumbnail-Image"
               />
             </div>
           )}
-          <MarkDownContainer className="Write-Preview-Content">
+          <MarkDownContainer className="Handle-Preview-Content">
             {content}
           </MarkDownContainer>
         </div>
-        <div className="Write-Control">
+        <div className="Handle-Control">
           <button
-            className="Write-Control-Confirm"
+            className="Handle-Control-Confirm"
             onClick={() => writeClickHandler()}
           >
             <HiOutlinePencil />
           </button>
-          <button className="Write-Control-Save" onClick={() => {}}>
+          <button className="Handle-Control-Save" onClick={() => {}}>
             <FiSave />
           </button>
           <button
-            className="Write-Control-Cancel"
+            className="Handle-Control-Cancel"
             onClick={() => writeCancelHandler()}
           >
             <IoMdExit />
@@ -170,4 +170,4 @@ const Write = ({
   );
 };
 
-export default Write;
+export default Handle;

@@ -30,27 +30,14 @@ const Main = ({
   loading,
   postRef,
   admin,
-  modify,
-  setModify,
   scrollToTop,
   mainRef,
 }: MainProps) => {
   return (
     <>
       <div className="Main">
-        <div className="Main-Banner">
-          <div className="Main-Banner-Content">
-            <h1>Write the Code, Clean the World.</h1>
-            <p>코딩이 취미인 한 학생의 이야기.</p>
-            <BsChevronDoubleDown onClick={() => scrollToTop()} />
-          </div>
-        </div>
         <div className="Main-Wrapper" ref={mainRef}>
           <div className="Main-Wrapper-Container">
-            <div className="Main-Wrapper-Container-Title">
-              <h1>Create, Refactor, and Done.</h1>
-              <p>항상 좋은 코드로 시작해 좋은 코드로 완성하기 위해.</p>
-            </div>
             <MainCategories
               categories={categories}
               totalPostCount={totalPostCount}

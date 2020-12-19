@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { observer } from "mobx-react";
-import Write from "../../components/Write";
+import Handle from "../../components/Handle";
 import Portal from "../../components/common/Portal";
 import ModalContainer from "../Modal/ModalContainer";
 import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
-import WriteCancelAlert from "../../components/Write/WriteCancelAlert";
+import HandleCancelAlert from "../../components/Handle/HandleCancelAlert";
 import useStore from "../../util/lib/hooks/useStore";
 import {
   MyProfileResponse,
@@ -17,20 +17,20 @@ import isEmpty from "../../util/lib/isEmpty";
 import convertURL from "../../util/lib/convertURL";
 import axios from "axios";
 
-interface WriteContainerProps extends RouteComponentProps<MatchType> {}
+interface HandleContainerProps extends RouteComponentProps<MatchType> {}
 
 interface MatchType {
   idx: string;
 }
 
-const WriteContainer = ({ match }: WriteContainerProps) => {
+const HandleContainer = ({ match }: HandleContainerProps) => {
   const { store } = useStore();
   const { handleUploadFile } = store.UploadStore;
   const { handlePost, handleCreatePost, handleModifyPost } = store.PostStore;
   const { categories, handleCategories } = store.CategoryStore;
   const { login, admin, handleMyProfile, handleLoginState } = store.UserStore;
 
-  const [write, setWrite] = useState<boolean>(false);
+  const [write, setWrite] = useState<boolean>(true);
 
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
@@ -125,6 +125,8 @@ const WriteContainer = ({ match }: WriteContainerProps) => {
 
     if (uploadFile) {
       thumbnail = await handleUploadFileCallback(uploadFile);
+    } else if (fileName) {
+      thumbnail = convertURL(fileName);
     } else {
       thumbnail = "";
     }
@@ -310,13 +312,13 @@ const WriteContainer = ({ match }: WriteContainerProps) => {
     <>
       <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
-          <WriteCancelAlert
+          <HandleCancelAlert
             showModalCallback={showModalCallback}
             push={goToBeforePage}
           />
         </ModalContainer>
       </Portal>
-      <Write
+      <Handle
         title={title}
         setTitle={setTitle}
         titleRef={titleRef}
@@ -343,4 +345,4 @@ const WriteContainer = ({ match }: WriteContainerProps) => {
   );
 };
 
-export default withRouter(observer(WriteContainer));
+export default withRouter(observer(HandleContainer));

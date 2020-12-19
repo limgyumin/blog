@@ -10,7 +10,7 @@ import PostLoading from "./PostLoading";
 import PostProfile from "./PostProfile";
 
 interface PostProps {
-  post: PostType;
+  post: Partial<PostType>;
   loading: boolean;
   notFound: boolean;
   likeCount: number;
@@ -51,11 +51,11 @@ const Post = ({
               post.idx && (
                 <>
                   <PostHeader
-                    title={post.title}
-                    writer={post.user.name}
-                    categoryName={post.category_name}
-                    createdAt={post.created_at}
-                    thumbnail={post.thumbnail}
+                    title={post.title!}
+                    writer={post.user!.name}
+                    categoryName={post.category_name!}
+                    createdAt={post.created_at!}
+                    thumbnail={post.thumbnail!}
                     handlePostLikeCallback={handlePostLikeCallback}
                     showModalCallback={showModalCallback}
                     modifyClickHandler={modifyClickHandler}
@@ -69,10 +69,10 @@ const Post = ({
                     </MarkDownContainer>
                   )}
                   <PostProfile
-                    avatar={post.user.avatar}
-                    writer={post.user.name}
-                    bio={post.user.bio}
-                    id={post.user.id}
+                    avatar={post.user!.avatar}
+                    writer={post.user!.name}
+                    bio={post.user!.bio}
+                    id={post.user!.id}
                   />
                   <PostList otherPosts={otherPosts} />
                   {admin && <PostCommentContainer postIdx={post.idx} />}
