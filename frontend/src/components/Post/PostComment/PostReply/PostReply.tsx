@@ -20,6 +20,7 @@ interface PostReplyProps {
   handleCreateCancelCallback: () => void;
   handleRepliesCallback: () => Promise<void>;
   keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  replyRef: React.RefObject<HTMLDivElement>;
 }
 
 const PostReply = ({
@@ -37,6 +38,7 @@ const PostReply = ({
   handleCreateCancelCallback,
   handleRepliesCallback,
   keyDownListener,
+  replyRef,
 }: PostReplyProps) => {
   return (
     <>
@@ -86,6 +88,7 @@ const PostReply = ({
                 />
               )}
             </div>
+            <div ref={replyRef} />
           </>
         ) : (
           <>

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
 import PostReply from "../../components/Post/PostComment/PostReply";
@@ -46,6 +46,8 @@ const PostReplyContainer = ({
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const replyRef = useRef<HTMLDivElement>(null);
+
   // 답글 생성
   const handleCreateReplyCallback = useCallback(async () => {
     if (isEmpty(content)) {
@@ -83,7 +85,9 @@ const PostReplyContainer = ({
       .then((res: ReplyCountResponse) => {
         setReplyCount(res.data["reply_count"]);
         if (res.data.reply_count > 0) {
-          handleRepliesCallback();
+          handleRepliesCallback().then(() => {
+            scrollToBottom();
+          });
         } else {
           setReplies([]);
         }
@@ -138,6 +142,10 @@ const PostReplyContainer = ({
     }
   };
 
+  const scrollToBottom = () => {
+    replyRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   useEffect(() => {
     handleReplyCountCallback();
     return () => {
@@ -180,6 +188,7 @@ const PostReplyContainer = ({
         handleCreateCancelCallback={handleCreateCancelCallback}
         handleRepliesCallback={handleRepliesCallback}
         keyDownListener={keyDownListener}
+        replyRef={replyRef}
       />
     </>
   );
