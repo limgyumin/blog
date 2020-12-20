@@ -58,24 +58,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
   // 글의 Idx
   const postIdx = Number(match.params.idx);
 
-  // 글 조회
-  const handlePostCallback = useCallback(async () => {
-    setLoading(true);
-    await handlePost(postIdx)
-      .then((res: PostResponse) => {
-        setLoading(false);
-        setPost(res.data.post);
-      })
-      .catch((err: Error) => {
-        if (err.message.indexOf("404")) {
-          setNotFound(true);
-        } else {
-          toast.error("이런! 글 조회에 실패했어요.");
-          history.push("/");
-        }
-      });
-  }, [postIdx]);
-
   const handleDeletePostCallback = useCallback(async () => {
     setDeleting(true);
     await handleDeletePost(postIdx)
@@ -132,6 +114,26 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, [postIdx]);
 
+  // 글 조회
+  const handlePostCallback = useCallback(async () => {
+    setLoading(true);
+    await handlePost(postIdx)
+      .then((res: PostResponse) => {
+        setLoading(false);
+        setPost(res.data.post);
+        handleOtherPostsCallback();
+        handleLikeInfoCallback();
+      })
+      .catch((err: Error) => {
+        if (err.message.indexOf("404")) {
+          setNotFound(true);
+        } else {
+          toast.error("이런! 글 조회에 실패했어요.");
+          history.push("/");
+        }
+      });
+  }, [postIdx, handleOtherPostsCallback, handleLikeInfoCallback]);
+
   const deletePostHandler = useCallback(async () => {
     await handleDeletePostCallback();
     if (!deleting) {
@@ -183,12 +185,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
   }, [handlePostCallback]);
 
   useEffect(() => {
-    handleOtherPostsCallback();
     return () => setOtherPosts({});
   }, [handleOtherPostsCallback]);
 
   useEffect(() => {
-    handleLikeInfoCallback();
     return () => {
       setLikeCount(0);
       setLiked(false);

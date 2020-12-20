@@ -112,6 +112,10 @@
           @media screen and (max-width: 1110px) {
             max-width: 16rem;
           }
+
+          @media screen and (max-width: 530px) {
+            max-width: 12rem;
+          }
         }
 
         &-Label {

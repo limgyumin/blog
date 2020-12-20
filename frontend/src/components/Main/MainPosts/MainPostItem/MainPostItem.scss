@@ -2,7 +2,7 @@
 @import "../../../../util/color.scss";
 
 .Main-Post-Item {
-  width: 23rem;
+  width: 20.9rem;
   margin: 1rem;
   cursor: pointer;
   transition: transform ease 0.2s;
@@ -27,12 +27,70 @@
     position: relative;
     padding-top: 60%;
 
+    &-Shadow {
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      border-radius: 0.2rem;
+      z-index: 11;
+      background-color: #00000038;
+      transition: opacity ease 0.3s;
+      padding: 0.6rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      &-Wrapper {
+        display: flex;
+        align-items: center;
+
+        &-Comment,
+        &-Like {
+          display: flex;
+          align-items: center;
+          font-size: 1rem;
+          background-color: $white;
+          padding: 0.19rem 0.6rem;
+          border-radius: 0.5rem;
+          color: $gray;
+          font-weight: 600;
+        }
+
+        &-Comment {
+          margin-right: 0.6rem;
+
+          & > svg {
+            margin-right: 0.3rem;
+          }
+
+          & > p {
+            font-size: 0.925rem;
+          }
+        }
+
+        &-Like {
+          & > svg {
+            margin-right: 0.3rem;
+          }
+
+          & > p {
+            font-size: 0.925rem;
+          }
+        }
+      }
+    }
+
     &-Image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 0.4rem;
-      margin-bottom: 0.4rem;
+      border-radius: 0.2rem;
       position: absolute;
       top: 0;
     }
@@ -44,111 +102,57 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.6rem;
     position: relative;
+
+    &-Wrapper {
+      display: flex;
+      align-items: center;
+      margin: 1rem 0 0.8rem 0;
+
+      &-Category {
+        font-size: 0.8rem;
+        background-color: $vvv-light-gray;
+        padding: 0.19rem 0.6rem;
+        border-radius: 0.5rem;
+        color: $gray;
+        font-weight: 600;
+        margin-right: 0.6rem;
+      }
+
+      &-Date {
+        font-size: 0.925rem;
+        font-weight: 700;
+        color: $black;
+      }
+    }
 
     &-Info {
       display: flex;
       flex-direction: column;
+      margin-bottom: 1rem;
 
       &-Title {
+        display: flex;
+        align-items: center;
         color: $black;
-        font-size: 1rem;
+        font-size: 1.025rem;
         font-weight: 700;
-        margin-bottom: 0.4rem;
-        @include ellipsis(1);
+        margin-bottom: 0.3rem;
+
+        & > span {
+          @include ellipsis(1);
+        }
+
+        & > p {
+          margin-left: 0.4rem;
+        }
       }
 
       &-Description {
         font-size: 0.9rem;
         font-weight: 500;
         color: $light-gray;
-        margin-bottom: 1rem;
-        @include ellipsis(2);
-      }
-    }
-
-    &-Category {
-      color: $light-gray;
-      font-size: 0.8rem;
-      font-weight: 400;
-
-      & > span {
-        background-color: $vvv-light-gray;
-        padding: 0.19rem 0.6rem;
-        border-radius: 1rem;
-        color: $black;
-        font-size: 0.7rem;
-        font-weight: 600;
-      }
-    }
-  }
-
-  &-Bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.4rem 0.6rem;
-
-    &-Profile {
-      display: flex;
-      align-items: center;
-
-      &-Avatar {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-      }
-
-      &-Name {
-        color: $black;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-left: 0.5rem;
-
-        & > span {
-          color: $v-light-gray;
-          font-weight: 500;
-        }
-      }
-    }
-
-    &-Count {
-      display: flex;
-      align-items: center;
-      margin-right: 0.4rem;
-
-      &-Comment {
-        display: flex;
-        align-items: center;
-
-        & > svg {
-          color: $black;
-          font-size: 1rem;
-        }
-
-        & > span {
-          color: $black;
-          margin-left: 0.3rem;
-          font-size: 0.9rem;
-        }
-      }
-
-      &-Like {
-        display: flex;
-        align-items: center;
-        margin-left: 0.8rem;
-
-        & > svg {
-          color: $black;
-          font-size: 1rem;
-        }
-
-        & > span {
-          color: $black;
-          margin-left: 0.3rem;
-          font-size: 0.9rem;
-        }
+        @include ellipsis(1);
       }
     }
   }

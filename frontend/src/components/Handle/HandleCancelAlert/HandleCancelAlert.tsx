@@ -16,7 +16,7 @@ const HandleCancelAlert = ({
         <div className="Handle-Cancel-Alert-Content">
           <h2>작성 취소</h2>
           <p>
-            작성중인 내용이 모두 삭제됩니다.
+            변경하신 내용이 모두 취소됩니다.
             <br />
             정말로 작성을 취소하시겠어요?
           </p>

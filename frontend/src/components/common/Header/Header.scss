@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   background-color: $white;
-  transition: transform ease 0.3s, box-shadow ease 0.3s;
+  transition: transform ease 0.5s, box-shadow ease 0.3s;
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
 
   &-Container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
     padding: 0 1rem;
@@ -76,8 +76,8 @@
             cursor: pointer;
 
             &-Avatar {
-              width: 2.7rem;
-              height: 2.7rem;
+              width: 2.65rem;
+              height: 2.65rem;
               border-radius: 50%;
               box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
             }
@@ -104,7 +104,7 @@
           justify-content: center;
           align-items: center;
           cursor: pointer;
-          padding: 0.4rem;
+          padding: 0.43rem;
           background-color: $black;
           border-radius: 50%;
           box-shadow: none;
@@ -119,69 +119,9 @@
           }
 
           &-Logo {
-            width: 1.85rem;
-            height: 1.85rem;
+            width: 1.75rem;
+            height: 1.75rem;
           }
-        }
-      }
-    }
-
-    &-Categories {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      overflow: hidden;
-      max-height: 0rem;
-      transition: all ease 1s;
-
-      &-Open {
-        max-height: 14rem;
-      }
-    }
-
-    &-UpDown {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.8rem;
-
-      &-Icon {
-        cursor: pointer;
-        width: 1rem;
-        height: 1rem;
-        animation: float ease 1s infinite;
-
-        @keyframes float {
-          0% {
-            transform: translateY(-0.3rem);
-          }
-
-          50% {
-            transform: translateY(0rem);
-          }
-
-          100% {
-            transform: translateY(-0.3rem);
-          }
-        }
-
-        @keyframes float-rotated {
-          0% {
-            transform: rotate(180deg) translateY(0.3rem);
-          }
-
-          50% {
-            transform: rotate(180deg) translateY(0rem);
-          }
-
-          100% {
-            transform: rotate(180deg) translateY(0.3rem);
-          }
-        }
-
-        &-Open {
-          animation: float-rotated ease 1s infinite;
         }
       }
     }

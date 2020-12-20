@@ -30,7 +30,6 @@ const MainContainer = ({}: MainContainerProps) => {
   //posts
   const [postCount, setPostCount] = useState<number>(0);
   const [notFound, setNotFound] = useState<boolean>(false);
-  const [fixedLoading, setFixedLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
@@ -97,12 +96,12 @@ const MainContainer = ({}: MainContainerProps) => {
   }, [initPostsCallback]);
 
   useEffect(() => {
-    handleCategoriesCallback();
-  }, [handleCategoriesCallback]);
-
-  useEffect(() => {
     handlePostsCallback();
   }, [handlePostsCallback]);
+
+  useEffect(() => {
+    handleCategoriesCallback();
+  }, [handleCategoriesCallback]);
 
   return (
     <>

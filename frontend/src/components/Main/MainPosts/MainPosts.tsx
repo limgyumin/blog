@@ -1,7 +1,6 @@
 import React from "react";
 import PostType from "../../../util/types/Post";
 import MainPostItem from "./MainPostItem";
-import MainPostItemLoading from "./MainPostItemLoading";
 import "./MainPosts.scss";
 
 interface MainPostsProps {
@@ -24,19 +23,7 @@ const MainPosts = ({ posts, loading, postRef }: MainPostsProps) => {
               )}
             </React.Fragment>
           ))}
-          {loading && (
-            <>
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-              <MainPostItemLoading />
-            </>
-          )}
+          {loading && <></>}
         </div>
       </div>
     </>

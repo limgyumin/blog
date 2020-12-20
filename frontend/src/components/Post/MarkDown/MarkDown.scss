@@ -87,17 +87,15 @@
   }
 
   blockquote {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
-    margin-left: 0px;
-    margin-right: 0px;
     color: $light-gray;
+    font-size: 1rem;
     border-left: 4px solid;
     border-color: $vv-light-gray;
     background-color: $vvvvv-light-gray;
-    padding: 1rem 1rem 1rem 2rem;
+    margin: 2rem 0;
+    padding: 0.7rem 1rem 0.7rem 2rem;
 
     & :first-child {
       margin-top: 0px;

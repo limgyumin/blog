@@ -10,19 +10,13 @@ interface HeaderContainerProps {}
 
 const HeaderContainer = ({}: HeaderContainerProps) => {
   const history = useHistory();
-  const { pathname } = useLocation();
-
   const { store } = useStore();
-  const { categories, totalPostCount } = store.CategoryStore;
   const { handleLoginState, handleAdminState } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
-  const [open, setOpen] = useState<boolean>(false);
   const [hide, setHide] = useState<boolean>(false);
   const [shadow, setShadow] = useState<boolean>(false);
   const [showOption, setShowOption] = useState<boolean>(false);
-  const [transparent, setTransparent] = useState<boolean>(false);
-  const [enable, setEnable] = useState<boolean>(false);
 
   const [pageY, setPageY] = useState<number>(0);
   const documentRef = useRef(document);
@@ -31,12 +25,8 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
     const { pageYOffset } = window;
     const deltaY = pageYOffset - pageY;
     const hide = pageYOffset !== 0 && deltaY >= 0;
-    const shadow = (pageYOffset > 30 && deltaY < 0) || open;
-    const transparent = pageYOffset < 835 && pathname === "/";
-    const enable = pageYOffset > 1080 && pathname === "/";
+    const shadow = pageYOffset > 30 && deltaY < 0;
 
-    setEnable(enable);
-    setTransparent(transparent);
     setShadow(shadow);
     setHide(hide);
     setPageY(pageYOffset);
@@ -88,26 +78,14 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   }, [handleMyProfileCallback]);
 
   useEffect(() => {
-    const { pageYOffset } = window;
-    const transparent = pageYOffset < 835 && pathname === "/";
-    setTransparent(transparent);
-  }, []);
-
-  useEffect(() => {
     documentRef.current.addEventListener("scroll", scrollHandler);
     return () =>
       documentRef.current.removeEventListener("scroll", scrollHandler);
   }, [pageY]);
 
-  useEffect(() => {
-    setShadow(open);
-  }, [open]);
-
   return (
     <>
       <Header
-        enable={enable}
-        transparent={transparent}
         shadow={shadow}
         hide={hide}
         admin={admin}
@@ -117,11 +95,6 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
         setShowOption={setShowOption}
         closeOption={closeOption}
         handleLogout={handleLogout}
-        totalPostCount={totalPostCount}
-        categories={categories}
-        pathname={pathname}
-        open={open}
-        setOpen={setOpen}
       />
     </>
   );

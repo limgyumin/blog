@@ -8,12 +8,8 @@ import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";
 import HeaderOption from "./HeaderOption";
-import { CategoryType } from "../../../util/types/Category";
-import HeaderCategoryItem from "./HeaderCategoryItem";
 
 interface HeaderProps {
-  enable: boolean;
-  transparent: boolean;
   shadow: boolean;
   hide: boolean;
   admin: boolean;
@@ -23,16 +19,9 @@ interface HeaderProps {
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   closeOption: (e: any) => void;
   handleLogout: () => void;
-  totalPostCount: number;
-  categories: CategoryType[];
-  pathname: string;
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Header = ({
-  enable,
-  transparent,
   shadow,
   hide,
   admin,
@@ -42,18 +31,7 @@ const Header = ({
   setShowOption,
   closeOption,
   handleLogout,
-  totalPostCount,
-  categories,
-  pathname,
-  open,
-  setOpen,
 }: HeaderProps) => {
-  const total_view = {
-    idx: 0,
-    name: "전체",
-    post_count: totalPostCount,
-  };
-
   return (
     <>
       <div
@@ -112,32 +90,6 @@ const Header = ({
               )}
             </div>
           </div>
-          {enable && (
-            <>
-              <div
-                className={
-                  open
-                    ? "Header-Container-Categories-Open Header-Container-Categories"
-                    : "Header-Container-Categories"
-                }
-              >
-                <HeaderCategoryItem category={total_view} />
-                {categories.map((category, idx) => (
-                  <HeaderCategoryItem key={idx} category={category} />
-                ))}
-              </div>
-              <div className="Header-Container-UpDown">
-                <Arrows
-                  onClick={() => setOpen(!open)}
-                  className={
-                    open
-                      ? "Header-Container-UpDown-Icon-Open Header-Container-UpDown-Icon"
-                      : "Header-Container-UpDown-Icon"
-                  }
-                />
-              </div>
-            </>
-          )}
         </div>
       </div>
     </>
