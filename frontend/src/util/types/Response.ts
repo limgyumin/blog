@@ -43,7 +43,7 @@ export interface CategoriesResponse extends Response {
   };
 }
 
-export interface MyProfileResponse extends Response {
+export interface ProfileResponse extends Response {
   data: {
     user: UserType;
   };

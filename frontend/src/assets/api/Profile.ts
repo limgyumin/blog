@@ -13,6 +13,18 @@ class Profile {
       throw new Error(`${error}`);
     }
   }
+
+  async GetAdminProfile() {
+    try {
+      const url = `${SERVER}/v1/profile/admin`;
+
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Profile();
