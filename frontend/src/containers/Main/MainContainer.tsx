@@ -25,7 +25,6 @@ const MainContainer = ({}: MainContainerProps) => {
   const { store } = useStore();
   const { posts, handlePosts, initPosts } = store.PostStore;
   const { totalPostCount, categories, handleCategories } = store.CategoryStore;
-  const { admin } = store.UserStore;
 
   //posts
   const [postCount, setPostCount] = useState<number>(0);
@@ -126,7 +125,6 @@ const MainContainer = ({}: MainContainerProps) => {
         notFound={notFound}
         loading={loading}
         postRef={ref}
-        admin={admin}
         modify={modify}
         setModify={setModify}
         scrollToTop={scrollToTop}

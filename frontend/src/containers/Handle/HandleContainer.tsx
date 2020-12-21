@@ -7,7 +7,7 @@ import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
 import HandleCancelAlert from "../../components/Handle/HandleCancelAlert";
 import useStore from "../../util/lib/hooks/useStore";
 import {
-  MyProfileResponse,
+  ProfileResponse,
   PostResponse,
   UploadFileResponse,
 } from "../../util/types/Response";
@@ -173,7 +173,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       axios.defaults.headers.common["access_token"] = token;
 
       await handleMyProfile()
-        .then((res: MyProfileResponse) => {
+        .then((res: ProfileResponse) => {
           if (!res.data.user.is_admin) {
             history.push("/");
           }

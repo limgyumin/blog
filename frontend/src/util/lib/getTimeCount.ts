@@ -8,8 +8,5 @@ export default (time: Date): string => {
     },
   };
 
-  let timeSentence = TimeCounting(time, option);
-  timeSentence = timeSentence === "just now" ? "Just Now" : timeSentence;
-
-  return timeSentence;
+  return TimeCounting(time, option).replace("just now", "Just Now");
 };

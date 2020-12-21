@@ -143,7 +143,7 @@ const PostReplyContainer = ({
   };
 
   const scrollToBottom = () => {
-    replyRef.current?.scrollIntoView({ behavior: "smooth" });
+    replyRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   useEffect(() => {

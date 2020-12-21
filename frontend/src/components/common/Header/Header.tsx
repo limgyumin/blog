@@ -3,7 +3,6 @@ import "./Header.scss";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
 import { ReactComponent as Option } from "../../../assets/images/option.svg";
-import { ReactComponent as Arrows } from "../../../assets/images/arrows.svg";
 import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";

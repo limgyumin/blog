@@ -23,6 +23,7 @@
     bottom: 0;
     left: 0;
     height: 6px;
+    z-index: 100;
 
     &-Container {
       background: $black;

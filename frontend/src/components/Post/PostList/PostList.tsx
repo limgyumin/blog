@@ -21,7 +21,7 @@ const PostList = ({ otherPosts }: PostListProps) => {
               <GrLinkPrevious />
               <div className="Post-List-Previous-Container-Content">
                 <h3 className="Post-List-Previous-Container-Content-Name">
-                  이전 게시글
+                  Previous Post
                 </h3>
                 <p className="Post-List-Previous-Container-Content-Title">
                   {otherPosts.previous?.title}
@@ -38,7 +38,7 @@ const PostList = ({ otherPosts }: PostListProps) => {
             >
               <div className="Post-List-Next-Container-Content">
                 <h3 className="Post-List-Next-Container-Content-Name">
-                  다음 게시글
+                  Next Post
                 </h3>
                 <p className="Post-List-Next-Container-Content-Title">
                   {otherPosts.next?.title}

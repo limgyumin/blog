@@ -13,7 +13,6 @@ interface MainProps {
   notFound: boolean;
   loading: boolean;
   postRef: (node?: Element | null | undefined) => void;
-  admin: boolean;
   modify: boolean;
   setModify: React.Dispatch<React.SetStateAction<boolean>>;
   scrollToTop: () => void;
@@ -27,7 +26,6 @@ const Main = ({
   notFound,
   loading,
   postRef,
-  admin,
   scrollToTop,
   mainRef,
 }: MainProps) => {
@@ -39,7 +37,6 @@ const Main = ({
             <MainCategories
               categories={categories}
               totalPostCount={totalPostCount}
-              admin={admin}
             />
             {notFound ? (
               <MainPostNotFound />

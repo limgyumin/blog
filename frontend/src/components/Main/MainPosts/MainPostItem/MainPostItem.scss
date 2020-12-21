@@ -4,16 +4,15 @@
 .Main-Post-Item {
   width: 20.9rem;
   margin: 1rem;
-  cursor: pointer;
   transition: transform ease 0.2s;
   position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
 
-  &:hover {
-    transform: translateY(-0.5rem);
-  }
+  // &:hover {
+  //   transform: translateY(-0.5rem);
+  // }
 
   @media screen and (max-width: 1230px) {
     width: calc(50% - 2rem);
@@ -26,6 +25,7 @@
   &-Thumbnail {
     position: relative;
     padding-top: 60%;
+    cursor: pointer;
 
     &-Shadow {
       opacity: 0;
@@ -34,9 +34,9 @@
       position: absolute;
       top: 0;
       border-radius: 0.2rem;
-      z-index: 11;
+      z-index: 10;
       background-color: #00000038;
-      transition: opacity ease 0.3s;
+      transition: opacity ease 0.2s;
       padding: 0.6rem;
       display: flex;
       align-items: flex-end;
@@ -110,9 +110,9 @@
       margin: 1rem 0 0.8rem 0;
 
       &-Category {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         background-color: $vvv-light-gray;
-        padding: 0.19rem 0.6rem;
+        padding: 0.16rem 0.5rem;
         border-radius: 0.5rem;
         color: $gray;
         font-weight: 600;
@@ -149,7 +149,7 @@
       }
 
       &-Description {
-        font-size: 0.9rem;
+        font-size: 0.8725rem;
         font-weight: 500;
         color: $light-gray;
         @include ellipsis(1);

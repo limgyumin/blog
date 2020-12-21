@@ -14,9 +14,9 @@ interface MainPostItemProps {
 const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
   return (
     <>
-      <Link to={`/post/${post.idx}`} className="Main-Post-Item" ref={postRef}>
+      <div className="Main-Post-Item" ref={postRef}>
         {post.thumbnail && (
-          <div className="Main-Post-Item-Thumbnail">
+          <Link to={`/post/${post.idx}`} className="Main-Post-Item-Thumbnail">
             <div className="Main-Post-Item-Thumbnail-Shadow">
               <div className="Main-Post-Item-Thumbnail-Shadow-Wrapper">
                 <div className="Main-Post-Item-Thumbnail-Shadow-Wrapper-Comment">
@@ -34,7 +34,7 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
               alt="Thumbnail"
               className="Main-Post-Item-Thumbnail-Image"
             />
-          </div>
+          </Link>
         )}
         <div className="Main-Post-Item-Content">
           <div className="Main-Post-Item-Content-Wrapper">
@@ -55,7 +55,7 @@ const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
             </span>
           </div>
         </div>
-      </Link>
+      </div>
     </>
   );
 };
