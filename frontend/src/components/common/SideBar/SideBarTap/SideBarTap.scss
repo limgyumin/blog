@@ -1,0 +1,29 @@
+@import "../../../../util/color.scss";
+
+.SideBar-Tap {
+  width: 100%;
+
+  &-Home,
+  &-Categories,
+  &-Achieve,
+  &-About {
+    display: flex;
+    align-items: center;
+    color: $white;
+    padding: 1.1rem 1rem 1.1rem 4rem;
+    background-color: $semi-light-black;
+    text-decoration: none;
+    cursor: pointer;
+
+    & > svg {
+      font-size: 1.5rem;
+      margin-right: 1.2rem;
+    }
+
+    & > p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+    }
+  }
+}

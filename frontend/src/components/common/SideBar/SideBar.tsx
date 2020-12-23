@@ -1,5 +1,6 @@
 import React from "react";
 import "./SideBar.scss";
+import SideBarTap from "./SideBarTap";
 
 interface SideBarProps {
   avatar: string;
@@ -11,15 +12,15 @@ interface SideBarProps {
 const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
   return (
     <>
-      <div className="SideBar">
-        <div className="SideBar-Profile">
-          <img className="SideBar-Profile-Avatar" src={avatar} alt="admin" />
-          <p className="SideBar-Profile-Name">
-            {id}({name})
-          </p>
-          <p className="SideBar-Profile-Bio">{bio}</p>
+      <nav className="SideBar">
+        <div className="SideBar-Content">
+          <img className="SideBar-Content-Avatar" src={avatar} alt="admin" />
+          <p className="SideBar-Content-Name">{name}</p>
+          <p className="SideBar-Content-Id">{id}</p>
+          <p className="SideBar-Content-Bio">{bio}</p>
         </div>
-      </div>
+        <SideBarTap />
+      </nav>
     </>
   );
 };
