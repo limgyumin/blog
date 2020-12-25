@@ -33,7 +33,7 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <>
-      <div
+      <header
         className={
           hide
             ? "Header-Hide Header"
@@ -90,7 +90,7 @@ const Header = ({
             </div>
           </div>
         </div>
-      </div>
+      </header>
     </>
   );
 };

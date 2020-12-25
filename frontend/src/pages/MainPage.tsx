@@ -5,9 +5,7 @@ import MainContainer from "../containers/Main/MainContainer";
 const MainPage = () => {
   return (
     <>
-      <Template>
-        <MainContainer />
-      </Template>
+      <MainContainer />
     </>
   );
 };

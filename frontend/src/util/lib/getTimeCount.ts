@@ -8,5 +8,5 @@ export default (time: Date): string => {
     },
   };
 
-  return TimeCounting(time, option).replace("just now", "Just Now");
+  return TimeCounting(time, option).replace("just now", "Just now");
 };

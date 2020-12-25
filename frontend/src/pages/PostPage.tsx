@@ -5,9 +5,7 @@ import PostContainer from "../containers/Post/PostContainer";
 const PostPage = () => {
   return (
     <>
-      <Template>
-        <PostContainer />
-      </Template>
+      <PostContainer />
     </>
   );
 };
