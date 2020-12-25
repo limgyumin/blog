@@ -13,6 +13,7 @@ export default async (req: Request, res: Response) => {
   try {
     const categoryRepo = getRepository(Category);
     const categories: CategoryPostsType[] = await categoryRepo.find({
+      select: ["idx", "name"],
       order: {
         order_number: "ASC",
       },
@@ -21,6 +22,7 @@ export default async (req: Request, res: Response) => {
     for (let i in categories) {
       const postRepo = getRepository(Post);
       const [posts, post_count] = await postRepo.findAndCount({
+        select: ["idx", "title", "created_at"],
         where: {
           is_temp: false,
           is_deleted: false,

@@ -1,4 +1,4 @@
-import { CategoryType } from "./Category";
+import { CategoryPostsType, CategoryType } from "./Category";
 import CommentType from "./Comment";
 import OtherPostsType from "./OtherPosts";
 import PostType from "./Post";
@@ -40,6 +40,12 @@ export interface CategoriesResponse extends Response {
   data: {
     total: number;
     categories: CategoryType[];
+  };
+}
+
+export interface CategoryPostsResponse extends Response {
+  data: {
+    categories: CategoryPostsType[];
   };
 }
 

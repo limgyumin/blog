@@ -13,6 +13,18 @@ class Category {
       throw new Error(`${error}`);
     }
   }
+
+  async getCategoryPosts() {
+    try {
+      let url = `${SERVER}/v1/category/post`;
+
+      const { data } = await axios.get(url);
+
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Category();
