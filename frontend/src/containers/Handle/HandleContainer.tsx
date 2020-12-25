@@ -28,7 +28,13 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const { handleUploadFile } = store.UploadStore;
   const { handlePost, handleCreatePost, handleModifyPost } = store.PostStore;
   const { categories, handleCategories } = store.CategoryStore;
-  const { login, admin, handleMyProfile, handleLoginState } = store.UserStore;
+  const {
+    login,
+    admin,
+    handleMyProfile,
+    handleLoginState,
+    handleAdminState,
+  } = store.UserStore;
 
   const [write, setWrite] = useState<boolean>(true);
 
@@ -76,6 +82,8 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   }, []);
 
   const handleCreatePostCallback = useCallback(async () => {
+    console.log(111);
+
     if (!login || !admin) {
       history.push("/");
       return;
@@ -107,7 +115,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       .catch((err: Error) => {
         toast.error("앗! 글 작성에 실패했어요.");
       });
-  }, [title, desc, content, categoryIdx, uploadFile]);
+  }, [title, desc, content, categoryIdx, uploadFile, login, admin]);
 
   const handleModifyPostCallback = useCallback(async () => {
     if (!login || !admin) {
@@ -174,7 +182,9 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
       await handleMyProfile()
         .then((res: ProfileResponse) => {
-          if (!res.data.user.is_admin) {
+          if (res.data.user.is_admin) {
+            handleAdminState(true);
+          } else {
             history.push("/");
           }
         })
@@ -232,13 +242,9 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   }, [idx]);
 
   const writeClickHandler = () => {
-    console.log("끵");
-
     if (write) {
       handleCreatePostCallback();
     } else {
-      console.log("ㅗ");
-
       handleModifyPostCallback();
     }
   };
