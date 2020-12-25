@@ -1,0 +1,48 @@
+@import "../../../util/color.scss";
+
+.Categories-Posts-List-Item {
+  display: flex;
+  cursor: pointer;
+  background-color: $vvvv-light-gray;
+  text-decoration: none;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $vvv-light-gray;
+  }
+
+  &-Info {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.3rem 1rem 2.5rem;
+
+    &-Wrapper {
+      display: flex;
+      align-items: center;
+
+      & > svg {
+        margin-right: 0.5rem;
+        color: #58a6ff;
+        font-size: 1.2rem;
+      }
+
+      &-Name {
+        margin-right: 0.6rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: $light-black;
+
+        &:hover {
+          text-decoration: underline;
+          color: #0366d6;
+        }
+      }
+    }
+
+    &-Date {
+      color: $v-light-gray;
+      font-size: 0.8rem;
+    }
+  }
+}
