@@ -3,12 +3,13 @@
 
 .Handle {
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
   font-family: MalgunGothic;
   animation: fadeIn ease 0.5s;
 
-  @keyframes identifier {
+  @keyframes fadeIn {
     0% {
       opacity: 0;
     }
@@ -22,84 +23,274 @@
     background-color: $vvv-light-gray;
   }
 
-  &-Container {
-    width: 50%;
-    min-height: 100%;
-    background-color: $vvvvv-light-gray;
-    padding: 2rem 2.5rem 1rem;
-    position: relative;
+  &-TopBar {
+    display: flex;
+    align-items: center;
+    background-color: $black;
+    padding: 0.8rem 1.5rem;
 
-    @media screen and (max-width: 840px) {
-      width: 100%;
+    & > svg {
+      width: 1.65rem;
+      height: 1.65rem;
+      margin-right: 1rem;
     }
 
-    &-Label {
-      display: flex;
-      align-items: center;
-      font-size: 1.2rem;
+    & > p {
+      font-family: NotoSansKR;
       font-weight: 500;
-      color: $semi-light-gray;
+      font-size: 1rem;
+      color: $vvvv-light-gray;
+    }
+  }
 
-      & > svg {
-        margin-right: 0.4rem;
+  &-Wrapper {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 6.725rem);
+
+    &-Area {
+      width: 50%;
+      min-height: inherit;
+      border-right: 1px solid $vvv-light-gray;
+
+      @media screen and (max-width: 840px) {
+        width: 100%;
+        border: none;
+      }
+
+      &-Label {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 500;
+        background-color: $vvvvv-light-gray;
+        color: $light-black;
+        padding: 0 0.5rem 0 2rem;
+        border-bottom: 1px solid $vvv-light-gray;
+        font-family: NotoSansKR;
+
+        &-Inner {
+          display: flex;
+          align-items: center;
+          padding: 0.8rem 0;
+          border-bottom: 3.5px solid $light-black;
+        }
+
+        &-Buttons {
+          display: none;
+          align-items: center;
+
+          @media screen and (max-width: 840px) {
+            display: flex;
+          }
+
+          &-Confirm,
+          &-Save,
+          &-Cancel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-radius: 0.3rem;
+            padding: 0.4rem 0.9rem;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all ease 0.2s;
+            margin-right: 0.6rem;
+            font-family: NotoSansKR;
+            background-color: $v-light-gray;
+            color: $white;
+
+            &:hover {
+              background-color: $light-gray;
+            }
+          }
+
+          &-Confirm {
+            background-color: $black;
+            color: $white;
+
+            &:hover {
+              background-color: $light-black;
+            }
+          }
+        }
+      }
+
+      &-Container {
+        width: 100%;
+        min-height: inherit;
+        background-color: $white;
+        padding: 1.5rem 2rem;
+        position: relative;
+
+        &-Title {
+          resize: none;
+          width: 100%;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          margin-top: 2rem;
+          font-family: inherit;
+          font-size: 2.2rem;
+          font-weight: 600;
+          color: $black;
+          line-height: 1.45;
+          overflow-y: hidden;
+
+          &::placeholder {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: $v-light-gray;
+          }
+        }
+
+        &-Description {
+          resize: none;
+          width: 100%;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          font-family: inherit;
+          font-size: 1.5rem;
+          color: $black;
+          margin: 1rem 0;
+          line-height: 1.5;
+          overflow-y: hidden;
+
+          &::placeholder {
+            font-size: 1.5rem;
+            color: $vv-light-gray;
+          }
+        }
+
+        &-Content {
+          resize: none;
+          width: 100%;
+          min-height: 68%;
+          border: none;
+          outline: none;
+          background-color: transparent;
+          font-family: inherit;
+          font-size: 1.125rem;
+          color: $black;
+          margin-top: 2rem;
+          line-height: 1.7;
+          overflow-y: hidden;
+          tab-size: 4;
+
+          &::placeholder {
+            font-size: 1.125rem;
+            color: $vv-light-gray;
+          }
+        }
       }
     }
 
-    &-Title {
-      resize: none;
-      width: 100%;
-      border: none;
-      outline: none;
-      background-color: transparent;
-      margin-top: 2rem;
-      font-family: inherit;
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: $black;
-      line-height: 1.45;
-      overflow-y: hidden;
+    &-Preview {
+      width: 50%;
+      min-height: inherit;
+      overflow-x: hidden;
 
-      &::placeholder {
-        font-size: 2.2rem;
-        font-weight: 600;
-        color: $v-light-gray;
+      @media screen and (max-width: 840px) {
+        display: none;
+      }
+
+      &-Label {
+        display: flex;
+        width: 100%;
+        font-size: 1.1rem;
+        font-weight: 500;
+        background-color: $vvvvv-light-gray;
+        color: $light-black;
+        padding: 0 2rem;
+        border-bottom: 1px solid $vvv-light-gray;
+        font-family: NotoSansKR;
+
+        &-Inner {
+          display: flex;
+          align-items: center;
+          padding: 0.8rem 0;
+          border-bottom: 3.5px solid $light-black;
+
+          & > svg {
+            margin-right: 0.4rem;
+          }
+        }
+      }
+
+      &-Area {
+        padding: 1.5rem 2rem;
+
+        &-Title {
+          width: 100%;
+          margin-top: 2rem;
+          font-size: 2.2rem;
+          font-weight: 600;
+          color: $black;
+          line-height: 1.5;
+          word-break: break-all;
+        }
+
+        &-Description {
+          width: 100%;
+          font-size: 1.5rem;
+          margin: 1rem 0;
+          color: $black;
+          line-height: 1.5;
+          word-break: break-all;
+        }
+
+        &-Thumbnail {
+          margin: 2rem 0;
+          position: relative;
+          padding-top: 35%;
+          max-width: 65%;
+
+          &-Image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.4rem;
+            margin-bottom: 0.4rem;
+            position: absolute;
+            top: 0;
+          }
+        }
+
+        &-Content {
+          margin-top: 3.5rem;
+        }
       }
     }
+  }
 
-    &-Description {
-      resize: none;
-      width: 100%;
-      border: none;
-      outline: none;
-      background-color: transparent;
-      font-family: inherit;
-      font-size: 1.5rem;
-      color: $black;
-      margin: 1rem 0;
-      line-height: 1.5;
-      overflow-y: hidden;
+  &-Control {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    z-index: 10;
+    background-color: $vvvvv-light-gray;
+    border-top: 1px solid $vvv-light-gray;
+    padding: 0.8rem 1.5rem;
 
-      &::placeholder {
-        font-size: 1.5rem;
-        color: $vv-light-gray;
-      }
-    }
-
-    &-Input {
-      position: fixed;
-      align-items: center;
-      z-index: 10;
-      bottom: 2rem;
-      left: 2.5rem;
+    &-Wrapper {
       display: flex;
+      align-items: center;
 
       &-Button {
         display: flex;
         align-items: center;
         border-radius: 0.2rem;
         background-color: $white;
-        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
         overflow: hidden;
+        border: 1px solid $vvv-light-gray;
         margin-right: 1.4rem;
 
         &-FileName {
@@ -108,17 +299,10 @@
           padding: 0.2rem 0.8rem;
           @include ellipsis(1);
           max-width: 20rem;
-
-          @media screen and (max-width: 1110px) {
-            max-width: 16rem;
-          }
-
-          @media screen and (max-width: 530px) {
-            max-width: 12rem;
-          }
         }
 
-        &-Label {
+        &-Label,
+        &-Delete {
           display: flex;
           align-items: center;
           padding: 0.5rem 0.75rem;
@@ -126,9 +310,12 @@
           font-size: 1rem;
           line-height: normal;
           vertical-align: middle;
-          background-color: $v-light-gray;
           cursor: pointer;
           transition: all ease 0.1s;
+        }
+
+        &-Label {
+          background-color: $v-light-gray;
 
           & > svg {
             margin-right: 0.4rem;
@@ -140,16 +327,7 @@
         }
 
         &-Delete {
-          display: flex;
-          align-items: center;
-          padding: 0.5rem 0.75rem;
-          color: $white;
-          font-size: 1rem;
-          line-height: normal;
-          vertical-align: middle;
           background-color: $light-gray;
-          cursor: pointer;
-          transition: all ease 0.1s;
 
           & > svg {
             margin-right: 0.4rem;
@@ -179,11 +357,11 @@
         background-color: $white;
         color: $v-light-gray;
         font-size: 0.9rem;
-        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.15);
         border-radius: 0.2rem;
         padding: 0.5rem 0.75rem;
         transition: all ease 0.1s;
         position: relative;
+        border: 1px solid $vvv-light-gray;
 
         &:hover {
           background-color: $vvvvv-light-gray;
@@ -196,166 +374,45 @@
       }
     }
 
-    &-Content {
-      resize: none;
-      width: 100%;
-      min-height: 68%;
-      border: none;
-      outline: none;
-      background-color: transparent;
-      font-family: inherit;
-      font-size: 1.125rem;
-      color: $black;
-      margin-top: 2rem;
-      line-height: 1.5;
-      overflow-y: hidden;
-      tab-size: 4;
-
-      &::placeholder {
-        font-size: 1.125rem;
-        color: $vv-light-gray;
-      }
-    }
-  }
-
-  &-Preview {
-    width: 50%;
-    height: 100%;
-    padding: 2rem 2.5rem;
-    overflow-x: hidden;
-
-    @media screen and (max-width: 840px) {
-      display: none;
-    }
-
-    &-Label {
+    &-Buttons {
       display: flex;
       align-items: center;
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: $semi-light-gray;
 
-      & > svg {
-        margin-right: 0.4rem;
+      @media screen and (max-width: 840px) {
+        display: none;
       }
-    }
 
-    &-Title {
-      width: 100%;
-      margin-top: 2rem;
-      font-size: 2.2rem;
-      font-weight: 600;
-      color: $black;
-      line-height: 1.5;
-      word-break: break-all;
-    }
+      &-Confirm,
+      &-Save,
+      &-Cancel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 0.3rem;
+        padding: 0.45rem 0.9rem;
+        font-weight: 500;
+        font-size: 1rem;
+        transition: all ease 0.2s;
+        margin-right: 0.6rem;
+        font-family: NotoSansKR;
+        background-color: $v-light-gray;
+        color: $white;
 
-    &-Description {
-      width: 100%;
-      font-size: 1.5rem;
-      margin: 1rem 0;
-      color: $black;
-      line-height: 1.5;
-      word-break: break-all;
-    }
-
-    &-Thumbnail {
-      margin: 2rem 0;
-      position: relative;
-      padding-top: 35%;
-      max-width: 65%;
-
-      &-Image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 0.4rem;
-        margin-bottom: 0.4rem;
-        position: absolute;
-        top: 0;
+        &:hover {
+          background-color: $light-gray;
+        }
       }
-    }
 
-    &-Content {
-      margin-top: 3.5rem;
-    }
-  }
+      &-Confirm {
+        background-color: $black;
+        color: $white;
 
-  &-Control {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    z-index: 10;
-    bottom: 2rem;
-    right: 2rem;
-
-    @media screen and (max-width: 700px) {
-      bottom: 5.5rem;
-      left: 2.5rem;
-    }
-
-    &-Confirm {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      outline: none;
-      border: none;
-      border-radius: 0.6rem;
-      padding: 0.7rem;
-      background-color: $black;
-      color: $white;
-      font-weight: 600;
-      font-size: 1.4rem;
-      transition: all ease 0.2s;
-      margin-right: 1rem;
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        background-color: $light-black;
-      }
-    }
-
-    &-Save {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      outline: none;
-      border: none;
-      border-radius: 0.6rem;
-      padding: 0.7rem;
-      background-color: $gray;
-      color: $white;
-      font-weight: 600;
-      font-size: 1.4rem;
-      transition: all ease 0.2s;
-      margin-right: 1rem;
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        background-color: $light-gray;
-      }
-    }
-
-    &-Cancel {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      outline: none;
-      border: none;
-      border-radius: 0.6rem;
-      padding: 0.7rem;
-      background-color: $v-semi-light-gray;
-      color: $light-gray;
-      font-weight: 600;
-      font-size: 1.4rem;
-      transition: all ease 0.2s;
-      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        background-color: $vvvv-light-gray;
+        &:hover {
+          background-color: $light-black;
+        }
       }
     }
   }

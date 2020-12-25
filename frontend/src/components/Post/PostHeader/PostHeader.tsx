@@ -48,37 +48,39 @@ const PostHeader = ({
                 {getTimeCount(createdAt)}
               </p>
             </div>
-            <div
-              className={
-                liked
-                  ? "Post-Header-Container-Category-Like-Active Post-Header-Container-Category-Like"
-                  : "Post-Header-Container-Category-Like"
-              }
-              onClick={handlePostLikeCallback}
-            >
-              <Like
+            <div className="Post-Header-Container-Category-Right">
+              <div
                 className={
                   liked
-                    ? "Post-Header-Container-Category-Like-Button-Active Post-Header-Container-Category-Like-Button"
-                    : "Post-Header-Container-Category-Like-Button"
+                    ? "Post-Header-Container-Category-Right-Like-Active Post-Header-Container-Category-Right-Like"
+                    : "Post-Header-Container-Category-Right-Like"
                 }
-              />
-              <span
-                className={
-                  liked
-                    ? "Post-Header-Container-Category-Like-Count-Active Post-Header-Container-Category-Like-Count"
-                    : "Post-Header-Container-Category-Like-Count"
-                }
+                onClick={handlePostLikeCallback}
               >
-                {likeCount}
-              </span>
-            </div>
-            {admin && (
-              <div className="Post-Header-Container-Category-Control">
-                <FaPen onClick={() => modifyClickHandler()} />
-                <FaTrash onClick={() => showModalCallback()} />
+                <Like
+                  className={
+                    liked
+                      ? "Post-Header-Container-Category-Right-Like-Button-Active Post-Header-Container-Category-Right-Like-Button"
+                      : "Post-Header-Container-Category-Right-Like-Button"
+                  }
+                />
+                <span
+                  className={
+                    liked
+                      ? "Post-Header-Container-Category-Right-Like-Count-Active Post-Header-Container-Category-Right-Like-Count"
+                      : "Post-Header-Container-Category-Right-Like-Count"
+                  }
+                >
+                  {likeCount}
+                </span>
               </div>
-            )}
+              {admin && (
+                <div className="Post-Header-Container-Category-Right-Control">
+                  <FaPen onClick={() => modifyClickHandler()} />
+                  <FaTrash onClick={() => showModalCallback()} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className="Post-Header-Like">

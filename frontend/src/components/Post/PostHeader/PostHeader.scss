@@ -54,93 +54,99 @@
         }
       }
 
-      &-Like {
-        display: none;
+      &-Right {
+        display: flex;
         align-items: center;
-        justify-content: center;
-        border-radius: 3rem;
-        border: 1.8px solid $v-light-gray;
-        background-color: $white;
-        padding: 0.32rem 0.75rem;
-        transition: all ease 0.1s;
-        cursor: pointer;
 
-        @media screen and (max-width: 1025px) {
-          display: flex;
-        }
-
-        &-Active,
-        &-Active:hover {
-          border-color: $light-black !important;
-        }
-
-        &:hover {
-          border-color: $light-gray;
-        }
-
-        &:hover > &-Button {
-          & > path {
-            fill: $light-gray;
-          }
-
-          &-Active {
-            & > path {
-              fill: $light-black;
-            }
-          }
-        }
-
-        &:hover > &-Count {
-          color: $light-gray;
-
-          &-Active {
-            color: $light-black;
-          }
-        }
-
-        &-Button {
-          width: 1rem;
-          height: 1rem;
-          margin-right: 0.6rem;
+        &-Like {
+          display: none;
+          align-items: center;
+          justify-content: center;
+          border-radius: 3rem;
+          border: 1.8px solid $v-light-gray;
+          background-color: $white;
+          padding: 0.32rem 0.75rem;
           transition: all ease 0.1s;
-          transform: translateY(0.135rem);
-
-          & > path {
-            transition: all ease 0.1s;
-            fill: $v-light-gray;
-          }
-
-          &-Active {
-            animation: active ease 0.8s;
-
-            & > path {
-              fill: $black;
-            }
-          }
-        }
-
-        &-Count {
-          color: $v-light-gray;
-          font-size: 0.8rem;
-          font-weight: 600;
-          font-family: MalgunGothic;
-
-          &-Active {
-            color: $black;
-          }
-        }
-      }
-
-      &-Control {
-        & > svg {
+          margin-right: 1rem;
           cursor: pointer;
-          font-size: 1rem;
-          transition: color ease 0.1s;
-          color: $vv-light-gray;
-          margin-left: 1rem;
+
+          @media screen and (max-width: 1025px) {
+            display: flex;
+          }
+
+          &-Active,
+          &-Active:hover {
+            border-color: $light-black !important;
+          }
 
           &:hover {
+            border-color: $light-gray;
+          }
+
+          &:hover > &-Button {
+            & > path {
+              fill: $light-gray;
+            }
+
+            &-Active {
+              & > path {
+                fill: $light-black;
+              }
+            }
+          }
+
+          &:hover > &-Count {
             color: $light-gray;
+
+            &-Active {
+              color: $light-black;
+            }
+          }
+
+          &-Button {
+            width: 1rem;
+            height: 1rem;
+            margin-right: 0.6rem;
+            transition: all ease 0.1s;
+            transform: translateY(0.135rem);
+
+            & > path {
+              transition: all ease 0.1s;
+              fill: $v-light-gray;
+            }
+
+            &-Active {
+              animation: active ease 0.8s;
+
+              & > path {
+                fill: $black;
+              }
+            }
+          }
+
+          &-Count {
+            color: $v-light-gray;
+            font-size: 0.8rem;
+            font-weight: 600;
+            font-family: MalgunGothic;
+
+            &-Active {
+              color: $black;
+            }
+          }
+        }
+
+        &-Control {
+          & > svg {
+            cursor: pointer;
+            font-size: 1rem;
+            transition: color ease 0.1s;
+            color: $vv-light-gray;
+            margin-left: 1rem;
+
+            &:hover {
+              color: $light-gray;
+            }
           }
         }
       }
