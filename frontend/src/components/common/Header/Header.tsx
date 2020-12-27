@@ -3,6 +3,7 @@ import "./Header.scss";
 import { ReactComponent as Logo } from "../../../assets/images/logo.svg";
 import { ReactComponent as GitHub } from "../../../assets/images/github_logo.svg";
 import { ReactComponent as Option } from "../../../assets/images/option.svg";
+import { BsSearch } from "react-icons/bs";
 import { OAUTH } from "../../../config/config.json";
 import { Link } from "react-router-dom";
 import UserType from "../../../util/types/User";
@@ -48,6 +49,12 @@ const Header = ({
               <Logo className="Header-Container-Content-Image" />
             </Link>
             <div className="Header-Container-Content-Profile">
+              <Link
+                to="/search"
+                className="Header-Container-Content-Profile-Search"
+              >
+                <BsSearch />
+              </Link>
               {login ? (
                 <>
                   {admin && (

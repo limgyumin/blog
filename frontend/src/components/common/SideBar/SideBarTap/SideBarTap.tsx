@@ -12,20 +12,28 @@ const SideBarTap = ({}: SideBarTapProps) => {
     <>
       <div className="SideBar-Tap">
         <Link to="/" className="SideBar-Tap-Home">
-          <RiHome3Line />
-          <p>HOME</p>
+          <div className="SideBar-Tap-Home-Wrapper">
+            <RiHome3Line />
+            <p>HOME</p>
+          </div>
         </Link>
         <Link to="/categories" className="SideBar-Tap-Categories">
-          <BiBook />
-          <p>CATEGORIES</p>
+          <div className="SideBar-Tap-Categories-Wrapper">
+            <BiBook />
+            <p>CATEGORIES</p>
+          </div>
         </Link>
         <div className="SideBar-Tap-Achieve">
-          <RiMacbookLine />
-          <p>ACHIEVE</p>
+          <div className="SideBar-Tap-Achieve-Wrapper">
+            <RiMacbookLine />
+            <p>ACHIEVE</p>
+          </div>
         </div>
         <div className="SideBar-Tap-About">
-          <HiOutlineInformationCircle />
-          <p>ABOUT</p>
+          <div className="SideBar-Tap-About-Wrapper">
+            <HiOutlineInformationCircle />
+            <p>ABOUT</p>
+          </div>
         </div>
       </div>
     </>

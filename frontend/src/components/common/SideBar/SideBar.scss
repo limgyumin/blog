@@ -6,7 +6,8 @@
   left: 0;
   overflow-y: auto;
   z-index: 99;
-  background-color: $black;
+  background-color: $vvvvv-light-gray;
+  border-right: 1px solid $vvv-light-gray;
   min-height: 100vh;
 
   &-Content {
@@ -17,17 +18,18 @@
       height: 11rem;
       border-radius: 50%;
       margin-bottom: 1rem;
+      border: 1px solid $vvv-light-gray;
     }
 
     &-Name {
-      font-size: 1.5rem;
-      color: $white;
+      font-size: 1.425rem;
+      color: $light-black;
       font-weight: 600;
     }
 
     &-Id {
       font-size: 1.2rem;
-      color: $v-light-gray;
+      color: $light-gray;
       font-weight: 300;
       margin-bottom: 1rem;
     }
