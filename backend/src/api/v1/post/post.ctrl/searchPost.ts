@@ -9,7 +9,7 @@ export default async (req: Request, res: Response) => {
 
   try {
     const postRepo = getRepository(Post);
-    const posts: Post[] = await postRepo.find({
+    const [posts, post_count] = await postRepo.findAndCount({
       where: {
         is_deleted: false,
         is_temp: false,
@@ -30,6 +30,7 @@ export default async (req: Request, res: Response) => {
       status: 200,
       message: "글 검색 성공.",
       data: {
+        post_count,
         posts,
       },
     });

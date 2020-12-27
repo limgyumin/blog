@@ -169,6 +169,23 @@ class PostStore {
   };
 
   @action
+  handleSearchPost = async (query: string): Promise<PostsResponse> => {
+    try {
+      const response: PostsResponse = await Post.SearchPost(query);
+
+      return new Promise(
+        (resolve: (response: PostsResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handlePostLike = async (post_idx: number): Promise<Response> => {
     try {
       const response: Response = await Post.PostLike(post_idx);

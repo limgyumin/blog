@@ -109,6 +109,17 @@ class Post {
     }
   }
 
+  async SearchPost(query: string) {
+    try {
+      const url = `${SERVER}/v1/post/search?query=${query}`;
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async PostLike(post_idx: number) {
     try {
       const url = `${SERVER}/v1/like`;
