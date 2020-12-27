@@ -1,0 +1,42 @@
+@import "../../util/color.scss";
+
+.Search {
+  display: flex;
+  justify-content: center;
+  padding: 8rem 0 4rem 0;
+
+  &-Container {
+    width: 100%;
+    max-width: 900px;
+    padding: 0 1rem;
+
+    &-Input {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      border: 1px solid $vv-light-gray;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 6rem;
+      cursor: text;
+
+      & > svg {
+        font-size: 1.4rem;
+        color: $v-light-gray;
+        margin-right: 0.8rem;
+      }
+
+      & > input {
+        width: 100%;
+        outline: none;
+        border: none;
+        font-size: 1.3rem;
+        font-family: inherit;
+
+        &::placeholder {
+          color: $vv-light-gray;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
