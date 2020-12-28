@@ -14,7 +14,7 @@ const MainCategories = ({
 }: MainCategoriesProps) => {
   const total_view = {
     idx: 0,
-    name: "전체",
+    name: "All",
     post_count: totalPostCount,
   };
   return (

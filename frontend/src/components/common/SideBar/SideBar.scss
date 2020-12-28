@@ -3,12 +3,17 @@
 .SideBar {
   position: fixed;
   top: 0;
-  left: 0;
+  bottom: 0;
+  left: -25rem;
   overflow-y: auto;
   z-index: 99;
   background-color: $vvvvv-light-gray;
   border-right: 1px solid $vvv-light-gray;
-  min-height: 100vh;
+  transition: left ease 0.4s;
+
+  &-Active {
+    left: 0;
+  }
 
   &-Content {
     padding: 5rem 6rem 4rem 4rem;
@@ -40,5 +45,45 @@
       font-weight: 500;
       font-style: oblique;
     }
+  }
+}
+
+.Toggle {
+  color: #24292e;
+  background-color: #fff;
+  border: 1px solid $vvv-light-gray;
+  opacity: 1;
+  line-height: 1;
+  position: fixed;
+  left: 0;
+  text-align: center;
+  top: 33%;
+  z-index: 98;
+  cursor: pointer;
+  border-radius: 0px 4px 4px 0px;
+  border-left: none;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.2s ease-in 0.2s, opacity 0.35s ease-in 0.2s;
+
+  &-Active {
+    left: -5rem;
+  }
+
+  &-Icon {
+    transform: rotate(-90deg);
+    margin-bottom: 0.3rem;
+  }
+
+  &-Text {
+    color: $light-black;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14px;
+    transform: rotate(-180deg);
+    writing-mode: tb-rl;
   }
 }

@@ -38,6 +38,13 @@ const Search = ({
               ref={inputRef}
             />
           </div>
+          {postCount ? (
+            <p className="Search-Container-Count">
+              <span>{postCount} Posts</span> were found.
+            </p>
+          ) : (
+            <></>
+          )}
           <div className="Search-Container-Posts">
             {searchedPost.map((post, idx) => (
               <React.Fragment key={idx}>

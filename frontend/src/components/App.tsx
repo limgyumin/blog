@@ -23,7 +23,7 @@ const App = () => {
             path !== "success" && (
               <>
                 <HeaderContainer />
-                {/* <SideBarContainer /> */}
+                <SideBarContainer />
               </>
             )
           );

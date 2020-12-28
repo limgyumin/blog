@@ -16,7 +16,7 @@
       align-items: center;
       border: 1px solid $vv-light-gray;
       padding: 0.9rem 1.2rem;
-      margin-bottom: 6rem;
+      margin-bottom: 1rem;
       cursor: text;
 
       & > svg {
@@ -37,6 +37,20 @@
           font-weight: 500;
         }
       }
+    }
+
+    &-Count {
+      color: $light-gray;
+      font-size: 1.2rem;
+
+      & > span {
+        color: $light-black;
+        font-weight: 600;
+      }
+    }
+
+    &-Posts {
+      margin-top: 4rem;
     }
   }
 }
