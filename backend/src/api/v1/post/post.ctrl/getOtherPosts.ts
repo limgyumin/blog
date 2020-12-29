@@ -19,7 +19,6 @@ export default async (req: Request, res: Response) => {
     const currentPost: Post = await getRepository(Post).findOne({
       where: {
         idx: postIdx,
-        is_temp: false,
         is_deleted: false,
       },
     });
@@ -33,31 +32,33 @@ export default async (req: Request, res: Response) => {
       return;
     }
 
-    const { idx } = currentPost;
-
-    const options: FindManyOptions = {
-      select: ["idx", "title"],
-      where: [
-        { idx: idx - 1, is_deleted: false, is_temp: false },
-        { idx: idx + 1, is_deleted: false, is_temp: false },
-      ],
-      order: { idx: "ASC" },
-    };
-
-    const otherPosts: Post[] = await getRepository(Post).find(options);
-
     const result: Record<"previous" | "next", Post | null> = {
       previous: null,
       next: null,
     };
 
-    if (otherPosts.length === 1) {
-      otherPosts[0].idx > idx
-        ? (result.next = otherPosts[0])
-        : (result.previous = otherPosts[0]);
-    } else if (otherPosts.length === 2) {
-      result.previous = otherPosts[0];
-      result.next = otherPosts[1];
+    if (!currentPost.is_temp) {
+      const { idx } = currentPost;
+
+      const options: FindManyOptions = {
+        select: ["idx", "title"],
+        where: [
+          { idx: idx - 1, is_deleted: false, is_temp: false },
+          { idx: idx + 1, is_deleted: false, is_temp: false },
+        ],
+        order: { idx: "ASC" },
+      };
+
+      const otherPosts: Post[] = await getRepository(Post).find(options);
+
+      if (otherPosts.length === 1) {
+        otherPosts[0].idx > idx
+          ? (result.next = otherPosts[0])
+          : (result.previous = otherPosts[0]);
+      } else if (otherPosts.length === 2) {
+        result.previous = otherPosts[0];
+        result.next = otherPosts[1];
+      }
     }
 
     logger.green("[GET] 이전 및 다음 글 조회 성공.");

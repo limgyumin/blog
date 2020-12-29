@@ -20,7 +20,6 @@ const SearchContainer = ({}) => {
   const handleSearchPostCallback = useCallback(async () => {
     await handleSearchPost(removeLastBlank(content))
       .then((res: PostsResponse) => {
-        console.log(res);
         setSearchedPost(res.data.posts);
         setPostCount(res.data.post_count);
       })

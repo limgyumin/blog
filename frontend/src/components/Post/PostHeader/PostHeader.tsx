@@ -39,9 +39,11 @@ const PostHeader = ({
           <h1 className="Post-Header-Container-Title">{title}</h1>
           <div className="Post-Header-Container-Category">
             <div className="Post-Header-Container-Category-Wrapper">
-              <div className="Post-Header-Container-Category-Wrapper-Name">
-                {categoryName}
-              </div>
+              {categoryName && (
+                <div className="Post-Header-Container-Category-Wrapper-Name">
+                  {categoryName}
+                </div>
+              )}
               <p className="Post-Header-Container-Category-Wrapper-Info">
                 <span>{writer}</span>
                 {" · "}

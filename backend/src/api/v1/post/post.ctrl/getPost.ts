@@ -25,17 +25,6 @@ export default async (req: AuthRequest, res: Response) => {
   try {
     const postRepo = getRepository(Post);
     const post: PostListType = await postRepo.findOne({
-      select: [
-        "idx",
-        "title",
-        "description",
-        "content",
-        "thumbnail",
-        "fk_user_idx",
-        "fk_category_idx",
-        "created_at",
-        "updated_at",
-      ],
       where: {
         idx,
         is_deleted: false,
@@ -62,14 +51,6 @@ export default async (req: AuthRequest, res: Response) => {
       }
     }
 
-    const categoryRepo = getRepository(Category);
-    const category = await categoryRepo.findOne({
-      select: ["name"],
-      where: {
-        idx: post.fk_category_idx,
-      },
-    });
-
     const userRepo = getRepository(User);
     const userInfo: User = await userRepo.findOne({
       where: {
@@ -79,8 +60,19 @@ export default async (req: AuthRequest, res: Response) => {
 
     delete post.fk_user_idx;
 
+    if (!post.is_temp) {
+      const categoryRepo = getRepository(Category);
+      const category = await categoryRepo.findOne({
+        select: ["name"],
+        where: {
+          idx: post.fk_category_idx,
+        },
+      });
+
+      post.category_name = category.name;
+    }
+
     post.user = userInfo;
-    post.category_name = category.name;
 
     if (post.thumbnail) {
       post.thumbnail = generateURL(req, post.thumbnail);

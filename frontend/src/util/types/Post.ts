@@ -9,6 +9,7 @@ export default interface PostType {
   created_at: Date;
   category_name: string;
   fk_category_idx: number;
+  is_temp: boolean;
   user: UserType;
   comment_count: number;
   like_count: number;

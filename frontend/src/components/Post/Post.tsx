@@ -75,7 +75,7 @@ const Post = ({
                     id={post.user!.id}
                   />
                   <PostList otherPosts={otherPosts} />
-                  {admin && <PostCommentContainer postIdx={post.idx} />}
+                  {!post.is_temp && <PostCommentContainer postIdx={post.idx} />}
                 </>
               )
             )}
