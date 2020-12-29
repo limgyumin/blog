@@ -52,7 +52,6 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const [desc, setDesc] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [categoryIdx, setCategoryIdx] = useState<number>(0);
-  const [temp, setTemp] = useState<boolean>(false);
 
   const [preview, setPreview] = useState<string | ArrayBuffer | null>("");
   const [fileName, setFileName] = useState<string>("");
@@ -145,7 +144,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
     const postParams: CreateTempPostParams = {
       title: removeLastBlank(title),
-      description: removeLastBlank(desc),
+      description: removeLastBlank(desc) || "임시 저장된 글.",
       content: removeLastBlank(content),
       category_idx: categoryIdx,
       thumbnail: thumbnail,
@@ -161,47 +160,63 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       });
   }, [title, desc, content, categoryIdx, uploadFile, login, admin]);
 
-  const handleModifyPostCallback = useCallback(async () => {
-    if (!login || !admin) {
-      history.push("/");
-      return;
-    } else if (isEmpty(title) || isEmpty(desc) || isEmpty(content)) {
-      toast.error("내용을 입력해주세요.");
-      return;
-    } else if (isEmpty(category)) {
-      toast.error("카테고리를 선택해주세요.");
-      return;
-    }
+  const handleModifyPostCallback = useCallback(
+    async (temp: boolean) => {
+      if (!login || !admin) {
+        history.push("/");
+        return;
+      }
 
-    let thumbnail: string | undefined;
+      if (temp) {
+        if (isEmpty(title) || isEmpty(content)) {
+          toast.error("내용을 입력해주세요.");
+          return;
+        }
+      } else {
+        if (isEmpty(title) || isEmpty(desc) || isEmpty(content)) {
+          toast.error("내용을 입력해주세요.");
+          return;
+        } else if (isEmpty(category)) {
+          toast.error("카테고리를 선택해주세요.");
+          return;
+        }
+      }
 
-    if (uploadFile) {
-      thumbnail = await handleUploadFileCallback(uploadFile);
-    } else if (fileName) {
-      thumbnail = convertURL(fileName);
-    } else {
-      thumbnail = "";
-    }
+      let thumbnail: string | undefined;
 
-    const postParams: ModifyPostParams = {
-      idx: Number(idx),
-      title: removeLastBlank(title),
-      description: removeLastBlank(desc),
-      content: removeLastBlank(content),
-      category_idx: categoryIdx,
-      is_temp: temp,
-      thumbnail: thumbnail,
-    };
+      if (uploadFile) {
+        thumbnail = await handleUploadFileCallback(uploadFile);
+      } else if (fileName) {
+        thumbnail = convertURL(fileName);
+      } else {
+        thumbnail = "";
+      }
 
-    await handleModifyPost(postParams)
-      .then((res: Response) => {
-        toast.success("야호! 글 수정에 성공했어요!");
-        history.push(`/post/${idx}`);
-      })
-      .catch((err: Error) => {
-        toast.error("앗! 글 수정에 실패했어요.");
-      });
-  }, [title, desc, content, categoryIdx, uploadFile, temp]);
+      const postParams: ModifyPostParams = {
+        idx: Number(idx),
+        title: removeLastBlank(title),
+        description: removeLastBlank(desc) || "임시 저장된 글.",
+        content: removeLastBlank(content),
+        category_idx: categoryIdx,
+        is_temp: temp,
+        thumbnail: thumbnail,
+      };
+
+      await handleModifyPost(postParams)
+        .then((res: Response) => {
+          toast.success("야호! 글 수정에 성공했어요!");
+          if (temp) {
+            history.push("/");
+          } else {
+            history.push(`/post/${idx}`);
+          }
+        })
+        .catch((err: Error) => {
+          toast.error("앗! 글 수정에 실패했어요.");
+        });
+    },
+    [title, desc, content, categoryIdx, uploadFile]
+  );
 
   const handlePostCallback = useCallback(async () => {
     if (!write) {
@@ -292,7 +307,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     if (write) {
       handleCreatePostCallback();
     } else {
-      handleModifyPostCallback();
+      handleModifyPostCallback(false);
     }
   };
 
@@ -300,8 +315,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     if (write) {
       handleCreateTempPostCallback();
     } else {
-      setTemp(true);
-      handleModifyPostCallback();
+      handleModifyPostCallback(true);
     }
   };
 
