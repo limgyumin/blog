@@ -1,9 +1,5 @@
 import React from "react";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
-import { AiOutlineEye } from "react-icons/ai";
-import { HiOutlinePencil } from "react-icons/hi";
-import { IoMdExit } from "react-icons/io";
-import { FiSave } from "react-icons/fi";
 import { ReactComponent as Option } from "../../assets/images/option.svg";
 import "./Handle.scss";
 import { CategoryType } from "../../util/types/Category";
@@ -31,6 +27,7 @@ interface HandleProps {
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
   categoryItemHandler: (name: string, idx: number) => void;
   writeClickHandler: () => void;
+  saveClickHandler: () => void;
   keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
 }
 
@@ -55,6 +52,7 @@ const Handle = ({
   setShowOption,
   categoryItemHandler,
   writeClickHandler,
+  saveClickHandler,
   keyDownHandler,
 }: HandleProps) => {
   return (
@@ -77,7 +75,7 @@ const Handle = ({
                 </button>
                 <button
                   className="Handle-Wrapper-Area-Label-Buttons-Save"
-                  onClick={() => {}}
+                  onClick={() => saveClickHandler()}
                 >
                   임시 저장
                 </button>
@@ -185,7 +183,10 @@ const Handle = ({
             >
               작성하기
             </button>
-            <button className="Handle-Control-Buttons-Save" onClick={() => {}}>
+            <button
+              className="Handle-Control-Buttons-Save"
+              onClick={() => saveClickHandler()}
+            >
               임시 저장
             </button>
             <button

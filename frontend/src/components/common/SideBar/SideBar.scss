@@ -9,6 +9,8 @@
   z-index: 99;
   background-color: $vvvvv-light-gray;
   border-right: 1px solid $vvv-light-gray;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
   transition: left ease 0.4s;
 
   &-Active {

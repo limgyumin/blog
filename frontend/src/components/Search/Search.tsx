@@ -25,26 +25,28 @@ const Search = ({
     <>
       <div className="Search">
         <div className="Search-Container">
-          <div
-            className="Search-Container-Input"
-            onClick={() => inputFocusHandler()}
-          >
-            <BsSearch />
-            <input
-              placeholder="검색어를 입력해주세요"
-              autoFocus
-              onChange={(e) => setContentListener(e)}
-              onKeyDown={(e) => keyDownListener(e)}
-              ref={inputRef}
-            />
+          <div className="Search-Container-Wrapper">
+            <div
+              className="Search-Container-Wrapper-Input"
+              onClick={() => inputFocusHandler()}
+            >
+              <BsSearch />
+              <input
+                placeholder="검색어를 입력해주세요"
+                autoFocus
+                onChange={(e) => setContentListener(e)}
+                onKeyDown={(e) => keyDownListener(e)}
+                ref={inputRef}
+              />
+            </div>
+            {postCount ? (
+              <p className="Search-Container-Wrapper-Count">
+                <span>{postCount} Posts</span> were found.
+              </p>
+            ) : (
+              <></>
+            )}
           </div>
-          {postCount ? (
-            <p className="Search-Container-Count">
-              <span>{postCount} Posts</span> were found.
-            </p>
-          ) : (
-            <></>
-          )}
           <div className="Search-Container-Posts">
             {searchedPost.map((post, idx) => (
               <React.Fragment key={idx}>

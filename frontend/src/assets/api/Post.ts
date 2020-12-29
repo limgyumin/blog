@@ -1,5 +1,10 @@
 import axios from "axios";
 import { SERVER } from "../../config/config.json";
+import {
+  CreatePostParams,
+  CreateTempPostParams,
+  ModifyPostParams,
+} from "../../util/types/PostParams";
 
 interface PostParamsType {
   page: number;
@@ -8,22 +13,35 @@ interface PostParamsType {
 }
 
 class Post {
-  async CreatePost(
-    title: string,
-    description: string,
-    content: string,
-    category_idx: number,
-    thumbnail?: string
-  ) {
+  async CreatePost(post: CreatePostParams) {
     try {
       const url = `${SERVER}/v1/post`;
 
       const body = {
-        title,
-        description,
-        content,
-        thumbnail: thumbnail || null,
-        category_idx,
+        title: post.title,
+        description: post.description,
+        content: post.content,
+        thumbnail: post.thumbnail || null,
+        category_idx: post.category_idx,
+      };
+
+      const { data } = await axios.post(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
+  async CreateTempPost(post: CreateTempPostParams) {
+    try {
+      const url = `${SERVER}/v1/post/temp`;
+
+      const body = {
+        title: post.title,
+        description: post.description,
+        content: post.content,
+        category_idx: post.category_idx,
+        thumbnail: post.thumbnail,
       };
 
       const { data } = await axios.post(url, body);
@@ -59,25 +77,17 @@ class Post {
     }
   }
 
-  async ModifyPost(
-    idx: number,
-    title: string,
-    description: string,
-    content: string,
-    category_idx: number,
-    thumbnail?: string,
-    is_temp?: boolean
-  ) {
+  async ModifyPost(post: ModifyPostParams) {
     try {
-      const url = `${SERVER}/v1/post/${idx}`;
+      const url = `${SERVER}/v1/post/${post.idx}`;
 
       const body = {
-        title,
-        description,
-        content,
-        thumbnail,
-        is_temp,
-        category_idx,
+        title: post.title,
+        description: post.description,
+        content: post.content,
+        thumbnail: post.thumbnail,
+        is_temp: post.is_temp,
+        category_idx: post.category_idx,
       };
 
       const { data } = await axios.put(url, body);

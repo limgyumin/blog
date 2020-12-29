@@ -31,9 +31,9 @@ export const validateCreateTemp = (req: Request, res: Response): boolean => {
   const schema = Joi.object().keys({
     title: Joi.string().max(255).required(),
     content: Joi.string().min(1).max(255).required(),
-    thumbnail: Joi.string().max(800).allow(null),
-    category_idx: Joi.number().integer().allow(null),
-    description: Joi.string().max(255).allow(null),
+    thumbnail: Joi.string().max(800).allow(null).allow(""),
+    category_idx: Joi.number().integer().allow(null).allow(""),
+    description: Joi.string().max(255).allow(null).allow(""),
   });
 
   return validation(req, res, schema);

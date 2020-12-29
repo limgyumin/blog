@@ -8,6 +8,11 @@ import {
   PostResponse,
   PostsResponse,
 } from "../../util/types/Response";
+import {
+  CreatePostParams,
+  CreateTempPostParams,
+  ModifyPostParams,
+} from "../../util/types/PostParams";
 
 interface PostParamsType {
   page: number;
@@ -80,20 +85,27 @@ class PostStore {
 
   @action
   handleCreatePost = async (
-    title: string,
-    description: string,
-    content: string,
-    categoryIdx: number,
-    thumbnail?: string
+    postParams: CreatePostParams
   ): Promise<Response> => {
     try {
-      const response: Response = await Post.CreatePost(
-        title,
-        description,
-        content,
-        categoryIdx,
-        thumbnail
-      );
+      const response: Response = await Post.CreatePost(postParams);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleCreateTempPost = async (
+    postParams: CreateTempPostParams
+  ): Promise<Response> => {
+    try {
+      const response: Response = await Post.CreateTempPost(postParams);
 
       return new Promise((resolve: (response: Response) => void, reject) => {
         resolve(response);
@@ -107,24 +119,10 @@ class PostStore {
 
   @action
   handleModifyPost = async (
-    idx: number,
-    title: string,
-    description: string,
-    content: string,
-    category_idx: number,
-    thumbnail?: string,
-    is_temp?: boolean
+    postParams: ModifyPostParams
   ): Promise<Response> => {
     try {
-      const response: Response = await Post.ModifyPost(
-        idx,
-        title,
-        description,
-        content,
-        category_idx,
-        thumbnail,
-        is_temp
-      );
+      const response: Response = await Post.ModifyPost(postParams);
 
       return new Promise((resolve: (response: Response) => void) => {
         resolve(response);

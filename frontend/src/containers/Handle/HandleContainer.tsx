@@ -16,6 +16,11 @@ import removeLastBlank from "../../util/lib/removeLastBlank";
 import isEmpty from "../../util/lib/isEmpty";
 import convertURL from "../../util/lib/convertURL";
 import axios from "axios";
+import {
+  CreatePostParams,
+  CreateTempPostParams,
+  ModifyPostParams,
+} from "../../util/types/PostParams";
 
 interface HandleContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -26,7 +31,12 @@ interface MatchType {
 const HandleContainer = ({ match }: HandleContainerProps) => {
   const { store } = useStore();
   const { handleUploadFile } = store.UploadStore;
-  const { handlePost, handleCreatePost, handleModifyPost } = store.PostStore;
+  const {
+    handlePost,
+    handleCreatePost,
+    handleCreateTempPost,
+    handleModifyPost,
+  } = store.PostStore;
   const { categories, handleCategories } = store.CategoryStore;
   const {
     login,
@@ -42,6 +52,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const [desc, setDesc] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [categoryIdx, setCategoryIdx] = useState<number>(0);
+  const [temp, setTemp] = useState<boolean>(false);
 
   const [preview, setPreview] = useState<string | ArrayBuffer | null>("");
   const [fileName, setFileName] = useState<string>("");
@@ -82,8 +93,6 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   }, []);
 
   const handleCreatePostCallback = useCallback(async () => {
-    console.log(111);
-
     if (!login || !admin) {
       history.push("/");
       return;
@@ -101,15 +110,50 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       thumbnail = await handleUploadFileCallback(uploadFile);
     }
 
-    await handleCreatePost(
-      removeLastBlank(title),
-      removeLastBlank(desc),
-      removeLastBlank(content),
-      categoryIdx,
-      thumbnail
-    )
+    const postParams: CreatePostParams = {
+      title: removeLastBlank(title),
+      description: removeLastBlank(desc),
+      content: removeLastBlank(content),
+      category_idx: categoryIdx,
+      thumbnail: thumbnail,
+    };
+
+    await handleCreatePost(postParams)
       .then((res: Response) => {
         toast.success("야호! 글 작성에 성공했어요!");
+        history.push("/");
+      })
+      .catch((err: Error) => {
+        toast.error("앗! 글 작성에 실패했어요.");
+      });
+  }, [title, desc, content, categoryIdx, uploadFile, login, admin]);
+
+  const handleCreateTempPostCallback = useCallback(async () => {
+    if (!login || !admin) {
+      history.push("/");
+      return;
+    } else if (isEmpty(title) || isEmpty(content)) {
+      toast.error("내용을 입력해주세요.");
+      return;
+    }
+
+    let thumbnail: string | undefined;
+
+    if (uploadFile) {
+      thumbnail = await handleUploadFileCallback(uploadFile);
+    }
+
+    const postParams: CreateTempPostParams = {
+      title: removeLastBlank(title),
+      description: removeLastBlank(desc),
+      content: removeLastBlank(content),
+      category_idx: categoryIdx,
+      thumbnail: thumbnail,
+    };
+
+    await handleCreateTempPost(postParams)
+      .then((res: Response) => {
+        toast.success("야호! 임시글 글 작성에 성공했어요!");
         history.push("/");
       })
       .catch((err: Error) => {
@@ -139,14 +183,17 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       thumbnail = "";
     }
 
-    await handleModifyPost(
-      Number(idx),
-      removeLastBlank(title),
-      removeLastBlank(desc),
-      removeLastBlank(content),
-      categoryIdx,
-      thumbnail
-    )
+    const postParams: ModifyPostParams = {
+      idx: Number(idx),
+      title: removeLastBlank(title),
+      description: removeLastBlank(desc),
+      content: removeLastBlank(content),
+      category_idx: categoryIdx,
+      is_temp: temp,
+      thumbnail: thumbnail,
+    };
+
+    await handleModifyPost(postParams)
       .then((res: Response) => {
         toast.success("야호! 글 수정에 성공했어요!");
         history.push(`/post/${idx}`);
@@ -154,7 +201,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       .catch((err: Error) => {
         toast.error("앗! 글 수정에 실패했어요.");
       });
-  }, [title, desc, content, categoryIdx, uploadFile]);
+  }, [title, desc, content, categoryIdx, uploadFile, temp]);
 
   const handlePostCallback = useCallback(async () => {
     if (!write) {
@@ -245,6 +292,15 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     if (write) {
       handleCreatePostCallback();
     } else {
+      handleModifyPostCallback();
+    }
+  };
+
+  const saveClickHandler = () => {
+    if (write) {
+      handleCreateTempPostCallback();
+    } else {
+      setTemp(true);
       handleModifyPostCallback();
     }
   };
@@ -345,6 +401,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         setShowOption={setShowOption}
         categoryItemHandler={categoryItemHandler}
         writeClickHandler={writeClickHandler}
+        saveClickHandler={saveClickHandler}
         keyDownHandler={keyDownHandler}
       />
     </>
