@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import LoginPage from "../pages/LoginPage";
+import AuthPage from "../pages/AuthPage";
 import MainPage from "../pages/MainPage";
 import PostPage from "../pages/PostPage";
 import HandlePage from "../pages/HandlePage";
@@ -20,7 +20,7 @@ const App = () => {
           return (
             path !== "write" &&
             path !== "modify" &&
-            path !== "success" && (
+            path !== "auth" && (
               <>
                 <HeaderContainer />
                 <SideBarContainer />
@@ -36,7 +36,7 @@ const App = () => {
         <Route path="/modify/:idx" component={HandlePage} />
         <Route path="/write" component={HandlePage} />
         <Route path="/search" component={SearchPage} />
-        <Route path="/success" component={LoginPage} />
+        <Route path="/auth" component={AuthPage} />
       </Switch>
     </div>
   );

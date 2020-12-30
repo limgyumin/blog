@@ -1,28 +1,30 @@
 import React, { useCallback, useEffect } from "react";
 import { observer } from "mobx-react";
-import Login from "../../components/Login";
+import Auth from "../../components/Auth";
 import { useHistory } from "react-router-dom";
 import useStore from "../../util/lib/hooks/useStore";
 import useQuery from "../../util/lib/hooks/useQuery";
-import { LoginResponse } from "../../util/types/Response";
+import { AuthResponse } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-interface LoginContainerProps {}
+interface AuthContainerProps {}
 
-const LoginContainer = ({}: LoginContainerProps) => {
+const AuthContainer = ({}: AuthContainerProps) => {
   const { store } = useStore();
-  const { handleLogin } = store.UserStore;
+  const { handleAuth } = store.UserStore;
   const history = useHistory();
   const query = useQuery();
 
-  const handleLoginCallback = useCallback(async () => {
+  const handleAuthCallback = useCallback(async () => {
     const code = query.get("code");
 
-    await handleLogin(String(code))
-      .then((res: LoginResponse) => {
-        localStorage.setItem("access_token", res.data.access_token);
-        history.push("/");
+    await handleAuth(String(code))
+      .then((res: AuthResponse) => {
+        if (res.status === 200) {
+          localStorage.setItem("access_token", res.data.access_token);
+          history.push("/");
+        }
       })
       .catch((err: Error) => {
         if (err.message.indexOf("400")) {
@@ -35,14 +37,14 @@ const LoginContainer = ({}: LoginContainerProps) => {
   }, []);
 
   useEffect(() => {
-    handleLoginCallback();
-  }, [handleLoginCallback]);
+    handleAuthCallback();
+  }, [handleAuthCallback]);
 
   return (
     <>
-      <Login />
+      <Auth />
     </>
   );
 };
 
-export default observer(LoginContainer);
+export default observer(AuthContainer);

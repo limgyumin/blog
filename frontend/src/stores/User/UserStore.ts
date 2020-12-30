@@ -2,7 +2,7 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Login from "../../assets/api/Login";
 import Profile from "../../assets/api/Profile";
-import { LoginResponse, ProfileResponse } from "../../util/types/Response";
+import { AuthResponse, ProfileResponse } from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import axios from "axios";
 
@@ -14,9 +14,9 @@ class UserStore {
   @observable user: UserType = <UserType>{};
 
   @action
-  handleLogin = async (code: string): Promise<LoginResponse> => {
+  handleAuth = async (code: string): Promise<AuthResponse> => {
     try {
-      const response: LoginResponse = await Login.GitHubLogin(code);
+      const response: AuthResponse = await Login.GitHubLogin(code);
       axios.defaults.headers.common["access_token"] =
         response.data["access_token"];
       this.handleMyProfile();
@@ -26,7 +26,7 @@ class UserStore {
       }
 
       return new Promise(
-        (resolve: (response: LoginResponse) => void, reject) => {
+        (resolve: (response: AuthResponse) => void, reject) => {
           resolve(response);
         }
       );

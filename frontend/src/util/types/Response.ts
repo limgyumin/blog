@@ -55,7 +55,7 @@ export interface ProfileResponse extends Response {
   };
 }
 
-export interface LoginResponse extends Response {
+export interface AuthResponse extends Response {
   data: {
     access_token: string;
   };
