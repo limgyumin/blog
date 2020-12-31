@@ -77,6 +77,17 @@ class Post {
     }
   }
 
+  async GetTempPosts() {
+    try {
+      const url = `${SERVER}/v1/post/temp`;
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async ModifyPost(post: ModifyPostParams) {
     try {
       const url = `${SERVER}/v1/post/${post.idx}`;

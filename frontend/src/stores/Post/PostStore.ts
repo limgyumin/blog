@@ -84,6 +84,23 @@ class PostStore {
   };
 
   @action
+  handleTempPosts = async (): Promise<PostsResponse> => {
+    try {
+      const response = await Post.GetTempPosts();
+
+      return new Promise(
+        (resolve: (response: PostsResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleCreatePost = async (
     postParams: CreatePostParams
   ): Promise<Response> => {
