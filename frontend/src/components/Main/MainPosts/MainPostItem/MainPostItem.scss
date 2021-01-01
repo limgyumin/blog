@@ -2,17 +2,13 @@
 @import "../../../../util/color.scss";
 
 .Main-Post-Item {
-  width: 20.9rem;
+  width: 18rem;
   margin: 1rem;
   transition: transform ease 0.2s;
   position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
-
-  // &:hover {
-  //   transform: translateY(-0.5rem);
-  // }
 
   @media screen and (max-width: 1230px) {
     width: calc(50% - 2rem);
@@ -135,7 +131,7 @@
         display: flex;
         align-items: center;
         color: $black;
-        font-size: 1.025rem;
+        font-size: 0.975rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
 
@@ -149,9 +145,9 @@
       }
 
       &-Description {
-        font-size: 0.8725rem;
+        font-size: 0.925rem;
         font-weight: 500;
-        color: $light-gray;
+        color: $light-black;
         @include ellipsis(1);
       }
     }

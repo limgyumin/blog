@@ -22,9 +22,6 @@ const HeaderOption = ({
         <div className="Header-Option-MyProfile">
           <span className="Header-Option-MyProfile-Text">내 프로필</span>
         </div>
-        <div className="Header-Option-ReadList">
-          <span className="Header-Option-ReadList-Text">읽기 목록</span>
-        </div>
         {admin && (
           <div className="Header-Option-TempList">
             <span className="Header-Option-TempList-Text">임시 글</span>

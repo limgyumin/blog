@@ -5,24 +5,17 @@ import MainCategoryItem from "./MainCategoryItem";
 
 interface MainCategoriesProps {
   categories: CategoryType[];
-  totalPostCount: number;
+  totalView: CategoryType;
 }
 
-const MainCategories = ({
-  categories,
-  totalPostCount,
-}: MainCategoriesProps) => {
-  const total_view = {
-    idx: 0,
-    name: "All",
-    post_count: totalPostCount,
-  };
+const MainCategories = ({ categories, totalView }: MainCategoriesProps) => {
   return (
     <>
       <div className="Main-Categories">
         <div className="Main-Categories-Container">
+          <p className="Main-Categories-Container-Title">Categories</p>
           <div className="Main-Categories-Container-List">
-            <MainCategoryItem category={total_view} />
+            <MainCategoryItem category={totalView} />
             {categories.map((category, idx) => (
               <MainCategoryItem key={idx} category={category} />
             ))}

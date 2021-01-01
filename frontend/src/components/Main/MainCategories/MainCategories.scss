@@ -1,51 +1,37 @@
 @import "../../../util/color.scss";
 
 .Main-Categories {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 1rem;
+  width: 16rem;
+  position: relative;
+  margin: 1rem 0 1rem 2rem;
+
+  @media screen and (max-width: 1240px) {
+    width: 14rem;
+  }
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
 
   &-Container {
     width: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    padding: 0 1rem;
+    border-left: 5px solid $vvv-light-gray;
 
     &-Title {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      & > p {
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-
-      &-Edit {
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all ease 0.2s;
-
-        &:hover {
-          background-color: $vvvv-light-gray;
-        }
-
-        & > svg {
-          font-size: 1.1rem;
-          color: $v-light-gray;
-        }
-      }
+      color: $gray;
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
     }
 
     &-List {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      margin: 1rem 0;
     }
   }
 }

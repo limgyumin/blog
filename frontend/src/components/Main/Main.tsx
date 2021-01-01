@@ -3,6 +3,7 @@ import { CategoryType } from "../../util/types/Category";
 import PostType from "../../util/types/Post";
 import "./Main.scss";
 import MainCategories from "./MainCategories";
+import MainCategoryItem from "./MainCategories/MainCategoryItem";
 import MainPosts from "./MainPosts";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
 
@@ -29,21 +30,29 @@ const Main = ({
   scrollToTop,
   mainRef,
 }: MainProps) => {
+  const totalView = {
+    idx: 0,
+    name: "All",
+    post_count: totalPostCount,
+  };
   return (
     <>
       <div className="Main">
         <div className="Main-Wrapper" ref={mainRef}>
           <div className="Main-Wrapper-Container">
-            <MainCategories
-              categories={categories}
-              totalPostCount={totalPostCount}
-            />
+            <div className="Main-Wrapper-Container-List">
+              <MainCategoryItem category={totalView} />
+              {categories.map((category, idx) => (
+                <MainCategoryItem key={idx} category={category} />
+              ))}
+            </div>
             {notFound ? (
               <MainPostNotFound />
             ) : (
               <MainPosts posts={posts} loading={loading} postRef={postRef} />
             )}
           </div>
+          <MainCategories categories={categories} totalView={totalView} />
         </div>
       </div>
     </>
