@@ -19,7 +19,6 @@ interface PostProps {
   showModalCallback: () => void;
   modifyClickHandler: () => void;
   otherPosts: Partial<OtherPostsType>;
-  scroll: number;
   postTopRef: React.RefObject<HTMLDivElement>;
   admin: boolean;
 }
@@ -34,7 +33,6 @@ const Post = ({
   showModalCallback,
   modifyClickHandler,
   otherPosts,
-  scroll,
   postTopRef,
   admin,
 }: PostProps) => {
@@ -81,12 +79,6 @@ const Post = ({
             )}
           </div>
         )}
-        <div className="Post-ProgressBar">
-          <div
-            className="Post-ProgressBar-Container"
-            style={{ transform: `scale(${scroll}, 1)` }}
-          />
-        </div>
       </div>
     </>
   );

@@ -3,7 +3,6 @@
 .Header {
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: $white;
@@ -14,136 +13,160 @@
   z-index: 11;
 
   &-Hide {
-    transform: translateY(-20rem);
+    transform: translateY(-4.3rem);
   }
 
   &-Shadow {
     box-shadow: 0 0 0.3rem 0 rgba(0, 0, 0, 0.1);
   }
 
-  &-Container {
-    width: 100%;
-    max-width: 1250px;
+  &-Wrapper {
     display: flex;
-    flex-direction: column;
-    padding: 0 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
 
-    &-Content {
+    &-Container {
+      width: 100%;
+      max-width: 1250px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.8rem 0;
+      flex-direction: column;
+      padding: 0 1rem;
 
-      &-Image {
-        height: 1.4rem;
-      }
-
-      &-Profile {
+      &-Content {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 0;
 
-        &-Search {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          margin-right: 1.3rem;
-          border-radius: 50%;
-          padding: 0.45rem;
-          transition: background-color ease 0.1s;
-
-          &:hover {
-            background-color: $vvvv-light-gray;
-          }
-
-          & > svg {
-            font-size: 1.4rem;
-            color: $black;
-          }
+        &-Image {
+          height: 1.4rem;
         }
 
-        &-Write {
+        &-Profile {
           display: flex;
-          justify-content: center;
           align-items: center;
-          width: 5rem;
-          height: 2.1rem;
-          background-color: $black;
-          font-size: 1rem;
-          font-weight: 500;
-          color: $white;
-          border-radius: 2rem;
-          margin-right: 1.4rem;
-          cursor: pointer;
-          box-shadow: none;
-          transition: all ease-in-out 0.2s;
-          text-decoration: none;
 
-          &:hover {
-            background-color: $light-black;
-          }
-
-          &:active {
-            box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
-          }
-        }
-
-        &-Wrapper {
-          position: relative;
-
-          &-User {
+          &-Search {
             display: flex;
             align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            margin-right: 1.3rem;
+            border-radius: 50%;
+            padding: 0.45rem;
+            transition: background-color ease 0.1s;
+
+            &:hover {
+              background-color: $vvvv-light-gray;
+            }
+
+            & > svg {
+              font-size: 1.4rem;
+              color: $black;
+            }
+          }
+
+          &-Write {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 5rem;
+            height: 2.1rem;
+            background-color: $black;
+            font-size: 1rem;
+            font-weight: 500;
+            color: $white;
+            border-radius: 2rem;
+            margin-right: 1.4rem;
             cursor: pointer;
+            box-shadow: none;
+            transition: all ease-in-out 0.2s;
+            text-decoration: none;
 
-            &-Avatar {
-              width: 2.65rem;
-              height: 2.65rem;
-              border-radius: 50%;
-              box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+            &:hover {
+              background-color: $light-black;
             }
 
-            &-Option {
-              width: 0.7rem;
-              margin-left: 0.8rem;
+            &:active {
+              box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.4);
+            }
+          }
 
-              & > path {
-                transition: fill ease 0.2s;
+          &-Wrapper {
+            position: relative;
+
+            &-User {
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+
+              &-Avatar {
+                width: 2.65rem;
+                height: 2.65rem;
+                border-radius: 50%;
+                box-shadow: 0 0 0.5rem 0 rgba(0, 0, 0, 0.15);
+              }
+
+              &-Option {
+                width: 0.7rem;
+                margin-left: 0.8rem;
+
+                & > path {
+                  transition: fill ease 0.2s;
+                }
+              }
+
+              &:hover > &-Option {
+                path {
+                  fill: $black;
+                }
               }
             }
+          }
 
-            &:hover > &-Option {
-              path {
-                fill: $black;
-              }
+          &-Button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.43rem;
+            background-color: $black;
+            border-radius: 50%;
+            box-shadow: none;
+            transition: all ease-in-out 0.2s;
+
+            &:hover {
+              background-color: $light-black;
+            }
+
+            &:active {
+              box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
+            }
+
+            &-Logo {
+              width: 1.75rem;
+              height: 1.75rem;
             }
           }
         }
+      }
+    }
 
-        &-Button {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-          padding: 0.43rem;
-          background-color: $black;
-          border-radius: 50%;
-          box-shadow: none;
-          transition: all ease-in-out 0.2s;
+    &-ProgressBar {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: -4px;
+      height: 4px;
+      z-index: 100;
 
-          &:hover {
-            background-color: $light-black;
-          }
-
-          &:active {
-            box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
-          }
-
-          &-Logo {
-            width: 1.75rem;
-            height: 1.75rem;
-          }
-        }
+      &-Container {
+        background: $light-black;
+        transform-origin: top left;
+        transform: scale(0, 0);
+        height: 4px;
       }
     }
   }

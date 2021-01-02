@@ -46,7 +46,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
   const [notFound, setNotFound] = useState<boolean>(false);
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState<boolean>(false);
-  const [scroll, setScroll] = useState<number>(0);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -156,16 +155,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
     history.push(`/modify/${postIdx}`);
   };
 
-  const progressBarHandler = () => {
-    const totalScroll = document.documentElement.scrollTop;
-    const windowHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    const progress = totalScroll / windowHeight;
-
-    setScroll(progress);
-  };
-
   const scrollToTop = () => {
     postTopRef.current?.scrollIntoView();
   };
@@ -173,11 +162,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
   useEffect(() => {
     scrollToTop();
   }, [postIdx]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", progressBarHandler);
-    return () => window.removeEventListener("scroll", progressBarHandler);
-  }, []);
 
   useEffect(() => {
     handlePostCallback();
@@ -248,7 +232,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
         handlePostLikeCallback={handlePostLikeCallback}
         showModalCallback={showModalCallback}
         otherPosts={otherPosts}
-        scroll={scroll}
         postTopRef={postTopRef}
         admin={admin}
         modifyClickHandler={modifyClickHandler}

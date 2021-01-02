@@ -4,7 +4,7 @@ import "./HeaderOption.scss";
 
 interface HeaderOptionProps {
   admin: boolean;
-  closeOption: (e: any) => void;
+  closeOption: () => void;
   handleLogout: () => void;
 }
 

@@ -15,10 +15,12 @@ interface HeaderProps {
   admin: boolean;
   login: boolean;
   user: UserType;
+  scroll: number;
   showOption: boolean;
   setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
-  closeOption: (e: any) => void;
+  closeOption: () => void;
   handleLogout: () => void;
+  pathname: string;
 }
 
 const Header = ({
@@ -27,10 +29,12 @@ const Header = ({
   admin,
   login,
   user,
+  scroll,
   showOption,
   setShowOption,
   closeOption,
   handleLogout,
+  pathname,
 }: HeaderProps) => {
   return (
     <>
@@ -43,59 +47,69 @@ const Header = ({
             : "Header"
         }
       >
-        <div className="Header-Container">
-          <div className="Header-Container-Content">
-            <Link to="/">
-              <Logo className="Header-Container-Content-Image" />
-            </Link>
-            <div className="Header-Container-Content-Profile">
-              <Link
-                to="/search"
-                className="Header-Container-Content-Profile-Search"
-              >
-                <BsSearch />
+        <div className="Header-Wrapper">
+          <div className="Header-Wrapper-Container">
+            <div className="Header-Wrapper-Container-Content">
+              <Link to="/">
+                <Logo className="Header-Wrapper-Container-Content-Image" />
               </Link>
-              {login ? (
-                <>
-                  {admin && (
-                    <Link
-                      to="/write"
-                      className="Header-Container-Content-Profile-Write"
-                    >
-                      글 쓰기
-                    </Link>
-                  )}
-                  <div className="Header-Container-Content-Profile-Wrapper">
-                    <div
-                      className="Header-Container-Content-Profile-Wrapper-User"
-                      onClick={() => setShowOption(true)}
-                    >
-                      <img
-                        src={user.avatar}
-                        alt="Profile"
-                        className="Header-Container-Content-Profile-Wrapper-User-Avatar"
-                      />
-                      <Option className="Header-Container-Content-Profile-Wrapper-User-Option" />
-                    </div>
-                    {showOption && (
-                      <HeaderOption
-                        admin={admin}
-                        closeOption={closeOption}
-                        handleLogout={handleLogout}
-                      />
-                    )}
-                  </div>
-                </>
-              ) : (
-                <a
-                  href={OAUTH}
-                  className="Header-Container-Content-Profile-Button"
+              <div className="Header-Wrapper-Container-Content-Profile">
+                <Link
+                  to="/search"
+                  className="Header-Wrapper-Container-Content-Profile-Search"
                 >
-                  <GitHub className="Header-Container-Content-Profile-Button-Logo" />
-                </a>
-              )}
+                  <BsSearch />
+                </Link>
+                {login ? (
+                  <>
+                    {admin && (
+                      <Link
+                        to="/write"
+                        className="Header-Wrapper-Container-Content-Profile-Write"
+                      >
+                        글 쓰기
+                      </Link>
+                    )}
+                    <div className="Header-Wrapper-Container-Content-Profile-Wrapper">
+                      <div
+                        className="Header-Wrapper-Container-Content-Profile-Wrapper-User"
+                        onClick={() => setShowOption(true)}
+                      >
+                        <img
+                          src={user.avatar}
+                          alt="Profile"
+                          className="Header-Wrapper-Container-Content-Profile-Wrapper-User-Avatar"
+                        />
+                        <Option className="Header-Wrapper-Container-Content-Profile-Wrapper-User-Option" />
+                      </div>
+                      {showOption && (
+                        <HeaderOption
+                          admin={admin}
+                          closeOption={closeOption}
+                          handleLogout={handleLogout}
+                        />
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <a
+                    href={OAUTH}
+                    className="Header-Wrapper-Container-Content-Profile-Button"
+                  >
+                    <GitHub className="Header-Wrapper-Container-Content-Profile-Button-Logo" />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
+          {pathname.split("/")[1] === "post" && (
+            <div className="Header-Wrapper-ProgressBar">
+              <div
+                className="Header-Wrapper-ProgressBar-Container"
+                style={{ transform: `scale(${scroll}, 1)` }}
+              />
+            </div>
+          )}
         </div>
       </header>
     </>
