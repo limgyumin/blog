@@ -1,3 +1,5 @@
+@import "../../util/color.scss";
+
 .Temp {
   display: flex;
   justify-content: center;
@@ -6,15 +8,22 @@
   &-Container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
     max-width: 1000px;
     padding: 0 1rem;
 
+    &-Title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: $light-black;
+      padding: 0 1rem;
+      margin-bottom: 3.6rem;
+    }
+
     &-List {
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
     }
   }
 }

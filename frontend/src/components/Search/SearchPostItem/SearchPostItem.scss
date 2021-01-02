@@ -17,7 +17,7 @@
 
   &-Thumbnail {
     position: relative;
-    padding-top: 25%;
+    padding-top: 18%;
     padding-right: 25%;
     margin-right: 2rem;
 
@@ -25,7 +25,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 0.2rem;
       position: absolute;
       top: 0;
     }
@@ -33,7 +32,6 @@
 
   &-Content {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -42,7 +40,6 @@
     &-Wrapper {
       display: flex;
       align-items: center;
-      margin: 0 0 0.8rem 0;
 
       &-Category {
         font-size: 0.75rem;
@@ -70,7 +67,7 @@
         display: flex;
         align-items: center;
         color: $black;
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
 
@@ -90,13 +87,13 @@
         color: $black;
         max-width: 45rem;
         overflow: hidden;
-        @include ellipsis(4);
+        @include ellipsis(3);
 
-        @media screen and (max-width: 810px) {
+        @media screen and (max-width: 960px) {
           @include ellipsis(2);
         }
 
-        @media screen and (max-width: 610px) {
+        @media screen and (max-width: 810px) {
           @include ellipsis(1);
         }
       }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import getDateFormat from "../../../util/lib/getDateFormat";
 import PostType from "../../../util/types/Post";
 import "./TempPostItem.scss";
@@ -10,20 +11,21 @@ interface TempPostItemProps {
 const TempPostItem = ({ tempPost }: TempPostItemProps) => {
   return (
     <>
-      <div className="Temp-Post-Item">
+      <Link to={`/modify/${tempPost.idx}`} className="Temp-Post-Item">
         <div className="Temp-Post-Item-Info">
-          <span className="temp-Post-Item-Info-Date">
-            {getDateFormat(tempPost.created_at)}
-          </span>
-          <div className="Temp-Post-Item-Info-Title">
-            <span>{tempPost.title}</span>
-            <p>↗</p>
+          <div className="Temp-Post-Item-Info-Wrapper">
+            <p className="Temp-Post-Item-Info-Wrapper-Title">
+              {tempPost.title}
+            </p>
+            <p className="Temp-Post-Item-Info-Wrapper-Content">
+              {tempPost.content}
+            </p>
           </div>
-          <span className="Temp-Post-Item-Info-Description">
-            {tempPost.description}
-          </span>
+          <p className="Temp-Post-Item-Info-Date">
+            {getDateFormat(tempPost.created_at)}
+          </p>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

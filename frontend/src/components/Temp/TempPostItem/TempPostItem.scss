@@ -1,10 +1,47 @@
+@import "../../../util/color.scss";
+@import "../../../util/lib.scss";
+
 .Temp-Post-Item {
-  width: 18rem;
+  width: 100%;
   margin: 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+  border: 1px solid $vvv-light-gray;
+  border-radius: 0.2rem;
 
   &-Info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-Wrapper {
+      width: 100%;
+
+      &-Title {
+        color: $black;
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        @include ellipsis(1);
+      }
+
+      &-Content {
+        color: $black;
+        font-size: 0.975rem;
+        font-weight: 500;
+        margin-bottom: 0.8rem;
+        @include ellipsis(3);
+      }
+    }
+
+    &-Date {
+      color: $light-gray;
+      font-size: 0.825rem;
+      font-weight: 400;
+    }
   }
 }

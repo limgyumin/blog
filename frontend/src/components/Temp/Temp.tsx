@@ -12,6 +12,7 @@ const Temp = ({ tempPosts }: TempProps) => {
     <>
       <div className="Temp">
         <div className="Temp-Container">
+          <p className="Temp-Container-Title">Saved Posts</p>
           <div className="Temp-Container-List">
             {tempPosts.map((tempPost, idx) => (
               <React.Fragment key={idx}>

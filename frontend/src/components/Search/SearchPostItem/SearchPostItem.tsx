@@ -22,14 +22,6 @@ const SearchPostItem = ({ post }: SearchPostItemProps) => {
           </div>
         )}
         <div className="Search-Post-Item-Content">
-          <div className="Search-Post-Item-Content-Wrapper">
-            <span className="Search-Post-Item-Content-Wrapper-Category">
-              {post.category_name}
-            </span>
-            <span className="Search-Post-Item-Content-Wrapper-Date">
-              {getDateFormat(post.created_at)}
-            </span>
-          </div>
           <div className="Search-Post-Item-Content-Info">
             <div className="Search-Post-Item-Content-Info-Title">
               <span>{post.title}</span>
@@ -37,6 +29,14 @@ const SearchPostItem = ({ post }: SearchPostItemProps) => {
             </div>
             <span className="Search-Post-Item-Content-Info-Description">
               {post.description}
+            </span>
+          </div>
+          <div className="Search-Post-Item-Content-Wrapper">
+            <span className="Search-Post-Item-Content-Wrapper-Category">
+              {post.category_name}
+            </span>
+            <span className="Search-Post-Item-Content-Wrapper-Date">
+              {getDateFormat(post.created_at)}
             </span>
           </div>
         </div>

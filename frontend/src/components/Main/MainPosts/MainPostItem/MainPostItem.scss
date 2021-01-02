@@ -97,7 +97,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     position: relative;
 
     &-Wrapper {
@@ -131,7 +130,7 @@
         display: flex;
         align-items: center;
         color: $black;
-        font-size: 0.975rem;
+        font-size: 1rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
 
@@ -145,7 +144,7 @@
       }
 
       &-Description {
-        font-size: 0.925rem;
+        font-size: 0.875rem;
         font-weight: 500;
         color: $light-black;
         @include ellipsis(1);
