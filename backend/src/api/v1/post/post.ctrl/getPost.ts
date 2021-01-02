@@ -60,7 +60,7 @@ export default async (req: AuthRequest, res: Response) => {
 
     delete post.fk_user_idx;
 
-    if (!post.is_temp) {
+    if (post.fk_category_idx) {
       const categoryRepo = getRepository(Category);
       const category = await categoryRepo.findOne({
         select: ["name"],

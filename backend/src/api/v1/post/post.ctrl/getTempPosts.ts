@@ -7,7 +7,7 @@ export default async (req: Request, res: Response) => {
   try {
     const postRepo = getRepository(Post);
     const posts: Post[] = await postRepo.find({
-      select: ["idx", "title", "description", "created_at"],
+      select: ["idx", "title", "content", "created_at"],
       where: {
         is_temp: true,
       },
