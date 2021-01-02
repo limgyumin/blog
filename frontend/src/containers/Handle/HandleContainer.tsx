@@ -21,6 +21,7 @@ import {
   CreateTempPostParams,
   ModifyPostParams,
 } from "../../util/types/PostParams";
+import { useBeforeunload } from "react-beforeunload";
 
 interface HandleContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -70,6 +71,8 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   const { idx } = match.params;
+
+  useBeforeunload((e) => e.preventDefault());
 
   const handleCategoriesCallback = useCallback(async () => {
     await handleCategories()
