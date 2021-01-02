@@ -98,7 +98,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     } else if (isEmpty(title) || isEmpty(desc) || isEmpty(content)) {
       toast.error("내용을 입력해주세요.");
       return;
-    } else if (isEmpty(category)) {
+    } else if (!categoryIdx) {
       toast.error("카테고리를 선택해주세요.");
       return;
     }
@@ -176,7 +176,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         if (isEmpty(title) || isEmpty(desc) || isEmpty(content)) {
           toast.error("내용을 입력해주세요.");
           return;
-        } else if (isEmpty(category)) {
+        } else if (!categoryIdx) {
           toast.error("카테고리를 선택해주세요.");
           return;
         }
@@ -225,7 +225,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
           setTitle(res.data.post["title"]);
           setDesc(res.data.post["description"]);
           setContent(res.data.post["content"]);
-          setCategory(res.data.post["category_name"]);
+          setCategory(res.data.post["category_name"] || "");
           setFileName(res.data.post["thumbnail"]);
           setPreview(res.data.post["thumbnail"]);
           setCategoryIdx(res.data.post["fk_category_idx"]);
