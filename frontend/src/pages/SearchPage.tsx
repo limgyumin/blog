@@ -1,7 +1,7 @@
 import React from "react";
 import SearchContainer from "../containers/Search/SearchContainer";
 
-const SearchPage = ({}) => {
+const SearchPage = () => {
   return (
     <>
       <SearchContainer />

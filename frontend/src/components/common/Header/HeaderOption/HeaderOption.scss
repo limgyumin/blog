@@ -13,10 +13,13 @@
   position: absolute;
   border-radius: 0.2rem;
 
-  & > div {
+  & > div,
+  & > a {
     width: 100%;
     padding: 0.6rem 0.8rem;
     cursor: pointer;
+    text-decoration: none;
+
     &:hover {
       background-color: $vvvv-light-gray;
     }

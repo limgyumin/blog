@@ -55,22 +55,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   };
 
   const closeOption = (e: any) => {
-    if (
-      e.target &&
-      !(
-        e.target.classList.contains("Header-Option") ||
-        e.target.classList.contains("Header-Option-MyProfile") ||
-        e.target.classList.contains("Header-Option-MyProfile-Text") ||
-        e.target.classList.contains("Header-Option-ReadList") ||
-        e.target.classList.contains("Header-Option-ReadList-Text") ||
-        e.target.classList.contains("Header-Option-TempList") ||
-        e.target.classList.contains("Header-Option-TempList-Text") ||
-        e.target.classList.contains("Header-Option-Logout") ||
-        e.target.classList.contains("Header-Option-Logout-Text")
-      )
-    ) {
-      setShowOption(false);
-    }
+    setShowOption(false);
   };
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./HeaderOption.scss";
 
 interface HeaderOptionProps {
@@ -23,9 +24,9 @@ const HeaderOption = ({
           <span className="Header-Option-MyProfile-Text">내 프로필</span>
         </div>
         {admin && (
-          <div className="Header-Option-TempList">
+          <Link to="/temp" className="Header-Option-TempList">
             <span className="Header-Option-TempList-Text">임시 글</span>
-          </div>
+          </Link>
         )}
         <div className="Header-Option-Logout" onClick={() => handleLogout()}>
           <span className="Header-Option-Logout-Text">로그아웃</span>

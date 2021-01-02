@@ -9,6 +9,7 @@ import CategoriesPage from "../pages/CategoriesPage";
 import HeaderContainer from "../containers/Header/HeaderContainer";
 import SideBarContainer from "../containers/SideBar/SideBarContainer";
 import SearchPage from "../pages/SearchPage";
+import TempPage from "../pages/TempPage";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/write" component={HandlePage} />
         <Route path="/search" component={SearchPage} />
         <Route path="/auth" component={AuthPage} />
+        <Route path="/temp" component={TempPage} />
       </Switch>
     </div>
   );
