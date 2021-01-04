@@ -1,0 +1,60 @@
+@import "../../../util/color.scss";
+
+.Post-BottomBar {
+  border-top: 1px solid $vvv-light-gray;
+  background-color: $white;
+  position: fixed;
+  z-index: 98;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+
+  & > button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+  }
+
+  &-Like {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 0.4rem;
+
+    & > svg {
+      font-size: 1.6rem;
+      color: $light-black;
+      margin-right: 0.25rem;
+    }
+
+    & > p {
+      font-size: 1.125rem;
+      color: $light-black;
+    }
+  }
+
+  &-Users {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1rem;
+
+    & > svg {
+      font-size: 1.5rem;
+      color: $light-black;
+    }
+  }
+
+  &-ScrollTop {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    & > svg {
+      font-size: 1.5rem;
+      color: $light-black;
+    }
+  }
+}
