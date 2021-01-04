@@ -1,44 +1,50 @@
 import React from "react";
+import { BsArrowBarUp } from "react-icons/bs";
+import { IoMdHeartEmpty } from "react-icons/io";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
+import PostBottomBarContainer from "../../containers/Post/PostBottomBarContainer";
 import PostCommentContainer from "../../containers/Post/PostCommentContainer";
 import OtherPostsType from "../../util/types/OtherPosts";
 import PostType from "../../util/types/Post";
 import "./Post.scss";
+import PostBottomBar from "./PostBottomBar";
 import PostHeader from "./PostHeader";
 import PostList from "./PostList";
 import PostLoading from "./PostLoading";
 import PostProfile from "./PostProfile";
 
 interface PostProps {
+  postIdx: number;
   post: Partial<PostType>;
   loading: boolean;
   notFound: boolean;
-  likeCount: number;
-  liked: boolean;
-  handlePostLikeCallback: () => Promise<void>;
   showModalCallback: () => void;
-  modifyClickHandler: () => void;
   otherPosts: Partial<OtherPostsType>;
   postTopRef: React.RefObject<HTMLDivElement>;
+  scrollToTopSmooth: () => void;
   admin: boolean;
+  modifyClickHandler: () => void;
 }
 
 const Post = ({
+  postIdx,
   post,
   loading,
   notFound,
-  likeCount,
-  liked,
-  handlePostLikeCallback,
   showModalCallback,
-  modifyClickHandler,
   otherPosts,
   postTopRef,
+  scrollToTopSmooth,
   admin,
+  modifyClickHandler,
 }: PostProps) => {
   return (
     <>
       <div className="Post" ref={postTopRef}>
+        <PostBottomBarContainer
+          postIdx={postIdx}
+          scrollToTopSmooth={scrollToTopSmooth}
+        />
         {notFound ? (
           <p>아무것도 없떵</p>
         ) : (
@@ -54,11 +60,8 @@ const Post = ({
                     categoryName={post.category_name!}
                     createdAt={post.created_at!}
                     thumbnail={post.thumbnail!}
-                    handlePostLikeCallback={handlePostLikeCallback}
                     showModalCallback={showModalCallback}
                     modifyClickHandler={modifyClickHandler}
-                    likeCount={likeCount}
-                    liked={liked}
                     admin={admin}
                   />
                   {post.content && (

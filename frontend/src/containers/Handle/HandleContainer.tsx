@@ -155,11 +155,10 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
     await handleCreateTempPost(postParams)
       .then((res: Response) => {
-        toast.success("야호! 임시글 글 작성에 성공했어요!");
-        history.push("/");
+        toast.success("글이 임시 저장되었습니당!");
       })
       .catch((err: Error) => {
-        toast.error("앗! 글 작성에 실패했어요.");
+        toast.error("이런! 어딘가 문제가 있어요.");
       });
   }, [title, desc, content, categoryIdx, uploadFile, login, admin]);
 
@@ -207,18 +206,18 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
       await handleModifyPost(postParams)
         .then((res: Response) => {
-          toast.success("야호! 글 수정에 성공했어요!");
-          if (temp) {
-            history.push("/");
-          } else {
+          if (!temp) {
             history.push(`/post/${idx}`);
+            toast.success("야호! 글 수정에 성공했어요!");
+          } else {
+            toast.success("글이 임시 저장되었습니당!");
           }
         })
         .catch((err: Error) => {
-          toast.error("앗! 글 수정에 실패했어요.");
+          toast.error("이런! 어딘가 문제가 있어요.");
         });
     },
-    [title, desc, content, categoryIdx, uploadFile]
+    [title, desc, content, categoryIdx, uploadFile, fileName]
   );
 
   const handlePostCallback = useCallback(async () => {

@@ -80,7 +80,7 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   }, [handleMyProfileCallback]);
 
   useEffect(() => {
-    if (!hide) {
+    if (hide) {
       closeOption();
     }
   }, [hide]);

@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: column;
   font-family: MalgunGothic;
-  width: 20rem;
+  min-width: 22rem;
+  padding: 2rem 1.6rem 1.4rem 1.6rem;
 
   &-Content {
     display: flex;
