@@ -1,0 +1,34 @@
+@import "../../../../util/color.scss";
+
+.Post-Liked-User-Item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.6rem;
+  background-color: $vvvv-light-gray;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $vvv-light-gray;
+  }
+
+  &-Avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid $vvv-light-gray;
+    margin-right: 0.5rem;
+  }
+
+  &-Content {
+    &-Name {
+      font-size: 0.925rem;
+      font-weight: 600;
+      color: $light-black;
+    }
+
+    &-Bio {
+      font-size: 0.8rem;
+      color: $v-light-gray;
+    }
+  }
+}

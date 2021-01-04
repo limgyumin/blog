@@ -1,0 +1,42 @@
+@import "../../../util/color.scss";
+
+.Post-Liked-Users {
+  width: 27rem;
+
+  &-Header {
+    // position: fixed;
+    // width: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $vvvvv-light-gray;
+    border: 1px solid $vvv-light-gray;
+    padding: 0.6rem 0.4rem;
+
+    & > svg {
+      cursor: pointer;
+      font-size: 1.4rem;
+      position: absolute;
+      left: 0.4rem;
+      color: $light-black;
+    }
+
+    &-Title {
+      font-size: 1rem;
+      color: $light-black;
+      font-weight: 600;
+      margin-right: 0.4rem;
+    }
+
+    &-Count {
+      font-size: 1rem;
+      color: $v-light-gray;
+      font-weight: 600;
+    }
+  }
+
+  &-List {
+    height: 30rem;
+    overflow-y: auto;
+  }
+}
