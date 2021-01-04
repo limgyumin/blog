@@ -3,11 +3,7 @@ import { observer } from "mobx-react";
 import Post from "../../components/Post";
 import useStore from "../../util/lib/hooks/useStore";
 import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
-import {
-  LikeInfoResponse,
-  OtherPostsResponse,
-  PostResponse,
-} from "../../util/types/Response";
+import { OtherPostsResponse, PostResponse } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
@@ -31,21 +27,13 @@ interface MatchType {
 const PostContainer = ({ match }: PostContainerProps) => {
   const history = useHistory();
   const { store } = useStore();
-  const {
-    handlePost,
-    handleDeletePost,
-    handleOtherPosts,
-    handlePostLike,
-    handleLikeInfo,
-  } = store.PostStore;
-  const { login, admin } = store.UserStore;
+  const { handlePost, handleDeletePost, handleOtherPosts } = store.PostStore;
+  const { admin } = store.UserStore;
 
   const [post, setPost] = useState<Partial<PostType>>({});
   const [otherPosts, setOtherPosts] = useState<Partial<OtherPostsType>>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
-  const [likeCount, setLikeCount] = useState<number>(0);
-  const [liked, setLiked] = useState<boolean>(false);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -80,39 +68,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
       });
   }, [postIdx]);
 
-  // 글 좋아요 및 좋아요 취소
-  const handlePostLikeCallback = useCallback(async () => {
-    if (login) {
-      await handlePostLike(postIdx)
-        .then((res: Response) => {
-          handleLikeInfoCallback();
-        })
-        .catch((err: Error) => {
-          if (err.message.indexOf("401")) {
-            toast.info("로그인 후 좋아요를 누르실 수 있어요.");
-          } else {
-            toast.error("이런! 어딘가 문제가 있어요.");
-            history.push("/");
-          }
-        });
-    } else {
-      toast.info("로그인 후 좋아요를 누르실 수 있어요.");
-    }
-  }, [login]);
-
-  // 글 좋아요 여부 조회
-  const handleLikeInfoCallback = useCallback(async () => {
-    await handleLikeInfo(postIdx)
-      .then((res: LikeInfoResponse) => {
-        setLikeCount(res.data["like_count"]);
-        setLiked(res.data["liked"]);
-      })
-      .catch((err: Error) => {
-        toast.error("이런! 좋아요 정보 조회에 실패했어요.");
-        history.push("/");
-      });
-  }, [postIdx]);
-
   // 글 조회
   const handlePostCallback = useCallback(async () => {
     setLoading(true);
@@ -121,7 +76,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
         setLoading(false);
         setPost(res.data.post);
         handleOtherPostsCallback();
-        handleLikeInfoCallback();
       })
       .catch((err: Error) => {
         if (err.message.indexOf("404")) {
@@ -131,7 +85,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
           history.push("/");
         }
       });
-  }, [postIdx, handleOtherPostsCallback, handleLikeInfoCallback]);
+  }, [postIdx, handleOtherPostsCallback]);
 
   const deletePostHandler = useCallback(async () => {
     await handleDeletePostCallback();
@@ -159,6 +113,10 @@ const PostContainer = ({ match }: PostContainerProps) => {
     postTopRef.current?.scrollIntoView();
   };
 
+  const scrollToTopSmooth = () => {
+    postTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   useEffect(() => {
     scrollToTop();
   }, [postIdx]);
@@ -171,13 +129,6 @@ const PostContainer = ({ match }: PostContainerProps) => {
   useEffect(() => {
     return () => setOtherPosts({});
   }, [handleOtherPostsCallback]);
-
-  useEffect(() => {
-    return () => {
-      setLikeCount(0);
-      setLiked(false);
-    };
-  }, [handleLikeInfoCallback]);
 
   return (
     <>
@@ -224,15 +175,14 @@ const PostContainer = ({ match }: PostContainerProps) => {
         </ModalContainer>
       </Portal>
       <Post
+        postIdx={postIdx}
         post={post}
         loading={loading}
         notFound={notFound}
-        likeCount={likeCount}
-        liked={liked}
-        handlePostLikeCallback={handlePostLikeCallback}
         showModalCallback={showModalCallback}
         otherPosts={otherPosts}
         postTopRef={postTopRef}
+        scrollToTopSmooth={scrollToTopSmooth}
         admin={admin}
         modifyClickHandler={modifyClickHandler}
       />

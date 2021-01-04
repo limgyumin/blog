@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import useStore from "../../util/lib/hooks/useStore";
-import "react-toastify/dist/ReactToastify.css";
 import PostCommentItem from "../../components/Post/PostComment/PostCommentItem";
 import CommentType from "../../util/types/Comment";
 import { toast } from "react-toastify";
