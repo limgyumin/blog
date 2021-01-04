@@ -17,6 +17,13 @@ export interface LikeInfoResponse extends Response {
   };
 }
 
+export interface LikedUsersResponse extends Response {
+  data: {
+    like_count: number;
+    liked_users: UserType[];
+  };
+}
+
 export interface OtherPostsResponse extends Response {
   data: {
     other_posts: OtherPostsType;

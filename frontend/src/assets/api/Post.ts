@@ -165,6 +165,17 @@ class Post {
       throw new Error(`${error}`);
     }
   }
+
+  async GetLikedUsers(idx: number) {
+    try {
+      const url = `${SERVER}/v1/like/users?post=${idx}`;
+
+      const { data } = await axios.get(url);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Post();

@@ -3,6 +3,7 @@ import { autobind } from "core-decorators";
 import Post from "../../assets/api/Post";
 import PostType from "../../util/types/Post";
 import {
+  LikedUsersResponse,
   LikeInfoResponse,
   OtherPostsResponse,
   PostResponse,
@@ -222,6 +223,23 @@ class PostStore {
 
       return new Promise(
         (resolve: (response: LikeInfoResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleLikedUsers = async (idx: number): Promise<LikedUsersResponse> => {
+    try {
+      const response: LikedUsersResponse = await Post.GetLikedUsers(idx);
+
+      return new Promise(
+        (resolve: (response: LikedUsersResponse) => void, reject) => {
           resolve(response);
         }
       );
