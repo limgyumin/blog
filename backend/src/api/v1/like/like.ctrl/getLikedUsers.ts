@@ -33,19 +33,18 @@ export default async (req: Request, res: Response) => {
       },
     });
 
+    const liked_users: User[] = [];
+
     for (let i in likes) {
       const userRepo = getRepository(User);
       const user: User = await userRepo.findOne({
-        select: ["avatar", "name"],
+        select: ["avatar", "name", "bio"],
         where: {
           idx: likes[i].fk_user_idx,
         },
       });
 
-      delete likes[i].fk_post_idx;
-      delete likes[i].fk_user_idx;
-
-      likes[i].user = user;
+      liked_users.push(user);
     }
 
     logger.green("[GET] 좋아요 유저 조회 성공.");
@@ -54,7 +53,7 @@ export default async (req: Request, res: Response) => {
       message: "좋아요 유저 목록 조회 성공.",
       data: {
         like_count,
-        likes,
+        liked_users,
       },
     });
   } catch (error) {
