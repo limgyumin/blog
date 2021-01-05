@@ -30,20 +30,20 @@
     &-Name {
       font-size: 1.425rem;
       color: $light-black;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     &-Id {
       font-size: 1.2rem;
-      color: $light-gray;
-      font-weight: 300;
+      color: $v-light-gray;
+      font-weight: lighter;
       margin-bottom: 1rem;
     }
 
     &-Bio {
       font-size: 1.2rem;
       color: $light-gray;
-      font-weight: 500;
+      font-weight: normal;
       font-style: oblique;
     }
   }
@@ -75,14 +75,16 @@
   }
 
   &-Icon {
+    font-size: 1rem;
+    color: $black;
     transform: rotate(-90deg);
     margin-bottom: 0.3rem;
   }
 
   &-Text {
-    color: $light-black;
-    font-size: 12px;
-    font-weight: 600;
+    color: $black;
+    font-size: 0.875rem;
+    font-weight: normal;
     line-height: 14px;
     transform: rotate(-180deg);
     writing-mode: tb-rl;

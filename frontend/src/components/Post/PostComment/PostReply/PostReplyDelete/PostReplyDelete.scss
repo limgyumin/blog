@@ -3,7 +3,7 @@
 .Post-Reply-Delete {
   display: flex;
   flex-direction: column;
-  font-family: MalgunGothic;
+  font-family: inherit;
   min-width: 22rem;
   padding: 2rem 1.6rem 1.4rem 1.6rem;
 
@@ -32,7 +32,7 @@
       padding: 0.4rem 1rem;
       background-color: $black;
       color: $white;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 1rem;
       transition: all ease 0.2s;
       margin-right: 0.6rem;
@@ -50,7 +50,7 @@
       padding: 0.4rem 1rem;
       background-color: $v-light-gray;
       color: $white;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 1rem;
       transition: all ease 0.2s;
 

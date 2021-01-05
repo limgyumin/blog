@@ -70,7 +70,7 @@
 
         &-Title {
           color: $black;
-          font-weight: 600;
+          font-weight: bold;
           font-size: 1.125rem;
           margin-top: 0.4rem;
           @include ellipsis(1);
@@ -136,7 +136,7 @@
 
         &-Title {
           color: $black;
-          font-weight: 600;
+          font-weight: bold;
           font-size: 1.125rem;
           margin-top: 0.4rem;
           @include ellipsis(1);

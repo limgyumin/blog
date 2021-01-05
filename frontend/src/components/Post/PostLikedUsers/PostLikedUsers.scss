@@ -4,8 +4,6 @@
   width: 27rem;
 
   &-Header {
-    // position: fixed;
-    // width: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,14 +22,14 @@
     &-Title {
       font-size: 1rem;
       color: $light-black;
-      font-weight: 600;
+      font-weight: bold;
       margin-right: 0.4rem;
     }
 
     &-Count {
       font-size: 1rem;
       color: $v-light-gray;
-      font-weight: 600;
+      font-weight: bold;
     }
   }
 

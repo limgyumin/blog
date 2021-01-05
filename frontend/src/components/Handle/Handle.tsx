@@ -58,10 +58,6 @@ const Handle = ({
   return (
     <>
       <div className="Handle">
-        <div className="Handle-TopBar">
-          <Logo />
-          <p>글 작성하기</p>
-        </div>
         <div className="Handle-Wrapper">
           <div className="Handle-Wrapper-Area">
             <div className="Handle-Wrapper-Area-Label">

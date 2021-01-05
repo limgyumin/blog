@@ -38,10 +38,11 @@
           border: none;
           font-size: 1.3rem;
           font-family: inherit;
+          font-weight: normal;
 
           &::placeholder {
             color: $vv-light-gray;
-            font-weight: 500;
+            font-weight: normal;
           }
         }
       }
@@ -49,10 +50,11 @@
       &-Count {
         color: $light-gray;
         font-size: 1.2rem;
+        font-weight: normal;
 
         & > span {
           color: $light-black;
-          font-weight: 600;
+          font-weight: bold;
         }
       }
     }

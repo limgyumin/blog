@@ -4,7 +4,7 @@
   text-decoration: none;
   cursor: pointer;
   margin: 0 0.6rem 0.4rem 0;
-  border-radius: 0.35rem;
+  border-radius: 0.3rem;
   background-color: $vvv-light-gray;
   transition: background-color ease 0.1s;
   display: flex;
@@ -35,11 +35,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.2rem 0.3rem 0.2rem 0.6rem;
+    padding: 0.23rem 0.3rem 0.23rem 0.6rem;
 
     &-Name {
       font-size: 0.825rem;
-      font-weight: 600;
+      font-weight: normal;
       color: $black;
       margin-right: 0.2rem;
       transition: color ease 0.2s;
@@ -51,12 +51,16 @@
   }
 
   &-Count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color ease 0.1s;
     background-color: $semi-light-gray;
     padding: 0.2rem 0.4rem;
     color: $gray;
     font-size: 0.825rem;
     font-weight: 600;
+    height: 100%;
 
     &-Active {
       background-color: $semi-light-black;

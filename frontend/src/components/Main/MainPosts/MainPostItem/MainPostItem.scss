@@ -52,10 +52,10 @@
           align-items: center;
           font-size: 1rem;
           background-color: $white;
-          padding: 0.19rem 0.6rem;
-          border-radius: 0.5rem;
+          padding: 0.3rem 0.6rem;
+          border-radius: 0.3rem;
           color: $gray;
-          font-weight: 600;
+          font-weight: normal;
         }
 
         &-Comment {
@@ -110,13 +110,13 @@
         padding: 0.16rem 0.5rem;
         border-radius: 0.5rem;
         color: $gray;
-        font-weight: 600;
+        font-weight: bold;
         margin-right: 0.6rem;
       }
 
       &-Date {
         font-size: 0.925rem;
-        font-weight: 700;
+        font-weight: bold;
         color: $black;
       }
     }
@@ -131,7 +131,7 @@
         align-items: center;
         color: $black;
         font-size: 1rem;
-        font-weight: 700;
+        font-weight: bold;
         margin-bottom: 0.3rem;
 
         & > span {
@@ -145,7 +145,7 @@
 
       &-Description {
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: normal;
         color: $light-black;
         @include ellipsis(1);
       }

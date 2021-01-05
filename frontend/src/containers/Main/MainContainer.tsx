@@ -32,8 +32,6 @@ const MainContainer = ({}: MainContainerProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
-  const mainRef = useRef<HTMLDivElement>(null);
-
   //categories
   const [modify, setModify] = useState<boolean>(false);
 
@@ -73,10 +71,6 @@ const MainContainer = ({}: MainContainerProps) => {
       });
     }
   }, []);
-
-  const scrollToTop = () => {
-    mainRef.current!.scrollIntoView({ behavior: "smooth" });
-  };
 
   useEffect(() => {
     if (inView && !loading && posts.length < postCount) {
@@ -127,8 +121,6 @@ const MainContainer = ({}: MainContainerProps) => {
         postRef={ref}
         modify={modify}
         setModify={setModify}
-        scrollToTop={scrollToTop}
-        mainRef={mainRef}
       />
     </>
   );

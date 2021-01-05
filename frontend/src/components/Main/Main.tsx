@@ -5,6 +5,7 @@ import "./Main.scss";
 import MainCategories from "./MainCategories";
 import MainCategoryItem from "./MainCategories/MainCategoryItem";
 import MainPosts from "./MainPosts";
+import MainPostLoading from "./MainPosts/MainPostLoading";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
 
 interface MainProps {
@@ -16,8 +17,6 @@ interface MainProps {
   postRef: (node?: Element | null | undefined) => void;
   modify: boolean;
   setModify: React.Dispatch<React.SetStateAction<boolean>>;
-  scrollToTop: () => void;
-  mainRef: React.RefObject<HTMLDivElement>;
 }
 
 const Main = ({
@@ -27,8 +26,6 @@ const Main = ({
   notFound,
   loading,
   postRef,
-  scrollToTop,
-  mainRef,
 }: MainProps) => {
   const totalView = {
     idx: 0,
@@ -38,7 +35,7 @@ const Main = ({
   return (
     <>
       <div className="Main">
-        <div className="Main-Wrapper" ref={mainRef}>
+        <div className="Main-Wrapper">
           <div className="Main-Wrapper-Container">
             <div className="Main-Wrapper-Container-List">
               <MainCategoryItem category={totalView} />
@@ -51,6 +48,7 @@ const Main = ({
             ) : (
               <MainPosts posts={posts} loading={loading} postRef={postRef} />
             )}
+            {loading && <MainPostLoading />}
           </div>
           <MainCategories categories={categories} totalView={totalView} />
         </div>

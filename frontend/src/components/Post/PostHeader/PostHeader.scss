@@ -36,7 +36,7 @@
         &-Name {
           background-color: $vvv-light-gray;
           font-size: 1rem;
-          font-weight: 600;
+          font-weight: bold;
           padding: 0.25rem 0.9rem;
           border-radius: 2rem;
           color: $light-black;
@@ -45,12 +45,12 @@
 
         &-Info {
           font-size: 1.05rem;
-          font-weight: 400;
+          font-weight: normal;
           color: $light-gray;
 
           & > span {
             color: $black;
-            font-weight: 600;
+            font-weight: bold;
           }
         }
       }

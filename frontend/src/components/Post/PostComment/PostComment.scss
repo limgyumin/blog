@@ -11,7 +11,7 @@
 
     &-Count {
       font-size: 1.125rem;
-      font-weight: 600;
+      font-weight: bold;
       margin-bottom: 1rem;
     }
 
@@ -24,7 +24,7 @@
         min-height: 6.125rem;
         padding: 1rem;
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: normal;
         font-family: inherit;
         color: $black;
         outline: none;
@@ -60,9 +60,10 @@
           padding: 0.4rem 1rem;
           background-color: $black;
           color: $white;
-          font-weight: 600;
+          font-weight: bold;
           font-size: 1rem;
           transition: all ease 0.2s;
+          font-family: inherit;
 
           &:hover {
             background-color: $light-black;

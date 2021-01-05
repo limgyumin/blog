@@ -6,7 +6,7 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  font-family: MalgunGothic;
+  font-family: inherit;
   animation: fadeIn ease 0.5s;
 
   @keyframes fadeIn {
@@ -21,26 +21,6 @@
 
   ::selection {
     background-color: $vvv-light-gray;
-  }
-
-  &-TopBar {
-    display: flex;
-    align-items: center;
-    background-color: $black;
-    padding: 0.8rem 1.5rem;
-
-    & > svg {
-      width: 1.65rem;
-      height: 1.65rem;
-      margin-right: 1rem;
-    }
-
-    & > p {
-      font-family: NotoSansKR;
-      font-weight: 500;
-      font-size: 1rem;
-      color: $vvvv-light-gray;
-    }
   }
 
   &-Wrapper {
@@ -63,12 +43,12 @@
         justify-content: space-between;
         width: 100%;
         font-size: 1.1rem;
-        font-weight: 500;
+        font-weight: normal;
         background-color: $vvvvv-light-gray;
         color: $light-black;
         padding: 0 0.5rem 0 2rem;
         border-bottom: 1px solid $vvv-light-gray;
-        font-family: NotoSansKR;
+        font-family: inherit;
 
         &-Inner {
           display: flex;
@@ -96,11 +76,11 @@
             border: none;
             border-radius: 0.3rem;
             padding: 0.4rem 0.9rem;
-            font-weight: 500;
+            font-weight: bold;
             font-size: 1rem;
             transition: all ease 0.2s;
             margin-right: 0.6rem;
-            font-family: NotoSansKR;
+            font-family: inherit;
             background-color: $v-light-gray;
             color: $white;
 
@@ -136,14 +116,14 @@
           margin-top: 2rem;
           font-family: inherit;
           font-size: 2.2rem;
-          font-weight: 600;
+          font-weight: bold;
           color: $black;
           line-height: 1.45;
           overflow-y: hidden;
 
           &::placeholder {
             font-size: 2.2rem;
-            font-weight: 600;
+            font-weight: bold;
             color: $v-light-gray;
           }
         }
@@ -156,6 +136,7 @@
           background-color: transparent;
           font-family: inherit;
           font-size: 1.5rem;
+          font-weight: normal;
           color: $black;
           margin: 1rem 0;
           line-height: 1.5;
@@ -163,6 +144,7 @@
 
           &::placeholder {
             font-size: 1.5rem;
+            font-weight: normal;
             color: $vv-light-gray;
           }
         }
@@ -203,7 +185,7 @@
         display: flex;
         width: 100%;
         font-size: 1.1rem;
-        font-weight: 500;
+        font-weight: normal;
         background-color: $vvvvv-light-gray;
         color: $light-black;
         padding: 0 2rem;
@@ -229,7 +211,7 @@
           width: 100%;
           margin-top: 2rem;
           font-size: 2.2rem;
-          font-weight: 600;
+          font-weight: bold;
           color: $black;
           line-height: 1.5;
           word-break: break-all;
@@ -238,6 +220,7 @@
         &-Description {
           width: 100%;
           font-size: 1.5rem;
+          font-weight: normal;
           margin: 1rem 0;
           color: $black;
           line-height: 1.5;
@@ -307,6 +290,7 @@
           align-items: center;
           padding: 0.5rem 0.75rem;
           color: $white;
+          font-weight: bold;
           font-size: 1rem;
           line-height: normal;
           vertical-align: middle;
@@ -393,11 +377,11 @@
         border: none;
         border-radius: 0.3rem;
         padding: 0.45rem 0.9rem;
-        font-weight: 500;
+        font-weight: bold;
         font-size: 1rem;
         transition: all ease 0.2s;
         margin-right: 0.6rem;
-        font-family: NotoSansKR;
+        font-family: inherit;
         background-color: $v-light-gray;
         color: $white;
 
