@@ -86,7 +86,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     let thumbnail = "";
     await handleUploadFile(image)
       .then((res: UploadFileResponse) => {
-        thumbnail = convertURL(res.data.files[0]);
+        thumbnail = res.data.files[0];
       })
       .catch((err: Error) => {
         toast.error("이런! 이미지 업로드에 실패했어요.");
@@ -117,7 +117,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       description: removeLastBlank(desc),
       content: removeLastBlank(content),
       category_idx: categoryIdx,
-      thumbnail: thumbnail,
+      thumbnail: convertURL(thumbnail!),
     };
 
     await handleCreatePost(postParams)
@@ -150,7 +150,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       description: removeLastBlank(desc) || "임시 저장된 글.",
       content: removeLastBlank(content),
       category_idx: categoryIdx,
-      thumbnail: thumbnail,
+      thumbnail: convertURL(thumbnail!),
     };
 
     await handleCreateTempPost(postParams)
@@ -189,7 +189,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       if (uploadFile) {
         thumbnail = await handleUploadFileCallback(uploadFile);
       } else if (fileName) {
-        thumbnail = convertURL(fileName);
+        thumbnail = fileName;
       } else {
         thumbnail = "";
       }
@@ -201,7 +201,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         content: removeLastBlank(content),
         category_idx: categoryIdx,
         is_temp: temp,
-        thumbnail: thumbnail,
+        thumbnail: convertURL(thumbnail),
       };
 
       await handleModifyPost(postParams)
@@ -264,6 +264,22 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       history.push("/");
     }
   }, []);
+
+  const handleInsertImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      let reader = new FileReader();
+      if (e.target.files && e.target.files.length) {
+        let file = e.target.files[0];
+        reader.onloadend = async () => {
+          const imageURL = await handleUploadFileCallback(file);
+          setContent((content) => content + `![image](${imageURL})`);
+        };
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      toast.error("이런! 어딘가 문제가 있어요.");
+    }
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
@@ -408,6 +424,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         contentRef={contentRef}
         writeCancelHandler={writeCancelHandler}
         handleImageChange={handleImageChange}
+        handleInsertImage={handleInsertImage}
         preview={preview}
         fileName={fileName}
         clearImageHandler={clearImageHandler}

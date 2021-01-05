@@ -18,6 +18,7 @@ interface HandleProps {
   contentRef: React.RefObject<HTMLTextAreaElement>;
   writeCancelHandler: () => void;
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInsertImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
   preview: string | ArrayBuffer | null;
   fileName: string;
   clearImageHandler: () => void;
@@ -43,6 +44,7 @@ const Handle = ({
   contentRef,
   writeCancelHandler,
   handleImageChange,
+  handleInsertImage,
   preview,
   fileName,
   clearImageHandler,
@@ -129,6 +131,18 @@ const Handle = ({
             </div>
           </div>
         </div>
+        <div className="Handle-InsertImage">
+          <p className="Handle-InsertImage-Title">이미지를 추가해보세요!</p>
+          <label htmlFor="insert_image" className="Handle-InsertImage-Button">
+            업로드
+          </label>
+          <input
+            id="insert_image"
+            type="file"
+            accept="image/png, image/jpeg"
+            onChange={(e) => handleInsertImage(e)}
+          />
+        </div>
         <div className="Handle-Control">
           <div className="Handle-Control-Wrapper">
             <div className="Handle-Control-Wrapper-Button">
@@ -144,7 +158,7 @@ const Handle = ({
                 </div>
               ) : (
                 <label
-                  htmlFor="file"
+                  htmlFor="thumbnail"
                   className="Handle-Control-Wrapper-Button-Label"
                 >
                   업로드
@@ -152,7 +166,7 @@ const Handle = ({
               )}
             </div>
             <input
-              id="file"
+              id="thumbnail"
               type="file"
               accept="image/png, image/jpeg"
               onChange={(e) => handleImageChange(e)}
