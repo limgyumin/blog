@@ -2,7 +2,11 @@ import { action, observable } from "mobx";
 import { autobind } from "core-decorators";
 import Login from "../../assets/api/Login";
 import Profile from "../../assets/api/Profile";
-import { AuthResponse, ProfileResponse } from "../../util/types/Response";
+import {
+  AuthResponse,
+  ProfileResponse,
+  ProfilesResponse,
+} from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import axios from "axios";
 
@@ -46,6 +50,23 @@ class UserStore {
   handleLoginState(state: boolean) {
     this.login = state;
   }
+
+  @action
+  handleProfiles = async (): Promise<ProfilesResponse> => {
+    try {
+      const response: ProfilesResponse = await Profile.GetProfiles();
+
+      return new Promise(
+        (resolve: (response: ProfilesResponse) => void, reject) => {
+          resolve(response);
+        }
+      );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
 
   @action
   handleMyProfile = async (): Promise<ProfileResponse> => {

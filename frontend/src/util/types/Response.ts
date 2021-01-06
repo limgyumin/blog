@@ -56,6 +56,13 @@ export interface CategoryPostsResponse extends Response {
   };
 }
 
+export interface ProfilesResponse extends Response {
+  data: {
+    user_count: number;
+    users: UserType[];
+  };
+}
+
 export interface ProfileResponse extends Response {
   data: {
     user: UserType;
