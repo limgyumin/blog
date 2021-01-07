@@ -23,12 +23,12 @@ const SideBarTap = ({}: SideBarTapProps) => {
             <p>CATEGORIES</p>
           </div>
         </Link>
-        <div className="SideBar-Tap-Achieve">
+        <Link to="/members" className="SideBar-Tap-Achieve">
           <div className="SideBar-Tap-Achieve-Wrapper">
             <RiMacbookLine />
-            <p>ACHIEVE</p>
+            <p>MEMBERS</p>
           </div>
-        </div>
+        </Link>
         <div className="SideBar-Tap-About">
           <div className="SideBar-Tap-About-Wrapper">
             <HiOutlineInformationCircle />

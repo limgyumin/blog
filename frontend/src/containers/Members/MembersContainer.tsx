@@ -2,15 +2,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import Members from "../../components/Members";
 import useStore from "../../util/lib/hooks/useStore";
-import { ProfilesResponse } from "../../util/types/Response";
+import { ProfileResponse, ProfilesResponse } from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import { toast } from "react-toastify";
 
 const MembersContainer = ({}) => {
   const { store } = useStore();
-  const { handleProfiles } = store.UserStore;
+  const { handleProfiles, handleAdminProfile } = store.UserStore;
   const [userCount, setUserCount] = useState<number>(0);
   const [users, setUsers] = useState<UserType[]>([]);
+  const [admin, setAdmin] = useState<Partial<UserType>>({});
 
   const handleProfilesCallback = useCallback(async () => {
     await handleProfiles()
@@ -23,6 +24,23 @@ const MembersContainer = ({}) => {
       });
   }, []);
 
+  const handleAdminProfileCallback = useCallback(async () => {
+    await handleAdminProfile()
+      .then((res: ProfileResponse) => {
+        setAdmin(res.data.user);
+      })
+      .catch((err: Error) => {
+        toast.error("이런! 어딘가 문제가 있어요.");
+      });
+  }, []);
+
+  useEffect(() => {
+    handleAdminProfileCallback();
+    return () => {
+      setAdmin({});
+    };
+  }, [handleAdminProfileCallback]);
+
   useEffect(() => {
     handleProfilesCallback();
     return () => {
@@ -33,7 +51,7 @@ const MembersContainer = ({}) => {
 
   return (
     <>
-      <Members userCount={userCount} users={users} />
+      <Members userCount={userCount} admin={admin} users={users} />
     </>
   );
 };

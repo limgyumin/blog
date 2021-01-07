@@ -25,11 +25,21 @@
         padding: 0.9rem 1.2rem;
         margin-bottom: 1rem;
         cursor: text;
+        transition: border ease 0.2s;
+
+        &:focus-within {
+          border: 1px solid $light-black;
+
+          & > svg {
+            color: $light-black;
+          }
+        }
 
         & > svg {
           font-size: 1.4rem;
           color: $v-light-gray;
           margin-right: 0.8rem;
+          transition: color ease 0.2s;
         }
 
         & > input {

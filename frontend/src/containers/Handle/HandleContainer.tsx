@@ -399,7 +399,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   useEffect(() => {
     contentRef.current!.style.height = "0px";
     const scrollHeight = contentRef.current!.scrollHeight;
-    contentRef.current!.style.height = scrollHeight + "px";
+    contentRef.current!.style.height = scrollHeight + 48 + "px";
   }, [content]);
 
   return (

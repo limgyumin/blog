@@ -1,0 +1,80 @@
+@import "../../util/color.scss";
+
+.Members {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  &-Container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+    margin: 8rem 0 4rem 0;
+    padding: 0 1rem;
+
+    &-Wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      &-Title {
+        font-size: 3rem;
+        font-weight: bold;
+        color: $light-black;
+        margin-bottom: 0.7rem;
+
+        @media screen and (max-width: 600px) {
+          font-size: 2.4rem;
+        }
+      }
+
+      &-Subtitle {
+        font-size: 2.1rem;
+        font-weight: normal;
+        color: $light-black;
+
+        & > span {
+          font-weight: bold;
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 1.6rem;
+        }
+      }
+    }
+
+    &-Admin {
+      margin-top: 6rem;
+      margin-bottom: 3rem;
+
+      &-Title {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: $light-black;
+
+        & > svg {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    &-List {
+      &-Title {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+        color: $light-black;
+
+        & > svg {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
