@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   font-family: inherit;
   animation: fadeIn ease 0.5s;
 
@@ -26,11 +26,11 @@
   &-Wrapper {
     display: flex;
     width: 100%;
-    min-height: calc(100vh - 6.725rem);
+    height: calc(100vh - 56px);
 
     &-Area {
       width: 50%;
-      min-height: inherit;
+      height: inherit;
       border-right: 1px solid $vvv-light-gray;
 
       @media screen and (max-width: 840px) {
@@ -42,6 +42,7 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        height: 3.4rem;
         font-size: 1.1rem;
         font-weight: normal;
         background-color: $vvvvv-light-gray;
@@ -102,10 +103,10 @@
 
       &-Container {
         width: 100%;
-        min-height: calc(100vh - 6.725rem);
+        height: calc(100% - 3.4rem);
+        overflow-y: auto;
         background-color: $white;
-        padding: 1.5rem 2rem 7rem 2rem;
-        position: relative;
+        padding: 1.5rem 2rem;
 
         &-Title {
           resize: none;
@@ -174,8 +175,7 @@
 
     &-Preview {
       width: 50%;
-      min-height: inherit;
-      overflow-x: hidden;
+      height: inherit;
 
       @media screen and (max-width: 840px) {
         display: none;
@@ -184,13 +184,14 @@
       &-Label {
         display: flex;
         width: 100%;
+        height: 3.4rem;
         font-size: 1.1rem;
         font-weight: normal;
         background-color: $vvvvv-light-gray;
         color: $light-black;
         padding: 0 2rem;
         border-bottom: 1px solid $vvv-light-gray;
-        font-family: NotoSansKR;
+        font-family: inherit;
 
         &-Inner {
           display: flex;
@@ -205,6 +206,10 @@
       }
 
       &-Area {
+        width: 100%;
+        height: calc(100% - 3.4rem);
+        overflow-y: auto;
+        background-color: $white;
         padding: 1.5rem 2rem;
 
         &-Title {
@@ -227,25 +232,16 @@
           word-break: break-all;
         }
 
-        &-Thumbnail {
-          margin: 2rem 0;
-          position: relative;
-          padding-top: 35%;
-          max-width: 65%;
-
-          &-Image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 0.4rem;
-            margin-bottom: 0.4rem;
-            position: absolute;
-            top: 0;
-          }
+        &-Image {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          margin-top: 1.5rem;
+          margin-bottom: 1.5rem;
         }
 
         &-Content {
-          margin: 3.5rem 0 6rem 0;
+          margin-top: 3.5rem;
         }
       }
     }
@@ -297,13 +293,10 @@
   }
 
   &-Control {
-    position: fixed;
-    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    z-index: 10;
     background-color: $vvvvv-light-gray;
     border-top: 1px solid $vvv-light-gray;
     padding: 0.5rem 1.5rem;

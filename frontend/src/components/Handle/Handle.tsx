@@ -118,12 +118,10 @@ const Handle = ({
               <p className="Handle-Wrapper-Preview-Area-Title">{title}</p>
               <p className="Handle-Wrapper-Preview-Area-Description">{desc}</p>
               {preview && (
-                <div className="Handle-Wrapper-Preview-Area-Thumbnail">
-                  <img
-                    src={preview.toString()}
-                    className="Handle-Wrapper-Preview-Area-Thumbnail-Image"
-                  />
-                </div>
+                <img
+                  src={preview.toString()}
+                  className="Handle-Wrapper-Preview-Area-Image"
+                />
               )}
               <MarkDownContainer className="Handle-Wrapper-Preview-Area-Content">
                 {content}
