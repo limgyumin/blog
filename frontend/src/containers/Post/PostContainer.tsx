@@ -73,6 +73,9 @@ const PostContainer = ({ match }: PostContainerProps) => {
     setLoading(true);
     await handlePost(postIdx)
       .then((res: PostResponse) => {
+        if (!res.data.post) {
+          setNotFound(true);
+        }
         setLoading(false);
         setPost(res.data.post);
         handleOtherPostsCallback();

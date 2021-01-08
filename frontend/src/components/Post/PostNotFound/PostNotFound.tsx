@@ -12,7 +12,7 @@ const PostNotFound = ({}: PostNotFoundProps) => {
         <div className="Post-Paper-NotFound-Container">
           <div className="Post-Paper-NotFound-Container-Image"></div>
           <p className="Post-Paper-NotFound-Container-Title">
-            정말 이 주소가 맞나요?
+            잠깐, 정말 이 주소가 맞나요?
           </p>
           <p className="Post-Paper-NotFound-Container-Subtitle">
             아닌 것 같은데용.. 😅

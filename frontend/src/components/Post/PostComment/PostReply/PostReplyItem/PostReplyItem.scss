@@ -16,22 +16,34 @@
       display: flex;
       align-items: center;
 
-      & > img {
-        width: 3.6rem;
-        height: 3.6rem;
-        border-radius: 50%;
-        border: 1px solid $vvv-light-gray;
-        margin-right: 0.8rem;
+      &-Avatar {
+        & > img {
+          width: 3.6rem;
+          height: 3.6rem;
+          border-radius: 50%;
+          border: 1px solid $vvv-light-gray;
+          margin-right: 0.8rem;
+        }
       }
 
       &-Container {
         display: flex;
         flex-direction: column;
 
-        & > h3 {
-          font-size: 1.125rem;
-          margin-bottom: 0.25rem;
-          color: $black;
+        &-Name {
+          text-decoration: none;
+
+          &:hover {
+            & > h3 {
+              text-decoration: underline;
+            }
+          }
+
+          & > h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+            color: $black;
+          }
         }
 
         & > p {

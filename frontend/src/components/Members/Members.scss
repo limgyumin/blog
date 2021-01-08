@@ -12,6 +12,19 @@
     max-width: 800px;
     margin: 8rem 0 4rem 0;
     padding: 0 1rem;
+    animation: memberFadeIn ease 0.5s;
+
+    @keyframes memberFadeIn {
+      0% {
+        transform: translateY(2rem);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateY(0rem);
+        opacity: 1;
+      }
+    }
 
     &-Wrapper {
       display: flex;

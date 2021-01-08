@@ -19,9 +19,9 @@
     background-color: rgba(0, 0, 0, 0.4);
 
     &-Active {
-      animation: fadeIn ease 0.5s;
+      animation: modalFadeIn ease 0.5s;
 
-      @keyframes fadeIn {
+      @keyframes modalFadeIn {
         0% {
           opacity: 0;
         }
@@ -32,9 +32,9 @@
     }
 
     &-Leave {
-      animation: fadeOut ease 0.5s;
+      animation: modalFadeOut ease 0.5s;
 
-      @keyframes fadeOut {
+      @keyframes modalFadeOut {
         0% {
           opacity: 1;
         }
@@ -53,28 +53,28 @@
     overflow: hidden;
 
     &-Active {
-      animation: risingUp ease 0.5s;
+      animation: modalRisingUp ease 0.5s;
       transform-origin: bottom;
 
-      @keyframes risingUp {
+      @keyframes modalRisingUp {
         0% {
-          transform: scale(1, 1) translateY(100rem);
+          transform: translateY(100rem);
         }
         100% {
-          transform: scale(1, 1) translateY(0);
+          transform: translateY(0);
         }
       }
     }
 
     &-Leave {
-      animation: risingDown ease 0.5s;
+      animation: modalRisingDown ease 0.5s;
 
-      @keyframes risingDown {
+      @keyframes modalRisingDown {
         0% {
-          transform: scale(1, 1) translateY(0rem);
+          transform: translateY(0rem);
         }
         100% {
-          transform: scale(1, 1) translateY(100rem);
+          transform: translateY(100rem);
         }
       }
     }

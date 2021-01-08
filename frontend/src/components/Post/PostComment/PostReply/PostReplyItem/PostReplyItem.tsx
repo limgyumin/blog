@@ -37,9 +37,21 @@ const PostReplyItem = ({
       <div className="Post-Reply-Item">
         <div className="Post-Reply-Item-Wrapper">
           <div className="Post-Reply-Item-Wrapper-Info">
-            <img src={reply.user.avatar} alt={reply.user.avatar} />
+            <a
+              className="Post-Reply-Item-Wrapper-Info-Avatar"
+              href={`https://github.com/${reply.user.id}`}
+              target="_blank"
+            >
+              <img src={reply.user.avatar} alt={reply.user.avatar} />
+            </a>
             <div className="Post-Reply-Item-Wrapper-Info-Container">
-              <h3>{reply.user.name}</h3>
+              <a
+                className="Post-Reply-Item-Wrapper-Info-Container-Name"
+                href={`https://github.com/${reply.user.id}`}
+                target="_blank"
+              >
+                <h3>{reply.user.name}</h3>
+              </a>
               <p>{getTimeCount(reply.created_at)}</p>
             </div>
           </div>
