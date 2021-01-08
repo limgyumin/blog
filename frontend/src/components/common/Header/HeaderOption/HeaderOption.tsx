@@ -20,9 +20,6 @@ const HeaderOption = ({
   return (
     <>
       <div className="Header-Option">
-        <div className="Header-Option-MyProfile">
-          <span className="Header-Option-MyProfile-Text">내 프로필</span>
-        </div>
         {admin && (
           <Link to="/temp" className="Header-Option-TempList">
             <span className="Header-Option-TempList-Text">임시 글</span>

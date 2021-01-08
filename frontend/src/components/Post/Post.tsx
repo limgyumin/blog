@@ -11,6 +11,7 @@ import PostBottomBar from "./PostBottomBar";
 import PostHeader from "./PostHeader";
 import PostList from "./PostList";
 import PostLoading from "./PostLoading";
+import PostNotFound from "./PostNotFound";
 import PostProfile from "./PostProfile";
 
 interface PostProps {
@@ -41,46 +42,52 @@ const Post = ({
   return (
     <>
       <div className="Post" ref={postTopRef}>
-        <PostBottomBarContainer
-          postIdx={postIdx}
-          scrollToTopSmooth={scrollToTopSmooth}
-        />
+        {post.idx && (
+          <PostBottomBarContainer
+            postIdx={postIdx}
+            scrollToTopSmooth={scrollToTopSmooth}
+          />
+        )}
         {notFound ? (
-          <p>아무것도 없떵</p>
+          <PostNotFound />
         ) : (
-          <div className="Post-Container">
-            {loading ? (
-              <PostLoading />
-            ) : (
-              post.idx && (
-                <>
-                  <PostHeader
-                    title={post.title!}
-                    writer={post.user!.name}
-                    categoryName={post.category_name!}
-                    createdAt={post.created_at!}
-                    thumbnail={post.thumbnail!}
-                    showModalCallback={showModalCallback}
-                    modifyClickHandler={modifyClickHandler}
-                    admin={admin}
-                  />
-                  {post.content && (
-                    <MarkDownContainer className="Post-Content">
-                      {post.content}
-                    </MarkDownContainer>
-                  )}
-                  <PostProfile
-                    avatar={post.user!.avatar}
-                    writer={post.user!.name}
-                    bio={post.user!.bio}
-                    id={post.user!.id}
-                  />
-                  <PostList otherPosts={otherPosts} />
-                  {!post.is_temp && <PostCommentContainer postIdx={post.idx} />}
-                </>
-              )
-            )}
-          </div>
+          <>
+            <div className="Post-Container">
+              {loading ? (
+                <PostLoading />
+              ) : (
+                post.idx && (
+                  <>
+                    <PostHeader
+                      title={post.title!}
+                      writer={post.user!.name}
+                      categoryName={post.category_name!}
+                      createdAt={post.created_at!}
+                      thumbnail={post.thumbnail!}
+                      showModalCallback={showModalCallback}
+                      modifyClickHandler={modifyClickHandler}
+                      admin={admin}
+                    />
+                    {post.content && (
+                      <MarkDownContainer className="Post-Content">
+                        {post.content}
+                      </MarkDownContainer>
+                    )}
+                    <PostProfile
+                      avatar={post.user!.avatar}
+                      writer={post.user!.name}
+                      bio={post.user!.bio}
+                      id={post.user!.id}
+                    />
+                    <PostList otherPosts={otherPosts} />
+                    {!post.is_temp && (
+                      <PostCommentContainer postIdx={post.idx} />
+                    )}
+                  </>
+                )
+              )}
+            </div>
+          </>
         )}
       </div>
     </>

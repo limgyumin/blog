@@ -1,6 +1,6 @@
-@import "../../../../util/color.scss";
+@import "../../../util/color.scss";
 
-.Main-Paper-NotFound {
+.Post-Paper-NotFound {
   width: 100%;
   height: 80vh;
   display: flex;
@@ -8,11 +8,14 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  padding-top: 10rem;
 
-  &-Paper {
+  &-Sign {
     z-index: 10;
     transform: translateY(1rem);
     animation: upAndDown ease 1s infinite;
+    margin-bottom: 4rem;
+
     @keyframes upAndDown {
       0% {
         transform: translateY(1rem);
@@ -37,25 +40,6 @@
     &-Image {
       display: flex;
       flex-direction: column;
-
-      &-Shadow {
-        width: 11rem;
-        margin-bottom: 2rem;
-        animation: bigAndSmall ease 1s infinite;
-        @keyframes bigAndSmall {
-          0% {
-            transform: scale(1, 1);
-          }
-
-          50% {
-            transform: scale(0.9, 0.9);
-          }
-
-          100% {
-            transform: scale(1, 1);
-          }
-        }
-      }
     }
 
     &-Title {

@@ -15,7 +15,7 @@ const MainPostNotFound = ({}: MainPostNotFoundProps) => {
             <Shadow className="Main-Paper-NotFound-Container-Image-Shadow" />
           </div>
           <p className="Main-Paper-NotFound-Container-Title">
-            이런! 아무것도 없네요
+            으음.. 아무것도 없네요.
           </p>
           <p className="Main-Paper-NotFound-Container-Subtitle">
             아마 곧 생기지 않을까요?.. 🤔
