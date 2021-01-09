@@ -6,8 +6,11 @@ import findOrCreate from "../../../../lib/findOrCreate";
 import User from "../../../../entity/User";
 import { createToken } from "../../../../lib/token";
 import UserDataType from "../../../../type/UserDataType";
+import { validateLogin } from "../../../../lib/validation/auth";
 
 export default async (req: Request, res: Response) => {
+  if (!validateLogin(req, res)) return;
+
   type RequestBody = {
     code: string;
   };

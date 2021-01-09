@@ -4,6 +4,7 @@ import Comment from "../../../../entity/Comment";
 import Post from "../../../../entity/Post";
 import User from "../../../../entity/User";
 import logger from "../../../../lib/logger";
+import * as admin from "firebase-admin";
 import { validateCreate } from "../../../../lib/validation/comment";
 import AuthRequest from "../../../../type/AuthRequest";
 
@@ -43,6 +44,46 @@ export default async (req: AuthRequest, res: Response) => {
     comment.user = user;
 
     await commentRepo.save(comment);
+
+    const userRepo = getRepository(User);
+    const adminUser = await userRepo.findOne({
+      where: {
+        is_admin: true,
+      },
+    });
+
+    if (adminUser.fcm_allow && adminUser.fcm) {
+      const postRepo = getRepository(Post);
+      const post = await postRepo.findOne({
+        idx: comment.fk_post_idx,
+      });
+
+      const message = {
+        webpush: {
+          notification: {
+            icon: null,
+            title: `${user.name}님께서 댓글을 남겼습니다.`,
+            body: `${comment.content}`,
+            click_action: `http://localhost:3000/post/${post.idx}`,
+          },
+        },
+        data: {
+          score: "850",
+          time: "2:45",
+        },
+        token: adminUser.fcm,
+      };
+
+      admin
+        .messaging()
+        .send(message)
+        .then((res: string) => {
+          logger.green("[FCM] FCM 알림 전송 성공.");
+        })
+        .catch((err: Error) => {
+          logger.red("[FCM] FCM 알림 전송 실패.", err.message);
+        });
+    }
 
     logger.green("[POST] 댓글 작성 성공.");
     res.status(200).json({

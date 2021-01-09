@@ -39,6 +39,18 @@ export default class User extends BaseEntity {
   })
   bio: string;
 
+  @Column({
+    length: 255,
+    nullable: true,
+  })
+  fcm: string;
+
+  @Column({
+    default: false,
+    nullable: false,
+  })
+  fcm_allow: boolean;
+
   //관리자
   @Column({
     default: false,
