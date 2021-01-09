@@ -42,6 +42,21 @@ class UserStore {
   };
 
   @action
+  handleFcmToken = async (token: string): Promise<Response> => {
+    try {
+      const response: Response = await Login.FcmToken(token);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleAdminState(state: boolean) {
     this.admin = state;
   }

@@ -3,6 +3,9 @@ import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../../components/common/Header";
 import useStore from "../../util/lib/hooks/useStore";
 import axios from "axios";
+import firebase from "firebase/app";
+import "firebase/messaging";
+import option from "../../config/firebase";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -12,7 +15,11 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
   const { pathname } = useLocation();
   const history = useHistory();
   const { store } = useStore();
-  const { handleLoginState, handleAdminState } = store.UserStore;
+  const {
+    handleLoginState,
+    handleFcmToken,
+    handleAdminState,
+  } = store.UserStore;
   const { admin, login, user, handleMyProfile } = store.UserStore;
 
   const [hide, setHide] = useState<boolean>(false);
@@ -45,8 +52,42 @@ const HeaderContainer = ({}: HeaderContainerProps) => {
           handleLogout();
         }
       });
+      requestNotification();
     }
   }, [login]);
+
+  const getFcmToken = async () => {
+    if (!firebase.apps.length) {
+      firebase.initializeApp(option);
+    }
+    const token = await firebase.messaging().getToken();
+
+    await handleFcmToken(token);
+  };
+
+  const requestNotification = async () => {
+    if ("Notification" in window) {
+      try {
+        Notification.requestPermission().then(
+          (permission: NotificationPermission) => {
+            if (permission === "granted") {
+              getFcmToken();
+            }
+          }
+        );
+      } catch (error) {
+        if (error instanceof TypeError) {
+          Notification.requestPermission(
+            (permission: NotificationPermission) => {
+              if (permission === "granted") {
+                getFcmToken();
+              }
+            }
+          );
+        }
+      }
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");

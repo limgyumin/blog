@@ -138,7 +138,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
   };
 
   const scrollToBottom = () => {
-    commentRef.current?.scrollIntoView({ behavior: "smooth" });
+    commentRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   useEffect(() => {

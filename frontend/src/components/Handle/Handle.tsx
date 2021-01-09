@@ -4,7 +4,6 @@ import { ReactComponent as Option } from "../../assets/images/option.svg";
 import "./Handle.scss";
 import { CategoryType } from "../../util/types/Category";
 import HandleCategoryOption from "./HandleCategoryOption";
-import { ReactComponent as Logo } from "../../assets/images/untitled_logo.svg";
 
 interface HandleProps {
   title: string;
@@ -14,7 +13,6 @@ interface HandleProps {
   setDesc: React.Dispatch<React.SetStateAction<string>>;
   descRef: React.RefObject<HTMLTextAreaElement>;
   content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
   contentRef: React.RefObject<HTMLTextAreaElement>;
   writeCancelHandler: () => void;
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -30,6 +28,8 @@ interface HandleProps {
   writeClickHandler: () => void;
   saveClickHandler: () => void;
   keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  changeHandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  scrollDownRef: React.RefObject<HTMLDivElement>;
 }
 
 const Handle = ({
@@ -40,7 +40,6 @@ const Handle = ({
   setDesc,
   descRef,
   content,
-  setContent,
   contentRef,
   writeCancelHandler,
   handleImageChange,
@@ -56,6 +55,8 @@ const Handle = ({
   writeClickHandler,
   saveClickHandler,
   keyDownHandler,
+  changeHandler,
+  scrollDownRef,
 }: HandleProps) => {
   return (
     <>
@@ -104,7 +105,7 @@ const Handle = ({
                 ref={contentRef}
                 value={content}
                 onKeyDown={(e) => keyDownHandler(e)}
-                onChange={(e) => setContent(e.target.value)}
+                onChange={(e) => changeHandler(e)}
                 className="Handle-Wrapper-Area-Container-Content"
                 placeholder="자! 이제 마음껏 이야기를 써보죠!"
               />
@@ -114,7 +115,7 @@ const Handle = ({
             <div className="Handle-Wrapper-Preview-Label">
               <p className="Handle-Wrapper-Preview-Label-Inner">미리보기</p>
             </div>
-            <div className="Handle-Wrapper-Preview-Area">
+            <div className="Handle-Wrapper-Preview-Area" ref={scrollDownRef}>
               <p className="Handle-Wrapper-Preview-Area-Title">{title}</p>
               <p className="Handle-Wrapper-Preview-Area-Description">{desc}</p>
               {preview && (

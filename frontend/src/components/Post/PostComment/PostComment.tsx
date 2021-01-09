@@ -62,7 +62,7 @@ const PostComment = ({
             </div>
           </div>
         </div>
-        <div className="Post-Comment-List">
+        <div className="Post-Comment-List" ref={commentRef}>
           {comments.map((comment) => (
             <PostCommentItemContainer
               key={comment.idx}
@@ -74,7 +74,6 @@ const PostComment = ({
             />
           ))}
         </div>
-        <div ref={commentRef} />
       </div>
     </>
   );

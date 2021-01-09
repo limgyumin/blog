@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const CategoriesContainer = ({}) => {
   const { store } = useStore();
   const { categoryPosts, handleCategoryPosts } = store.CategoryStore;
+  const { admin, login } = store.UserStore;
 
   const handleCategoryPostsCallback = useCallback(async () => {
     await handleCategoryPosts()
@@ -23,7 +24,7 @@ const CategoriesContainer = ({}) => {
 
   return (
     <>
-      <Categories categoryPosts={categoryPosts} />
+      <Categories categoryPosts={categoryPosts} admin={admin} login={login} />
     </>
   );
 };

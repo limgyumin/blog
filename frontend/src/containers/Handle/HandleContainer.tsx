@@ -69,6 +69,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const titleRef = useRef<HTMLTextAreaElement>(null);
   const descRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
+  const scrollDownRef = useRef<HTMLDivElement>(null);
 
   const { idx } = match.params;
 
@@ -272,7 +273,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         let file = e.target.files[0];
         reader.onloadend = async () => {
           const imageURL = await handleUploadFileCallback(file);
-          setContent((content) => content + `![image](${imageURL})`);
+          setContent((content) => content + `\n![image](${imageURL})`);
         };
         reader.readAsDataURL(file);
       }
@@ -311,6 +312,14 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
   const goToBeforePage = () => {
     history.goBack();
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+    scrollDownRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+    });
   };
 
   const checkIsWriteCallback = useCallback(() => {
@@ -420,7 +429,6 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         setDesc={setDesc}
         descRef={descRef}
         content={content}
-        setContent={setContent}
         contentRef={contentRef}
         writeCancelHandler={writeCancelHandler}
         handleImageChange={handleImageChange}
@@ -436,6 +444,8 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
         writeClickHandler={writeClickHandler}
         saveClickHandler={saveClickHandler}
         keyDownHandler={keyDownHandler}
+        changeHandler={changeHandler}
+        scrollDownRef={scrollDownRef}
       />
     </>
   );

@@ -15,6 +15,20 @@ class Login {
       throw new Error(`${error}`);
     }
   }
+
+  async FcmToken(token: string) {
+    try {
+      const url = `${SERVER}/v1/auth/fcm`;
+      const body = {
+        token,
+      };
+
+      const { data } = await axios.post(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
 }
 
 export default new Login();
