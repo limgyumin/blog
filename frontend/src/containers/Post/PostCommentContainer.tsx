@@ -113,7 +113,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
         toast.error("이런! 댓글 삭제에 실패했어요.");
         history.push("/");
       });
-  }, [commentIdx]);
+  }, [commentIdx, handleCommentsCallback]);
 
   const showModalCallback = useCallback(() => {
     if (isShow) {
@@ -124,7 +124,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
       setIsShow(!isShow);
     }
     setIsOpen(!isOpen);
-  }, [isShow, isOpen]);
+  }, [isShow]);
 
   // 댓글 생성 Enter키 처리 (Enter + Shift 줄바꿈)
   const keyDownListener = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

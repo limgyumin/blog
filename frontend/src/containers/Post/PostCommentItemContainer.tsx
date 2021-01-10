@@ -52,7 +52,7 @@ const PostCommentItemContainer = ({
     } else {
       toast.info("로그인 후 댓글을 수정하실 수 있습니다.");
     }
-  }, [comment, content]);
+  }, [comment, content, handleCommentsCallback]);
 
   // Modify 취소 시 수정한 내용 초기화
   const handleModifyCancelCallback = useCallback(() => {

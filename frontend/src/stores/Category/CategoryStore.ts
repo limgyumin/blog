@@ -14,6 +14,21 @@ class CategoryStore {
   @observable totalPostCount: number = 0;
 
   @action
+  handleCreateCategory = async (name: string): Promise<Response> => {
+    try {
+      const response: Response = await Category.createCategory(name);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleCategories = async (): Promise<CategoriesResponse> => {
     try {
       const response: CategoriesResponse = await Category.getCategories();
@@ -45,6 +60,21 @@ class CategoryStore {
           resolve(response);
         }
       );
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleDeleteCategory = async (idx: number): Promise<Response> => {
+    try {
+      const response: Response = await Category.deleteCategory(idx);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
     } catch (error) {
       return new Promise((resolve, reject: (error: Error) => void) => {
         reject(error);

@@ -1,4 +1,6 @@
 import React from "react";
+import { FaExchangeAlt, FaPen, FaTrash } from "react-icons/fa";
+import { RiFolderAddFill } from "react-icons/ri";
 import { CategoryPostsType } from "../../util/types/Category";
 import "./Categories.scss";
 import CategoriesList from "./CategoriesListItem";
@@ -7,9 +9,19 @@ interface CategoriesProps {
   categoryPosts: CategoryPostsType[];
   admin: boolean;
   login: boolean;
+  deleteMode: boolean;
+  setDeleteMode: React.Dispatch<React.SetStateAction<boolean>>;
+  deleteCategoryHandler: (idx: number) => void;
 }
 
-const Categories = ({ categoryPosts, admin, login }: CategoriesProps) => {
+const Categories = ({
+  categoryPosts,
+  admin,
+  login,
+  deleteMode,
+  setDeleteMode,
+  deleteCategoryHandler,
+}: CategoriesProps) => {
   return (
     <>
       <div className="Categories">
@@ -18,15 +30,44 @@ const Categories = ({ categoryPosts, admin, login }: CategoriesProps) => {
             <p className="Categories-Wrapper-Header-Title">Categories</p>
             {admin && login && (
               <div className="Categories-Wrapper-Header-Control">
-                <p className="Categories-Wrapper-Header-Control-Edit">수정</p>
-                <p className="Categories-Wrapper-Header-Control-Delete">삭제</p>
+                {!deleteMode && (
+                  <div className="Categories-Wrapper-Header-Control-Add">
+                    <RiFolderAddFill />
+                  </div>
+                )}
+                {!deleteMode && (
+                  <div className="Categories-Wrapper-Header-Control-Edit">
+                    <FaPen />
+                  </div>
+                )}
+                <div
+                  className="Categories-Wrapper-Header-Control-Delete"
+                  onClick={() => setDeleteMode((prev) => !prev)}
+                >
+                  {deleteMode ? "완료" : <FaTrash />}
+                </div>
+                {!deleteMode && (
+                  <div className="Categories-Wrapper-Header-Control-Order">
+                    <FaExchangeAlt />
+                  </div>
+                )}
               </div>
             )}
           </div>
-          <div className="Categories-Wrapper-List">
+          <div
+            className={
+              deleteMode
+                ? "Categories-Wrapper-List-Delete Categories-Wrapper-List"
+                : "Categories-Wrapper-List"
+            }
+          >
             {categoryPosts.map((categoryPost, idx) => (
               <React.Fragment key={idx}>
-                <CategoriesList categoryPost={categoryPost} />
+                <CategoriesList
+                  categoryPost={categoryPost}
+                  deleteMode={deleteMode}
+                  deleteCategoryHandler={deleteCategoryHandler}
+                />
               </React.Fragment>
             ))}
           </div>

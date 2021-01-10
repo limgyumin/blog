@@ -1,16 +1,22 @@
-import { boolean } from "joi";
 import React, { useState } from "react";
 import { FaFolder, FaFolderOpen } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdCancel } from "react-icons/md";
 import { CategoryPostsType } from "../../../util/types/Category";
 import CategoriesPostsListItem from "../CategoriesPostsListItem";
 import "./CategoriesListItem.scss";
 
 interface CategoriesListItemProps {
   categoryPost: CategoryPostsType;
+  deleteMode: boolean;
+  deleteCategoryHandler: (idx: number) => void;
 }
 
-const CategoriesListItem = ({ categoryPost }: CategoriesListItemProps) => {
+const CategoriesListItem = ({
+  categoryPost,
+  deleteMode,
+  deleteCategoryHandler,
+}: CategoriesListItemProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -18,7 +24,9 @@ const CategoriesListItem = ({ categoryPost }: CategoriesListItemProps) => {
       <div className="Categories-List-Item">
         <div
           className="Categories-List-Item-Info"
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => {
+            !deleteMode && setOpen((prev) => !prev);
+          }}
         >
           <div className="Categories-List-Item-Info-Wrapper">
             {open ? <FaFolderOpen /> : <FaFolder />}
@@ -29,13 +37,20 @@ const CategoriesListItem = ({ categoryPost }: CategoriesListItemProps) => {
               {categoryPost.post_count} posts
             </p>
           </div>
-          <IoIosArrowDown
-            className={
-              open
-                ? "Categories-List-Item-Info-Arrow-Active Categories-List-Item-Info-Arrow"
-                : "Categories-List-Item-Info-Arrow"
-            }
-          />
+          {deleteMode ? (
+            <MdCancel
+              className="Categories-List-Item-Info-Icon"
+              onClick={() => deleteCategoryHandler(categoryPost.idx)}
+            />
+          ) : (
+            <IoIosArrowDown
+              className={
+                open
+                  ? "Categories-List-Item-Info-Icon-Active Categories-List-Item-Info-Icon"
+                  : "Categories-List-Item-Info-Icon"
+              }
+            />
+          )}
         </div>
         <div
           className={

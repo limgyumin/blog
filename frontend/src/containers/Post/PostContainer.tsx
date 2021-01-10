@@ -95,7 +95,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
     if (!deleting) {
       history.push("/");
     }
-  }, [deleting]);
+  }, [deleting, handleDeletePostCallback]);
 
   const showModalCallback = useCallback(() => {
     if (isShow) {

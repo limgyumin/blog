@@ -45,7 +45,7 @@ const PostReplyItemContainer = ({
         toast.error("이런! 댓글 수정에 실패했어요.");
         history.push("/");
       });
-  }, [reply, content]);
+  }, [reply, content, handleRepliesCallback]);
 
   // 답글 수정 취소 시 수정한 내용 초기화
   const handleModifyCancelCallback = useCallback(() => {

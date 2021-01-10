@@ -97,6 +97,16 @@ const PostReplyContainer = ({
       });
   }, [commentIdx, handleRepliesCallback]);
 
+  // 답글 생성 취소시 작성 내용 초기화
+  const handleCreateCancelCallback = useCallback(() => {
+    if (replyCount) {
+      setEnable(false);
+    } else {
+      setShow(false);
+    }
+    setContent("");
+  }, [replyCount]);
+
   const handleDeleteReplyCallback = useCallback(async () => {
     await handleDeleteReply(replyIdx)
       .then((res: Response) => {
@@ -108,17 +118,7 @@ const PostReplyContainer = ({
         toast.error("이런! 답글 삭제에 실패했어요.");
         history.push("/");
       });
-  }, [replyIdx]);
-
-  // 답글 생성 취소시 작성 내용 초기화
-  const handleCreateCancelCallback = useCallback(() => {
-    if (replyCount) {
-      setEnable(false);
-    } else {
-      setShow(false);
-    }
-    setContent("");
-  }, [replyCount]);
+  }, [replyIdx, handleReplyCountCallback, handleCommentCountCallback]);
 
   const showModalCallback = useCallback(() => {
     if (isShow) {
