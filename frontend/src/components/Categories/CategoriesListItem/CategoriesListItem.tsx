@@ -8,14 +8,26 @@ import "./CategoriesListItem.scss";
 
 interface CategoriesListItemProps {
   categoryPost: CategoryPostsType;
-  deleteMode: boolean;
+  editMode: boolean;
+  modifyCategoryHandler: (idx: number) => void;
   deleteCategoryHandler: (idx: number) => void;
+  modifyMode: boolean;
+  setModifyMode: React.Dispatch<React.SetStateAction<boolean>>;
+  keyDownListener: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  categoryName: string;
+  setCategoryName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const CategoriesListItem = ({
   categoryPost,
-  deleteMode,
+  editMode,
+  modifyCategoryHandler,
   deleteCategoryHandler,
+  modifyMode,
+  setModifyMode,
+  keyDownListener,
+  categoryName,
+  setCategoryName,
 }: CategoriesListItemProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -25,19 +37,35 @@ const CategoriesListItem = ({
         <div
           className="Categories-List-Item-Info"
           onClick={() => {
-            !deleteMode && setOpen((prev) => !prev);
+            !editMode && setOpen((prev) => !prev);
           }}
         >
           <div className="Categories-List-Item-Info-Wrapper">
             {open ? <FaFolderOpen /> : <FaFolder />}
-            <p className="Categories-List-Item-Info-Wrapper-Name">
-              {categoryPost.name}
-            </p>
+            {modifyMode ? (
+              <input
+                value={categoryName}
+                type="text"
+                placeholder="카테고리 이름 입력."
+                className="Categories-List-Item-Info-Wrapper-Input"
+                onChange={(e) => setCategoryName(e.target.value)}
+                onKeyDown={(e) => keyDownListener(e)}
+              />
+            ) : (
+              <p
+                className="Categories-List-Item-Info-Wrapper-Name"
+                onClick={() => {
+                  editMode && modifyCategoryHandler(categoryPost.idx);
+                }}
+              >
+                {categoryPost.name}
+              </p>
+            )}
             <p className="Categories-List-Item-Info-Wrapper-Count">
               {categoryPost.post_count} posts
             </p>
           </div>
-          {deleteMode ? (
+          {editMode ? (
             <MdCancel
               className="Categories-List-Item-Info-Icon"
               onClick={() => deleteCategoryHandler(categoryPost.idx)}

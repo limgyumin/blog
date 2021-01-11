@@ -36,10 +36,10 @@ const PostReplyItemContainer = ({
       toast.error("내용을 작성해주세요.");
       return;
     }
-    setEnable(false);
     await handleModifyReply(reply.idx, removeLastBlank(content))
       .then((res: Response) => {
         handleRepliesCallback();
+        setEnable(false);
       })
       .catch((err: Error) => {
         toast.error("이런! 댓글 수정에 실패했어요.");

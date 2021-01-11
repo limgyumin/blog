@@ -7,9 +7,6 @@ import {
   CategoryPostsResponse,
 } from "../../util/types/Response";
 import { toast } from "react-toastify";
-import ModalContainer from "../Modal/ModalContainer";
-import Portal from "../../components/common/Portal";
-import CategoryDeleteAlert from "../../components/Categories/CategoryDeleteAlert";
 import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
 
@@ -20,19 +17,13 @@ const CategoriesContainer = ({}) => {
     handleCreateCategory,
     handleCategories,
     handleCategoryPosts,
-    handleDeleteCategory,
   } = store.CategoryStore;
   const { admin, login } = store.UserStore;
 
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
   const [categoryName, setCategoryName] = useState<string>("");
-  const [categoryIdx, setCategoryIdx] = useState<number>(0);
 
   const [createMode, setCreateMode] = useState<boolean>(false);
-  const [modifyMode, setModifyMode] = useState<boolean>(false);
-  const [deleteMode, setDeleteMode] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const handleCreateCategoryCallback = useCallback(async () => {
     if (admin && login) {
@@ -41,6 +32,7 @@ const CategoriesContainer = ({}) => {
           handleCategoryPostsCallback();
           handleCategoriesCallback();
           setCreateMode(false);
+          setCategoryName("");
         })
         .catch((err: Error) => {
           if (err.message.indexOf("409")) {
@@ -68,51 +60,18 @@ const CategoriesContainer = ({}) => {
       });
   }, []);
 
-  const handleDeleteCategoryCallback = useCallback(async () => {
-    if (admin && login) {
-      await handleDeleteCategory(categoryIdx)
-        .then(() => {
-          handleCategoryPostsCallback();
-          handleCategoriesCallback();
-        })
-        .catch((err: Error) => {
-          toast.error("이런! 카테고리 삭제에 실패했어요.");
-        });
-    }
-  }, [categoryIdx]);
-
-  const showModalCallback = useCallback(() => {
-    if (isShow) {
-      setTimeout(() => {
-        setIsShow(!isShow);
-      }, 500);
-    } else {
-      setIsShow(!isShow);
-    }
-    setIsOpen(!isOpen);
-  }, [isShow, isOpen]);
-
-  const deleteCategoryHandler = (idx: number) => {
-    showModalCallback();
-    setCategoryIdx(idx);
-  };
-
   const keyDownListener = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
-      if (
-        !isEmpty(categoryName) &&
-        (e.key === "Enter" || e.key === "NumpadEnter")
-      ) {
+      if (e.key === "Enter" || e.key === "NumpadEnter") {
+        if (isEmpty(categoryName)) {
+          toast.error("이름을 작성해주세요.");
+          return;
+        }
         handleCreateCategoryCallback();
       }
     },
     [categoryName, handleCreateCategoryCallback]
   );
-
-  const deleteClickHandler = useCallback(() => {
-    handleDeleteCategoryCallback();
-    showModalCallback();
-  }, [handleDeleteCategoryCallback]);
 
   useEffect(() => {
     handleCategoryPostsCallback();
@@ -120,28 +79,19 @@ const CategoriesContainer = ({}) => {
 
   return (
     <>
-      <Portal elementId="modal-root">
-        <ModalContainer isOpen={isOpen} isShow={isShow}>
-          <CategoryDeleteAlert
-            deleteClickHandler={deleteClickHandler}
-            showModalCallback={showModalCallback}
-          />
-        </ModalContainer>
-      </Portal>
       <Categories
         categoryPosts={categoryPosts}
         admin={admin}
         login={login}
         categoryName={categoryName}
         createMode={createMode}
-        modifyMode={modifyMode}
-        deleteMode={deleteMode}
+        editMode={editMode}
         setCreateMode={setCreateMode}
-        setModifyMode={setModifyMode}
-        setDeleteMode={setDeleteMode}
+        setEditMode={setEditMode}
         setCategoryName={setCategoryName}
-        deleteCategoryHandler={deleteCategoryHandler}
         keyDownListener={keyDownListener}
+        handleCategoryPostsCallback={handleCategoryPostsCallback}
+        handleCategoriesCallback={handleCategoriesCallback}
       />
     </>
   );

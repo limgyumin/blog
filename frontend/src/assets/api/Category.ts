@@ -39,6 +39,37 @@ class Category {
     }
   }
 
+  async modifyCategory(idx: number, name: string) {
+    try {
+      const url = `${SERVER}/v1/category/${idx}`;
+
+      const body = {
+        name,
+      };
+
+      const { data } = await axios.put(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
+  async modifyOrderCategory(idx: number, order_number: number) {
+    try {
+      const url = `${SERVER}/v1/category/order`;
+
+      const body = {
+        order_number,
+        idx,
+      };
+
+      const { data } = await axios.put(url, body);
+      return data;
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   async deleteCategory(idx: number) {
     try {
       const url = `${SERVER}/v1/category/${idx}`;

@@ -68,6 +68,45 @@ class CategoryStore {
   };
 
   @action
+  handleModifyCategory = async (
+    idx: number,
+    name: string
+  ): Promise<Response> => {
+    try {
+      const response: Response = await Category.modifyCategory(idx, name);
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
+  handleModifyOrderCategory = async (
+    idx: number,
+    order_number: number
+  ): Promise<Response> => {
+    try {
+      const response: Response = await Category.modifyOrderCategory(
+        idx,
+        order_number
+      );
+
+      return new Promise((resolve: (response: Response) => void, reject) => {
+        resolve(response);
+      });
+    } catch (error) {
+      return new Promise((resolve, reject: (error: Error) => void) => {
+        reject(error);
+      });
+    }
+  };
+
+  @action
   handleDeleteCategory = async (idx: number): Promise<Response> => {
     try {
       const response: Response = await Category.deleteCategory(idx);
