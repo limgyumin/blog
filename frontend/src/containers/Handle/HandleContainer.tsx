@@ -118,7 +118,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       description: removeLastBlank(desc),
       content: removeLastBlank(content),
       category_idx: categoryIdx,
-      thumbnail: convertURL(thumbnail!),
+      thumbnail: convertURL(thumbnail),
     };
 
     await handleCreatePost(postParams)
@@ -151,7 +151,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       description: removeLastBlank(desc) || "임시 저장된 글.",
       content: removeLastBlank(content),
       category_idx: categoryIdx,
-      thumbnail: convertURL(thumbnail!),
+      thumbnail: convertURL(thumbnail),
     };
 
     await handleCreateTempPost(postParams)

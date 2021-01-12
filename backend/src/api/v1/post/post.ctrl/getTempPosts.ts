@@ -12,7 +12,7 @@ export default async (req: Request, res: Response) => {
         is_temp: true,
       },
       order: {
-        created_at: "ASC",
+        created_at: "DESC",
       },
     });
 

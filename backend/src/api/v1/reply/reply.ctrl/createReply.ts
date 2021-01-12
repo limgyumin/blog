@@ -66,7 +66,7 @@ export default async (req: AuthRequest, res: Response) => {
         webpush: {
           notification: {
             icon: null,
-            title: `${user.name}님께서 댓글을 남겼습니다.`,
+            title: `${user.name}님이 답글을 남겼습니당.`,
             body: `${reply.content}`,
             click_action: `http://localhost:3000/post/${post.idx}`,
           },

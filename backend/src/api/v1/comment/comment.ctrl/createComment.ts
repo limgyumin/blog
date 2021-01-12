@@ -62,7 +62,7 @@ export default async (req: AuthRequest, res: Response) => {
         webpush: {
           notification: {
             icon: null,
-            title: `${user.name}님께서 댓글을 남겼습니다.`,
+            title: `${user.name}님이 댓글을 남겼습니당.`,
             body: `${comment.content}`,
             click_action: `http://localhost:3000/post/${post.idx}`,
           },

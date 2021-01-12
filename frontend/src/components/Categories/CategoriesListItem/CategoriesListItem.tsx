@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaFolder, FaFolderOpen } from "react-icons/fa";
 import { IoIosArrowDown } from "react-icons/io";
 import { MdCancel } from "react-icons/md";
+import { RiDeleteBack2Fill } from "react-icons/ri";
 import { CategoryPostsType } from "../../../util/types/Category";
 import CategoriesPostsListItem from "../CategoriesPostsListItem";
 import "./CategoriesListItem.scss";
@@ -43,14 +44,21 @@ const CategoriesListItem = ({
           <div className="Categories-List-Item-Info-Wrapper">
             {open ? <FaFolderOpen /> : <FaFolder />}
             {modifyMode ? (
-              <input
-                value={categoryName}
-                type="text"
-                placeholder="카테고리 이름 입력."
-                className="Categories-List-Item-Info-Wrapper-Input"
-                onChange={(e) => setCategoryName(e.target.value)}
-                onKeyDown={(e) => keyDownListener(e)}
-              />
+              <div className="Categories-List-Item-Info-Wrapper-Edit">
+                <input
+                  value={categoryName}
+                  type="text"
+                  placeholder="카테고리 이름 입력."
+                  className="Categories-List-Item-Info-Wrapper-Edit-Input"
+                  onChange={(e) => setCategoryName(e.target.value)}
+                  onKeyDown={(e) => keyDownListener(e)}
+                />
+                <RiDeleteBack2Fill
+                  onClick={() => {
+                    editMode && setModifyMode((prev) => !prev);
+                  }}
+                />
+              </div>
             ) : (
               <p
                 className="Categories-List-Item-Info-Wrapper-Name"

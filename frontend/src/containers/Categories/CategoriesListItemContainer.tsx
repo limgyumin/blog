@@ -24,11 +24,7 @@ const CategoriesListItemContainer = ({
   editMode,
 }: CategoriesListItemContainerProps) => {
   const { store } = useStore();
-  const {
-    handleModifyCategory,
-    handleModifyOrderCategory,
-    handleDeleteCategory,
-  } = store.CategoryStore;
+  const { handleModifyCategory, handleDeleteCategory } = store.CategoryStore;
   const { admin, login } = store.UserStore;
 
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -38,7 +34,6 @@ const CategoriesListItemContainer = ({
 
   const [categoryName, setCategoryName] = useState<string>("");
   const [categoryIdx, setCategoryIdx] = useState<number>(0);
-  const [orderNumber, setOrderNumber] = useState<number>(0);
 
   const handleModifyCategoryCallback = useCallback(async () => {
     if (admin && login) {
@@ -53,16 +48,6 @@ const CategoriesListItemContainer = ({
         });
     }
   }, [categoryIdx, categoryName]);
-
-  const handleModifyOrderCategoryCallback = useCallback(async () => {
-    if (admin && login) {
-      await handleModifyOrderCategory(categoryIdx, orderNumber)
-        .then((res: Response) => {})
-        .catch((err: Error) => {
-          toast.error("아악! 어딘가 문제가 있어요.");
-        });
-    }
-  }, [categoryIdx, orderNumber]);
 
   const handleDeleteCategoryCallback = useCallback(async () => {
     if (admin && login) {

@@ -36,18 +36,33 @@
         }
       }
 
-      &-Input {
-        outline: none;
+      &-Edit {
         border: 1px solid $vvv-light-gray;
         border-radius: 0.3rem;
         padding: 0.3rem 0.5rem;
         margin-right: 0.6rem;
-        font-family: inherit;
+        display: flex;
+        align-items: center;
 
-        &::placeholder {
+        &-Input {
+          border: none;
+          outline: none;
           font-family: inherit;
-          font-size: 0.825rem;
+
+          &::placeholder {
+            font-family: inherit;
+            font-size: 0.825rem;
+            color: $vv-light-gray;
+          }
+        }
+
+        & > svg {
           color: $vv-light-gray;
+          transition: color ease 0.1s;
+
+          &:hover {
+            color: $v-light-gray;
+          }
         }
       }
 

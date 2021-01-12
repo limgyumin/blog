@@ -2,7 +2,7 @@ import axios from "axios";
 import { SERVER } from "../../config/config.json";
 
 class Category {
-  async createCategory(name: string) {
+  async CreateCategory(name: string) {
     try {
       const url = `${SERVER}/v1/category`;
 
@@ -17,7 +17,7 @@ class Category {
     }
   }
 
-  async getCategories() {
+  async GetCategories() {
     try {
       const url = `${SERVER}/v1/category`;
 
@@ -28,7 +28,7 @@ class Category {
     }
   }
 
-  async getCategoryPosts() {
+  async GetCategoryPosts() {
     try {
       const url = `${SERVER}/v1/category/post`;
 
@@ -39,7 +39,7 @@ class Category {
     }
   }
 
-  async modifyCategory(idx: number, name: string) {
+  async ModifyCategory(idx: number, name: string) {
     try {
       const url = `${SERVER}/v1/category/${idx}`;
 
@@ -54,23 +54,7 @@ class Category {
     }
   }
 
-  async modifyOrderCategory(idx: number, order_number: number) {
-    try {
-      const url = `${SERVER}/v1/category/order`;
-
-      const body = {
-        order_number,
-        idx,
-      };
-
-      const { data } = await axios.put(url, body);
-      return data;
-    } catch (error) {
-      throw new Error(`${error}`);
-    }
-  }
-
-  async deleteCategory(idx: number) {
+  async DeleteCategory(idx: number) {
     try {
       const url = `${SERVER}/v1/category/${idx}`;
 

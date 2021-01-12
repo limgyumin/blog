@@ -16,7 +16,7 @@ class CategoryStore {
   @action
   handleCreateCategory = async (name: string): Promise<Response> => {
     try {
-      const response: Response = await Category.createCategory(name);
+      const response: Response = await Category.CreateCategory(name);
 
       return new Promise((resolve: (response: Response) => void, reject) => {
         resolve(response);
@@ -31,7 +31,7 @@ class CategoryStore {
   @action
   handleCategories = async (): Promise<CategoriesResponse> => {
     try {
-      const response: CategoriesResponse = await Category.getCategories();
+      const response: CategoriesResponse = await Category.GetCategories();
 
       this.categories = response.data.categories;
       this.totalPostCount = response.data.total;
@@ -51,7 +51,7 @@ class CategoryStore {
   @action
   handleCategoryPosts = async (): Promise<CategoryPostsResponse> => {
     try {
-      const response: CategoryPostsResponse = await Category.getCategoryPosts();
+      const response: CategoryPostsResponse = await Category.GetCategoryPosts();
 
       this.categoryPosts = response.data.categories;
 
@@ -73,28 +73,7 @@ class CategoryStore {
     name: string
   ): Promise<Response> => {
     try {
-      const response: Response = await Category.modifyCategory(idx, name);
-
-      return new Promise((resolve: (response: Response) => void, reject) => {
-        resolve(response);
-      });
-    } catch (error) {
-      return new Promise((resolve, reject: (error: Error) => void) => {
-        reject(error);
-      });
-    }
-  };
-
-  @action
-  handleModifyOrderCategory = async (
-    idx: number,
-    order_number: number
-  ): Promise<Response> => {
-    try {
-      const response: Response = await Category.modifyOrderCategory(
-        idx,
-        order_number
-      );
+      const response: Response = await Category.ModifyCategory(idx, name);
 
       return new Promise((resolve: (response: Response) => void, reject) => {
         resolve(response);
@@ -109,7 +88,7 @@ class CategoryStore {
   @action
   handleDeleteCategory = async (idx: number): Promise<Response> => {
     try {
-      const response: Response = await Category.deleteCategory(idx);
+      const response: Response = await Category.DeleteCategory(idx);
 
       return new Promise((resolve: (response: Response) => void, reject) => {
         resolve(response);
