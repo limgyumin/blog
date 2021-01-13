@@ -115,7 +115,7 @@ const Handle = ({
             <div className="Handle-Wrapper-Preview-Label">
               <p className="Handle-Wrapper-Preview-Label-Inner">미리보기</p>
             </div>
-            <div className="Handle-Wrapper-Preview-Area" ref={scrollDownRef}>
+            <div className="Handle-Wrapper-Preview-Area">
               <p className="Handle-Wrapper-Preview-Area-Title">{title}</p>
               <p className="Handle-Wrapper-Preview-Area-Description">{desc}</p>
               {preview && (
@@ -124,7 +124,10 @@ const Handle = ({
                   className="Handle-Wrapper-Preview-Area-Image"
                 />
               )}
-              <MarkDownContainer className="Handle-Wrapper-Preview-Area-Content">
+              <MarkDownContainer
+                className="Handle-Wrapper-Preview-Area-Content"
+                scrollDownRef={scrollDownRef}
+              >
                 {content}
               </MarkDownContainer>
             </div>

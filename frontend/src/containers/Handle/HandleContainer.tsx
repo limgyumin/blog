@@ -314,14 +314,6 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
     history.goBack();
   };
 
-  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-    scrollDownRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "end",
-    });
-  };
-
   const checkIsWriteCallback = useCallback(() => {
     if (!idx) {
       setWrite(true);
@@ -368,6 +360,13 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   const categoryItemHandler = (name: string, idx: number) => {
     setCategory(name);
     setCategoryIdx(idx);
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+    scrollDownRef.current?.scrollIntoView({
+      block: "end",
+    });
   };
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
