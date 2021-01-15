@@ -37,6 +37,10 @@ const CategoriesListItemContainer = ({
 
   const handleModifyCategoryCallback = useCallback(async () => {
     if (admin && login) {
+      if (categoryName === categoryPost.name) {
+        setModifyMode((prev) => !prev);
+        return;
+      }
       await handleModifyCategory(categoryIdx, removeLastBlank(categoryName))
         .then((res: Response) => {
           handleCategoryPostsCallback();
