@@ -5,9 +5,10 @@ import TempPostItem from "./TempPostItem";
 
 interface TempProps {
   tempPosts: PostType[];
+  deleteClickHandler: (idx: number) => void;
 }
 
-const Temp = ({ tempPosts }: TempProps) => {
+const Temp = ({ tempPosts, deleteClickHandler }: TempProps) => {
   return (
     <>
       <div className="Temp">
@@ -19,7 +20,10 @@ const Temp = ({ tempPosts }: TempProps) => {
           <div className="Temp-Container-List">
             {tempPosts.map((tempPost, idx) => (
               <React.Fragment key={idx}>
-                <TempPostItem tempPost={tempPost} />
+                <TempPostItem
+                  tempPost={tempPost}
+                  deleteClickHandler={deleteClickHandler}
+                />
               </React.Fragment>
             ))}
           </div>

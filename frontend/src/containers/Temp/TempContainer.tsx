@@ -7,6 +7,9 @@ import PostType from "../../util/types/Post";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Portal from "../../components/common/Portal";
+import ModalContainer from "../Modal/ModalContainer";
+import TempPostDeleteAlert from "../../components/Temp/TempPostDeleteAlert";
 
 const TempContainer = ({}) => {
   const history = useHistory();
@@ -18,8 +21,13 @@ const TempContainer = ({}) => {
     handleAdminState,
     handleMyProfile,
   } = store.UserStore;
-  const { handleTempPosts } = store.PostStore;
+  const { handleTempPosts, handleDeletePost } = store.PostStore;
+
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const [tempPosts, setTempPosts] = useState<PostType[]>([]);
+  const [postIdx, setPostIdx] = useState<number>(0);
 
   const handleTempPostsCallback = useCallback(async () => {
     if (admin && login) {
@@ -34,6 +42,18 @@ const TempContainer = ({}) => {
       history.push("/");
     }
   }, [admin, login]);
+
+  const handleDeleteTempPostCallback = useCallback(async () => {
+    if (admin && login) {
+      await handleDeletePost(postIdx)
+        .then((res: Response) => {
+          handleTempPostsCallback();
+        })
+        .catch((err: Error) => {
+          toast.error("악! 임시 글 삭제에 실패했어요.");
+        });
+    }
+  }, [postIdx, handleTempPostsCallback]);
 
   const handleAdminCallback = useCallback(async () => {
     const token = localStorage.getItem("access_token");
@@ -62,6 +82,27 @@ const TempContainer = ({}) => {
     }
   }, []);
 
+  const showModalCallback = useCallback(() => {
+    if (isShow) {
+      setTimeout(() => {
+        setIsShow(!isShow);
+      }, 500);
+    } else {
+      setIsShow(!isShow);
+    }
+    setIsOpen(!isOpen);
+  }, [isShow, isOpen]);
+
+  const deleteClickHandler = (idx: number) => {
+    setPostIdx(idx);
+    showModalCallback();
+  };
+
+  const deletePostHandler = useCallback(async () => {
+    await handleDeleteTempPostCallback();
+    showModalCallback();
+  }, [handleDeleteTempPostCallback]);
+
   useEffect(() => {
     handleAdminCallback();
   }, [handleAdminCallback]);
@@ -72,7 +113,15 @@ const TempContainer = ({}) => {
 
   return (
     <>
-      <Temp tempPosts={tempPosts} />
+      <Portal elementId="modal-root">
+        <ModalContainer isOpen={isOpen} isShow={isShow}>
+          <TempPostDeleteAlert
+            deletePostHandler={deletePostHandler}
+            showModalCallback={showModalCallback}
+          />
+        </ModalContainer>
+      </Portal>
+      <Temp tempPosts={tempPosts} deleteClickHandler={deleteClickHandler} />
     </>
   );
 };

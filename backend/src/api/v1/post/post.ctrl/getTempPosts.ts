@@ -10,6 +10,7 @@ export default async (req: Request, res: Response) => {
       select: ["idx", "title", "content", "created_at"],
       where: {
         is_temp: true,
+        is_deleted: false,
       },
       order: {
         created_at: "DESC",
