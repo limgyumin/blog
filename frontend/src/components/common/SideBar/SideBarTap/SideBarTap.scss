@@ -10,7 +10,7 @@
   &-About {
     display: flex;
     color: $light-gray;
-    padding: 1.1rem 1rem 1.1rem 4rem;
+    padding: 1rem 1rem 1rem 3rem;
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px solid $vvv-light-gray;
@@ -24,9 +24,19 @@
       align-items: center;
       transition: transform ease 0.3s;
 
-      & > svg {
-        font-size: 1.5rem;
+      &-Area {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        border-radius: 50%;
+        background-color: $vvv-light-gray;
+        margin-right: 0.6rem;
         margin-right: 1.2rem;
+
+        & > svg {
+          font-size: 1.5rem;
+        }
       }
 
       & > p {

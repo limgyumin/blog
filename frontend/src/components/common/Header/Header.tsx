@@ -40,10 +40,10 @@ const Header = ({
     <>
       <header
         className={
-          hide
-            ? "Header-Hide Header"
-            : shadow
+          shadow
             ? "Header-Shadow Header"
+            : hide
+            ? "Header-Shadow Header-Hide Header"
             : "Header"
         }
       >

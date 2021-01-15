@@ -12,7 +12,10 @@ const Temp = ({ tempPosts }: TempProps) => {
     <>
       <div className="Temp">
         <div className="Temp-Container">
-          <p className="Temp-Container-Title">Saved Posts</p>
+          <h1 className="Temp-Container-Title">Saved Posts</h1>
+          <h4 className="Temp-Container-Subtitle">
+            임시 저장된 글 목록이 표시됩니다.
+          </h4>
           <div className="Temp-Container-List">
             {tempPosts.map((tempPost, idx) => (
               <React.Fragment key={idx}>

@@ -10,19 +10,19 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 960px;
+    max-width: 1250px;
     padding: 0 1rem;
 
     &-Wrapper {
       width: 100%;
-      max-width: 960px;
+      max-width: 860px;
 
       &-Input {
         width: 100%;
         display: flex;
         align-items: center;
         border: 1px solid $vv-light-gray;
-        padding: 0.9rem 1.2rem;
+        padding: 1.1rem 1.2rem;
         margin-bottom: 1rem;
         cursor: text;
         transition: border ease 0.2s;
@@ -36,7 +36,7 @@
         }
 
         & > svg {
-          font-size: 1.4rem;
+          font-size: 1.5rem;
           color: $v-light-gray;
           margin-right: 0.8rem;
           transition: color ease 0.2s;
@@ -46,7 +46,7 @@
           width: 100%;
           outline: none;
           border: none;
-          font-size: 1.3rem;
+          font-size: 1.4rem;
           font-family: inherit;
           font-weight: normal;
 

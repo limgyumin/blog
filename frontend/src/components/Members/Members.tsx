@@ -20,7 +20,7 @@ const Members = ({ userCount, admin, users }: MembersProps) => {
           <div className="Members-Container-Wrapper">
             <p className="Members-Container-Wrapper-Title">이 블로그의 멤버</p>
             <p className="Members-Container-Wrapper-Subtitle">
-              현재{" "}
+              와우! 현재{" "}
               <span>
                 <CountUp end={userCount + 1} duration={2.75} separator="," />
               </span>

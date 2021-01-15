@@ -84,7 +84,10 @@ const Categories = ({
               </div>
             </div>
           )}
-          <p className="Categories-Wrapper-Title">Categories</p>
+          <h1 className="Categories-Wrapper-Title">Categories</h1>
+          <h4 className="Categories-Wrapper-Subtitle">
+            카테고리 목록과 해당 글 목록이 표시됩니다.
+          </h4>
           <div
             className={
               editMode

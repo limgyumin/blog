@@ -31,7 +31,7 @@
       top: 0;
       border-radius: 0.2rem;
       z-index: 10;
-      background-color: #00000038;
+      background-color: #00000042;
       transition: opacity ease 0.2s;
       padding: 0.6rem;
       display: flex;
@@ -107,8 +107,8 @@
       &-Category {
         font-size: 0.75rem;
         background-color: $vvv-light-gray;
-        padding: 0.16rem 0.5rem;
-        border-radius: 0.5rem;
+        padding: 0.2rem 0.55rem;
+        border-radius: 2rem;
         color: $gray;
         font-weight: bold;
         margin-right: 0.6rem;
