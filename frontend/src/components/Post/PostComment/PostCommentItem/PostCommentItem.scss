@@ -58,15 +58,15 @@
     &-Control {
       display: flex;
       align-items: center;
-      color: $v-light-gray;
-      font-size: 0.9rem;
+      color: $vv-light-gray;
+      font-size: 0.825rem;
 
       &-Edit {
         cursor: pointer;
-        margin-right: 0.6rem;
+        margin-right: 0.8rem;
 
         &:hover {
-          color: $vv-light-gray;
+          color: $v-light-gray;
         }
       }
 
@@ -74,7 +74,7 @@
         cursor: pointer;
 
         &:hover {
-          color: $vv-light-gray;
+          color: $v-light-gray;
         }
       }
     }
@@ -101,6 +101,7 @@
       margin-bottom: 1rem;
 
       &::placeholder {
+        font-style: italic;
         transition: color ease 0.2s;
         color: $vv-light-gray;
       }
@@ -118,18 +119,23 @@
       align-items: center;
       width: 100%;
 
-      &-Button {
+      &-Button,
+      &-Cancel {
         cursor: pointer;
         outline: none;
         border: none;
         border-radius: 0.3rem;
         padding: 0.4rem 1rem;
-        background-color: $black;
-        color: $white;
-        font-weight: bold;
+        font-weight: normal;
         font-size: 1rem;
         transition: all ease 0.2s;
         margin-right: 0.6rem;
+        font-family: inherit;
+      }
+
+      &-Button {
+        background-color: $black;
+        color: $white;
 
         &:hover {
           background-color: $light-black;
@@ -137,16 +143,8 @@
       }
 
       &-Cancel {
-        cursor: pointer;
-        outline: none;
-        border: none;
-        border-radius: 0.3rem;
-        padding: 0.4rem 1rem;
         background-color: $v-light-gray;
         color: $white;
-        font-weight: bold;
-        font-size: 1rem;
-        transition: all ease 0.2s;
 
         &:hover {
           background-color: $vv-light-gray;

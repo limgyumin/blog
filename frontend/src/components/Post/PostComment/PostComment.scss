@@ -37,6 +37,7 @@
         overflow-y: hidden;
 
         &::placeholder {
+          font-style: italic;
           transition: color ease 0.2s;
           color: $vv-light-gray;
         }
@@ -60,7 +61,7 @@
           padding: 0.4rem 1rem;
           background-color: $black;
           color: $white;
-          font-weight: bold;
+          font-weight: normal;
           font-size: 1rem;
           transition: all ease 0.2s;
           font-family: inherit;

@@ -17,6 +17,7 @@ interface CategoriesListItemProps {
   keyDownListener: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   categoryName: string;
   setCategoryName: React.Dispatch<React.SetStateAction<string>>;
+  categoryLength: number;
 }
 
 const CategoriesListItem = ({
@@ -29,6 +30,7 @@ const CategoriesListItem = ({
   keyDownListener,
   categoryName,
   setCategoryName,
+  categoryLength,
 }: CategoriesListItemProps) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -74,10 +76,12 @@ const CategoriesListItem = ({
             </p>
           </div>
           {editMode ? (
-            <MdCancel
-              className="Categories-List-Item-Info-Icon"
-              onClick={() => deleteCategoryHandler(categoryPost.idx)}
-            />
+            categoryLength > 1 && (
+              <MdCancel
+                className="Categories-List-Item-Info-Icon"
+                onClick={() => deleteCategoryHandler(categoryPost.idx)}
+              />
+            )
           ) : (
             <IoIosArrowDown
               className={

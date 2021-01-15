@@ -14,6 +14,7 @@ interface CategoriesListItemContainerProps {
   handleCategoryPostsCallback: () => Promise<void>;
   handleCategoriesCallback: () => Promise<void>;
   categoryPost: CategoryPostsType;
+  categoryLength: number;
   editMode: boolean;
 }
 
@@ -21,6 +22,7 @@ const CategoriesListItemContainer = ({
   handleCategoryPostsCallback,
   handleCategoriesCallback,
   categoryPost,
+  categoryLength,
   editMode,
 }: CategoriesListItemContainerProps) => {
   const { store } = useStore();
@@ -55,6 +57,10 @@ const CategoriesListItemContainer = ({
 
   const handleDeleteCategoryCallback = useCallback(async () => {
     if (admin && login) {
+      if (categoryLength <= 1) {
+        toast.error("카테고리는 최소한 1개가 있어야해요.");
+        return;
+      }
       await handleDeleteCategory(categoryIdx)
         .then(() => {
           handleCategoryPostsCallback();
@@ -132,6 +138,7 @@ const CategoriesListItemContainer = ({
         keyDownListener={keyDownListener}
         categoryName={categoryName}
         setCategoryName={setCategoryName}
+        categoryLength={categoryLength}
       />
     </>
   );

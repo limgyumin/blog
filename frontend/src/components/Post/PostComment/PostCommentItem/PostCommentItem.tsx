@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTrash, FaPen } from "react-icons/fa";
 import CommentType from "../../../../util/types/Comment";
 import "./PostCommentItem.scss";
 import UserType from "../../../../util/types/User";
@@ -65,13 +66,13 @@ const PostCommentItem = ({
                     className="Post-Comment-Item-Wrapper-Control-Edit"
                     onClick={() => setEnable(true)}
                   >
-                    수정
+                    <FaPen />
                   </p>
                   <p
                     className="Post-Comment-Item-Wrapper-Control-Delete"
                     onClick={() => deleteClickListener(comment.idx)}
                   >
-                    삭제
+                    <FaTrash />
                   </p>
                 </div>
               )}
@@ -85,7 +86,7 @@ const PostCommentItem = ({
               autoFocus
               onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
-              placeholder="댓글을 작성해주세요."
+              placeholder="Write a comment ..."
               className="Post-Comment-Item-Input-Box"
             />
             <div className="Post-Comment-Item-Input-Wrapper">
@@ -93,13 +94,13 @@ const PostCommentItem = ({
                 className="Post-Comment-Item-Input-Wrapper-Button"
                 onClick={() => handleModifyCommentCallback()}
               >
-                수정하기
+                Update
               </button>
               <button
                 className="Post-Comment-Item-Input-Wrapper-Cancel"
                 onClick={() => handleModifyCancelCallback()}
               >
-                취소
+                Cancel
               </button>
             </div>
           </div>

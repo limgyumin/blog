@@ -56,15 +56,15 @@
     &-Control {
       display: flex;
       align-items: center;
-      color: $v-light-gray;
-      font-size: 0.9rem;
+      color: $vv-light-gray;
+      font-size: 0.825rem;
 
       &-Edit {
         cursor: pointer;
-        margin-right: 0.6rem;
+        margin-right: 0.8rem;
 
         &:hover {
-          color: $vv-light-gray;
+          color: $v-light-gray;
         }
       }
 
@@ -72,7 +72,7 @@
         cursor: pointer;
 
         &:hover {
-          color: $vv-light-gray;
+          color: $v-light-gray;
         }
       }
     }

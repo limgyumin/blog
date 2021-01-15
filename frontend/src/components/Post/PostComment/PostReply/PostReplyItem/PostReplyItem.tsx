@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTrash, FaPen } from "react-icons/fa";
 import getTimeCount from "../../../../../util/lib/getTimeCount";
 import ReplyType from "../../../../../util/types/Reply";
 import UserType from "../../../../../util/types/User";
@@ -63,13 +64,13 @@ const PostReplyItem = ({
                     className="Post-Reply-Item-Wrapper-Control-Edit"
                     onClick={() => setEnable(true)}
                   >
-                    수정
+                    <FaPen />
                   </p>
                   <p
                     className="Post-Reply-Item-Wrapper-Control-Delete"
                     onClick={() => deleteClickListener(reply.idx)}
                   >
-                    삭제
+                    <FaTrash />
                   </p>
                 </div>
               )}
@@ -83,7 +84,7 @@ const PostReplyItem = ({
             confirmListener={handleModifyReplyCallback}
             cancelListener={handleModifyCancelCallback}
             keyDownListener={keyDownListener}
-            label="수정하기"
+            label="Update"
           />
         ) : (
           <p>{reply.content}</p>

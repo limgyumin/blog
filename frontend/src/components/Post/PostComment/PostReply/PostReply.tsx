@@ -47,7 +47,7 @@ const PostReply = ({
           <>
             <div className="Post-Reply-Count" onClick={() => setShow(!show)}>
               <BiMessageSquareMinus />
-              <span>숨기기</span>
+              <span>Hide</span>
             </div>
             <div className="Post-Reply-Container">
               {replyCount ? (
@@ -74,7 +74,7 @@ const PostReply = ({
                       className="Post-Reply-Container-Create"
                       onClick={() => setEnable(true)}
                     >
-                      답글 작성하기
+                      Leave a reply
                     </button>
                   )}
                 </>
@@ -96,12 +96,12 @@ const PostReply = ({
               {replyCount ? (
                 <>
                   <BiMessageSquareAdd />
-                  <span>{replyCount}개의 답글</span>
+                  <span>{replyCount} Replies</span>
                 </>
               ) : (
                 <>
                   <BiMessageSquareAdd />
-                  <span>답글 달기</span>
+                  <span>Leave a reply</span>
                 </>
               )}
             </div>

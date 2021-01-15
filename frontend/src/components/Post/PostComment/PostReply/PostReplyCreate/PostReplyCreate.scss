@@ -24,6 +24,7 @@
     overflow-y: hidden;
 
     &::placeholder {
+      font-style: italic;
       transition: color ease 0.2s;
       color: $vv-light-gray;
     }
@@ -41,19 +42,23 @@
     align-items: center;
     width: 100%;
 
-    &-Button {
+    &-Button,
+    &-Cancel {
       cursor: pointer;
       outline: none;
       border: none;
       border-radius: 0.3rem;
       padding: 0.4rem 1rem;
-      background-color: $black;
-      color: $white;
-      font-weight: bold;
+      font-weight: normal;
       font-size: 1rem;
       transition: all ease 0.2s;
       margin-right: 0.6rem;
       font-family: inherit;
+    }
+
+    &-Button {
+      background-color: $black;
+      color: $white;
 
       &:hover {
         background-color: $light-black;
@@ -61,17 +66,8 @@
     }
 
     &-Cancel {
-      cursor: pointer;
-      outline: none;
-      border: none;
-      border-radius: 0.3rem;
-      padding: 0.4rem 1rem;
       background-color: $v-light-gray;
       color: $white;
-      font-weight: bold;
-      font-size: 1rem;
-      transition: all ease 0.2s;
-      font-family: inherit;
 
       &:hover {
         background-color: $vv-light-gray;

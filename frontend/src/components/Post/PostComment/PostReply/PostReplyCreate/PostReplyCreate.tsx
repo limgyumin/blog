@@ -35,7 +35,7 @@ const PostReplyCreate = ({
           autoFocus
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => keyDownListener(e)}
-          placeholder="답글을 작성해주세요."
+          placeholder="Write a Reply ..."
           className="Post-Reply-Create-Box"
         />
         <div className="Post-Reply-Create-Wrapper">
@@ -43,13 +43,13 @@ const PostReplyCreate = ({
             className="Post-Reply-Create-Wrapper-Button"
             onClick={() => confirmListener()}
           >
-            {label || "작성하기"}
+            {label || "Send"}
           </button>
           <button
             className="Post-Reply-Create-Wrapper-Cancel"
             onClick={() => cancelListener()}
           >
-            취소
+            Cancel
           </button>
         </div>
       </div>

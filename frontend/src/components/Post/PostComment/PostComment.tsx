@@ -41,7 +41,7 @@ const PostComment = ({
       <div className="Post-Comment">
         <div className="Post-Comment-Container">
           <p className="Post-Comment-Container-Count">
-            {commentCount}개의 댓글
+            {commentCount} Comments
           </p>
           <div className="Post-Comment-Container-Input">
             <textarea
@@ -49,7 +49,7 @@ const PostComment = ({
               value={content}
               onChange={(e) => setContent(e.target.value)}
               onKeyDown={(e) => keyDownListener(e)}
-              placeholder="댓글을 작성해주세요."
+              placeholder="Write a comment ..."
               className="Post-Comment-Container-Input-Box"
             />
             <div className="Post-Comment-Container-Input-Wrapper">
@@ -57,7 +57,7 @@ const PostComment = ({
                 className="Post-Comment-Container-Input-Wrapper-Button"
                 onClick={() => handleCreateCommentCallback()}
               >
-                작성하기
+                Send
               </button>
             </div>
           </div>

@@ -101,6 +101,7 @@ const Categories = ({
                   handleCategoryPostsCallback={handleCategoryPostsCallback}
                   handleCategoriesCallback={handleCategoriesCallback}
                   categoryPost={categoryPost}
+                  categoryLength={categoryPosts.length}
                   editMode={editMode}
                 />
               </React.Fragment>
