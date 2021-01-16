@@ -46,6 +46,8 @@
           border: none;
           outline: none;
           font-family: inherit;
+          background-color: var(--theme-main-background);
+          color: var(--theme-main);
 
           &::placeholder {
             font-family: inherit;

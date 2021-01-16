@@ -13,5 +13,11 @@
     justify-content: center;
     padding: 1rem;
     border-radius: 50%;
+
+    &-Loading {
+      & > svg {
+        fill: var(--theme-main);
+      }
+    }
   }
 }

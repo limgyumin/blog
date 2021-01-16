@@ -40,6 +40,11 @@
         width: 11rem;
         margin-bottom: 2rem;
         animation: bigAndSmall ease 1s infinite;
+
+        & > ellipse {
+          fill: var(--theme-background-scale-1);
+        }
+
         @keyframes bigAndSmall {
           0% {
             transform: scale(1, 1);

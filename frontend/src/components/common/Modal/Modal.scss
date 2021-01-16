@@ -47,7 +47,7 @@
 
   &-Box {
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--theme-main-background);
     box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.1);
     border-radius: 0.2rem;
     overflow: hidden;

@@ -10,8 +10,8 @@ const MainPostLoading = ({}: MainPostLoadingProps) => {
       <div className="Main-Post-Loading">
         <div className="Main-Post-Loading-Wrapper">
           <ReactLoading
+            className="Main-Post-Loading-Wrapper-Loading"
             type={"bars"}
-            color={"#3e3e3e"}
             height={"3rem"}
             width={"3rem"}
           />

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--theme-main-background);
+  background-color: var(--theme-header-background);
   transition: transform ease 0.5s, box-shadow ease 0.3s;
   position: fixed;
   top: 0;
@@ -40,6 +40,10 @@
 
         &-Image {
           height: 1.4rem;
+
+          & > path {
+            fill: var(--theme-main);
+          }
         }
 
         &-Profile {
@@ -128,7 +132,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            padding: 0.43rem;
+            padding: 0.375rem;
             background-color: var(--theme-main);
             border-radius: 50%;
             box-shadow: none;
@@ -145,6 +149,10 @@
             &-Logo {
               width: 1.75rem;
               height: 1.75rem;
+
+              & > path {
+                fill: var(--theme-header-background);
+              }
             }
           }
         }

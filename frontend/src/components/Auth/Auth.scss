@@ -26,5 +26,11 @@
       color: var(--theme-main);
       margin-bottom: 2rem;
     }
+
+    &-Loading {
+      & > svg {
+        fill: var(--theme-main);
+      }
+    }
   }
 }

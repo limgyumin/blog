@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   padding: 8rem 0 4rem 0;
+  min-height: 100vh;
 
   &-Container {
     display: flex;
@@ -47,6 +48,8 @@
           font-size: 1.4rem;
           font-family: inherit;
           font-weight: normal;
+          background-color: var(--theme-main-background);
+          color: var(--theme-main);
 
           &::placeholder {
             color: var(--theme-background-scale-0);
