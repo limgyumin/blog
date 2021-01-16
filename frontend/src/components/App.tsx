@@ -16,7 +16,6 @@ import "../util/theme.scss";
 const App = () => {
   return (
     <div className="App light">
-      <div id="modal-area"></div>
       <ToastContainer autoClose={4000} />
       <Route
         render={({ location }) => {

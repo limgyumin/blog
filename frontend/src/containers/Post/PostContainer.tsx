@@ -8,10 +8,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from "react-helmet";
 import OtherPostsType from "../../util/types/OtherPosts";
-import Portal from "../../components/common/Portal";
 import ModalContainer from "../Modal/ModalContainer";
 import PostDelete from "../../components/Post/PostDelete";
 import PostType from "../../util/types/Post";
+import Portal from "../../components/common/Portal";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -169,7 +169,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
           />
         </Helmet>
       )}
-      <Portal elementId="modal-area">
+      <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostDelete
             deletePostHandler={deletePostHandler}

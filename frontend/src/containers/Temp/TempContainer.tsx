@@ -113,7 +113,7 @@ const TempContainer = ({}) => {
 
   return (
     <>
-      <Portal elementId="modal-area">
+      <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <TempPostDeleteAlert
             deletePostHandler={deletePostHandler}

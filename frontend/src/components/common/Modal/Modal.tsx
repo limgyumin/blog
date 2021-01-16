@@ -2,16 +2,17 @@ import React from "react";
 import "./Modal.scss";
 
 interface ModalProps {
+  className: string;
   isOpen: boolean;
   isShow: boolean;
   children: React.ReactNode;
 }
 
-const Modal = ({ isOpen, isShow, children }: ModalProps) => {
+const Modal = ({ className, isOpen, isShow, children }: ModalProps) => {
   return (
     <>
       {isShow ? (
-        <div className="Modal">
+        <div className={className}>
           <div
             className={
               isOpen
