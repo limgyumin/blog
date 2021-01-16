@@ -82,7 +82,7 @@ const PostBottomBarContainer = ({
 
   return (
     <>
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostLikedUsersContainer
             postIdx={postIdx}

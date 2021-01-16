@@ -169,7 +169,7 @@ const PostContainer = ({ match }: PostContainerProps) => {
           />
         </Helmet>
       )}
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostDelete
             deletePostHandler={deletePostHandler}

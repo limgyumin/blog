@@ -1,5 +1,3 @@
-@import "../../../../util/color.scss";
-
 .Post-Reply {
   display: flex;
   flex-direction: column;
@@ -10,11 +8,11 @@
   &-Add {
     display: flex;
     align-items: center;
-    color: $light-black;
+    color: var(--theme-text-scale-1);
     cursor: pointer;
 
     &:hover {
-      color: $light-gray;
+      color: var(--theme-text-scale-3);
     }
 
     & > svg {
@@ -37,12 +35,12 @@
   }
 
   &-Container {
-    background-color: $v-semi-light-gray;
+    background-color: var(--theme-background-scale-3);
     margin-top: 1rem;
     padding: 0 1.3rem;
     display: flex;
     flex-direction: column;
-    border: 1px solid $vvv-light-gray;
+    border: 1px solid var(--theme-border);
     border-radius: 0.4rem;
 
     &-Create {
@@ -51,15 +49,15 @@
       border: none;
       border-radius: 0.3rem;
       padding: 0.6rem 1rem;
-      background-color: $gray;
-      color: $white;
+      background-color: var(--theme-text-scale-2);
+      color: var(--theme-main-background);
       font-weight: normal;
       font-size: 1rem;
       transition: all ease 0.2s;
       margin: 1rem 0;
 
       &:hover {
-        background-color: $light-gray;
+        background-color: var(--theme-text-scale-3);
       }
     }
   }

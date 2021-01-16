@@ -1,5 +1,3 @@
-@import "../../../util/color.scss";
-
 .Post-Profile {
   width: 100%;
   padding: 4rem 1rem 2.5rem 0;
@@ -7,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid $vvv-light-gray;
+  border-bottom: 1px solid var(--theme-border);
 
   &-Container {
     display: flex;
@@ -17,7 +15,7 @@
       width: 6rem;
       height: 6rem;
       border-radius: 50%;
-      border: 1px solid $vvv-light-gray;
+      border: 1px solid var(--theme-border);
       margin-right: 1.2rem;
     }
 
@@ -26,12 +24,12 @@
       flex-direction: column;
 
       & > h2 {
-        color: $black;
+        color: var(--theme-main);
         margin-bottom: 0.4rem;
       }
 
       & > p {
-        color: $v-light-gray;
+        color: var(--theme-text-scale-4);
         font-size: 1.1rem;
       }
     }
@@ -44,12 +42,12 @@
 
       & > path {
         transition: all ease 0.2s;
-        fill: $vv-light-gray;
+        fill: var(--theme-background-scale-0);
       }
     }
 
     &:hover > svg > path {
-      fill: $black;
+      fill: var(--theme-main);
     }
   }
 }

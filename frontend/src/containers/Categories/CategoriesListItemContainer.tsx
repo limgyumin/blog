@@ -120,7 +120,7 @@ const CategoriesListItemContainer = ({
 
   return (
     <>
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <CategoryDeleteAlert
             deleteClickHandler={deleteClickHandler}

@@ -159,7 +159,7 @@ const PostCommentContainer = ({ postIdx }: PostCommentContainerProps) => {
 
   return (
     <>
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostCommentDelete
             handleDeleteCommentCallback={handleDeleteCommentCallback}

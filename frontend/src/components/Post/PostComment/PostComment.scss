@@ -1,5 +1,3 @@
-@import "../../../util/color.scss";
-
 .Post-Comment {
   width: 100%;
   display: flex;
@@ -26,11 +24,11 @@
         font-size: 1rem;
         font-weight: normal;
         font-family: inherit;
-        color: $black;
+        color: var(--theme-main);
         outline: none;
         border-radius: 0.2rem;
-        border: 1px solid $vvv-light-gray;
-        background-color: $vvvvv-light-gray;
+        border: 1px solid var(--theme-border);
+        background-color: var(--theme-background-scale-2);
         resize: none;
         transition: border ease 0.2s;
         margin-bottom: 1rem;
@@ -39,13 +37,13 @@
         &::placeholder {
           font-style: italic;
           transition: color ease 0.2s;
-          color: $vv-light-gray;
+          color: var(--theme-background-scale-0);
         }
 
         &:focus {
-          border: 1px solid $vv-light-gray;
+          border: 1px solid var(--theme-background-scale-0);
           &::placeholder {
-            color: $v-light-gray;
+            color: var(--theme-text-scale-4);
           }
         }
       }
@@ -59,15 +57,15 @@
           border: none;
           border-radius: 0.3rem;
           padding: 0.4rem 1rem;
-          background-color: $black;
-          color: $white;
+          background-color: var(--theme-main);
+          color: var(--theme-main-background);
           font-weight: normal;
           font-size: 1rem;
           transition: all ease 0.2s;
           font-family: inherit;
 
           &:hover {
-            background-color: $light-black;
+            background-color: var(--theme-text-scale-1);
           }
         }
       }

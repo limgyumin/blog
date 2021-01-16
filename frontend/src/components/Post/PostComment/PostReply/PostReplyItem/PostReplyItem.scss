@@ -1,10 +1,8 @@
-@import "../../../../../util/color.scss";
-
 .Post-Reply-Item {
   display: flex;
   flex-direction: column;
   padding: 1.3rem 0;
-  border-bottom: 1px solid $vvv-light-gray;
+  border-bottom: 1px solid var(--theme-border);
 
   &-Wrapper {
     display: flex;
@@ -21,7 +19,7 @@
           width: 3.6rem;
           height: 3.6rem;
           border-radius: 50%;
-          border: 1px solid $vvv-light-gray;
+          border: 1px solid var(--theme-border);
           margin-right: 0.8rem;
         }
       }
@@ -42,13 +40,13 @@
           & > h3 {
             font-size: 1.125rem;
             margin-bottom: 0.25rem;
-            color: $black;
+            color: var(--theme-main);
           }
         }
 
         & > p {
           font-size: 0.9rem;
-          color: $light-gray;
+          color: var(--theme-text-scale-3);
         }
       }
     }
@@ -56,7 +54,7 @@
     &-Control {
       display: flex;
       align-items: center;
-      color: $vv-light-gray;
+      color: var(--theme-background-scale-0);
       font-size: 0.825rem;
 
       &-Edit {
@@ -64,7 +62,7 @@
         margin-right: 0.8rem;
 
         &:hover {
-          color: $v-light-gray;
+          color: var(--theme-text-scale-4);
         }
       }
 
@@ -72,14 +70,14 @@
         cursor: pointer;
 
         &:hover {
-          color: $v-light-gray;
+          color: var(--theme-text-scale-4);
         }
       }
     }
   }
 
   & > p {
-    color: $black;
+    color: var(--theme-main);
     font-size: 1.125rem;
     white-space: pre-wrap;
     word-break: break-all;

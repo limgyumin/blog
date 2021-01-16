@@ -1,11 +1,9 @@
-@import "../../../../util/color.scss";
-
 .Post-Comment-Item {
   display: flex;
   flex-direction: column;
   padding: 1.3rem;
-  border-left: 8px solid $vvv-light-gray;
-  background-color: $vvvvv-light-gray;
+  border-left: 8px solid var(--theme-border);
+  background-color: var(--theme-background-scale-2);
   margin-bottom: 1.3rem;
 
   &-Wrapper {
@@ -23,7 +21,7 @@
           width: 3.6rem;
           height: 3.6rem;
           border-radius: 50%;
-          border: 1px solid $vvv-light-gray;
+          border: 1px solid var(--theme-border);
           margin-right: 0.8rem;
         }
       }
@@ -44,13 +42,13 @@
           & > h3 {
             font-size: 1.125rem;
             margin-bottom: 0.25rem;
-            color: $black;
+            color: var(--theme-main);
           }
         }
 
         & > p {
           font-size: 0.9rem;
-          color: $light-gray;
+          color: var(--theme-text-scale-3);
         }
       }
     }
@@ -58,7 +56,7 @@
     &-Control {
       display: flex;
       align-items: center;
-      color: $vv-light-gray;
+      color: var(--theme-background-scale-0);
       font-size: 0.825rem;
 
       &-Edit {
@@ -66,7 +64,7 @@
         margin-right: 0.8rem;
 
         &:hover {
-          color: $v-light-gray;
+          color: var(--theme-text-scale-4);
         }
       }
 
@@ -74,7 +72,7 @@
         cursor: pointer;
 
         &:hover {
-          color: $v-light-gray;
+          color: var(--theme-text-scale-4);
         }
       }
     }
@@ -91,11 +89,11 @@
       font-size: 1rem;
       font-weight: normal;
       font-family: inherit;
-      color: $black;
+      color: var(--theme-main);
       outline: none;
       border-radius: 0.2rem;
-      border: 1px solid $vvv-light-gray;
-      background-color: $vvvv-light-gray;
+      border: 1px solid var(--theme-border);
+      background-color: var(--theme-background-scale-1);
       resize: none;
       transition: border ease 0.2s;
       margin-bottom: 1rem;
@@ -103,13 +101,13 @@
       &::placeholder {
         font-style: italic;
         transition: color ease 0.2s;
-        color: $vv-light-gray;
+        color: var(--theme-background-scale-0);
       }
 
       &:focus {
-        border: 1px solid $v-light-gray;
+        border: 1px solid var(--theme-text-scale-4);
         &::placeholder {
-          color: $v-light-gray;
+          color: var(--theme-text-scale-4);
         }
       }
     }
@@ -134,27 +132,27 @@
       }
 
       &-Button {
-        background-color: $black;
-        color: $white;
+        background-color: var(--theme-main);
+        color: var(--theme-main-background);
 
         &:hover {
-          background-color: $light-black;
+          background-color: var(--theme-text-scale-1);
         }
       }
 
       &-Cancel {
-        background-color: $v-light-gray;
-        color: $white;
+        background-color: var(--theme-text-scale-4);
+        color: var(--theme-main-background);
 
         &:hover {
-          background-color: $vv-light-gray;
+          background-color: var(--theme-background-scale-0);
         }
       }
     }
   }
 
   & > p {
-    color: $black;
+    color: var(--theme-main);
     font-size: 1.125rem;
     white-space: pre-wrap;
     word-break: break-all;

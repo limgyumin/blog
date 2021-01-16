@@ -1,4 +1,3 @@
-@import "../../../util/color.scss";
 @import "../../../util/lib.scss";
 
 .Post-List {
@@ -25,7 +24,7 @@
       margin-right: 0.5rem;
       width: 100%;
       max-width: 24rem;
-      background-color: $vvvvv-light-gray;
+      background-color: var(--theme-background-scale-2);
       padding: 1rem 1.5rem;
       border-radius: 0.2rem;
       text-decoration: none;
@@ -34,7 +33,7 @@
       align-items: center;
 
       &:hover {
-        background-color: $vvvv-light-gray;
+        background-color: var(--theme-background-scale-1);
         transform: scale(1.03, 1.03);
 
         & > svg {
@@ -64,12 +63,12 @@
         margin-left: 1.4rem;
 
         &-Name {
-          color: $light-black;
+          color: var(--theme-text-scale-1);
           font-size: 0.8rem;
         }
 
         &-Title {
-          color: $black;
+          color: var(--theme-main);
           font-weight: bold;
           font-size: 1.125rem;
           margin-top: 0.4rem;
@@ -89,7 +88,7 @@
       margin-left: 0.5rem;
       width: 100%;
       max-width: 24rem;
-      background-color: $vvvvv-light-gray;
+      background-color: var(--theme-background-scale-2);
       padding: 1rem 1.5rem;
       border-radius: 0.2rem;
       text-decoration: none;
@@ -99,7 +98,7 @@
       align-items: center;
 
       &:hover {
-        background-color: $vvvv-light-gray;
+        background-color: var(--theme-background-scale-1);
         transform: scale(1.03, 1.03);
 
         & > svg {
@@ -130,12 +129,12 @@
         text-align: right;
 
         &-Name {
-          color: $light-black;
+          color: var(--theme-text-scale-1);
           font-size: 0.8rem;
         }
 
         &-Title {
-          color: $black;
+          color: var(--theme-main);
           font-weight: bold;
           font-size: 1.125rem;
           margin-top: 0.4rem;

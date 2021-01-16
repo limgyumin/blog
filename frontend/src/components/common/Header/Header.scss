@@ -1,11 +1,9 @@
-@import "../../../util/color.scss";
-
 .Header {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $white;
+  background-color: var(--theme-main-background);
   transition: transform ease 0.5s, box-shadow ease 0.3s;
   position: fixed;
   top: 0;
@@ -59,12 +57,12 @@
             transition: background-color ease 0.1s;
 
             &:hover {
-              background-color: $vvvv-light-gray;
+              background-color: var(--theme-background-scale-1);
             }
 
             & > svg {
               font-size: 1.4rem;
-              color: $black;
+              color: var(--theme-main);
             }
           }
 
@@ -73,10 +71,10 @@
             justify-content: center;
             align-items: center;
             padding: 0.42rem 0.95rem;
-            background-color: $black;
+            background-color: var(--theme-main);
             font-size: 1rem;
             font-weight: bold;
-            color: $white;
+            color: var(--theme-main-background);
             border-radius: 2rem;
             margin-right: 1.4rem;
             cursor: pointer;
@@ -85,7 +83,7 @@
             text-decoration: none;
 
             &:hover {
-              background-color: $light-black;
+              background-color: var(--theme-text-scale-1);
             }
 
             &:active {
@@ -119,7 +117,7 @@
 
               &:hover > &-Option {
                 path {
-                  fill: $black;
+                  fill: var(--theme-main);
                 }
               }
             }
@@ -131,13 +129,13 @@
             align-items: center;
             cursor: pointer;
             padding: 0.43rem;
-            background-color: $black;
+            background-color: var(--theme-main);
             border-radius: 50%;
             box-shadow: none;
             transition: all ease-in-out 0.2s;
 
             &:hover {
-              background-color: $light-black;
+              background-color: var(--theme-text-scale-1);
             }
 
             &:active {
@@ -162,7 +160,7 @@
       z-index: 100;
 
       &-Container {
-        background: $light-black;
+        background: var(--theme-text-scale-1);
         transform-origin: top left;
         transform: scale(0, 0);
         height: 4px;

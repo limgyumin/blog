@@ -1,21 +1,19 @@
-@import "../../../../util/color.scss";
-
 .Post-Liked-User-Item {
   display: flex;
   align-items: center;
   width: 100%;
   padding: 0.6rem;
-  background-color: $vvvv-light-gray;
+  background-color: var(--theme-background-scale-1);
 
   &:not(:last-child) {
-    border-bottom: 1px solid $vvv-light-gray;
+    border-bottom: 1px solid var(--theme-border);
   }
 
   &-Avatar {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
-    border: 1px solid $vvv-light-gray;
+    border: 1px solid var(--theme-border);
     margin-right: 0.5rem;
   }
 
@@ -23,12 +21,12 @@
     &-Name {
       font-size: 0.925rem;
       font-weight: bold;
-      color: $light-black;
+      color: var(--theme-text-scale-1);
     }
 
     &-Bio {
       font-size: 0.8rem;
-      color: $v-light-gray;
+      color: var(--theme-text-scale-4);
     }
   }
 }

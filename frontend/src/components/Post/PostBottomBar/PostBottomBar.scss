@@ -1,8 +1,6 @@
-@import "../../../util/color.scss";
-
 .Post-BottomBar {
-  border-top: 1px solid $vvv-light-gray;
-  background-color: $white;
+  border-top: 1px solid var(--theme-border);
+  background-color: var(--theme-main-background);
   position: fixed;
   z-index: 98;
   width: 100%;
@@ -25,13 +23,13 @@
 
     & > svg {
       font-size: 1.6rem;
-      color: $light-black;
+      color: var(--theme-text-scale-1);
       margin-right: 0.25rem;
     }
 
     & > p {
       font-size: 1.125rem;
-      color: $light-black;
+      color: var(--theme-text-scale-1);
     }
   }
 
@@ -43,7 +41,7 @@
 
     & > svg {
       font-size: 1.5rem;
-      color: $light-black;
+      color: var(--theme-text-scale-1);
     }
   }
 
@@ -54,7 +52,7 @@
 
     & > svg {
       font-size: 1.5rem;
-      color: $light-black;
+      color: var(--theme-text-scale-1);
     }
   }
 }

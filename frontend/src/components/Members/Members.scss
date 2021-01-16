@@ -1,5 +1,3 @@
-@import "../../util/color.scss";
-
 .Members {
   display: flex;
   justify-content: center;
@@ -34,7 +32,7 @@
       &-Title {
         font-size: 3rem;
         font-weight: bold;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
         margin-bottom: 0.7rem;
 
         @media screen and (max-width: 600px) {
@@ -45,7 +43,7 @@
       &-Subtitle {
         font-size: 2.1rem;
         font-weight: normal;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
 
         & > span {
           font-weight: bold;
@@ -67,7 +65,7 @@
         font-size: 1.4rem;
         font-weight: bold;
         margin-bottom: 1rem;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
 
         & > svg {
           margin-right: 0.5rem;
@@ -82,7 +80,7 @@
         font-size: 1.4rem;
         font-weight: bold;
         margin-bottom: 1rem;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
 
         & > svg {
           margin-right: 0.5rem;

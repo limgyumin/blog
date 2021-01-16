@@ -1,13 +1,11 @@
-@import "../../../util/color.scss";
-
 .Categories-Posts-List-Item {
   display: flex;
   cursor: pointer;
-  background-color: $vvvvv-light-gray;
+  background-color: var(--theme-background-scale-2);
   text-decoration: none;
 
   &:not(:last-child) {
-    border-bottom: 1px solid $vvvv-light-gray;
+    border-bottom: 1px solid var(--theme-background-scale-1);
   }
 
   &-Info {
@@ -23,7 +21,7 @@
 
       & > svg {
         margin-right: 0.5rem;
-        color: #58a6ff;
+        color: var(--theme-icon-blue);
         font-size: 1.2rem;
       }
 
@@ -31,17 +29,17 @@
         margin-right: 0.6rem;
         font-size: 1rem;
         font-weight: normal;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
 
         &:hover {
           text-decoration: underline;
-          color: #0366d6;
+          color: var(--theme-hover-blue);
         }
       }
     }
 
     &-Date {
-      color: $v-light-gray;
+      color: var(--theme-text-scale-4);
       font-size: 0.8rem;
     }
   }

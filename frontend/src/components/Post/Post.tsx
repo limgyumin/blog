@@ -1,13 +1,10 @@
 import React from "react";
-import { BsArrowBarUp } from "react-icons/bs";
-import { IoMdHeartEmpty } from "react-icons/io";
 import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
 import PostBottomBarContainer from "../../containers/Post/PostBottomBarContainer";
 import PostCommentContainer from "../../containers/Post/PostCommentContainer";
 import OtherPostsType from "../../util/types/OtherPosts";
 import PostType from "../../util/types/Post";
 import "./Post.scss";
-import PostBottomBar from "./PostBottomBar";
 import PostHeader from "./PostHeader";
 import PostList from "./PostList";
 import PostLoading from "./PostLoading";

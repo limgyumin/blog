@@ -1,5 +1,4 @@
 @import "../../../../util/lib.scss";
-@import "../../../../util/color.scss";
 
 .Main-Post-Item {
   width: 18rem;
@@ -51,10 +50,10 @@
           display: flex;
           align-items: center;
           font-size: 1rem;
-          background-color: $white;
+          background-color: var(--theme-main-background);
           padding: 0.3rem 0.6rem;
           border-radius: 0.3rem;
-          color: $gray;
+          color: var(--theme-text-scale-2);
           font-weight: normal;
         }
 
@@ -106,10 +105,10 @@
 
       &-Category {
         font-size: 0.75rem;
-        background-color: $vvv-light-gray;
+        background-color: var(--theme-border);
         padding: 0.2rem 0.55rem;
         border-radius: 2rem;
-        color: $gray;
+        color: var(--theme-text-scale-2);
         font-weight: bold;
         margin-right: 0.6rem;
       }
@@ -117,7 +116,7 @@
       &-Date {
         font-size: 0.925rem;
         font-weight: bold;
-        color: $black;
+        color: var(--theme-main);
       }
     }
 
@@ -129,7 +128,7 @@
       &-Title {
         display: flex;
         align-items: center;
-        color: $black;
+        color: var(--theme-main);
         font-size: 1rem;
         font-weight: bold;
         margin-bottom: 0.3rem;
@@ -146,7 +145,7 @@
       &-Description {
         font-size: 0.875rem;
         font-weight: normal;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
         @include ellipsis(1);
       }
     }

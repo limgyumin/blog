@@ -1,5 +1,3 @@
-@import "../../../util/color.scss";
-
 .Post-Header {
   width: 100%;
   display: flex;
@@ -13,7 +11,7 @@
     margin-top: 8rem;
 
     &-Title {
-      color: $black;
+      color: var(--theme-main);
       font-size: 2.8rem;
       margin-bottom: 3rem;
       word-break: break-all;
@@ -34,22 +32,22 @@
         align-items: center;
 
         &-Name {
-          background-color: $vvv-light-gray;
+          background-color: var(--theme-border);
           font-size: 1rem;
           font-weight: bold;
           padding: 0.25rem 0.8rem;
           border-radius: 2rem;
-          color: $light-black;
+          color: var(--theme-text-scale-2);
           margin-right: 0.6rem;
         }
 
         &-Info {
           font-size: 1.05rem;
           font-weight: normal;
-          color: $light-gray;
+          color: var(--theme-text-scale-3);
 
           & > span {
-            color: $black;
+            color: var(--theme-main);
             font-weight: bold;
           }
         }
@@ -64,11 +62,11 @@
             cursor: pointer;
             font-size: 1rem;
             transition: color ease 0.1s;
-            color: $vv-light-gray;
+            color: var(--theme-background-scale-0);
             margin-left: 1rem;
 
             &:hover {
-              color: $light-gray;
+              color: var(--theme-text-scale-3);
             }
           }
         }

@@ -165,7 +165,7 @@ const PostReplyContainer = ({
 
   return (
     <>
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <PostReplyDelete
             showModal={showModalCallback}

@@ -1,5 +1,3 @@
-@import "../../../util/color.scss";
-
 .Post-Loading {
   width: 100%;
   display: flex;
@@ -8,19 +6,19 @@
   align-items: center;
 
   span {
-    background-color: $load-dark-gray;
+    background-color: var(--theme-post-loading-0);
     animation: colorChange ease 1s infinite;
     @keyframes colorChange {
       0% {
-        background-color: $load-dark-gray;
+        background-color: var(--theme-post-loading-0);
       }
 
       50% {
-        background-color: $load-light-gray;
+        background-color: var(--theme-post-loading-1);
       }
 
       100% {
-        background-color: $load-dark-gray;
+        background-color: var(--theme-post-loading-0);
       }
     }
   }

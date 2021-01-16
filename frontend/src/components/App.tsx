@@ -11,10 +11,12 @@ import SideBarContainer from "../containers/SideBar/SideBarContainer";
 import SearchPage from "../pages/SearchPage";
 import TempPage from "../pages/TempPage";
 import MemberPage from "../pages/MemberPage";
+import "../util/theme.scss";
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App light">
+      <div id="modal-area"></div>
       <ToastContainer autoClose={4000} />
       <Route
         render={({ location }) => {

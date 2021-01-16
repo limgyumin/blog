@@ -1,5 +1,4 @@
 @import "../../../util/lib.scss";
-@import "../../../util/color.scss";
 
 .Search-Post-Item {
   width: 100%;
@@ -42,10 +41,10 @@
 
       &-Category {
         font-size: 0.925rem;
-        background-color: $vvv-light-gray;
+        background-color: var(--theme-border);
         padding: 0.25rem 0.7rem;
         border-radius: 2rem;
-        color: $gray;
+        color: var(--theme-text-scale-2);
         font-weight: bold;
         margin-right: 1rem;
       }
@@ -53,7 +52,7 @@
       &-Date {
         font-size: 1rem;
         font-weight: normal;
-        color: $v-light-gray;
+        color: var(--theme-text-scale-4);
       }
     }
 
@@ -65,7 +64,7 @@
       &-Title {
         display: flex;
         align-items: center;
-        color: $black;
+        color: var(--theme-main);
         font-size: 1.4rem;
         font-weight: bold;
         margin-bottom: 0.8rem;
@@ -88,7 +87,7 @@
         font-size: 1.125rem;
         line-height: 1.5;
         font-weight: normal;
-        color: $black;
+        color: var(--theme-main);
         max-width: 50rem;
         overflow: hidden;
         margin-bottom: 0.4rem;

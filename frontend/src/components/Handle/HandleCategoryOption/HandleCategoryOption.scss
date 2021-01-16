@@ -1,13 +1,11 @@
-@import "../../../util/color.scss";
-
 .Handle-Category-Option {
   bottom: 2.7rem;
   left: 0;
   z-index: 1000;
   display: flex;
   flex-direction: column;
-  border: 1px solid $vvv-light-gray;
-  background: $white;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-main-background);
   width: 12rem;
   height: auto;
   position: absolute;
@@ -19,13 +17,13 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $vvvv-light-gray;
+      background-color: var(--theme-background-scale-1);
     }
 
     span {
       font-size: 1rem;
       font-weight: normal;
-      color: $black;
+      color: var(--theme-main);
     }
   }
 }

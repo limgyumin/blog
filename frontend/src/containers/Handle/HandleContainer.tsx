@@ -412,7 +412,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
 
   return (
     <>
-      <Portal elementId="modal-root">
+      <Portal elementId="modal-area">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
           <HandleCancelAlert
             showModalCallback={showModalCallback}

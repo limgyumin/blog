@@ -1,34 +1,32 @@
-@import "../../../../util/color.scss";
-
 .Main-Category-Item {
   text-decoration: none;
   cursor: pointer;
   margin: 0 0.6rem 0.4rem 0;
   border-radius: 0.3rem;
-  background-color: $vvv-light-gray;
+  background-color: var(--theme-border);
   transition: background-color ease 0.1s;
   display: flex;
   align-items: center;
   overflow: hidden;
 
   &:hover {
-    background-color: $vv-light-gray;
+    background-color: var(--theme-background-scale-0);
   }
 
   &:hover > &-Count {
-    background-color: $v-light-gray;
+    background-color: var(--theme-text-scale-4);
   }
 
   &-Active {
-    background-color: $light-black;
+    background-color: var(--theme-text-scale-1);
 
     &:hover {
-      background-color: $light-black;
+      background-color: var(--theme-text-scale-1);
     }
   }
 
   &:hover > &-Count-Active {
-    background-color: $semi-light-black;
+    background-color: var(--theme-text-scale-0);
   }
 
   &-Wrapper {
@@ -40,12 +38,12 @@
     &-Name {
       font-size: 0.825rem;
       font-weight: normal;
-      color: $black;
+      color: var(--theme-main);
       margin-right: 0.2rem;
       transition: color ease 0.2s;
 
       &-Active {
-        color: $white;
+        color: var(--theme-main-background);
       }
     }
   }
@@ -55,16 +53,16 @@
     align-items: center;
     justify-content: center;
     transition: background-color ease 0.1s;
-    background-color: $semi-light-gray;
+    background-color: var(--theme-background-scale-4);
     padding: 0.2rem 0.4rem;
-    color: $gray;
+    color: var(--theme-text-scale-1);
     font-size: 0.825rem;
     font-weight: 600;
     height: 100%;
 
     &-Active {
-      background-color: $semi-light-black;
-      color: $white;
+      background-color: var(--theme-text-scale-0);
+      color: var(--theme-main-background);
       font-weight: 400;
     }
   }

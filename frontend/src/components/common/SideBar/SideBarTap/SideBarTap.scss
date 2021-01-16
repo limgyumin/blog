@@ -1,19 +1,17 @@
-@import "../../../../util/color.scss";
-
 .SideBar-Tap {
   width: 100%;
-  border-top: 1px solid $vvv-light-gray;
+  border-top: 1px solid var(--theme-border);
 
   &-Home,
   &-Categories,
   &-Achieve,
   &-About {
     display: flex;
-    color: $light-gray;
+    color: var(--theme-text-scale-3);
     padding: 1rem 1rem 1rem 3rem;
     text-decoration: none;
     cursor: pointer;
-    border-bottom: 1px solid $vvv-light-gray;
+    border-bottom: 1px solid var(--theme-border);
 
     &:hover > &-Wrapper {
       transform: translateX(-0.5rem);
@@ -30,7 +28,7 @@
         justify-content: center;
         padding: 0.5rem;
         border-radius: 50%;
-        background-color: $vvv-light-gray;
+        background-color: var(--theme-border);
         margin-right: 0.6rem;
         margin-right: 1.2rem;
 

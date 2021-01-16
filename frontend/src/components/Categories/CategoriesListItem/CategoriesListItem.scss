@@ -1,11 +1,9 @@
-@import "../../../util/color.scss";
-
 .Categories-List-Item {
   cursor: pointer;
-  background-color: $white;
+  background-color: var(--theme-main-background);
 
   &:not(:last-child) {
-    border-bottom: 1px solid $vvvv-light-gray;
+    border-bottom: 1px solid var(--theme-background-scale-1);
   }
 
   &-Info {
@@ -20,7 +18,7 @@
 
       & > svg {
         margin-right: 0.5rem;
-        color: #58a6ff;
+        color: var(--theme-icon-blue);
         font-size: 1.2rem;
       }
 
@@ -28,16 +26,16 @@
         margin-right: 0.6rem;
         font-size: 1rem;
         font-weight: normal;
-        color: $light-black;
+        color: var(--theme-text-scale-1);
 
         &:hover {
           text-decoration: underline;
-          color: #0366d6;
+          color: var(--theme-hover-blue);
         }
       }
 
       &-Edit {
-        border: 1px solid $vvvv-light-gray;
+        border: 1px solid var(--theme-background-scale-1);
         border-radius: 0.3rem;
         padding: 0.3rem 0.5rem;
         margin-right: 0.6rem;
@@ -52,28 +50,28 @@
           &::placeholder {
             font-family: inherit;
             font-size: 0.825rem;
-            color: $vv-light-gray;
+            color: var(--theme-background-scale-0);
           }
         }
 
         & > svg {
-          color: $vv-light-gray;
+          color: var(--theme-background-scale-0);
           transition: color ease 0.1s;
 
           &:hover {
-            color: $v-light-gray;
+            color: var(--theme-text-scale-4);
           }
         }
       }
 
       &-Count {
-        color: $v-light-gray;
+        color: var(--theme-text-scale-4);
         font-size: 0.8rem;
       }
     }
 
     &-Icon {
-      color: $v-light-gray;
+      color: var(--theme-text-scale-4);
       font-size: 1.1rem;
       transform: rotate(0deg);
       transition: all ease 0.3s;
@@ -86,11 +84,11 @@
 
   &-Post {
     max-height: 0rem;
-    overflow: hidden;
+    overflow-y: auto;
     transition: max-height ease 0.6s;
 
     &-Active {
-      border-top: 1px solid $vvvv-light-gray;
+      border-top: 1px solid var(--theme-background-scale-1);
       max-height: 20rem;
     }
   }
