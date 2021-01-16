@@ -1,0 +1,29 @@
+.Side-Bar-Theme-Button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 3.5rem;
+  height: 1.8rem;
+  border-radius: 2rem;
+  background-color: var(--theme-text-scale-2);
+  position: relative;
+  transition: all ease 0.2s;
+
+  &:hover {
+    background-color: var(--theme-text-scale-0);
+  }
+
+  &-Toggle {
+    position: absolute;
+    border: 4px solid var(--theme-main-background);
+    border-radius: 50%;
+    width: 1.2rem;
+    height: 1.2rem;
+    right: 2rem;
+    transition: all ease 0.2s;
+
+    &-Dark {
+      right: 0.3rem;
+    }
+  }
+}

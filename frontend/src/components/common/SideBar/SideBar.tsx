@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import "./SideBar.scss";
 import SideBarTap from "./SideBarTap";
+import SideBarThemeButton from "./SideBarThemeButton";
 
 interface SideBarProps {
   avatar: string;
@@ -26,6 +27,9 @@ const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
           <p className="SideBar-Content-Bio">{bio}</p>
         </div>
         <SideBarTap />
+        <div className="SideBar-Bottom">
+          <SideBarThemeButton />
+        </div>
       </nav>
       <div
         className={open ? "Toggle-Active Toggle" : "Toggle"}
