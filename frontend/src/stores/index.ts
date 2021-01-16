@@ -2,6 +2,7 @@ import CategoryStore from "./Category";
 import CommentStore from "./Comment";
 import PostStore from "./Post";
 import ReplyStore from "./Reply";
+import ThemeStore from "./Theme";
 import UploadStore from "./Upload";
 import UserStore from "./User";
 
@@ -12,6 +13,7 @@ const stores = {
   CategoryStore: new CategoryStore(),
   UploadStore: new UploadStore(),
   UserStore: new UserStore(),
+  ThemeStore: new ThemeStore(),
 };
 
 export default stores;

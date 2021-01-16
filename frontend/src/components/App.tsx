@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import AuthPage from "../pages/AuthPage";
@@ -12,10 +12,28 @@ import SearchPage from "../pages/SearchPage";
 import TempPage from "../pages/TempPage";
 import MemberPage from "../pages/MemberPage";
 import "../util/theme.scss";
+import { observer } from "mobx-react";
+import useStore from "../util/lib/hooks/useStore";
 
 const App = () => {
+  const { store } = useStore();
+  const { theme, handleThemeState } = store.ThemeStore;
+
+  const validateTheme = () => {
+    const currentTheme = localStorage.getItem("theme");
+    if (!currentTheme || currentTheme === "light") {
+      handleThemeState(false);
+    } else {
+      handleThemeState(true);
+    }
+  };
+
+  useEffect(() => {
+    validateTheme();
+  }, []);
+
   return (
-    <div className="App light">
+    <div className={`App ${!theme ? "light" : "dark"}`}>
       <ToastContainer autoClose={4000} />
       <Route
         render={({ location }) => {
@@ -47,4 +65,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default observer(App);
