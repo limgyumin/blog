@@ -4,32 +4,28 @@
   margin-top: 2rem;
   width: 100%;
 
-  &-Count,
-  &-Add {
-    display: flex;
-    align-items: center;
-    color: var(--theme-text-scale-1);
-    cursor: pointer;
-
-    &:hover {
-      color: var(--theme-text-scale-3);
-    }
-
-    & > svg {
-      font-size: 1rem;
-      margin-right: 0.4rem;
-    }
-
-    & > span {
-      font-weight: bold;
-      font-size: 1rem;
-    }
-  }
-
   &-Count {
-    &-Active {
+    display: flex;
+    width: 100%;
+
+    &-Wrapper {
+      display: flex;
+      align-items: center;
+      color: var(--theme-text-scale-1);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--theme-text-scale-3);
+      }
+
       & > svg {
-        transform: rotate(180deg);
+        font-size: 1rem;
+        margin-right: 0.4rem;
+      }
+
+      & > span {
+        font-weight: bold;
+        font-size: 1rem;
       }
     }
   }

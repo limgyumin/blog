@@ -55,7 +55,8 @@
       }
 
       & > svg {
-        font-size: 1.6rem;
+        color: var(--theme-main);
+        font-size: 1.8rem;
       }
 
       &-Content {
@@ -103,6 +104,7 @@
 
         & > svg {
           animation: scale ease 0.7s infinite;
+
           @keyframes scale {
             0% {
               transform: translateX(-0.3rem);
@@ -120,7 +122,8 @@
       }
 
       & > svg {
-        font-size: 1.6rem;
+        color: var(--theme-main);
+        font-size: 1.8rem;
       }
 
       &-Content {

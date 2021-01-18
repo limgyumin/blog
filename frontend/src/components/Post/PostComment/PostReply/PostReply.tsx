@@ -45,9 +45,14 @@ const PostReply = ({
       <div className="Post-Reply">
         {show ? (
           <>
-            <div className="Post-Reply-Count" onClick={() => setShow(!show)}>
-              <BiMessageSquareMinus />
-              <span>Hide</span>
+            <div className="Post-Reply-Count">
+              <div
+                className="Post-Reply-Count-Wrapper"
+                onClick={() => setShow(!show)}
+              >
+                <BiMessageSquareMinus />
+                <span>Hide</span>
+              </div>
             </div>
             <div className="Post-Reply-Container">
               {replyCount ? (
@@ -92,18 +97,23 @@ const PostReply = ({
           </>
         ) : (
           <>
-            <div className="Post-Reply-Count" onClick={() => setShow(!show)}>
-              {replyCount ? (
-                <>
-                  <BiMessageSquareAdd />
-                  <span>{replyCount} Replies</span>
-                </>
-              ) : (
-                <>
-                  <BiMessageSquareAdd />
-                  <span>Leave a reply</span>
-                </>
-              )}
+            <div className="Post-Reply-Count">
+              <div
+                className="Post-Reply-Count-Wrapper"
+                onClick={() => setShow(!show)}
+              >
+                {replyCount ? (
+                  <>
+                    <BiMessageSquareAdd />
+                    <span>{replyCount} Replies</span>
+                  </>
+                ) : (
+                  <>
+                    <BiMessageSquareAdd />
+                    <span>Leave a reply</span>
+                  </>
+                )}
+              </div>
             </div>
           </>
         )}

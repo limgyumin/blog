@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import OtherPostsType from "../../../util/types/OtherPosts";
-import { GrLinkPrevious, GrLinkNext } from "react-icons/gr";
 import "./PostList.scss";
+import { IoMdArrowBack, IoMdArrowForward } from "react-icons/io";
 
 interface PostListProps {
   otherPosts: Partial<OtherPostsType>;
@@ -18,7 +18,7 @@ const PostList = ({ otherPosts }: PostListProps) => {
               to={`/post/${otherPosts.previous?.idx}`}
               className="Post-List-Previous-Container"
             >
-              <GrLinkPrevious />
+              <IoMdArrowBack />
               <div className="Post-List-Previous-Container-Content">
                 <h3 className="Post-List-Previous-Container-Content-Name">
                   Previous Post
@@ -44,7 +44,7 @@ const PostList = ({ otherPosts }: PostListProps) => {
                   {otherPosts.next?.title}
                 </p>
               </div>
-              <GrLinkNext />
+              <IoMdArrowForward />
             </Link>
           </div>
         )}
