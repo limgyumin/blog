@@ -13,6 +13,10 @@
     cursor: pointer;
     border-bottom: 1px solid var(--theme-border);
 
+    @media screen and (max-width: 1660px) {
+      padding: 1rem 1rem 1rem 2rem;
+    }
+
     &:hover > &-Wrapper {
       transform: translateX(-0.5rem);
     }
@@ -34,6 +38,10 @@
 
         & > svg {
           font-size: 1.5rem;
+        }
+
+        @media screen and (max-width: 1660px) {
+          display: none;
         }
       }
 

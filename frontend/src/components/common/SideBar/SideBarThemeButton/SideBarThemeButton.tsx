@@ -1,5 +1,7 @@
 import { observer } from "mobx-react";
 import React, { useCallback } from "react";
+import { WiMoonAltNew } from "react-icons/wi";
+import { IoMdMoon } from "react-icons/io";
 import useStore from "../../../../util/lib/hooks/useStore";
 import "./SideBarThemeButton.scss";
 
@@ -31,7 +33,9 @@ const SideBarThemeButton = ({}: SideBarThemeButtonProps) => {
               ? "Side-Bar-Theme-Button-Toggle"
               : "Side-Bar-Theme-Button-Toggle-Dark Side-Bar-Theme-Button-Toggle"
           }
-        />
+        >
+          {!theme ? <IoMdMoon /> : <WiMoonAltNew />}
+        </div>
       </div>
     </>
   );
