@@ -6,7 +6,13 @@ interface FooterProps {}
 const Footer = ({}: FooterProps) => {
   return (
     <>
-      <footer className="Footer"></footer>
+      <footer className="Footer">
+        <div className="Footer-Container">
+          <p className="Footer-Container-Content">
+            © 2021. limgyumin. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </>
   );
 };

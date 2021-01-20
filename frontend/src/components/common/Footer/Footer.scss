@@ -1,11 +1,21 @@
-@import "../../../util/color.scss";
-
 .Footer {
   width: 100%;
-  padding: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $black;
-  color: $white;
+
+  &-Container {
+    border-top: 1px solid var(--theme-border);
+    width: 100%;
+    max-width: 1218px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 2rem 2.5rem 2rem;
+
+    &-Content {
+      font-size: 0.925rem;
+      color: var(--theme-text-scale-4);
+    }
+  }
 }

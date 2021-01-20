@@ -1,6 +1,7 @@
 import React from "react";
 import { CategoryType } from "../../util/types/Category";
 import PostType from "../../util/types/Post";
+import Footer from "../common/Footer";
 import "./Main.scss";
 import MainCategories from "./MainCategories";
 import MainCategoryItem from "./MainCategories/MainCategoryItem";
@@ -52,6 +53,7 @@ const Main = ({
           </div>
           <MainCategories categories={categories} totalView={totalView} />
         </div>
+        <Footer />
       </div>
     </>
   );

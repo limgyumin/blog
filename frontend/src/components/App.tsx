@@ -40,29 +40,29 @@ const App = () => {
         render={({ location }) => {
           let path = location.pathname.split("/")[1];
           return (
-            path !== "write" &&
-            path !== "modify" &&
-            path !== "auth" && (
-              <>
-                <HeaderContainer />
-                <SideBarContainer />
-              </>
-            )
+            <>
+              {path !== "write" && path !== "modify" && path !== "auth" && (
+                <>
+                  <HeaderContainer />
+                  <SideBarContainer />
+                </>
+              )}
+              <Switch>
+                <Route exact path="/" component={MainPage} />
+                <Route path="/categories" component={CategoriesPage} />
+                <Route path="/post/:idx" component={PostPage} />
+                <Route path="/modify/:idx" component={HandlePage} />
+                <Route path="/write" component={HandlePage} />
+                <Route path="/search" component={SearchPage} />
+                <Route path="/auth" component={AuthPage} />
+                <Route path="/temp" component={TempPage} />
+                <Route path="/members" component={MemberPage} />
+                <Route path="/about" component={AboutPage} />
+              </Switch>
+            </>
           );
         }}
       />
-      <Switch>
-        <Route exact path="/" component={MainPage} />
-        <Route path="/categories" component={CategoriesPage} />
-        <Route path="/post/:idx" component={PostPage} />
-        <Route path="/modify/:idx" component={HandlePage} />
-        <Route path="/write" component={HandlePage} />
-        <Route path="/search" component={SearchPage} />
-        <Route path="/auth" component={AuthPage} />
-        <Route path="/temp" component={TempPage} />
-        <Route path="/members" component={MemberPage} />
-        <Route path="/about" component={AboutPage} />
-      </Switch>
     </div>
   );
 };
