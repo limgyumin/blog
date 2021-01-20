@@ -14,6 +14,7 @@ import MemberPage from "../pages/MemberPage";
 import "../util/theme.scss";
 import { observer } from "mobx-react";
 import useStore from "../util/lib/hooks/useStore";
+import AboutPage from "../pages/AboutPage";
 
 const App = () => {
   const { store } = useStore();
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/auth" component={AuthPage} />
         <Route path="/temp" component={TempPage} />
         <Route path="/members" component={MemberPage} />
+        <Route path="/about" component={AboutPage} />
       </Switch>
     </div>
   );
