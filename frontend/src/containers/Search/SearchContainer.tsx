@@ -14,14 +14,22 @@ const SearchContainer = ({}) => {
 
   const [content, setContent] = useState<string>("");
   const [postCount, setPostCount] = useState<number>(0);
+  const [notFound, setNotFound] = useState<boolean>(false);
   const [searchedPost, setSearchedPost] = useState<PostType[]>([]);
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearchPostCallback = useCallback(async () => {
+    setSearchedPost([]);
     await handleSearchPost(removeLastBlank(content))
       .then((res: PostsResponse) => {
-        setSearchedPost(res.data.posts);
-        setPostCount(res.data.post_count);
+        if (res.data.posts.length === 0) {
+          setNotFound(true);
+        } else {
+          setNotFound(false);
+          setSearchedPost(res.data.posts);
+          setPostCount(res.data.post_count);
+        }
       })
       .catch(() => {
         toast.error("이런! 글 검색에 실패했어요.");
@@ -51,6 +59,7 @@ const SearchContainer = ({}) => {
         setContentListener={setContentListener}
         searchedPost={searchedPost}
         postCount={postCount}
+        notFound={notFound}
       />
     </>
   );

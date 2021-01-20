@@ -60,13 +60,19 @@
 
       &-Count {
         color: var(--theme-text-scale-3);
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: normal;
 
         & > span {
           color: var(--theme-text-scale-1);
           font-weight: bold;
         }
+      }
+
+      &-NotFound {
+        color: var(--theme-main);
+        font-size: 1.25rem;
+        font-weight: normal;
       }
     }
 

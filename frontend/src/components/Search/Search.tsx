@@ -11,6 +11,7 @@ interface SearchProps {
   setContentListener: (e: React.ChangeEvent<HTMLInputElement>) => void;
   searchedPost: PostType[];
   postCount: number;
+  notFound: boolean;
 }
 
 const Search = ({
@@ -20,6 +21,7 @@ const Search = ({
   setContentListener,
   searchedPost,
   postCount,
+  notFound,
 }: SearchProps) => {
   return (
     <>
@@ -32,14 +34,18 @@ const Search = ({
             >
               <BsSearch />
               <input
-                placeholder="검색어를 입력해주세요"
+                placeholder="Search Post"
                 autoFocus
                 onChange={(e) => setContentListener(e)}
                 onKeyDown={(e) => keyDownListener(e)}
                 ref={inputRef}
               />
             </div>
-            {postCount ? (
+            {notFound ? (
+              <p className="Search-Container-Wrapper-NotFound">
+                No search results.
+              </p>
+            ) : postCount ? (
               <p className="Search-Container-Wrapper-Count">
                 <span>{postCount} Posts</span> were found.
               </p>
