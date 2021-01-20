@@ -48,6 +48,7 @@
           font-family: inherit;
           background-color: var(--theme-main-background);
           color: var(--theme-main);
+          width: 8rem;
 
           &::placeholder {
             font-family: inherit;
@@ -59,6 +60,7 @@
         & > svg {
           color: var(--theme-background-scale-0);
           transition: color ease 0.1s;
+          margin-left: 0.4rem;
 
           &:hover {
             color: var(--theme-text-scale-4);

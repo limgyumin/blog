@@ -15,24 +15,39 @@
   }
 
   &-Content {
-    padding: 5rem 4rem 4rem 4rem;
+    padding: 5rem 4rem 1rem 4rem;
 
     @media screen and (max-width: 1660px) {
-      padding: 3rem 2rem 2rem 2rem;
+      padding: 3rem 2rem 1rem 2rem;
     }
 
     &-Avatar {
-      width: 10rem;
-      height: 10rem;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      border: 1px solid var(--theme-border);
+      &-Img {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 1px solid var(--theme-border);
+      }
     }
 
     &-Name {
-      font-size: 1.425rem;
-      color: var(--theme-text-scale-1);
-      font-weight: bold;
+      display: flex;
+      margin-bottom: 0.4rem;
+
+      &-Wrapper {
+        color: var(--theme-text-scale-1);
+        text-decoration: none;
+
+        &-Text {
+          font-size: 1.425rem;
+          font-weight: bold;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     &-Id {
@@ -51,10 +66,12 @@
   }
 
   &-Bottom {
-    padding: 2rem 1rem 1rem 3rem;
+    padding: 1rem 1rem 1rem 4rem;
+    margin-bottom: 2rem;
 
     @media screen and (max-width: 1660px) {
-      padding: 2rem 1rem 1rem 2rem;
+      padding: 1rem 1rem 1rem 2rem;
+      margin-bottom: 1rem;
     }
   }
 }

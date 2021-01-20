@@ -30,19 +30,23 @@
         display: flex;
         flex-direction: column;
 
-        &-Name {
-          text-decoration: none;
+        &-Area {
+          display: flex;
 
-          &:hover {
-            & > h3 {
-              text-decoration: underline;
-            }
-          }
-
-          & > h3 {
-            font-size: 1.125rem;
-            margin-bottom: 0.25rem;
+          &-Name {
+            text-decoration: none;
             color: var(--theme-main);
+
+            &:hover {
+              & > h3 {
+                text-decoration: underline;
+              }
+            }
+
+            & > h3 {
+              font-size: 1.125rem;
+              margin-bottom: 0.25rem;
+            }
           }
         }
 

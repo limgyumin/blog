@@ -47,6 +47,13 @@
         color: var(--theme-text-scale-2);
         font-weight: bold;
         margin-right: 1rem;
+        word-break: break-all;
+        @include ellipsis(1);
+        max-width: 12rem;
+
+        @media screen and (max-width: 580px) {
+          max-width: 8rem;
+        }
       }
 
       &-Date {

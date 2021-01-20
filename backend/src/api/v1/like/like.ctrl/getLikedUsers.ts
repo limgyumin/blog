@@ -38,7 +38,7 @@ export default async (req: Request, res: Response) => {
     for (let i in likes) {
       const userRepo = getRepository(User);
       const user: User = await userRepo.findOne({
-        select: ["avatar", "name", "bio"],
+        select: ["avatar", "id", "name", "bio"],
         where: {
           idx: likes[i].fk_user_idx,
         },

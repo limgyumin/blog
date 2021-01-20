@@ -35,7 +35,7 @@ const PostReplyCreate = ({
           autoFocus
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => keyDownListener(e)}
-          placeholder="Write a Reply ..."
+          placeholder="Write a reply ..."
           className="Post-Reply-Create-Box"
         />
         <div className="Post-Reply-Create-Wrapper">

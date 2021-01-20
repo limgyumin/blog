@@ -35,14 +35,14 @@ const SideBarTap = ({}: SideBarTapProps) => {
             <p>MEMBERS</p>
           </div>
         </Link>
-        <div className="SideBar-Tap-About">
+        <Link to="/about/info" className="SideBar-Tap-About">
           <div className="SideBar-Tap-About-Wrapper">
             <div className="SideBar-Tap-About-Wrapper-Area">
               <HiOutlineInformationCircle />
             </div>
             <p>ABOUT</p>
           </div>
-        </div>
+        </Link>
       </div>
     </>
   );

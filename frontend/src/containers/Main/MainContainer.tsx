@@ -4,7 +4,7 @@ import Main from "../../components/Main";
 import useStore from "../../util/lib/hooks/useStore";
 import { PostsResponse } from "../../util/types/Response";
 import useQuery from "../../util/lib/hooks/useQuery";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +19,7 @@ interface PostParamsType {
 }
 
 const MainContainer = ({}: MainContainerProps) => {
+  const history = useHistory();
   const { search } = useLocation();
   const query = useQuery();
 
@@ -60,7 +61,11 @@ const MainContainer = ({}: MainContainerProps) => {
         }
       })
       .catch((err: Error) => {
-        toast.error("으악! 글 목록 조회에 실패했어요.");
+        if (err.message.indexOf("404")) {
+          history.push("/");
+        } else {
+          toast.error("으악! 글 목록 조회에 실패했어요.");
+        }
       });
   }, [page, search]);
 

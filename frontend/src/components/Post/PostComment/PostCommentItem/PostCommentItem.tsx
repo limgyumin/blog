@@ -48,13 +48,15 @@ const PostCommentItem = ({
               <img src={comment.user.avatar} alt={comment.user.avatar} />
             </a>
             <div className="Post-Comment-Item-Wrapper-Info-Container">
-              <a
-                className="Post-Comment-Item-Wrapper-Info-Container-Name"
-                href={`https://github.com/${comment.user.id}`}
-                target="_blank"
-              >
-                <h3>{comment.user.name}</h3>
-              </a>
+              <div className="Post-Comment-Item-Wrapper-Info-Container-Area">
+                <a
+                  className="Post-Comment-Item-Wrapper-Info-Container-Area-Name"
+                  href={`https://github.com/${comment.user.id}`}
+                  target="_blank"
+                >
+                  <h3>{comment.user.name}</h3>
+                </a>
+              </div>
               <p>{getTimeCount(comment.created_at)}</p>
             </div>
           </div>

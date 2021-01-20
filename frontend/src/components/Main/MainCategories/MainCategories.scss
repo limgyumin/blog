@@ -30,6 +30,22 @@
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+
+      &-All {
+        text-decoration: none;
+        margin-top: 0.4rem;
+        color: var(--theme-text-scale-4);
+
+        &:hover {
+          text-decoration: underline;
+          color: var(--theme-text-scale-3);
+        }
+
+        &-Text {
+          font-weight: normal;
+          font-size: 0.925rem;
+        }
+      }
     }
   }
 }

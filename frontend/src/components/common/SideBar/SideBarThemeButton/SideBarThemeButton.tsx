@@ -12,13 +12,8 @@ const SideBarThemeButton = ({}: SideBarThemeButtonProps) => {
   const { theme, handleThemeState } = store.ThemeStore;
 
   const themeChangeHandler = useCallback(() => {
-    if (!theme) {
-      handleThemeState(true);
-      localStorage.setItem("theme", "dark");
-    } else {
-      handleThemeState(false);
-      localStorage.setItem("theme", "light");
-    }
+    localStorage.setItem("theme", theme ? "light" : "dark");
+    handleThemeState(!theme);
   }, [theme]);
 
   return (

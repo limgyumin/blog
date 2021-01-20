@@ -41,7 +41,7 @@ const PostComment = ({
       <div className="Post-Comment">
         <div className="Post-Comment-Container">
           <p className="Post-Comment-Container-Count">
-            {commentCount} Comments
+            {commentCount} {commentCount > 1 ? "Comments" : "Comment"}
           </p>
           <div className="Post-Comment-Container-Input">
             <textarea

@@ -1,3 +1,5 @@
+@import "../../../util/lib.scss";
+
 .Post-Header {
   width: 100%;
   display: flex;
@@ -39,6 +41,13 @@
           border-radius: 2rem;
           color: var(--theme-text-scale-2);
           margin-right: 0.6rem;
+          max-width: 15rem;
+          @include ellipsis(1);
+          word-break: break-all;
+
+          @media screen and (max-width: 530px) {
+            max-width: 11rem;
+          }
         }
 
         &-Info {

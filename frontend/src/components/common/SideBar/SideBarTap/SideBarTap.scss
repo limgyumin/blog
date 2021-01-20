@@ -8,13 +8,13 @@
   &-About {
     display: flex;
     color: var(--theme-text-scale-3);
-    padding: 1rem 1rem 1rem 3rem;
+    padding: 0.8rem 1rem 0.8rem 3rem;
     text-decoration: none;
     cursor: pointer;
     border-bottom: 1px solid var(--theme-border);
 
     @media screen and (max-width: 1660px) {
-      padding: 1rem 1rem 1rem 2rem;
+      padding: 0.8rem 1rem 0.8rem 2rem;
     }
 
     &:hover > &-Wrapper {

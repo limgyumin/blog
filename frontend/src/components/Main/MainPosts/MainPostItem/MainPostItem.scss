@@ -3,11 +3,15 @@
 .Main-Post-Item {
   width: 18rem;
   margin: 1rem;
-  transition: transform ease 0.2s;
+  transition: transform ease 0.4s;
   position: relative;
   display: flex;
   flex-direction: column;
   text-decoration: none;
+
+  &:hover {
+    transform: translateY(-0.6rem);
+  }
 
   @media screen and (max-width: 1230px) {
     width: calc(50% - 2rem);
@@ -111,6 +115,9 @@
         color: var(--theme-text-scale-2);
         font-weight: bold;
         margin-right: 0.6rem;
+        max-width: 10rem;
+        @include ellipsis(1);
+        word-break: break-all;
       }
 
       &-Date {

@@ -46,7 +46,9 @@ const HandleCategoryOption = ({
             className="Handle-Category-Option-Item"
             onClick={() => categoryItemHandler(category.name, category.idx)}
           >
-            <span>{category.name}</span>
+            <span className="Handle-Category-Option-Item-Name">
+              {category.name}
+            </span>
           </div>
         ))}
       </div>

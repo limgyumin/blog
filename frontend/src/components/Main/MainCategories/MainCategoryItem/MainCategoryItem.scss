@@ -1,3 +1,5 @@
+@import "../../../../util/lib.scss";
+
 .Main-Category-Item {
   text-decoration: none;
   cursor: pointer;
@@ -34,6 +36,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.23rem 0.3rem 0.23rem 0.6rem;
+    max-width: 10rem;
 
     &-Name {
       font-size: 0.825rem;
@@ -41,6 +44,8 @@
       color: var(--theme-main);
       margin-right: 0.2rem;
       transition: color ease 0.2s;
+      @include ellipsis(1);
+      word-break: break-all;
 
       &-Active {
         color: var(--theme-main-background);

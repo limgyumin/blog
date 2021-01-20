@@ -21,15 +21,33 @@ const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
         onMouseLeave={() => setOpen(false)}
       >
         <div className="SideBar-Content">
-          <img className="SideBar-Content-Avatar" src={avatar} alt="admin" />
-          <p className="SideBar-Content-Name">{name}</p>
+          <a
+            href={`https://github.com/${id}`}
+            target="_blank"
+            className="SideBar-Content-Avatar"
+          >
+            <img
+              className="SideBar-Content-Avatar-Img"
+              src={avatar}
+              alt="admin"
+            />
+          </a>
+          <div className="SideBar-Content-Name">
+            <a
+              href={`https://github.com/${id}`}
+              target="_blank"
+              className="SideBar-Content-Name-Wrapper"
+            >
+              <p className="SideBar-Content-Name-Wrapper-Text">{name}</p>
+            </a>
+          </div>
           <p className="SideBar-Content-Id">{id}</p>
           <p className="SideBar-Content-Bio">{bio}</p>
         </div>
-        <SideBarTap />
         <div className="SideBar-Bottom">
           <SideBarThemeButton />
         </div>
+        <SideBarTap />
       </nav>
       <div
         className={open ? "Toggle-Active Toggle" : "Toggle"}

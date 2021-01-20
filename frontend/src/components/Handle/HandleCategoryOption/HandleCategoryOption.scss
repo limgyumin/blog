@@ -1,3 +1,5 @@
+@import "../../../util/lib.scss";
+
 .Handle-Category-Option {
   bottom: 2.7rem;
   left: 0;
@@ -11,7 +13,7 @@
   position: absolute;
   border-radius: 0.2rem;
 
-  & > div {
+  &-Item {
     width: 100%;
     padding: 0.7rem 0.8rem;
     cursor: pointer;
@@ -20,10 +22,12 @@
       background-color: var(--theme-background-scale-1);
     }
 
-    span {
+    &-Name {
       font-size: 1rem;
       font-weight: normal;
       color: var(--theme-main);
+      @include ellipsis(1);
+      word-break: break-all;
     }
   }
 }

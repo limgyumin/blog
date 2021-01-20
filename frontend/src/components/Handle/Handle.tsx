@@ -177,7 +177,9 @@ const Handle = ({
               className="Handle-Control-Wrapper-Category"
               onClick={() => setShowOption(true)}
             >
-              {category || "카테고리"}
+              <p className="Handle-Control-Wrapper-Category-Name">
+                {category || "카테고리"}
+              </p>
               <Option />
               {showOption && (
                 <HandleCategoryOption

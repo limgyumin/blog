@@ -105,7 +105,9 @@ const PostReply = ({
                 {replyCount ? (
                   <>
                     <BiMessageSquareAdd />
-                    <span>{replyCount} Replies</span>
+                    <span>
+                      {replyCount} {replyCount > 1 ? "Replies" : "Reply"}
+                    </span>
                   </>
                 ) : (
                   <>

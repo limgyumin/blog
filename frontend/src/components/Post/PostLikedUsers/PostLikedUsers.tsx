@@ -28,6 +28,7 @@ const PostLikedUsers = ({
             <React.Fragment key={idx}>
               <PostLikedUserItem
                 avatar={likedUser.avatar}
+                id={likedUser.id}
                 name={likedUser.name}
                 bio={likedUser.bio}
               />
