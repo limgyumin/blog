@@ -5,6 +5,8 @@ import useStore from "../../util/lib/hooks/useStore";
 import { ProfileResponse, ProfilesResponse } from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
+import ReactHelmet from "../../components/common/ReactHelmet";
 
 const MembersContainer = ({}) => {
   const { store } = useStore();
@@ -51,6 +53,10 @@ const MembersContainer = ({}) => {
 
   return (
     <>
+      <ReactHelmet
+        title="Members | Untitled"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+      />
       <Members userCount={userCount} admin={admin} users={users} />
     </>
   );

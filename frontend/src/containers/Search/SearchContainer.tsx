@@ -7,6 +7,8 @@ import { toast } from "react-toastify";
 import { PostsResponse } from "../../util/types/Response";
 import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
+import { Helmet } from "react-helmet";
+import ReactHelmet from "../../components/common/ReactHelmet";
 
 const SearchContainer = ({}) => {
   const { store } = useStore();
@@ -52,6 +54,10 @@ const SearchContainer = ({}) => {
 
   return (
     <>
+      <ReactHelmet
+        title="Search | Untitled"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+      />
       <Search
         inputRef={inputRef}
         inputFocusHandler={inputFocusHandler}

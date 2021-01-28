@@ -12,6 +12,7 @@ import ModalContainer from "../Modal/ModalContainer";
 import PostDelete from "../../components/Post/PostDelete";
 import PostType from "../../util/types/Post";
 import Portal from "../../components/common/Portal";
+import ReactHelmet from "../../components/common/ReactHelmet";
 
 /**
  * PostContainer에서는 정말 Post에 관련된 로직만!!
@@ -44,6 +45,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
 
   // 글의 Idx
   const postIdx = Number(match.params.idx);
+
+  const REGEXP = /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g;
 
   const handleDeletePostCallback = useCallback(async () => {
     setDeleting(true);
@@ -136,38 +139,12 @@ const PostContainer = ({ match }: PostContainerProps) => {
   return (
     <>
       {post.idx && post && (
-        <Helmet>
-          <title>{post.title}</title>
-          <meta
-            name="description"
-            content={post
-              .description!.replace(/ +/g, " ")
-              .replace(
-                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
-                ""
-              )}
-          />
-          <meta property="og:title" content={post.title} />
-          <meta
-            property="og:description"
-            content={post
-              .description!.replace(/ +/g, " ")
-              .replace(
-                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
-                ""
-              )}
-          />
-          <meta property="twitter:title" content={post.title} />
-          <meta
-            property="twitter:description"
-            content={post
-              .description!.replace(/ +/g, " ")
-              .replace(
-                /#+ |-+ |!+\[+.*\]+\(+.*\)|\`|\>+ |\[!+\[+.*\]+\(+.*\)|\<br+.*\>|\[.*\]\(.*\)/g,
-                ""
-              )}
-          />
-        </Helmet>
+        <ReactHelmet
+          title={post.title!}
+          description={post
+            .description!.replace(/ +/g, " ")
+            .replace(REGEXP, "")}
+        />
       )}
       <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
