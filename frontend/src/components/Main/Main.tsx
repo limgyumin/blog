@@ -8,6 +8,7 @@ import MainCategoryItem from "./MainCategories/MainCategoryItem";
 import MainPosts from "./MainPosts";
 import MainPostLoading from "./MainPosts/MainPostLoading";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
+import timeMessage from "../../util/lib/timeMessage";
 
 interface MainProps {
   posts: PostType[];
@@ -43,6 +44,11 @@ const Main = ({
               {categories.map((category, idx) => (
                 <MainCategoryItem key={idx} category={category} />
               ))}
+            </div>
+            <div className="Main-Wrapper-Container-Message">
+              <p className="Main-Wrapper-Container-Message-Content">
+                {timeMessage()}
+              </p>
             </div>
             {notFound ? (
               <MainPostNotFound />

@@ -1,3 +1,5 @@
+@import "../../../../util/lib.scss";
+
 .Post-Liked-User-Item {
   display: flex;
   width: 100%;
@@ -25,12 +27,16 @@
       &-Name {
         font-size: 0.925rem;
         font-weight: bold;
+        max-width: 20rem;
         color: var(--theme-text-scale-1);
+        @include ellipsis(1);
       }
 
       &-Bio {
         font-size: 0.8rem;
         color: var(--theme-text-scale-4);
+        max-width: 20rem;
+        @include ellipsis(1);
       }
     }
   }
