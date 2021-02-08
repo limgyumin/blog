@@ -82,7 +82,7 @@ const CategoriesContainer = ({}) => {
   return (
     <>
       <ReactHelmet
-        title="Categories | Untitled"
+        title="Categories | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
       />
       <Categories

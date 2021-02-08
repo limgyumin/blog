@@ -87,6 +87,23 @@ const Handle = ({
               </div>
             </div>
             <div className="Handle-Wrapper-Area-Container">
+              <div className="Handle-Wrapper-Area-Container-InsertImage">
+                <p className="Handle-Wrapper-Area-Container-InsertImage-Title">
+                  이미지를 추가해보세요!
+                </p>
+                <label
+                  htmlFor="insert_image"
+                  className="Handle-Wrapper-Area-Container-InsertImage-Button"
+                >
+                  업로드
+                </label>
+                <input
+                  id="insert_image"
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  onChange={(e) => handleInsertImage(e)}
+                />
+              </div>
               <textarea
                 ref={titleRef}
                 value={title}
@@ -133,18 +150,7 @@ const Handle = ({
             </div>
           </div>
         </div>
-        <div className="Handle-InsertImage">
-          <p className="Handle-InsertImage-Title">이미지를 추가해보세요!</p>
-          <label htmlFor="insert_image" className="Handle-InsertImage-Button">
-            업로드
-          </label>
-          <input
-            id="insert_image"
-            type="file"
-            accept="image/png, image/jpeg"
-            onChange={(e) => handleInsertImage(e)}
-          />
-        </div>
+
         <div className="Handle-Control">
           <div className="Handle-Control-Wrapper">
             <div className="Handle-Control-Wrapper-Button">

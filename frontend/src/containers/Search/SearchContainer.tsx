@@ -55,7 +55,7 @@ const SearchContainer = ({}) => {
   return (
     <>
       <ReactHelmet
-        title="Search | Untitled"
+        title="Search | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
       />
       <Search

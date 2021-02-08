@@ -20,7 +20,7 @@ const AboutContainer = ({}) => {
   return (
     <>
       <ReactHelmet
-        title="About | Untitled"
+        title="About | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
       />
       <About isInfo={isInfo} isPolicy={isPolicy} />

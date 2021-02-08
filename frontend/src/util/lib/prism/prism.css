@@ -8,9 +8,8 @@ https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javasc
 
 code[class*="language-"],
 pre[class*="language-"] {
-  color: black;
+  color: var(--theme-main);
   background: none;
-  text-shadow: 0 1px white;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   font-size: 1em;
   text-align: left;
@@ -62,7 +61,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: #f8f8f8;
+  background: var(--theme-code-block);
 }
 
 /* Inline code */
@@ -112,8 +111,6 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string {
   color: #9a6e3a;
-  /* This background color was intended by the author of this theme. */
-  background: hsla(0, 0%, 100%, 0.5);
 }
 
 .token.atrule,

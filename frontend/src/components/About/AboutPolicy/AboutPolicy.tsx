@@ -10,7 +10,7 @@ const AboutPolicy = ({}: AboutPolicyProps) => {
       <div className="About-Policy">
         <h1 className="colorLightBlue">1. 개인정보의 처리 목적</h1>
         <p className="sub_p mgt10">
-          Untitled(이하 "회사") 은(는) 다음의 목적을 위하여 개인정보를 처리하고
+          Nonamed(이하 "회사") 은(는) 다음의 목적을 위하여 개인정보를 처리하고
           있으며, 다음의 목적 이외의 용도로는 이용하지 않습니다.
         </p>
         <p className="sub_p">

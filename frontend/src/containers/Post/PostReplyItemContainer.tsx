@@ -65,6 +65,7 @@ const PostReplyItemContainer = ({
       (e.key === "Enter" || e.key === "NumpadEnter") &&
       !e.shiftKey
     ) {
+      e.preventDefault();
       handleModifyReplyCallback();
     }
   };

@@ -415,7 +415,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
   return (
     <>
       <ReactHelmet
-        title="Handle | Untitled"
+        title="Handle | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
       />
       <Portal elementId="modal-root">
