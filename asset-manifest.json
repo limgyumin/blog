@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6554328e.chunk.css",
+    "main.js": "/static/js/main.21e6570c.chunk.js",
+    "main.js.map": "/static/js/main.21e6570c.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.b40e28e2.js",
+    "runtime-main.js.map": "/static/js/runtime-main.b40e28e2.js.map",
+    "static/css/2.d34346ea.chunk.css": "/static/css/2.d34346ea.chunk.css",
+    "static/js/2.2254214f.chunk.js": "/static/js/2.2254214f.chunk.js",
+    "static/js/2.2254214f.chunk.js.map": "/static/js/2.2254214f.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.8d27a4200836f7caef69f67309600607.js": "/precache-manifest.8d27a4200836f7caef69f67309600607.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.d34346ea.chunk.css.map": "/static/css/2.d34346ea.chunk.css.map",
+    "static/css/main.6554328e.chunk.css.map": "/static/css/main.6554328e.chunk.css.map",
+    "static/js/2.2254214f.chunk.js.LICENSE.txt": "/static/js/2.2254214f.chunk.js.LICENSE.txt",
+    "static/media/util.scss": "/static/media/MalgunGothic-Semilight.9aebcd80.woff",
+    "static/media/github.36e0b5f0.svg": "/static/media/github.36e0b5f0.svg",
+    "static/media/github_logo.c6404cae.svg": "/static/media/github_logo.c6404cae.svg",
+    "static/media/logo.3e9b7410.svg": "/static/media/logo.3e9b7410.svg",
+    "static/media/not_found.305b54d5.svg": "/static/media/not_found.305b54d5.svg",
+    "static/media/option.147571c1.svg": "/static/media/option.147571c1.svg",
+    "static/media/paper.96395aef.svg": "/static/media/paper.96395aef.svg",
+    "static/media/shadow.c23d7744.svg": "/static/media/shadow.c23d7744.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b40e28e2.js",
+    "static/css/2.d34346ea.chunk.css",
+    "static/js/2.2254214f.chunk.js",
+    "static/css/main.6554328e.chunk.css",
+    "static/js/main.21e6570c.chunk.js"
+  ]
+}
