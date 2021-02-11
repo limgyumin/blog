@@ -15,6 +15,7 @@ const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <>
+      {open && <div className="SideBar-Close" onClick={() => setOpen(false)} />}
       <nav
         className={open ? "SideBar-Active SideBar" : "SideBar"}
         onMouseEnter={() => setOpen(true)}
@@ -52,6 +53,7 @@ const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
       <div
         className={open ? "Toggle-Active Toggle" : "Toggle"}
         onMouseEnter={() => setOpen(true)}
+        onClick={() => setOpen(true)}
       >
         <IoIosArrowDown className="Toggle-Icon" />
         <span className="Toggle-Text">Information</span>
