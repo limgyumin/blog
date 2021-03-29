@@ -10,8 +10,8 @@ import axios from "axios";
 import Portal from "../../components/common/Portal";
 import ModalContainer from "../Modal/ModalContainer";
 import TempPostDeleteAlert from "../../components/Temp/TempPostDeleteAlert";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 const TempContainer = ({}) => {
   const history = useHistory();
@@ -118,6 +118,7 @@ const TempContainer = ({}) => {
       <ReactHelmet
         title="Temp | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        image={THUMBNAIL_URL}
       />
       <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>

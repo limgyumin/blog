@@ -6,7 +6,6 @@ import { RouteComponentProps, useHistory, withRouter } from "react-router-dom";
 import { OtherPostsResponse, PostResponse } from "../../util/types/Response";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Helmet } from "react-helmet";
 import OtherPostsType from "../../util/types/OtherPosts";
 import ModalContainer from "../Modal/ModalContainer";
 import PostDelete from "../../components/Post/PostDelete";
@@ -144,6 +143,8 @@ const PostContainer = ({ match }: PostContainerProps) => {
           description={post
             .description!.replace(/ +/g, " ")
             .replace(REGEXP, "")}
+          url={`https://nonamed.blog/post/${post.idx}`}
+          image={post.thumbnail!}
         />
       )}
       <Portal elementId="modal-root">

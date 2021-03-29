@@ -5,8 +5,8 @@ import useStore from "../../util/lib/hooks/useStore";
 import { ProfileResponse, ProfilesResponse } from "../../util/types/Response";
 import UserType from "../../util/types/User";
 import { toast } from "react-toastify";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 const MembersContainer = ({}) => {
   const { store } = useStore();
@@ -56,6 +56,8 @@ const MembersContainer = ({}) => {
       <ReactHelmet
         title="Members | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/members"
+        image={THUMBNAIL_URL}
       />
       <Members userCount={userCount} admin={admin} users={users} />
     </>

@@ -9,8 +9,8 @@ import {
 import { toast } from "react-toastify";
 import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 const CategoriesContainer = ({}) => {
   const { store } = useStore();
@@ -84,6 +84,8 @@ const CategoriesContainer = ({}) => {
       <ReactHelmet
         title="Categories | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/categories"
+        image={THUMBNAIL_URL}
       />
       <Categories
         categoryPosts={categoryPosts}

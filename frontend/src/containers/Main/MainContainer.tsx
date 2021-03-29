@@ -8,8 +8,8 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 interface MainContainerProps {}
 
@@ -107,6 +107,8 @@ const MainContainer = ({}: MainContainerProps) => {
       <ReactHelmet
         title="Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog"
+        image={THUMBNAIL_URL}
       />
       <Main
         posts={posts}

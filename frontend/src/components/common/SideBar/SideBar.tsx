@@ -48,7 +48,7 @@ const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
         <div className="SideBar-Bottom">
           <SideBarThemeButton />
         </div>
-        <SideBarTap />
+        <SideBarTap setOpen={setOpen} />
       </nav>
       <div
         className={open ? "Toggle-Active Toggle" : "Toggle"}

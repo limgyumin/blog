@@ -7,6 +7,7 @@ import logger from "../../../../lib/logger";
 import * as admin from "firebase-admin";
 import { validateCreate } from "../../../../lib/validation/comment";
 import AuthRequest from "../../../../type/AuthRequest";
+import generateURL from "../../../../lib/util/generateURL";
 
 export default async (req: AuthRequest, res: Response) => {
   if (!validateCreate(req, res)) return;
@@ -61,10 +62,10 @@ export default async (req: AuthRequest, res: Response) => {
       const message = {
         webpush: {
           notification: {
-            icon: null,
+            icon: generateURL(req, "logo.png"),
             title: `${user.name}님이 댓글을 남겼습니당.`,
             body: `${comment.content}`,
-            click_action: `http://localhost:3000/post/${post.idx}`,
+            click_action: `https://nonamed.blog/post/${post.idx}`,
           },
         },
         data: {

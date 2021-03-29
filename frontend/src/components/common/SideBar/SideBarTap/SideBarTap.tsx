@@ -5,13 +5,19 @@ import { HiOutlineInformationCircle } from "react-icons/hi";
 import "./SideBarTap.scss";
 import { Link } from "react-router-dom";
 
-interface SideBarTapProps {}
+interface SideBarTapProps {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const SideBarTap = ({}: SideBarTapProps) => {
+const SideBarTap = ({ setOpen }: SideBarTapProps) => {
   return (
     <>
       <div className="SideBar-Tap">
-        <Link to="/" className="SideBar-Tap-Home">
+        <Link
+          to="/"
+          className="SideBar-Tap-Home"
+          onClick={() => setOpen(false)}
+        >
           <div className="SideBar-Tap-Home-Wrapper">
             <div className="SideBar-Tap-Home-Wrapper-Area">
               <RiHome3Line />
@@ -19,7 +25,11 @@ const SideBarTap = ({}: SideBarTapProps) => {
             <p>HOME</p>
           </div>
         </Link>
-        <Link to="/categories" className="SideBar-Tap-Categories">
+        <Link
+          to="/categories"
+          className="SideBar-Tap-Categories"
+          onClick={() => setOpen(false)}
+        >
           <div className="SideBar-Tap-Categories-Wrapper">
             <div className="SideBar-Tap-Categories-Wrapper-Area">
               <BiBook />
@@ -27,7 +37,11 @@ const SideBarTap = ({}: SideBarTapProps) => {
             <p>CATEGORIES</p>
           </div>
         </Link>
-        <Link to="/members" className="SideBar-Tap-Achieve">
+        <Link
+          to="/members"
+          className="SideBar-Tap-Achieve"
+          onClick={() => setOpen(false)}
+        >
           <div className="SideBar-Tap-Achieve-Wrapper">
             <div className="SideBar-Tap-Achieve-Wrapper-Area">
               <RiMacbookLine />
@@ -35,7 +49,11 @@ const SideBarTap = ({}: SideBarTapProps) => {
             <p>MEMBERS</p>
           </div>
         </Link>
-        <Link to="/about/info" className="SideBar-Tap-About">
+        <Link
+          to="/about/info"
+          className="SideBar-Tap-About"
+          onClick={() => setOpen(false)}
+        >
           <div className="SideBar-Tap-About-Wrapper">
             <div className="SideBar-Tap-About-Wrapper-Area">
               <HiOutlineInformationCircle />

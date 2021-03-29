@@ -7,4 +7,5 @@ temp/
 
 public/
 
+config/
 .env

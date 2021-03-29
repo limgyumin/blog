@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import { PostsResponse } from "../../util/types/Response";
 import isEmpty from "../../util/lib/isEmpty";
 import removeLastBlank from "../../util/lib/removeLastBlank";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 const SearchContainer = ({}) => {
   const { store } = useStore();
@@ -57,6 +57,8 @@ const SearchContainer = ({}) => {
       <ReactHelmet
         title="Search | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/search"
+        image={THUMBNAIL_URL}
       />
       <Search
         inputRef={inputRef}

@@ -22,8 +22,8 @@ import {
   ModifyPostParams,
 } from "../../util/types/PostParams";
 import { useBeforeunload } from "react-beforeunload";
-import { Helmet } from "react-helmet";
 import ReactHelmet from "../../components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
 
 interface HandleContainerProps extends RouteComponentProps<MatchType> {}
 
@@ -417,6 +417,7 @@ const HandleContainer = ({ match }: HandleContainerProps) => {
       <ReactHelmet
         title="Handle | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
+        image={THUMBNAIL_URL}
       />
       <Portal elementId="modal-root">
         <ModalContainer isOpen={isOpen} isShow={isShow}>
