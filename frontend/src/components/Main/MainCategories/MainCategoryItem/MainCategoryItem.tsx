@@ -1,84 +1,55 @@
-import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import useQuery from "../../../../util/lib/hooks/useQuery";
-import { CategoryType } from "../../../../util/types/Category";
-import "./MainCategoryItem.scss";
+import { ICategory } from "types/category.type";
+import useQueryString from "../../../../hooks/util/useQueryString";
 
-interface MainCategoryItemProps {
-  category: CategoryType;
-}
+const styles = require("./MainCategoryItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const MainCategoryItem = ({ category }: MainCategoryItemProps) => {
-  const query = useQuery();
-  const isTotal = category.idx === 0;
-  const path = `?tab=${category.idx}`;
-  const isMain = query.get("tab") === null;
-  const isCorrect = Number(query.get("tab")) === category.idx;
+type MainCategoryItemProps = {
+  category: ICategory;
+};
+
+const MainCategoryItem: FC<MainCategoryItemProps> = ({ category }) => {
+  const tab = useQueryString("tab");
+
+  const { idx, name, post_count } = category;
+
+  const isTotal = idx === 0;
+  const path = `?tab=${idx}`;
+  const isMain = tab === null;
+  const isCorrect = Number(tab) === idx;
 
   return (
-    <>
+    <React.Fragment>
       {isTotal ? (
-        <Link
-          to="/"
-          className={
-            isMain
-              ? "Main-Category-Item-Active Main-Category-Item"
-              : "Main-Category-Item"
-          }
-        >
-          <div className="Main-Category-Item-Wrapper">
-            <p
-              className={
-                isMain
-                  ? "Main-Category-Item-Wrapper-Name-Active Main-Category-Item-Wrapper-Name"
-                  : "Main-Category-Item-Wrapper-Name"
-              }
-            >
-              {category.name}
+        <Link to="/" className={cx("main-category-item", { "category-active": isMain })}>
+          <div className={cx("main-category-item-wrap")}>
+            <p className={cx("main-category-item-wrap-name", { "category-name-active": isMain })}>
+              {name}
             </p>
           </div>
-          <div
-            className={
-              isCorrect
-                ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
-                : "Main-Category-Item-Count"
-            }
-          >
-            {category.post_count}
+          <div className={cx("main-category-item-count", { "category-count-active": isCorrect })}>
+            {post_count}
           </div>
         </Link>
       ) : (
-        <Link
-          to={`${path}`}
-          className={
-            isCorrect
-              ? "Main-Category-Item-Active Main-Category-Item"
-              : "Main-Category-Item"
-          }
-        >
-          <div className="Main-Category-Item-Wrapper">
+        <Link to={`${path}`} className={cx("main-category-item", { "category-active": isCorrect })}>
+          <div className={cx("main-category-item-wrap")}>
             <p
-              className={
-                isCorrect
-                  ? "Main-Category-Item-Wrapper-Name-Active Main-Category-Item-Wrapper-Name"
-                  : "Main-Category-Item-Wrapper-Name"
-              }
+              className={cx("main-category-item-wrap-name", { "category-name-active": isCorrect })}
             >
-              {category.name}
+              {name}
             </p>
           </div>
-          <div
-            className={
-              isCorrect
-                ? "Main-Category-Item-Count-Active Main-Category-Item-Count"
-                : "Main-Category-Item-Count"
-            }
-          >
-            {category.post_count}
+          <div className={cx("main-category-item-count", { "category-count-active": isCorrect })}>
+            {post_count}
           </div>
         </Link>
       )}
-    </>
+    </React.Fragment>
   );
 };
 

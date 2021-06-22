@@ -1,23 +1,22 @@
 import React from "react";
-import "./MainPostLoading.scss";
-import ReactLoading from "react-loading";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import { SwapSpinner } from "react-spinners-kit";
+import useTheme from "hooks/util/useTheme";
+import ETheme from "enum/theme.enum";
 
-interface MainPostLoadingProps {}
+const styles = require("./MainPostLoading.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const MainPostLoading = ({}: MainPostLoadingProps) => {
+const MainPostLoading = () => {
+  const { theme } = useTheme();
+
+  const isLight = ETheme.LIGHT === theme;
+
   return (
-    <>
-      <div className="Main-Post-Loading">
-        <div className="Main-Post-Loading-Wrapper">
-          <ReactLoading
-            className="Main-Post-Loading-Wrapper-Loading"
-            type={"bars"}
-            height={"3rem"}
-            width={"3rem"}
-          />
-        </div>
-      </div>
-    </>
+    <div className={cx("main-post-loading")}>
+      <SwapSpinner size={80} color={isLight ? "#c1c1c1" : "#b3b3b3"} />
+    </div>
   );
 };
 

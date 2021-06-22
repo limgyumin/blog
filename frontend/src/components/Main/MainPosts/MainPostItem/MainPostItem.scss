@@ -1,6 +1,6 @@
-@import "../../../../util/lib.scss";
+@import "../../../../styles/lib.scss";
 
-.Main-Post-Item {
+.main-post-item {
   width: 18rem;
   margin: 1rem;
   transition: transform ease 0.4s;
@@ -21,12 +21,12 @@
     width: calc(100% - 2rem);
   }
 
-  &-Thumbnail {
+  &-thumbnail {
     position: relative;
     padding-top: 60%;
     cursor: pointer;
 
-    &-Shadow {
+    &-shadow {
       opacity: 0;
       width: 100%;
       height: 100%;
@@ -45,12 +45,12 @@
         opacity: 1;
       }
 
-      &-Wrapper {
+      &-wrap {
         display: flex;
         align-items: center;
 
-        &-Comment,
-        &-Like {
+        &-comment,
+        &-like {
           display: flex;
           align-items: center;
           font-size: 1rem;
@@ -61,7 +61,7 @@
           font-weight: normal;
         }
 
-        &-Comment {
+        &-comment {
           margin-right: 0.6rem;
 
           & > svg {
@@ -73,7 +73,7 @@
           }
         }
 
-        &-Like {
+        &-like {
           & > svg {
             margin-right: 0.3rem;
           }
@@ -85,9 +85,10 @@
       }
     }
 
-    &-Image {
+    &-image {
       width: 100%;
       height: 100%;
+      word-break: break-all;
       object-fit: cover;
       border-radius: 0.2rem;
       position: absolute;
@@ -95,19 +96,19 @@
     }
   }
 
-  &-Content {
+  &-content {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
       margin: 1rem 0 0.8rem 0;
 
-      &-Category {
+      &-category {
         font-size: 0.75rem;
         background-color: var(--theme-border);
         padding: 0.2rem 0.55rem;
@@ -120,19 +121,19 @@
         word-break: break-all;
       }
 
-      &-Date {
+      &-date {
         font-size: 0.925rem;
         font-weight: bold;
         color: var(--theme-main);
       }
     }
 
-    &-Info {
+    &-info {
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
 
-      &-Title {
+      &-title {
         display: flex;
         align-items: center;
         color: var(--theme-main);
@@ -149,7 +150,7 @@
         }
       }
 
-      &-Description {
+      &-description {
         font-size: 0.875rem;
         font-weight: normal;
         color: var(--theme-text-scale-1);

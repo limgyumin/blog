@@ -1,67 +1,57 @@
 import React from "react";
-import { CategoryType } from "../../util/types/Category";
-import PostType from "../../util/types/Post";
 import Footer from "../common/Footer";
-import "./Main.scss";
 import MainCategories from "./MainCategories";
 import MainCategoryItem from "./MainCategories/MainCategoryItem";
 import MainPosts from "./MainPosts";
 import MainPostLoading from "./MainPosts/MainPostLoading";
 import MainPostNotFound from "./MainPosts/MainPostNotFound";
-import timeMessage from "../../util/lib/timeMessage";
+import useFetchPosts from "hooks/post/useFetchPosts";
+import useFetchCategories from "hooks/category/useFetchCategories";
+import ReactHelmet from "components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "config/config.json";
+import MainTimeMessage from "./MainTimeMessage";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface MainProps {
-  posts: PostType[];
-  categories: CategoryType[];
-  totalPostCount: number;
-  notFound: boolean;
-  loading: boolean;
-  postRef: (node?: Element | null | undefined) => void;
-  modify: boolean;
-  setModify: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const styles = require("./Main.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Main = ({
-  posts,
-  categories,
-  totalPostCount,
-  notFound,
-  loading,
-  postRef,
-}: MainProps) => {
+const Main = () => {
+  const { posts, notFound, loading, lastPostEl } = useFetchPosts();
+  const { categories, totalPostCount } = useFetchCategories();
+
   const totalView = {
     idx: 0,
     name: "All",
     post_count: totalPostCount,
   };
+
   return (
-    <>
-      <div className="Main">
-        <div className="Main-Wrapper">
-          <div className="Main-Wrapper-Container">
-            <div className="Main-Wrapper-Container-List">
+    <React.Fragment>
+      <ReactHelmet
+        title="Nonamed"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog"
+        image={THUMBNAIL_URL}
+      />
+      <div className={cx("main")}>
+        <div className={cx("main-wrap")}>
+          <div className={cx("main-wrap-container")}>
+            <div className={cx("main-wrap-container-categories")}>
               <MainCategoryItem category={totalView} />
               {categories.map((category, idx) => (
                 <MainCategoryItem key={idx} category={category} />
               ))}
             </div>
-            <div className="Main-Wrapper-Container-Message">
-              <p className="Main-Wrapper-Container-Message-Content">
-                {timeMessage()}
-              </p>
-            </div>
-            {notFound ? (
-              <MainPostNotFound />
-            ) : (
-              <MainPosts posts={posts} loading={loading} postRef={postRef} />
-            )}
+            <MainTimeMessage />
+            {notFound ? <MainPostNotFound /> : <MainPosts posts={posts} lastPostEl={lastPostEl} />}
             {loading && <MainPostLoading />}
           </div>
           <MainCategories categories={categories} totalView={totalView} />
         </div>
         <Footer />
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

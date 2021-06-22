@@ -1,4 +1,4 @@
-.Main-Categories {
+.main-categories {
   width: 16rem;
   position: relative;
   margin: 0 0 1rem 2rem;
@@ -11,7 +11,7 @@
     display: none;
   }
 
-  &-Container {
+  &-wrap {
     width: inherit;
     display: flex;
     flex-wrap: wrap;
@@ -19,19 +19,19 @@
     padding: 0 1rem;
     border-left: 3px solid var(--theme-border);
 
-    &-Title {
+    &-title {
       color: var(--theme-text-scale-2);
       font-size: 1.125rem;
       font-weight: normal;
       margin-bottom: 1.5rem;
     }
 
-    &-List {
+    &-list {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
 
-      &-All {
+      &-all {
         text-decoration: none;
         margin-top: 0.4rem;
         color: var(--theme-text-scale-4);
@@ -41,7 +41,7 @@
           color: var(--theme-text-scale-3);
         }
 
-        &-Text {
+        &-text {
           font-weight: normal;
           font-size: 0.925rem;
         }
