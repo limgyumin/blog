@@ -1,19 +1,17 @@
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 import React from "react";
-import "./Footer.scss";
 
-interface FooterProps {}
+const styles = require("./Footer.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Footer = ({}: FooterProps) => {
+const Footer = () => {
   return (
-    <>
-      <footer className="Footer">
-        <div className="Footer-Container">
-          <p className="Footer-Container-Content">
-            © 2021. limgyumin. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </>
+    <footer className={cx("footer")}>
+      <div className={cx("footer-wrap")}>
+        <p className={cx("footer-wrap-content")}>© 2021. limgyumin. All rights reserved.</p>
+      </div>
+    </footer>
   );
 };
 
