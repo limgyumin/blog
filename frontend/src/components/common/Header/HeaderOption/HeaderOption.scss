@@ -1,5 +1,6 @@
-.Header-Option {
-  top: 3.8rem;
+.header-option {
+  top: 3rem;
+  left: 0rem;
   right: 0;
   z-index: 1000;
   display: flex;
@@ -11,8 +12,8 @@
   position: absolute;
   border-radius: 0.2rem;
 
-  &-Logout {
-    &-Wrapper {
+  &-logout {
+    &-wrap {
       & > svg {
         -webkit-transform: translateX(0.1rem) translateY(0.1rem);
         transform: translateX(0.1rem) translateY(0.1rem);
@@ -20,8 +21,8 @@
     }
   }
 
-  &-TempList,
-  &-Logout {
+  &-temp,
+  &-logout {
     display: flex;
     align-items: center;
     width: 100%;
@@ -33,7 +34,7 @@
       background-color: var(--theme-background-scale-2);
     }
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -48,7 +49,7 @@
       }
     }
 
-    &-Text {
+    &-text {
       font-size: 1rem;
       font-weight: normal;
       color: var(--theme-main);

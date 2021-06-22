@@ -1,43 +1,37 @@
-import React, { useEffect } from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
 import { FaSave } from "react-icons/fa";
 import { ImExit } from "react-icons/im";
 import { Link } from "react-router-dom";
-import "./HeaderOption.scss";
 
-interface HeaderOptionProps {
+const styles = require("./HeaderOption.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
+
+type HeaderOptionProps = {
+  clickEl: React.MutableRefObject<HTMLDivElement>;
   admin: boolean;
-  closeOption: () => void;
   handleLogout: () => void;
-}
+};
 
-const HeaderOption = ({
-  admin,
-  closeOption,
-  handleLogout,
-}: HeaderOptionProps) => {
-  useEffect(() => {
-    document.addEventListener("click", closeOption);
-    return () => document.removeEventListener("click", closeOption);
-  }, []);
+const HeaderOption: FC<HeaderOptionProps> = ({ clickEl, admin, handleLogout }) => {
   return (
-    <>
-      <div className="Header-Option">
-        {admin && (
-          <Link to="/temp" className="Header-Option-TempList">
-            <div className="Header-Option-TempList-Wrapper">
-              <FaSave />
-            </div>
-            <span className="Header-Option-TempList-Text">임시 글</span>
-          </Link>
-        )}
-        <div className="Header-Option-Logout" onClick={() => handleLogout()}>
-          <div className="Header-Option-Logout-Wrapper">
-            <ImExit />
+    <div className={cx("header-option")} ref={clickEl}>
+      {admin && (
+        <Link to="/temp" className={cx("header-option-temp")}>
+          <div className={cx("header-option-temp-wrap")}>
+            <FaSave />
           </div>
-          <span className="Header-Option-Logout-Text">로그아웃</span>
+          <span className={cx("header-option-temp-text")}>임시 글</span>
+        </Link>
+      )}
+      <div className={cx("header-option-logout")} onClick={() => handleLogout()}>
+        <div className={cx("header-option-logout-wrap")}>
+          <ImExit />
         </div>
+        <span className={cx("header-option-logout-text")}>로그아웃</span>
       </div>
-    </>
+    </div>
   );
 };
 
