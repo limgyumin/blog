@@ -1,26 +1,31 @@
-import React from "react";
-import "./Auth.scss";
-import ReactLoading from "react-loading";
+import React, { memo } from "react";
+import useGitHubAuth from "hooks/auth/useGitHubAuth";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import useTheme from "hooks/util/useTheme";
+import { WaveSpinner } from "react-spinners-kit";
 
-interface AuthProps {}
+const styles = require("./Auth.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Auth = ({}: AuthProps) => {
+const Auth = () => {
+  const { isLight } = useTheme();
+  useGitHubAuth();
+
   return (
-    <>
-      <div className="Auth">
-        <div className="Auth-Container">
-          <p className="Auth-Container-Title">로그인을 처리하는 중이에요!</p>
-          <p className="Auth-Container-Subtitle">조금만 기다려주세용... 🤤</p>
-          <ReactLoading
-            className="Auth-Container-Loading"
-            type={"spokes"}
-            height={"2.4rem"}
-            width={"2.4rem"}
-          />
-        </div>
+    <div className={cx("auth")}>
+      <div className={cx("auth-container")}>
+        <p className={cx("auth-container-title")}>로그인을 처리하는 중이에요!</p>
+        <p className={cx("auth-container-subtitle")}>
+          조금만 기다려주세용...
+          <span role="img" aria-label="person" aria-labelledby="person">
+            🤤
+          </span>
+        </p>
+        <WaveSpinner size={50} color={isLight ? "#c1c1c1" : "#b3b3b3"} />
       </div>
-    </>
+    </div>
   );
 };
 
-export default Auth;
+export default memo(Auth);
