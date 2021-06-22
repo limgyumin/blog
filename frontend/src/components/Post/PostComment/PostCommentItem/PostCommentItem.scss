@@ -1,4 +1,4 @@
-.Post-Comment-Item {
+.post-comment-item {
   display: flex;
   flex-direction: column;
   padding: 1.3rem;
@@ -6,17 +6,17 @@
   background-color: var(--theme-background-scale-2);
   margin-bottom: 1.3rem;
 
-  &-Wrapper {
+  &-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
-    &-Info {
+    &-info {
       display: flex;
       align-items: center;
 
-      &-Avatar {
+      &-avatar {
         & > img {
           width: 3.6rem;
           height: 3.6rem;
@@ -26,14 +26,14 @@
         }
       }
 
-      &-Container {
+      &-container {
         display: flex;
         flex-direction: column;
 
-        &-Area {
+        &-area {
           display: flex;
 
-          &-Name {
+          &-name {
             text-decoration: none;
             color: var(--theme-main);
 
@@ -57,13 +57,13 @@
       }
     }
 
-    &-Control {
+    &-control {
       display: flex;
       align-items: center;
       color: var(--theme-background-scale-0);
       font-size: 0.825rem;
 
-      &-Edit {
+      &-update {
         cursor: pointer;
         margin-right: 0.8rem;
 
@@ -72,7 +72,7 @@
         }
       }
 
-      &-Delete {
+      &-delete {
         cursor: pointer;
 
         &:hover {
@@ -82,11 +82,11 @@
     }
   }
 
-  &-Input {
+  &-input {
     display: flex;
     flex-direction: column;
 
-    &-Box {
+    &-box {
       width: 100%;
       min-height: 6.125rem;
       padding: 1rem;
@@ -116,13 +116,13 @@
       }
     }
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
       width: 100%;
 
-      &-Button,
-      &-Cancel {
+      &-button,
+      &-cancel {
         cursor: pointer;
         outline: none;
         border: none;
@@ -135,7 +135,7 @@
         font-family: inherit;
       }
 
-      &-Button {
+      &-button {
         background-color: var(--theme-main);
         color: var(--theme-main-background);
 
@@ -144,7 +144,7 @@
         }
       }
 
-      &-Cancel {
+      &-cancel {
         background-color: var(--theme-text-scale-4);
         color: var(--theme-main-background);
 
@@ -155,7 +155,7 @@
     }
   }
 
-  & > p {
+  &-content {
     color: var(--theme-main);
     font-size: 1.125rem;
     white-space: pre-wrap;

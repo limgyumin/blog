@@ -1,14 +1,15 @@
-.Post-Reply {
+.post-reply {
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
   width: 100%;
 
-  &-Count {
+  &-preview {
     display: flex;
-    width: 100%;
 
-    &-Wrapper {
+    &-hide,
+    &-count,
+    &-leave {
       display: flex;
       align-items: center;
       color: var(--theme-text-scale-1);
@@ -30,7 +31,7 @@
     }
   }
 
-  &-Container {
+  &-list {
     background-color: var(--theme-background-scale-3);
     margin-top: 1rem;
     padding: 0 1.3rem;
@@ -39,7 +40,7 @@
     border: 1px solid var(--theme-border);
     border-radius: 0.4rem;
 
-    &-Create {
+    &-create {
       cursor: pointer;
       outline: none;
       border: none;

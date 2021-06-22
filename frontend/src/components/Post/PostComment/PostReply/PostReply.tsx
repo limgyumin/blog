@@ -1,126 +1,93 @@
 import React from "react";
 import { BiMessageSquareAdd, BiMessageSquareMinus } from "react-icons/bi";
-import PostReplyItemContainer from "../../../../containers/Post/PostReplyItemContainer";
-import ReplyType from "../../../../util/types/Reply";
-import "./PostReply.scss";
-import PostReplyCreate from "./PostReplyCreate";
+import PostReplyHandle from "./PostReplyHandle";
+import Modal from "components/common/Modal";
+import { FC } from "react";
+import useReply from "hooks/reply/useReply";
+import PostReplyDelete from "./PostReplyDelete";
+import useFetchReplies from "hooks/reply/useFetchReplies";
+import { ClassNamesFn } from "classnames/types";
+import classNames from "classnames";
+import PostReplyItem from "./PostReplyItem";
+import useCreateReply from "hooks/reply/useCreateReply";
+import PostReplyLoading from "./PostReplyLoading";
 
-interface PostReplyProps {
-  show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
-  replies: ReplyType[];
-  enable: boolean;
-  setEnable: React.Dispatch<React.SetStateAction<boolean>>;
-  replyCount: number;
-  content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
-  setReplyIdx: React.Dispatch<React.SetStateAction<number>>;
-  showModalCallback: () => void;
-  handleCreateReplyCallback: () => Promise<void>;
-  handleCreateCancelCallback: () => void;
-  handleRepliesCallback: () => Promise<void>;
-  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  replyRef: React.RefObject<HTMLDivElement>;
-}
+const styles = require("./PostReply.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostReply = ({
-  show,
-  setShow,
-  replies,
-  enable,
-  setEnable,
-  replyCount,
-  content,
-  setContent,
-  setReplyIdx,
-  showModalCallback,
-  handleCreateReplyCallback,
-  handleCreateCancelCallback,
-  handleRepliesCallback,
-  keyDownListener,
-  replyRef,
-}: PostReplyProps) => {
+type PostReplyProps = {
+  commentIdx: number;
+};
+
+const PostReply: FC<PostReplyProps> = ({ commentIdx }) => {
+  const {
+    loading,
+    replies,
+    replyCount,
+    showReplies,
+    onShowRepliesHandler,
+    fetchRepliesHandler,
+  } = useFetchReplies(commentIdx);
+  const {
+    content,
+    replyLastEl,
+    createReplyHandler,
+    onChangeContent,
+    onKeyDownContent,
+  } = useCreateReply(fetchRepliesHandler, commentIdx);
+  const { isMount, onMount, onDeleteHandler, deleteReplyHandler } = useReply(fetchRepliesHandler);
+
   return (
-    <>
-      <div className="Post-Reply">
-        {show ? (
-          <>
-            <div className="Post-Reply-Count">
-              <div
-                className="Post-Reply-Count-Wrapper"
-                onClick={() => setShow(!show)}
-              >
-                <BiMessageSquareMinus />
-                <span>Hide</span>
-              </div>
+    <React.Fragment>
+      <Modal isMount={isMount}>
+        <PostReplyDelete onDelete={deleteReplyHandler} onCancel={onMount} />
+      </Modal>
+      <div className={cx("post-reply")}>
+        <div className={cx("post-reply-preview")}>
+          {showReplies ? (
+            <div className={cx("post-reply-preview-hide")} onClick={onShowRepliesHandler}>
+              <BiMessageSquareMinus />
+              <span>Hide</span>
             </div>
-            <div className="Post-Reply-Container">
+          ) : (
+            <React.Fragment>
               {replyCount ? (
-                <>
-                  {replies.map((reply) => (
-                    <PostReplyItemContainer
-                      key={reply.idx}
-                      reply={reply}
-                      setReplyIdx={setReplyIdx}
-                      showModalCallback={showModalCallback}
-                      handleRepliesCallback={handleRepliesCallback}
-                    />
-                  ))}
-                  {enable ? (
-                    <PostReplyCreate
-                      content={content}
-                      setContent={setContent}
-                      confirmListener={handleCreateReplyCallback}
-                      cancelListener={handleCreateCancelCallback}
-                      keyDownListener={keyDownListener}
-                    />
-                  ) : (
-                    <button
-                      className="Post-Reply-Container-Create"
-                      onClick={() => setEnable(true)}
-                    >
-                      Leave a reply
-                    </button>
-                  )}
-                </>
+                <div className={cx("post-reply-preview-count")} onClick={onShowRepliesHandler}>
+                  <BiMessageSquareAdd />
+                  <span>
+                    {replyCount} {replyCount > 1 ? "Replies" : "Reply"}
+                  </span>
+                </div>
               ) : (
-                <PostReplyCreate
-                  content={content}
-                  setContent={setContent}
-                  confirmListener={handleCreateReplyCallback}
-                  cancelListener={handleCreateCancelCallback}
-                  keyDownListener={keyDownListener}
-                />
+                <div className={cx("post-reply-preview-leave")} onClick={onShowRepliesHandler}>
+                  <BiMessageSquareAdd />
+                  <span>Leave a reply</span>
+                </div>
               )}
-            </div>
-            <div ref={replyRef} />
-          </>
-        ) : (
-          <>
-            <div className="Post-Reply-Count">
-              <div
-                className="Post-Reply-Count-Wrapper"
-                onClick={() => setShow(!show)}
-              >
-                {replyCount ? (
-                  <>
-                    <BiMessageSquareAdd />
-                    <span>
-                      {replyCount} {replyCount > 1 ? "Replies" : "Reply"}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <BiMessageSquareAdd />
-                    <span>Leave a reply</span>
-                  </>
-                )}
-              </div>
-            </div>
-          </>
+            </React.Fragment>
+          )}
+        </div>
+        {showReplies && (
+          <div className={cx("post-reply-list")} ref={replyLastEl}>
+            {replies.map((reply) => (
+              <PostReplyItem
+                key={reply.idx}
+                reply={reply}
+                onDeleteHandler={onDeleteHandler}
+                fetchRepliesHandler={fetchRepliesHandler}
+              />
+            ))}
+            {loading && <PostReplyLoading />}
+            <PostReplyHandle
+              content={content}
+              onChange={onChangeContent}
+              onKeyDown={onKeyDownContent}
+              onComplete={createReplyHandler}
+            />
+          </div>
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

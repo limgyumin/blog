@@ -1,120 +1,110 @@
-import React from "react";
+import React, { FC } from "react";
 import { FaTrash, FaPen } from "react-icons/fa";
-import CommentType from "../../../../util/types/Comment";
-import "./PostCommentItem.scss";
-import UserType from "../../../../util/types/User";
-import getTimeCount from "../../../../util/lib/getTimeCount";
-import PostReplyContainer from "../../../../containers/Post/PostReplyContainer";
+import IComment from "../../../../types/comment.type";
+import getTimeCount from "../../../../lib/getTimeCount";
+import useComment from "hooks/comment/useComment";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import PostReply from "../PostReply";
 
-interface PostCommentItemProps {
-  user: UserType;
-  login: boolean;
-  comment: CommentType;
-  enable: boolean;
-  setEnable: React.Dispatch<React.SetStateAction<boolean>>;
-  content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
-  handleCommentCountCallback: () => Promise<void>;
-  handleModifyCommentCallback: () => void;
-  handleModifyCancelCallback: () => void;
-  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  deleteClickListener: (idx: number) => void;
-}
+const styles = require("./PostCommentItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostCommentItem = ({
-  user,
-  login,
-  comment,
-  enable,
-  setEnable,
-  content,
-  setContent,
-  handleCommentCountCallback,
-  handleModifyCommentCallback,
-  handleModifyCancelCallback,
-  keyDownListener,
-  deleteClickListener,
-}: PostCommentItemProps) => {
+type PostCommentItemProps = {
+  comment: IComment;
+  onDeleteHandler: (idx: number) => void;
+};
+
+const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onDeleteHandler }) => {
+  const {
+    login,
+    profile,
+    updateMode,
+    content,
+    onChangeContent,
+    onKeyDownContent,
+    onUpdateHandler,
+    onCancelUpdateHandler,
+    updateCommentHandler,
+  } = useComment(comment);
+
   return (
-    <>
-      <div className="Post-Comment-Item">
-        <div className="Post-Comment-Item-Wrapper">
-          <div className="Post-Comment-Item-Wrapper-Info">
-            <a
-              className="Post-Comment-Item-Wrapper-Info-Avatar"
-              href={`https://github.com/${comment.user.id}`}
-              target="_blank"
-            >
-              <img src={comment.user.avatar} alt={comment.user.avatar} />
-            </a>
-            <div className="Post-Comment-Item-Wrapper-Info-Container">
-              <div className="Post-Comment-Item-Wrapper-Info-Container-Area">
-                <a
-                  className="Post-Comment-Item-Wrapper-Info-Container-Area-Name"
-                  href={`https://github.com/${comment.user.id}`}
-                  target="_blank"
-                >
-                  <h3>{comment.user.name}</h3>
-                </a>
-              </div>
-              <p>{getTimeCount(comment.created_at)}</p>
+    <div className={cx("post-comment-item")}>
+      <div className={cx("post-comment-item-wrap")}>
+        <div className={cx("post-comment-item-wrap-info")}>
+          <a
+            className={cx("post-comment-item-wrap-info-avatar")}
+            href={`https://github.com/${comment.user.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={comment.user.avatar} alt={comment.user.avatar} />
+          </a>
+          <div className={cx("post-comment-item-wrap-info-container")}>
+            <div className={cx("post-comment-item-wrap-info-container-area")}>
+              <a
+                className={cx("post-comment-item-wrap-info-container-area-name")}
+                href={`https://github.com/${comment.user.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h3>{comment.user.name}</h3>
+              </a>
             </div>
+            <p>{getTimeCount(comment.created_at)}</p>
           </div>
-          {login && comment.user.idx === user.idx && (
-            <>
-              {!enable && (
-                <div className="Post-Comment-Item-Wrapper-Control">
-                  <p
-                    className="Post-Comment-Item-Wrapper-Control-Edit"
-                    onClick={() => setEnable(true)}
-                  >
-                    <FaPen />
-                  </p>
-                  <p
-                    className="Post-Comment-Item-Wrapper-Control-Delete"
-                    onClick={() => deleteClickListener(comment.idx)}
-                  >
-                    <FaTrash />
-                  </p>
-                </div>
-              )}
-            </>
-          )}
         </div>
-        {enable ? (
-          <div className="Post-Comment-Item-Input">
-            <textarea
-              value={content}
-              autoFocus
-              onChange={(e) => setContent(e.target.value)}
-              onKeyDown={(e) => keyDownListener(e)}
-              placeholder="Write a comment ..."
-              className="Post-Comment-Item-Input-Box"
-            />
-            <div className="Post-Comment-Item-Input-Wrapper">
-              <button
-                className="Post-Comment-Item-Input-Wrapper-Button"
-                onClick={() => handleModifyCommentCallback()}
-              >
-                Update
-              </button>
-              <button
-                className="Post-Comment-Item-Input-Wrapper-Cancel"
-                onClick={() => handleModifyCancelCallback()}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        ) : (
-          <p>{comment.content}</p>
+        {login && comment.user.idx === profile.idx && (
+          <React.Fragment>
+            {!updateMode && (
+              <div className={cx("post-comment-item-wrap-control")}>
+                <p
+                  className={cx("post-comment-item-wrap-control-update")}
+                  onClick={onUpdateHandler}
+                >
+                  <FaPen />
+                </p>
+                <p
+                  className={cx("post-comment-item-wrap-control-delete")}
+                  onClick={() => onDeleteHandler(comment.idx)}
+                >
+                  <FaTrash />
+                </p>
+              </div>
+            )}
+          </React.Fragment>
         )}
-        <PostReplyContainer
-          commentIdx={comment.idx}
-          handleCommentCountCallback={handleCommentCountCallback}
-        />
       </div>
-    </>
+      {updateMode ? (
+        <div className={cx("post-comment-item-input")}>
+          <textarea
+            value={content}
+            autoFocus
+            onChange={(e) => onChangeContent(e)}
+            onKeyDown={(e) => onKeyDownContent(e)}
+            placeholder="Write a comment ..."
+            className={cx("post-comment-item-input-box")}
+          />
+          <div className={cx("post-comment-item-input-wrap")}>
+            <button
+              className={cx("post-comment-item-input-wrap-button")}
+              onClick={updateCommentHandler}
+            >
+              Update
+            </button>
+            <button
+              className={cx("post-comment-item-input-wrap-cancel")}
+              onClick={onCancelUpdateHandler}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ) : (
+        <p className={cx("post-comment-item-content")}>{comment.content}</p>
+      )}
+      <PostReply commentIdx={comment.idx} />
+    </div>
   );
 };
 

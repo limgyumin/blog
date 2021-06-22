@@ -1,10 +1,10 @@
-.Post-Reply-Create {
+.post-reply-handle {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
 
-  &-Box {
+  &-box {
     width: 100%;
     min-height: 6.125rem;
     padding: 1rem;
@@ -35,13 +35,13 @@
     }
   }
 
-  &-Wrapper {
+  &-wrap {
     display: flex;
     align-items: center;
     width: 100%;
 
-    &-Button,
-    &-Cancel {
+    &-button,
+    &-cancel {
       cursor: pointer;
       outline: none;
       border: none;
@@ -54,7 +54,7 @@
       font-family: inherit;
     }
 
-    &-Button {
+    &-button {
       background-color: var(--theme-main);
       color: var(--theme-main-background);
 
@@ -63,7 +63,7 @@
       }
     }
 
-    &-Cancel {
+    &-cancel {
       background-color: var(--theme-text-scale-4);
       color: var(--theme-main-background);
 
