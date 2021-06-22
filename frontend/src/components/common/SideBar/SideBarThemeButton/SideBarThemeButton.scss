@@ -1,4 +1,4 @@
-.Side-Bar-Theme-Button {
+.sidebar-theme-button {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -9,7 +9,7 @@
   position: relative;
   transition: all ease 0.2s;
 
-  &-Toggle {
+  &-toggle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -26,9 +26,9 @@
     & > svg {
       color: var(--theme-main-background);
     }
-
-    &-Dark {
-      right: -0.6rem;
-    }
   }
+}
+
+.toggle-dark {
+  right: -0.6rem;
 }

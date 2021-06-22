@@ -1,64 +1,43 @@
-import React, { useState } from "react";
+import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import useSideBar from "hooks/common/useSideBar";
+import useFetchAdminProfile from "hooks/user/useFetchAdminProfile";
 import { IoIosArrowDown } from "react-icons/io";
-import "./SideBar.scss";
-import SideBarTap from "./SideBarTap";
+import SideBarContent from "./SideBarContent";
+import SideBarMenu from "./SideBarMenu";
 import SideBarThemeButton from "./SideBarThemeButton";
 
-interface SideBarProps {
-  avatar: string;
-  id: string;
-  name: string;
-  bio: string;
-}
+const styles = require("./SideBar.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const SideBar = ({ avatar, id, name, bio }: SideBarProps) => {
-  const [open, setOpen] = useState<boolean>(false);
+const SideBar = () => {
+  const { adminProfile } = useFetchAdminProfile();
+  const { open, sideBarOpenHandler } = useSideBar();
+
   return (
-    <>
-      {open && <div className="SideBar-Close" onClick={() => setOpen(false)} />}
+    <React.Fragment>
+      {open && <div className={cx("sidebar-close")} onClick={() => sideBarOpenHandler(false)} />}
       <nav
-        className={open ? "SideBar-Active SideBar" : "SideBar"}
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
+        className={cx("sidebar", { "sidebar-active": open })}
+        onMouseEnter={() => sideBarOpenHandler(true)}
+        onMouseLeave={() => sideBarOpenHandler(false)}
       >
-        <div className="SideBar-Content">
-          <a
-            href={`https://github.com/${id}`}
-            target="_blank"
-            className="SideBar-Content-Avatar"
-          >
-            <img
-              className="SideBar-Content-Avatar-Img"
-              src={avatar}
-              alt="admin"
-            />
-          </a>
-          <div className="SideBar-Content-Name">
-            <a
-              href={`https://github.com/${id}`}
-              target="_blank"
-              className="SideBar-Content-Name-Wrapper"
-            >
-              <p className="SideBar-Content-Name-Wrapper-Text">{name}</p>
-            </a>
-          </div>
-          <p className="SideBar-Content-Id">{id}</p>
-          <p className="SideBar-Content-Bio">{bio}</p>
-        </div>
-        <div className="SideBar-Bottom">
+        <SideBarContent adminProfile={adminProfile} />
+        <div className={cx("sidebar-bottom")}>
           <SideBarThemeButton />
         </div>
-        <SideBarTap setOpen={setOpen} />
+        <SideBarMenu sideBarOpenHandler={sideBarOpenHandler} />
       </nav>
       <div
-        className={open ? "Toggle-Active Toggle" : "Toggle"}
-        onMouseEnter={() => setOpen(true)}
-        onClick={() => setOpen(true)}
+        className={cx("toggle", { "toggle-active": open })}
+        onMouseEnter={() => sideBarOpenHandler(true)}
+        onClick={() => sideBarOpenHandler(true)}
       >
-        <IoIosArrowDown className="Toggle-Icon" />
-        <span className="Toggle-Text">Information</span>
+        <IoIosArrowDown className={cx("toggle-icon")} />
+        <span className={cx("toggle-text")}>Information</span>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
