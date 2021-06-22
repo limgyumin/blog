@@ -1,0 +1,20 @@
+@import "../../../../styles/lib.scss";
+
+.handle-title-preview {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--theme-border);
+
+  &-name {
+    font-weight: bold;
+    font-size: 1.025rem;
+    color: var(--theme-text-scale-2);
+    margin-bottom: 0.8rem;
+  }
+
+  &-text {
+    font-weight: bold;
+    font-size: 1.325rem;
+    color: var(--theme-text-scale-0);
+    @include ellipsis(1);
+  }
+}
