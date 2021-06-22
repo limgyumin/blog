@@ -1,4 +1,4 @@
-export default () => {
+export default function timeMessage(): string {
   const currentHour: number = new Date().getHours();
   let message: string = "";
 
@@ -13,4 +13,4 @@ export default () => {
   }
 
   return message;
-};
+}
