@@ -19,7 +19,7 @@ export default function useFetchAdminProfile() {
   }, [fetchAdminProfileHandler]);
 
   useEffect(() => {
-    if (error) {
+    if (error && error.response) {
       if (error.response.status !== 400) {
         toast.error("관리자 프로필 부분에서 오류가 발생했어요!");
       }

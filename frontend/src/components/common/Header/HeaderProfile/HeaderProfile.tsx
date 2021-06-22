@@ -29,11 +29,13 @@ const HeaderProfile: FC<HeaderProfileProps> = ({
       <div className={cx("header-profile-user")} onClick={showMenuHandler} ref={menuEl}>
         <img src={profile.avatar} alt="Profile" className={cx("header-profile-user-avatar")} />
       </div>
-      <div className={cx("header-profile-divide")} />
       {admin && (
-        <Link to="/write" className={cx("header-profile-write")}>
-          글 쓰기
-        </Link>
+        <React.Fragment>
+          <div className={cx("header-profile-divide")} />
+          <Link to="/write" className={cx("header-profile-write")}>
+            글 쓰기
+          </Link>
+        </React.Fragment>
       )}
       {showMenu && children}
     </div>
