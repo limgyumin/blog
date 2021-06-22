@@ -1,40 +1,35 @@
-import React from "react";
+import React, { FC } from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import getDateFormat from "../../../util/lib/getDateFormat";
-import PostType from "../../../util/types/Post";
-import "./TempPostItem.scss";
+import getDateFormat from "../../../lib/getDateFormat";
+import IPost from "../../../types/post.type";
 
-interface TempPostItemProps {
-  tempPost: PostType;
-  deleteClickHandler: (idx: number) => void;
-}
+const styles = require("./TempPostItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const TempPostItem = ({ tempPost, deleteClickHandler }: TempPostItemProps) => {
+type TempPostItemProps = {
+  post: IPost;
+  onDeleteHandler: (idx: number) => void;
+};
+
+const TempPostItem: FC<TempPostItemProps> = ({ post, onDeleteHandler }) => {
+  const { idx, title, content, created_at } = post;
+
   return (
-    <>
-      <div className="Temp-Post-Item">
-        <div className="Temp-Post-Item-Info">
-          <Link
-            to={`/modify/${tempPost.idx}`}
-            className="Temp-Post-Item-Info-Wrapper"
-          >
-            <h3 className="Temp-Post-Item-Info-Wrapper-Title">
-              {tempPost.title}
-            </h3>
-            <p className="Temp-Post-Item-Info-Wrapper-Content">
-              {tempPost.content}
-            </p>
-          </Link>
-          <div className="Temp-Post-Item-Info-Bottom">
-            <p className="Temp-Post-Item-Info-Bottom-Date">
-              {getDateFormat(tempPost.created_at)}
-            </p>
-            <FaTrash onClick={() => deleteClickHandler(tempPost.idx)} />
-          </div>
+    <div className={cx("temp-post-item")}>
+      <div className={cx("temp-post-item-info")}>
+        <Link to={`/update/${idx}`} className={cx("temp-post-item-info-wrap")}>
+          <h3 className={cx("temp-post-item-info-wrap-title")}>{title}</h3>
+          <p className={cx("temp-post-item-info-wrap-content")}>{content}</p>
+        </Link>
+        <div className={cx("temp-post-item-info-bottom")}>
+          <p className={cx("temp-post-item-info-bottom-date")}>{getDateFormat(created_at)}</p>
+          <FaTrash onClick={() => onDeleteHandler(idx)} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
