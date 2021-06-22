@@ -1,62 +1,67 @@
-import React from "react";
-import "./MainPostItem.scss";
+import React, { FC } from "react";
 import { RiChat3Line } from "react-icons/ri";
 import { AiOutlineHeart } from "react-icons/ai";
-import PostType from "../../../../util/types/Post";
+import IPost from "types/post.type";
 import { Link } from "react-router-dom";
-import getDateFormat from "../../../../util/lib/getDateFormat";
+import getDateFormat from "lib/getDateFormat";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface MainPostItemProps {
-  post: PostType;
-  postRef?: (node?: Element | null | undefined) => void;
-}
+const styles = require("./MainPostItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const MainPostItem = ({ post, postRef }: MainPostItemProps) => {
+type MainPostItemProps = {
+  post: IPost;
+  lastPostEl?: (node?: Element | null | undefined) => void;
+};
+
+const MainPostItem: FC<MainPostItemProps> = ({ post, lastPostEl }) => {
+  const {
+    idx,
+    thumbnail,
+    title,
+    description,
+    comment_count,
+    like_count,
+    category_name,
+    created_at,
+  } = post;
+
   return (
-    <>
-      <Link to={`/post/${post.idx}`} className="Main-Post-Item" ref={postRef}>
-        {post.thumbnail && (
-          <div className="Main-Post-Item-Thumbnail">
-            <div className="Main-Post-Item-Thumbnail-Shadow">
-              <div className="Main-Post-Item-Thumbnail-Shadow-Wrapper">
-                <div className="Main-Post-Item-Thumbnail-Shadow-Wrapper-Comment">
-                  <RiChat3Line />
-                  <p>{post.comment_count}</p>
-                </div>
-                <div className="Main-Post-Item-Thumbnail-Shadow-Wrapper-Like">
-                  <AiOutlineHeart />
-                  <p>{post.like_count}</p>
-                </div>
+    <Link to={`/post/${idx}`} className={cx("main-post-item")} ref={lastPostEl}>
+      {thumbnail && (
+        <div className={cx("main-post-item-thumbnail")}>
+          <div className={cx("main-post-item-thumbnail-shadow")}>
+            <div className={cx("main-post-item-thumbnail-shadow-wrap")}>
+              <div className={cx("main-post-item-thumbnail-shadow-wrap-comment")}>
+                <RiChat3Line />
+                <p>{comment_count}</p>
+              </div>
+              <div className={cx("main-post-item-thumbnail-shadow-wrap-like")}>
+                <AiOutlineHeart />
+                <p>{like_count}</p>
               </div>
             </div>
-            <img
-              src={post.thumbnail}
-              alt="Thumbnail"
-              className="Main-Post-Item-Thumbnail-Image"
-            />
           </div>
-        )}
-        <div className="Main-Post-Item-Content">
-          <div className="Main-Post-Item-Content-Wrapper">
-            <span className="Main-Post-Item-Content-Wrapper-Category">
-              {post.category_name}
-            </span>
-            <span className="Main-Post-Item-Content-Wrapper-Date">
-              {getDateFormat(post.created_at)}
-            </span>
-          </div>
-          <div className="Main-Post-Item-Content-Info">
-            <div className="Main-Post-Item-Content-Info-Title">
-              <span>{post.title}</span>
-              <p>↗</p>
-            </div>
-            <span className="Main-Post-Item-Content-Info-Description">
-              {post.description}
-            </span>
-          </div>
+          <img src={thumbnail} alt={thumbnail} className={cx("main-post-item-thumbnail-image")} />
         </div>
-      </Link>
-    </>
+      )}
+      <div className={cx("main-post-item-content")}>
+        <div className={cx("main-post-item-content-wrap")}>
+          <span className={cx("main-post-item-content-wrap-category")}>{category_name}</span>
+          <span className={cx("main-post-item-content-wrap-date")}>
+            {getDateFormat(created_at)}
+          </span>
+        </div>
+        <div className={cx("main-post-item-content-info")}>
+          <div className={cx("main-post-item-content-info-title")}>
+            <span>{title}</span>
+            <p>↗</p>
+          </div>
+          <span className={cx("main-post-item-content-info-description")}>{description}</span>
+        </div>
+      </div>
+    </Link>
   );
 };
 

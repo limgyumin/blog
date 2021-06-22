@@ -1,0 +1,19 @@
+.header-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-right: 1rem;
+  border-radius: 50%;
+  padding: 0.45rem;
+  transition: background-color ease 0.1s;
+
+  &:hover {
+    background-color: var(--theme-background-scale-1);
+  }
+
+  & > svg {
+    font-size: 1.2rem;
+    color: var(--theme-main);
+  }
+}

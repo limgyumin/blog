@@ -1,0 +1,48 @@
+.light {
+  --theme-main: #1e1e1e;
+  --theme-main-background: #ffffff;
+  --theme-border: #ececec;
+  --theme-text-scale-0: #292929;
+  --theme-text-scale-1: #3e3e3e;
+  --theme-text-scale-2: #5e5e5e;
+  --theme-text-scale-3: #6e6e6e;
+  --theme-text-scale-4: #a2a2a2;
+  --theme-background-scale-0: #c1c1c1;
+  --theme-background-scale-1: #f5f5f5;
+  --theme-background-scale-2: #fbfbfb;
+  --theme-background-scale-3: #f8f8f8;
+  --theme-background-scale-4: #d8d8d8;
+  --theme-post-loading-0: #f7f7f7;
+  --theme-post-loading-1: #ececec;
+  --theme-icon-blue: #58a6ff;
+  --theme-hover-blue: #0366d6;
+  --theme-code-block: #f8f8f8;
+  --theme-handle-overlay: #ffffffcc;
+}
+
+.dark {
+  --theme-main: #dddddd;
+  --theme-main-background: #202020;
+  --theme-border: #2e2e2e;
+  --theme-text-scale-0: #c7c7c7;
+  --theme-text-scale-1: #b3b3b3;
+  --theme-text-scale-2: #999999;
+  --theme-text-scale-3: #727272;
+  --theme-text-scale-4: #686868;
+  --theme-background-scale-0: #575757;
+  --theme-background-scale-1: #272727;
+  --theme-background-scale-2: #222222;
+  --theme-background-scale-3: #202020;
+  --theme-background-scale-4: #383838;
+  --theme-post-loading-0: #292929;
+  --theme-post-loading-1: #252525;
+  --theme-icon-blue: #58a6ff;
+  --theme-hover-blue: #0366d6;
+  --theme-code-block: #272727;
+  --theme-handle-overlay: #00000066;
+}
+
+.App {
+  background-color: var(--theme-main-background);
+  min-height: 100vh;
+}

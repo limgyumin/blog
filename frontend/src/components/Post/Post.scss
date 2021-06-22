@@ -1,15 +1,15 @@
-.Post {
+.post {
   display: flex;
   justify-content: center;
   padding-bottom: 3rem;
 
-  &-Container {
+  &-wrap {
     width: 100%;
     max-width: 830px;
     padding: 0 1rem;
   }
 
-  &-Content {
+  &-content {
     margin: 3rem 0;
   }
 }

@@ -1,21 +1,21 @@
-.Post-Reply-Item {
+.post-reply-item {
   display: flex;
   flex-direction: column;
   padding: 1.3rem 0;
   border-bottom: 1px solid var(--theme-border);
 
-  &-Wrapper {
+  &-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.5rem;
 
-    &-Info {
+    &-info {
       display: flex;
       align-items: center;
 
-      &-Avatar {
-        & > img {
+      &-avatar {
+        &-img {
           width: 3.6rem;
           height: 3.6rem;
           border-radius: 50%;
@@ -24,14 +24,14 @@
         }
       }
 
-      &-Container {
+      &-container {
         display: flex;
         flex-direction: column;
 
-        &-Area {
+        &-area {
           display: flex;
 
-          &-Name {
+          &-name {
             text-decoration: none;
             color: var(--theme-main);
 
@@ -55,13 +55,13 @@
       }
     }
 
-    &-Control {
+    &-control {
       display: flex;
       align-items: center;
       color: var(--theme-background-scale-0);
       font-size: 0.825rem;
 
-      &-Edit {
+      &-update {
         cursor: pointer;
         margin-right: 0.8rem;
 
@@ -70,7 +70,7 @@
         }
       }
 
-      &-Delete {
+      &-delete {
         cursor: pointer;
 
         &:hover {
@@ -80,7 +80,7 @@
     }
   }
 
-  & > p {
+  &-content {
     color: var(--theme-main);
     font-size: 1.125rem;
     white-space: pre-wrap;

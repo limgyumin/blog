@@ -1,68 +1,68 @@
 import React from "react";
+import ReactHelmet from "components/common/ReactHelmet";
 import { BsSearch } from "react-icons/bs";
-import PostType from "../../util/types/Post";
-import "./Search.scss";
 import SearchPostItem from "./SearchPostItem";
+import { THUMBNAIL_URL } from "config/config.json";
+import useSearchPosts from "hooks/search/useSearchPosts";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface SearchProps {
-  inputRef: React.RefObject<HTMLInputElement>;
-  inputFocusHandler: () => void;
-  keyDownListener: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  setContentListener: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  searchedPost: PostType[];
-  postCount: number;
-  notFound: boolean;
-}
+const styles = require("./Search.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Search = ({
-  inputRef,
-  inputFocusHandler,
-  keyDownListener,
-  setContentListener,
-  searchedPost,
-  postCount,
-  notFound,
-}: SearchProps) => {
+const Search = () => {
+  const {
+    keyword,
+    posts,
+    notFound,
+    total,
+    searchInputEl,
+    onFocusInput,
+    onChangeKeyword,
+    onClickInput,
+    onKeyDownInput,
+  } = useSearchPosts();
+
   return (
-    <>
-      <div className="Search">
-        <div className="Search-Container">
-          <div className="Search-Container-Wrapper">
-            <div
-              className="Search-Container-Wrapper-Input"
-              onClick={() => inputFocusHandler()}
-            >
-              <BsSearch />
+    <React.Fragment>
+      <ReactHelmet
+        title="Search | Nonamed"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/search"
+        image={THUMBNAIL_URL}
+      />
+      <div className={cx("search")}>
+        <div className={cx("search-wrap")}>
+          <div className={cx("search-wrap-container")}>
+            <div className={cx("search-wrap-container-input")} onClick={onFocusInput}>
+              <BsSearch onClick={onClickInput} />
               <input
                 placeholder="Search Post"
                 autoFocus
-                onChange={(e) => setContentListener(e)}
-                onKeyDown={(e) => keyDownListener(e)}
-                ref={inputRef}
+                value={keyword}
+                onChange={(e) => onChangeKeyword(e)}
+                onKeyDown={(e) => onKeyDownInput(e)}
+                ref={searchInputEl}
               />
             </div>
             {notFound ? (
-              <p className="Search-Container-Wrapper-NotFound">
-                No search results.
-              </p>
-            ) : postCount ? (
-              <p className="Search-Container-Wrapper-Count">
-                <span>{postCount} Posts</span> were found.
-              </p>
+              <p className={cx("search-wrap-container-notfound")}>No search results.</p>
             ) : (
-              <></>
+              total > 0 && (
+                <p className={cx("search-wrap-container-count")}>
+                  <span>{total} Posts</span> were found.
+                </p>
+              )
             )}
           </div>
-          <div className="Search-Container-Posts">
-            {searchedPost.map((post, idx) => (
-              <React.Fragment key={idx}>
-                <SearchPostItem post={post} />
-              </React.Fragment>
+          <div className={cx("search-wrap-list")}>
+            {posts.map((post) => (
+              <SearchPostItem key={post.idx} post={post} />
             ))}
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

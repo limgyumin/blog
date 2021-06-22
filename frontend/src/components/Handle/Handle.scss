@@ -1,447 +1,56 @@
-@import "../../util/lib.scss";
+@import "../../styles/animations.scss";
 
-.Handle {
-  display: flex;
-  flex-direction: column;
+.handle {
   width: 100%;
   height: 100vh;
-  font-family: inherit;
-  animation: fadeIn ease 0.5s;
-
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  @include fade-in();
 
   ::selection {
-    background-color: var(--theme-border);
+    background-color: var(--theme-background-scale-4);
   }
 
-  &-Wrapper {
-    display: flex;
+  &-content {
     width: 100%;
-    height: calc(100vh - 56px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    overflow-y: hidden;
 
-    &-Area {
+    &-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
       width: 50%;
-      height: inherit;
-      border-right: 1px solid var(--theme-border);
+      height: 100%;
+      overflow-y: hidden;
+      background-color: var(--theme-main-background);
 
-      @media screen and (max-width: 840px) {
+      @media screen and (max-width: 860px) {
         width: 100%;
-        border: none;
       }
 
-      &-Label {
-        display: flex;
-        justify-content: space-between;
+      &-header {
         width: 100%;
-        height: 3.4rem;
-        font-size: 1.1rem;
-        font-weight: normal;
-        background-color: var(--theme-background-scale-2);
-        color: var(--theme-text-scale-1);
-        padding: 0 0.5rem 0 2rem;
-        border-bottom: 1px solid var(--theme-border);
-        font-family: inherit;
-
-        &-Inner {
-          display: flex;
-          align-items: center;
-          padding: 0.8rem 0;
-          border-bottom: 3.5px solid var(--theme-text-scale-1);
-        }
-
-        &-Buttons {
-          display: none;
-          align-items: center;
-
-          @media screen and (max-width: 840px) {
-            display: flex;
-          }
-
-          &-Confirm,
-          &-Save,
-          &-Cancel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            outline: none;
-            border: none;
-            border-radius: 0.3rem;
-            padding: 0.4rem 0.9rem;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: all ease 0.2s;
-            margin-right: 0.6rem;
-            font-family: inherit;
-            background-color: var(--theme-text-scale-4);
-            color: var(--theme-main-background);
-
-            &:hover {
-              background-color: var(--theme-text-scale-3);
-            }
-          }
-
-          &-Confirm {
-            background-color: var(--theme-main);
-            color: var(--theme-main-background);
-
-            &:hover {
-              background-color: var(--theme-text-scale-1);
-            }
-          }
-        }
+        padding: 3rem 2rem 0rem;
+        display: block;
       }
 
-      &-Container {
-        width: 100%;
-        height: calc(100% - 3.4rem);
-        overflow-y: auto;
-        background-color: var(--theme-main-background);
-        padding: 1.5rem 2rem;
-        position: relative;
-
-        &-InsertImage {
-          display: flex;
-          align-items: center;
-          padding: 0.5rem 0.6rem 0.5rem 0.8rem;
-          background-color: var(--theme-text-scale-1);
-          border-radius: 0.3rem;
-          position: fixed;
-          left: 1.5rem;
-          bottom: 4rem;
-          -webkit-box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-          box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
-
-          &-Title {
-            color: var(--theme-main-background);
-            font-size: 0.925rem;
-            margin-right: 1rem;
-          }
-
-          &-Button {
-            display: flex;
-            align-items: center;
-            padding: 0.4rem 0.6rem;
-            border-radius: 0.2rem;
-            background-color: var(--theme-text-scale-3);
-            color: var(--theme-main-background);
-            font-weight: bold;
-            font-size: 1rem;
-            line-height: normal;
-            vertical-align: middle;
-            cursor: pointer;
-            transition: all ease 0.1s;
-          }
-
-          & > input {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-          }
-        }
-
-        &-Title {
-          resize: none;
-          width: 100%;
-          border: none;
-          outline: none;
-          background-color: transparent;
-          margin-top: 2rem;
-          font-family: inherit;
-          font-size: 2.2rem;
-          font-weight: bold;
-          color: var(--theme-main);
-          line-height: 1.45;
-          overflow-y: hidden;
-
-          &::placeholder {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: var(--theme-text-scale-4);
-          }
-        }
-
-        &-Description {
-          resize: none;
-          width: 100%;
-          border: none;
-          outline: none;
-          background-color: transparent;
-          font-family: inherit;
-          font-size: 1.5rem;
-          font-weight: normal;
-          color: var(--theme-main);
-          margin: 1rem 0;
-          line-height: 1.5;
-          overflow-y: hidden;
-
-          &::placeholder {
-            font-size: 1.5rem;
-            font-weight: normal;
-            color: var(--theme-background-scale-0);
-          }
-        }
-
-        &-Content {
-          resize: none;
-          width: 100%;
-          min-height: 50vh;
-          border: none;
-          outline: none;
-          background-color: transparent;
-          font-family: inherit;
-          font-size: 1.125rem;
-          color: var(--theme-main);
-          margin-top: 2rem;
-          line-height: 1.7;
-          overflow-y: hidden;
-          tab-size: 4;
-
-          &::placeholder {
-            font-size: 1.125rem;
-            color: var(--theme-background-scale-0);
-          }
-        }
-      }
-    }
-
-    &-Preview {
-      width: 50%;
-      height: inherit;
-
-      @media screen and (max-width: 840px) {
-        display: none;
-      }
-
-      &-Label {
-        display: flex;
-        width: 100%;
-        height: 3.4rem;
-        font-size: 1.1rem;
-        font-weight: normal;
-        background-color: var(--theme-background-scale-2);
-        color: var(--theme-text-scale-1);
+      &-toolbar {
         padding: 0 2rem;
-        border-bottom: 1px solid var(--theme-border);
-        font-family: inherit;
-
-        &-Inner {
-          display: flex;
-          align-items: center;
-          padding: 0.8rem 0;
-          border-bottom: 3.5px solid var(--theme-text-scale-1);
-
-          & > svg {
-            margin-right: 0.4rem;
-          }
-        }
-      }
-
-      &-Area {
-        width: 100%;
-        height: calc(100% - 3.4rem);
-        overflow-y: auto;
-        background-color: var(--theme-main-background);
-        padding: 1.5rem 2rem;
-
-        &-Title {
-          width: 100%;
-          margin-top: 2rem;
-          font-size: 2.2rem;
-          font-weight: bold;
-          color: var(--theme-main);
-          line-height: 1.5;
-          word-break: break-all;
-        }
-
-        &-Description {
-          width: 100%;
-          font-size: 1.5rem;
-          font-weight: normal;
-          margin: 1rem 0;
-          color: var(--theme-main);
-          line-height: 1.5;
-          word-break: break-all;
-        }
-
-        &-Image {
-          max-width: 100%;
-          height: auto;
-          display: block;
-          margin-top: 1.5rem;
-          margin-bottom: 1.5rem;
-        }
-
-        &-Content {
-          margin-top: 3.5rem;
-        }
       }
     }
   }
+}
 
-  &-Control {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    background-color: var(--theme-background-scale-2);
-    border-top: 1px solid var(--theme-border);
-    padding: 0.5rem 1.5rem;
+.toolbar-passed {
+  top: 0;
+  border-bottom: 1px solid var(--theme-border);
+}
 
-    &-Wrapper {
-      display: flex;
-      align-items: center;
-
-      &-Button {
-        display: flex;
-        align-items: center;
-        border-radius: 0.2rem;
-        background-color: var(--theme-main-background);
-        overflow: hidden;
-        border: 1px solid var(--theme-border);
-        margin-right: 1.4rem;
-
-        &-FileName {
-          font-size: 0.9rem;
-          color: var(--theme-text-scale-4);
-          padding: 0.2rem 0.8rem;
-          @include ellipsis(1);
-          max-width: 20rem;
-        }
-
-        &-Label,
-        &-Delete {
-          display: flex;
-          align-items: center;
-          padding: 0.5rem 0.75rem;
-          color: var(--theme-main-background);
-          font-weight: bold;
-          font-size: 1rem;
-          line-height: normal;
-          vertical-align: middle;
-          cursor: pointer;
-          transition: all ease 0.1s;
-        }
-
-        &-Label {
-          background-color: var(--theme-text-scale-4);
-
-          & > svg {
-            margin-right: 0.4rem;
-          }
-
-          &:hover {
-            background-color: var(--theme-text-scale-3);
-          }
-        }
-
-        &-Delete {
-          background-color: var(--theme-text-scale-3);
-
-          & > svg {
-            margin-right: 0.4rem;
-          }
-
-          &:hover {
-            background-color: var(--theme-text-scale-2);
-          }
-        }
-      }
-
-      & > input {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        border: 0;
-      }
-
-      &-Category {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        background-color: var(--theme-main-background);
-        border-radius: 0.2rem;
-        padding: 0.5rem 0.75rem;
-        transition: all ease 0.1s;
-        position: relative;
-        border: 1px solid var(--theme-border);
-
-        &:hover {
-          background-color: var(--theme-background-scale-2);
-        }
-
-        &-Name {
-          color: var(--theme-text-scale-4);
-          font-size: 0.9rem;
-          word-break: break-all;
-          @include ellipsis(1);
-          max-width: 10rem;
-        }
-
-        & > svg {
-          width: 0.6rem;
-          margin-left: 0.4rem;
-        }
-      }
-    }
-
-    &-Buttons {
-      display: flex;
-      align-items: center;
-
-      @media screen and (max-width: 840px) {
-        display: none;
-      }
-
-      &-Confirm,
-      &-Save,
-      &-Cancel {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        outline: none;
-        border: none;
-        border-radius: 0.3rem;
-        padding: 0.45rem 0.9rem;
-        font-weight: bold;
-        font-size: 1rem;
-        transition: all ease 0.2s;
-        margin-right: 0.6rem;
-        font-family: inherit;
-        background-color: var(--theme-text-scale-4);
-        color: var(--theme-main-background);
-
-        &:hover {
-          background-color: var(--theme-text-scale-3);
-        }
-      }
-
-      &-Confirm {
-        background-color: var(--theme-main);
-        color: var(--theme-main-background);
-
-        &:hover {
-          background-color: var(--theme-text-scale-1);
-        }
-      }
-    }
-  }
+.header-passed {
+  display: none;
 }

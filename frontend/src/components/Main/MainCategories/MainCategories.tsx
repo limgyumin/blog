@@ -1,44 +1,39 @@
-import React from "react";
+import React, { FC } from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 import { Link } from "react-router-dom";
-import { CategoryType } from "../../../util/types/Category";
-import "./MainCategories.scss";
+import { ICategory } from "types/category.type";
 import MainCategoryItem from "./MainCategoryItem";
 
-interface MainCategoriesProps {
-  categories: CategoryType[];
-  totalView: CategoryType;
-}
+type MainCategoriesProps = {
+  categories: ICategory[];
+  totalView: ICategory;
+};
 
-const MainCategories = ({ categories, totalView }: MainCategoriesProps) => {
+const styles = require("./MainCategories.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
+
+const MainCategories: FC<MainCategoriesProps> = ({ categories, totalView }) => {
   const CATEGORY_MAX_COUNT = 15;
   return (
-    <>
-      <div className="Main-Categories">
-        <div className="Main-Categories-Container">
-          <p className="Main-Categories-Container-Title">Categories</p>
-          <div className="Main-Categories-Container-List">
-            <MainCategoryItem category={totalView} />
-            {categories.map((category, idx) => (
-              <React.Fragment key={idx}>
-                {idx < CATEGORY_MAX_COUNT && (
-                  <MainCategoryItem category={category} />
-                )}
-              </React.Fragment>
-            ))}
-            {categories.length > CATEGORY_MAX_COUNT && (
-              <Link
-                to="/categories"
-                className="Main-Categories-Container-List-All"
-              >
-                <p className="Main-Categories-Container-List-All-Text">
-                  ... View all Categories
-                </p>
-              </Link>
-            )}
-          </div>
+    <div className={cx("main-categories")}>
+      <div className={cx("main-categories-wrap")}>
+        <p className={cx("main-categories-wrap-title")}>Categories</p>
+        <div className={cx("main-categories-wrap-list")}>
+          <MainCategoryItem category={totalView} />
+          {categories.map((category, idx) => (
+            <React.Fragment key={idx}>
+              {idx < CATEGORY_MAX_COUNT && <MainCategoryItem category={category} />}
+            </React.Fragment>
+          ))}
+          {categories.length > CATEGORY_MAX_COUNT && (
+            <Link to="/categories" className={cx("main-categories-wrap-list-all")}>
+              <p className={cx("main-categories-wrap-list-all-text")}>... See all Categories</p>
+            </Link>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

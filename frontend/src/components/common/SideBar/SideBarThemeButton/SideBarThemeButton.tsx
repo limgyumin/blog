@@ -1,39 +1,26 @@
-import { observer } from "mobx-react";
-import React, { useCallback } from "react";
+import React from "react";
 import { WiMoonAltNew } from "react-icons/wi";
 import { IoMdMoon } from "react-icons/io";
-import useStore from "../../../../util/lib/hooks/useStore";
-import "./SideBarThemeButton.scss";
+import useTheme from "hooks/util/useTheme";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import ETheme from "enum/theme.enum";
 
-interface SideBarThemeButtonProps {}
+const styles = require("./SideBarThemeButton.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const SideBarThemeButton = ({}: SideBarThemeButtonProps) => {
-  const { store } = useStore();
-  const { theme, handleThemeState } = store.ThemeStore;
+const SideBarThemeButton = () => {
+  const { theme, onChangeTheme } = useTheme();
 
-  const themeChangeHandler = useCallback(() => {
-    localStorage.setItem("theme", theme ? "light" : "dark");
-    handleThemeState(!theme);
-  }, [theme]);
+  const isLight = theme === ETheme.LIGHT;
 
   return (
-    <>
-      <div
-        className="Side-Bar-Theme-Button"
-        onClick={() => themeChangeHandler()}
-      >
-        <div
-          className={
-            !theme
-              ? "Side-Bar-Theme-Button-Toggle"
-              : "Side-Bar-Theme-Button-Toggle-Dark Side-Bar-Theme-Button-Toggle"
-          }
-        >
-          {!theme ? <IoMdMoon /> : <WiMoonAltNew />}
-        </div>
+    <div className={cx("sidebar-theme-button")} onClick={onChangeTheme}>
+      <div className={cx("sidebar-theme-button-toggle", { "toggle-dark": isLight })}>
+        {isLight ? <IoMdMoon /> : <WiMoonAltNew />}
       </div>
-    </>
+    </div>
   );
 };
 
-export default observer(SideBarThemeButton);
+export default SideBarThemeButton;

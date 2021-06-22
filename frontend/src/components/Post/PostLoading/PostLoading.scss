@@ -1,4 +1,4 @@
-.Post-Loading {
+.post-loading {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -23,10 +23,10 @@
     }
   }
 
-  &-Wrap {
+  &-wrap {
     width: 100%;
 
-    &-Title {
+    &-title {
       display: flex;
       align-items: center;
       margin-bottom: 3.5rem;
@@ -39,7 +39,7 @@
       }
     }
 
-    &-Category {
+    &-category {
       display: flex;
       align-items: center;
       margin-bottom: 2rem;
@@ -53,18 +53,18 @@
     }
   }
 
-  &-Thumbnail {
+  &-thumbnail {
     max-width: 100%;
     max-height: 100vh;
     width: 100%;
     padding-top: 60%;
   }
 
-  &-Wrapper {
+  &-container {
     width: 100%;
     margin: 3rem 0;
 
-    &-Content {
+    &-content {
       display: flex;
       flex-wrap: wrap;
       align-items: center;

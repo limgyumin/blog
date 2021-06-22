@@ -1,81 +1,70 @@
 import React from "react";
-import PostCommentItemContainer from "../../../containers/Post/PostCommentItemContainer";
-import CommentType from "../../../util/types/Comment";
-import "./PostComment.scss";
+import Modal from "components/common/Modal";
+import useComment from "hooks/comment/useComment";
+import useFetchComments from "hooks/comment/useFetchComments";
+import PostCommentDelete from "./PostCommentDelete";
+import PostCommentItem from "./PostCommentItem";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-/**
- * 댓글 개수, 댓글 생성 담당
- */
+const styles = require("./PostComment.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-interface PostCommentProps {
-  comments: CommentType[];
-  commentCount: number;
-  content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
-  setCommentIdx: React.Dispatch<React.SetStateAction<number>>;
-  showModalCallback: () => void;
-  handleCreateCommentCallback: () => Promise<void>;
-  handleCommentCountCallback: () => Promise<void>;
-  handleCommentsCallback: () => Promise<void>;
-  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  commentRef: React.RefObject<HTMLDivElement>;
-  textAreaRef: React.RefObject<HTMLTextAreaElement>;
-}
+const PostComment = () => {
+  const { commentCount, comments } = useFetchComments();
+  const {
+    content,
+    commentLastEl,
+    commentTextAreaEl,
+    isMount,
+    onMount,
+    onChangeContent,
+    onKeyDownContent,
+    onDeleteHandler,
+    createCommentHandler,
+    deleteCommentHandler,
+  } = useComment();
 
-const PostComment = ({
-  comments,
-  commentCount,
-  content,
-  setContent,
-  setCommentIdx,
-  showModalCallback,
-  handleCreateCommentCallback,
-  handleCommentCountCallback,
-  handleCommentsCallback,
-  keyDownListener,
-  commentRef,
-  textAreaRef,
-}: PostCommentProps) => {
   return (
-    <>
-      <div className="Post-Comment">
-        <div className="Post-Comment-Container">
-          <p className="Post-Comment-Container-Count">
+    <React.Fragment>
+      <Modal isMount={isMount}>
+        <PostCommentDelete onDelete={deleteCommentHandler} onCancel={onMount} />
+      </Modal>
+      <div className={cx("post-comment")}>
+        <div className={cx("post-comment-wrap")}>
+          <p className={cx("post-comment-wrap-count")}>
             {commentCount} {commentCount > 1 ? "Comments" : "Comment"}
           </p>
-          <div className="Post-Comment-Container-Input">
+          <div className={cx("post-comment-wrap-input")}>
             <textarea
-              ref={textAreaRef}
+              ref={commentTextAreaEl}
               value={content}
-              onChange={(e) => setContent(e.target.value)}
-              onKeyDown={(e) => keyDownListener(e)}
+              onChange={(e) => onChangeContent(e)}
+              onKeyDown={(e) => onKeyDownContent(e)}
               placeholder="Write a comment ..."
-              className="Post-Comment-Container-Input-Box"
+              className={cx("post-comment-wrap-input-box")}
             />
-            <div className="Post-Comment-Container-Input-Wrapper">
+            <div className={cx("post-comment-wrap-input-container")}>
               <button
-                className="Post-Comment-Container-Input-Wrapper-Button"
-                onClick={() => handleCreateCommentCallback()}
+                className={cx("post-comment-wrap-input-container-button")}
+                onClick={createCommentHandler}
               >
                 Send
               </button>
             </div>
           </div>
         </div>
-        <div className="Post-Comment-List" ref={commentRef}>
+        <div className={cx("post-comment-list")} ref={commentLastEl}>
           {comments.map((comment) => (
-            <PostCommentItemContainer
+            <PostCommentItem
               key={comment.idx}
               comment={comment}
-              showModalCallback={showModalCallback}
-              setCommentIdx={setCommentIdx}
-              handleCommentCountCallback={handleCommentCountCallback}
-              handleCommentsCallback={handleCommentsCallback}
+              onDeleteHandler={onDeleteHandler}
             />
           ))}
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

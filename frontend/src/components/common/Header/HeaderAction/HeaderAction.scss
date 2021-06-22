@@ -1,0 +1,29 @@
+.header-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: var(--theme-main);
+  border-radius: 50%;
+  box-shadow: none;
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    background-color: var(--theme-text-scale-1);
+  }
+
+  &:active {
+    box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &-logo {
+    width: 1.65rem;
+    height: 1.65rem;
+
+    & > path {
+      fill: var(--theme-main-background);
+    }
+  }
+}

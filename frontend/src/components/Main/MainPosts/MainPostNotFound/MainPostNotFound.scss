@@ -1,4 +1,4 @@
-.Main-Paper-NotFound {
+.main-post-notfound {
   width: 100%;
   height: 80vh;
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
   position: relative;
 
-  &-Paper {
+  &-picture {
     z-index: 10;
     transform: translateY(1rem);
     animation: upAndDown ease 1s infinite;
@@ -26,17 +26,17 @@
     }
   }
 
-  &-Container {
+  &-wrap {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    &-Image {
+    &-image {
       display: flex;
       flex-direction: column;
 
-      &-Shadow {
+      &-shadow {
         width: 11rem;
         margin-bottom: 2rem;
         animation: bigAndSmall ease 1s infinite;
@@ -61,14 +61,14 @@
       }
     }
 
-    &-Title {
+    &-title {
       font-size: 1.8rem;
       font-weight: bold;
       margin-bottom: 0.2rem;
       color: var(--theme-main);
     }
 
-    &-Subtitle {
+    &-subtitle {
       font-size: 1.2rem;
       font-weight: normal;
       color: var(--theme-main);

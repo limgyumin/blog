@@ -1,98 +1,94 @@
-import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import useReply from "hooks/reply/useReply";
+import React, { FC } from "react";
 import { FaTrash, FaPen } from "react-icons/fa";
-import getTimeCount from "../../../../../util/lib/getTimeCount";
-import ReplyType from "../../../../../util/types/Reply";
-import UserType from "../../../../../util/types/User";
-import PostReplyCreate from "../PostReplyCreate";
-import "./PostReplyItem.scss";
+import getTimeCount from "../../../../../lib/getTimeCount";
+import IReply from "../../../../../types/reply.type";
+import PostReplyHandle from "../PostReplyHandle";
 
-interface PostReplyItemProps {
-  reply: ReplyType;
-  user: UserType;
-  login: boolean;
-  enable: boolean;
-  setEnable: React.Dispatch<React.SetStateAction<boolean>>;
-  content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
-  deleteClickListener: (idx: number) => void;
-  handleModifyReplyCallback: () => Promise<void>;
-  handleModifyCancelCallback: () => void;
-  keyDownListener: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-}
+const styles = require("./PostReplyItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostReplyItem = ({
-  reply,
-  user,
-  login,
-  enable,
-  setEnable,
-  content,
-  setContent,
-  deleteClickListener,
-  handleModifyReplyCallback,
-  handleModifyCancelCallback,
-  keyDownListener,
-}: PostReplyItemProps) => {
+type PostReplyItemProps = {
+  reply: IReply;
+  onDeleteHandler: (idx: number) => void;
+  fetchRepliesHandler: () => Promise<void>;
+};
+
+const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler, fetchRepliesHandler }) => {
+  const {
+    login,
+    profile,
+    content,
+    updateMode,
+    onChangeContent,
+    onKeyDownContent,
+    onUpdateHandler,
+    onCancelUpdateHandler,
+    updateReplyHandler,
+  } = useReply(fetchRepliesHandler, reply);
+
   return (
-    <>
-      <div className="Post-Reply-Item">
-        <div className="Post-Reply-Item-Wrapper">
-          <div className="Post-Reply-Item-Wrapper-Info">
-            <a
-              className="Post-Reply-Item-Wrapper-Info-Avatar"
-              href={`https://github.com/${reply.user.id}`}
-              target="_blank"
-            >
-              <img src={reply.user.avatar} alt={reply.user.avatar} />
-            </a>
-            <div className="Post-Reply-Item-Wrapper-Info-Container">
-              <div className="Post-Reply-Item-Wrapper-Info-Container-Area">
-                <a
-                  className="Post-Reply-Item-Wrapper-Info-Container-Area-Name"
-                  href={`https://github.com/${reply.user.id}`}
-                  target="_blank"
-                >
-                  <h3>{reply.user.name}</h3>
-                </a>
-              </div>
-              <p>{getTimeCount(reply.created_at)}</p>
+    <div className={cx("post-reply-item")}>
+      <div className={cx("post-reply-item-wrap")}>
+        <div className={cx("post-reply-item-wrap-info")}>
+          <a
+            className={cx("post-reply-item-wrap-info-avatar")}
+            href={`https://github.com/${reply.user.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className={cx("post-reply-item-wrap-info-avatar-img")}
+              src={reply.user.avatar}
+              alt={reply.user.avatar}
+            />
+          </a>
+          <div className={cx("post-reply-item-wrap-info-container")}>
+            <div className={cx("post-reply-item-wrap-info-container-area")}>
+              <a
+                className={cx("post-reply-item-wrap-info-container-area-name")}
+                href={`https://github.com/${reply.user.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <h3>{reply.user.name}</h3>
+              </a>
             </div>
+            <p>{getTimeCount(reply.created_at)}</p>
           </div>
-          {login && reply.user.idx === user.idx && (
-            <>
-              {!enable && (
-                <div className="Post-Reply-Item-Wrapper-Control">
-                  <p
-                    className="Post-Reply-Item-Wrapper-Control-Edit"
-                    onClick={() => setEnable(true)}
-                  >
-                    <FaPen />
-                  </p>
-                  <p
-                    className="Post-Reply-Item-Wrapper-Control-Delete"
-                    onClick={() => deleteClickListener(reply.idx)}
-                  >
-                    <FaTrash />
-                  </p>
-                </div>
-              )}
-            </>
-          )}
         </div>
-        {enable ? (
-          <PostReplyCreate
-            content={content}
-            setContent={setContent}
-            confirmListener={handleModifyReplyCallback}
-            cancelListener={handleModifyCancelCallback}
-            keyDownListener={keyDownListener}
-            label="Update"
-          />
-        ) : (
-          <p>{reply.content}</p>
+        {login && reply.user.idx === profile.idx && (
+          <React.Fragment>
+            {!updateMode && (
+              <div className={cx("post-reply-item-wrap-control")}>
+                <p className={cx("post-reply-item-wrap-control-update")} onClick={onUpdateHandler}>
+                  <FaPen />
+                </p>
+                <p
+                  className={cx("post-reply-item-wrap-control-delete")}
+                  onClick={() => onDeleteHandler(reply.idx)}
+                >
+                  <FaTrash />
+                </p>
+              </div>
+            )}
+          </React.Fragment>
         )}
       </div>
-    </>
+      {updateMode ? (
+        <PostReplyHandle
+          content={content}
+          onChange={onChangeContent}
+          onKeyDown={onKeyDownContent}
+          onComplete={updateReplyHandler}
+          onCancel={onCancelUpdateHandler}
+        />
+      ) : (
+        <p className={cx("post-reply-item-content")}>{reply.content}</p>
+      )}
+    </div>
   );
 };
 

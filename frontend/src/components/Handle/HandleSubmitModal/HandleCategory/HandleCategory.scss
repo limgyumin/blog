@@ -1,0 +1,42 @@
+.handle-category {
+  margin-top: 1rem;
+  position: relative;
+
+  &-name {
+    font-weight: bold;
+    font-size: 1.025rem;
+    color: var(--theme-text-scale-2);
+    margin-bottom: 0.8rem;
+  }
+
+  &-selectbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--theme-background-scale-4);
+    border-radius: 0.2rem;
+    padding: 0.5rem;
+    background-color: var(--theme-main-background);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--theme-background-scale-3);
+    }
+
+    &-wrap {
+      display: flex;
+      align-items: center;
+      font-size: 1.025rem;
+      color: var(--theme-text-scale-2);
+
+      &-icon {
+        margin-right: 0.4rem;
+      }
+    }
+
+    &-arrow {
+      font-size: 1.225rem;
+      color: var(--theme-text-scale-2);
+    }
+  }
+}

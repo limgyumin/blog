@@ -1,6 +1,6 @@
-@import "../../../util/lib.scss";
+@import "../../../styles/lib.scss";
 
-.Temp-Post-Item {
+.temp-post-item {
   width: 100%;
   margin: 1rem 0;
   padding: 1rem;
@@ -11,18 +11,18 @@
   background-color: var(--theme-main-background);
   border-radius: 0.2rem;
 
-  &-Info {
+  &-info {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
-    &-Wrapper {
+    &-wrap {
       width: 100%;
       text-decoration: none;
 
-      &-Title {
+      &-title {
         color: var(--theme-main);
         font-size: 1.4rem;
         font-weight: bold;
@@ -30,7 +30,7 @@
         margin-bottom: 1rem;
       }
 
-      &-Content {
+      &-content {
         color: var(--theme-text-scale-1);
         font-size: 0.975rem;
         font-weight: normal;
@@ -39,12 +39,12 @@
       }
     }
 
-    &-Bottom {
+    &-bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      &-Date {
+      &-date {
         color: var(--theme-text-scale-3);
         font-size: 0.825rem;
         font-weight: lighter;

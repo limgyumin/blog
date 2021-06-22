@@ -1,0 +1,50 @@
+.sidebar-content {
+  padding: 5rem 4rem 1rem 4rem;
+
+  @media screen and (max-width: 1660px) {
+    padding: 3rem 2rem 1rem 2rem;
+  }
+
+  &-avatar {
+    &-img {
+      width: 10rem;
+      height: 10rem;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 1px solid var(--theme-border);
+    }
+  }
+
+  &-name {
+    display: flex;
+    margin-bottom: 0.4rem;
+
+    &-wrap {
+      color: var(--theme-text-scale-1);
+      text-decoration: none;
+
+      &-text {
+        font-size: 1.425rem;
+        font-weight: bold;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-id {
+    font-size: 1.2rem;
+    color: var(--theme-text-scale-4);
+    font-weight: lighter;
+    margin-bottom: 1rem;
+  }
+
+  &-bio {
+    font-size: 1.2rem;
+    color: var(--theme-text-scale-3);
+    font-weight: normal;
+    font-style: oblique;
+  }
+}

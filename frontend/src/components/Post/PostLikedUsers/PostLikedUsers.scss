@@ -1,7 +1,7 @@
-.Post-Liked-Users {
+.post-liked-users {
   width: 27rem;
 
-  &-Header {
+  &-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,21 +17,21 @@
       color: var(--theme-text-scale-1);
     }
 
-    &-Title {
+    &-title {
       font-size: 1rem;
       color: var(--theme-text-scale-1);
       font-weight: bold;
       margin-right: 0.4rem;
     }
 
-    &-Count {
+    &-count {
       font-size: 1rem;
       color: var(--theme-text-scale-4);
       font-weight: bold;
     }
   }
 
-  &-List {
+  &-list {
     height: 30rem;
     overflow-y: auto;
   }

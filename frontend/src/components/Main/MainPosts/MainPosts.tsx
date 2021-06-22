@@ -1,32 +1,32 @@
-import React from "react";
-import PostType from "../../../util/types/Post";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
+import IPost from "../../../types/post.type";
 import MainPostItem from "./MainPostItem";
-import "./MainPosts.scss";
 
-interface MainPostsProps {
-  posts: PostType[];
-  loading: boolean;
-  postRef: (node?: Element | null | undefined) => void;
-}
+const styles = require("./MainPosts.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const MainPosts = ({ posts, loading, postRef }: MainPostsProps) => {
+type MainPostsProps = {
+  posts: IPost[];
+  lastPostEl: (node?: Element | null | undefined) => void;
+};
+
+const MainPosts: FC<MainPostsProps> = ({ posts, lastPostEl }) => {
   return (
-    <>
-      <div className="Main-Posts">
-        <div className="Main-Posts-List">
-          {posts.map((post: PostType, idx: number) => (
-            <React.Fragment key={idx}>
-              {posts.length - 1 === idx ? (
-                <MainPostItem post={post} postRef={postRef} />
-              ) : (
-                <MainPostItem post={post} />
-              )}
-            </React.Fragment>
-          ))}
-          {loading && <></>}
-        </div>
+    <div className={cx("main-posts")}>
+      <div className={cx("main-posts-list")}>
+        {posts.map((post: IPost, idx: number) => (
+          <React.Fragment key={idx}>
+            {posts.length - 1 === idx ? (
+              <MainPostItem post={post} lastPostEl={lastPostEl} />
+            ) : (
+              <MainPostItem post={post} />
+            )}
+          </React.Fragment>
+        ))}
       </div>
-    </>
+    </div>
   );
 };
 

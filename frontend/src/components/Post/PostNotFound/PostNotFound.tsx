@@ -1,25 +1,26 @@
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 import React from "react";
-import "./PostNotFound.scss";
 import { ReactComponent as Sign } from "../../../assets/images/not_found.svg";
 
-interface PostNotFoundProps {}
+const styles = require("./PostNotFound.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostNotFound = ({}: PostNotFoundProps) => {
+const PostNotFound = () => {
   return (
-    <>
-      <div className="Post-Paper-NotFound">
-        <Sign className="Post-Paper-NotFound-Sign" />
-        <div className="Post-Paper-NotFound-Container">
-          <div className="Post-Paper-NotFound-Container-Image"></div>
-          <p className="Post-Paper-NotFound-Container-Title">
-            잠깐, 정말 이 주소가 맞나요?
-          </p>
-          <p className="Post-Paper-NotFound-Container-Subtitle">
-            아닌 것 같은데용.. 😅
-          </p>
-        </div>
+    <div className={cx("post-notfound")}>
+      <Sign className={cx("Post-notfound-sign")} />
+      <div className={cx("Post-notfound-wrap")}>
+        <div className={cx("Post-notfound-wrap-image")}></div>
+        <p className={cx("Post-notfound-wrap-title")}>잠깐, 정말 이 주소가 맞나요?</p>
+        <p className={cx("Post-notfound-wrap-subtitle")}>
+          아닌 것 같은데용..
+          <span role="img" aria-label="person" aria-labelledby="person">
+            😅
+          </span>
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 

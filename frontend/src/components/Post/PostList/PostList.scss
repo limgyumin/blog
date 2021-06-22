@@ -1,6 +1,6 @@
-@import "../../../util/lib.scss";
+@import "../../../styles/lib.scss";
 
-.Post-List {
+.post-list {
   width: 100%;
   display: flex;
   align-items: center;
@@ -10,7 +10,7 @@
     flex-direction: column;
   }
 
-  &-Previous {
+  &-previous {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -20,7 +20,7 @@
       margin-bottom: 1rem;
     }
 
-    &-Container {
+    &-wrap {
       margin-right: 0.5rem;
       width: 100%;
       max-width: 24rem;
@@ -59,16 +59,16 @@
         font-size: 1.8rem;
       }
 
-      &-Content {
+      &-content {
         max-width: 17rem;
         margin-left: 1.4rem;
 
-        &-Name {
+        &-name {
           color: var(--theme-text-scale-1);
           font-size: 0.8rem;
         }
 
-        &-Title {
+        &-title {
           color: var(--theme-main);
           font-weight: bold;
           font-size: 1.125rem;
@@ -79,13 +79,13 @@
     }
   }
 
-  &-Next {
+  &-next {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     transition: all ease 0.1s;
 
-    &-Container {
+    &-wrap {
       margin-left: 0.5rem;
       width: 100%;
       max-width: 24rem;
@@ -126,17 +126,17 @@
         font-size: 1.8rem;
       }
 
-      &-Content {
+      &-content {
         max-width: 17rem;
         margin-right: 1.4rem;
         text-align: right;
 
-        &-Name {
+        &-name {
           color: var(--theme-text-scale-1);
           font-size: 0.8rem;
         }
 
-        &-Title {
+        &-title {
           text-align: left;
           color: var(--theme-main);
           font-weight: bold;

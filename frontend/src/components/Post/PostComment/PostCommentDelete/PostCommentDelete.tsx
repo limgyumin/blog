@@ -1,38 +1,32 @@
-import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
 import "./PostCommentDelete.scss";
 
-interface PostCommentDeleteProps {
-  handleDeleteCommentCallback: () => Promise<void>;
-  showModalCallback: () => void;
-}
+const styles = require("./PostCommentDelete.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostCommentDelete = ({
-  handleDeleteCommentCallback,
-  showModalCallback,
-}: PostCommentDeleteProps) => {
+type PostCommentDeleteProps = {
+  onDelete: () => void;
+  onCancel: () => void;
+};
+
+const PostCommentDelete: FC<PostCommentDeleteProps> = ({ onDelete, onCancel }) => {
   return (
-    <>
-      <div className="Post-Comment-Delete">
-        <div className="Post-Comment-Delete-Content">
-          <h2>댓글 삭제</h2>
-          <p>정말로 댓글을 삭제하시겠어요?</p>
-        </div>
-        <div className="Post-Comment-Delete-Button">
-          <button
-            className="Post-Comment-Delete-Button-Delete"
-            onClick={() => handleDeleteCommentCallback()}
-          >
-            삭제
-          </button>
-          <button
-            className="Post-Comment-Delete-Button-Cancel"
-            onClick={() => showModalCallback()}
-          >
-            취소
-          </button>
-        </div>
+    <div className={cx("post-comment-delete")}>
+      <div className={cx("post-comment-delete-content")}>
+        <h2>댓글 삭제</h2>
+        <p>정말로 댓글을 삭제하시겠어요?</p>
       </div>
-    </>
+      <div className={cx("post-comment-delete-button")}>
+        <button className={cx("post-comment-delete-button-delete")} onClick={onDelete}>
+          삭제
+        </button>
+        <button className={cx("post-comment-delete-button-cancel")} onClick={onCancel}>
+          취소
+        </button>
+      </div>
+    </div>
   );
 };
 

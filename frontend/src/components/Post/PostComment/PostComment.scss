@@ -1,24 +1,24 @@
-.Post-Comment {
+.post-comment {
   width: 100%;
   display: flex;
   flex-direction: column;
 
-  &-Container {
+  &-wrap {
     display: flex;
     flex-direction: column;
 
-    &-Count {
+    &-count {
       color: var(--theme-main);
       font-size: 1.125rem;
       font-weight: bold;
       margin-bottom: 1rem;
     }
 
-    &-Input {
+    &-input {
       display: flex;
       flex-direction: column;
 
-      &-Box {
+      &-box {
         width: 100%;
         min-height: 6.125rem;
         padding: 1rem;
@@ -49,10 +49,10 @@
         }
       }
 
-      &-Wrapper {
+      &-container {
         width: 100%;
 
-        &-Button {
+        &-button {
           cursor: pointer;
           outline: none;
           border: none;
@@ -73,7 +73,7 @@
     }
   }
 
-  &-List {
+  &-list {
     display: flex;
     flex-direction: column;
     margin-top: 3rem;

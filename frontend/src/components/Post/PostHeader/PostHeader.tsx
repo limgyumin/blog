@@ -1,66 +1,60 @@
-import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
 import { FaTrash, FaPen } from "react-icons/fa";
-import getTimeCount from "../../../util/lib/getTimeCount";
-import "./PostHeader.scss";
+import getTimeCount from "../../../lib/getTimeCount";
 
-interface PostHeaderProps {
+const styles = require("./PostHeader.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
+
+type PostHeaderProps = {
   title: string;
   writer: string;
   categoryName: string;
   createdAt: Date;
   thumbnail: string;
-  showModalCallback: () => void;
-  modifyClickHandler: () => void;
   admin: boolean;
-}
+  onDelete: () => void;
+  onUpdate: () => void;
+};
 
-const PostHeader = ({
+const PostHeader: FC<PostHeaderProps> = ({
   title,
   writer,
   categoryName,
   createdAt,
   thumbnail,
-  showModalCallback,
-  modifyClickHandler,
   admin,
-}: PostHeaderProps) => {
+  onDelete,
+  onUpdate,
+}) => {
   return (
-    <>
-      <div className="Post-Header">
-        <div className="Post-Header-Container">
-          <h1 className="Post-Header-Container-Title">{title}</h1>
-          <div className="Post-Header-Container-Category">
-            <div className="Post-Header-Container-Category-Wrapper">
-              {categoryName && (
-                <div className="Post-Header-Container-Category-Wrapper-Name">
-                  {categoryName}
-                </div>
-              )}
-              <p className="Post-Header-Container-Category-Wrapper-Info">
-                <span>{writer}</span>
-                {" · "}
-                {getTimeCount(createdAt)}
-              </p>
-            </div>
-            <div className="Post-Header-Container-Category-Right">
-              {admin && (
-                <div className="Post-Header-Container-Category-Right-Control">
-                  <FaPen onClick={() => modifyClickHandler()} />
-                  <FaTrash onClick={() => showModalCallback()} />
-                </div>
-              )}
-            </div>
+    <div className={cx("post-header")}>
+      <div className={cx("post-header-wrap")}>
+        <h1 className={cx("post-header-wrap-title")}>{title}</h1>
+        <div className={cx("post-header-wrap-category")}>
+          <div className={cx("post-header-wrap-category-container")}>
+            {categoryName && (
+              <div className={cx("post-header-wrap-category-container-name")}>{categoryName}</div>
+            )}
+            <p className={cx("post-header-wrap-category-container-info")}>
+              <span>{writer}</span>
+              {" · "}
+              {getTimeCount(createdAt)}
+            </p>
+          </div>
+          <div className={cx("post-header-wrap-category-right")}>
+            {admin && (
+              <div className={cx("post-header-wrap-category-right-control")}>
+                <FaPen onClick={onUpdate} />
+                <FaTrash onClick={onDelete} />
+              </div>
+            )}
           </div>
         </div>
-        {thumbnail && (
-          <img
-            src={thumbnail}
-            alt="Thumbnail"
-            className="Post-Header-Thumbnail"
-          />
-        )}
       </div>
-    </>
+      {thumbnail && <img src={thumbnail} alt={thumbnail} className={cx("post-header-thumbnail")} />}
+    </div>
   );
 };
 

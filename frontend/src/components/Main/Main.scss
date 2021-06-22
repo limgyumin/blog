@@ -1,17 +1,17 @@
-.Main {
+.main {
   display: flex;
   flex-direction: column;
   width: 100%;
   min-height: 100%;
 
-  &-Wrapper {
+  &-wrap {
     width: 100%;
     display: flex;
     padding: 6rem 0 4rem 0;
     justify-content: center;
     position: relative;
 
-    &-Container {
+    &-container {
       width: 100%;
       max-width: 960px;
       display: flex;
@@ -21,25 +21,7 @@
         padding-top: 1rem;
       }
 
-      &-Message {
-        display: flex;
-        align-items: center;
-        height: 2.6rem;
-        margin: 0 1rem;
-        border-left: 5px solid var(--theme-text-scale-4);
-        padding-left: 1.5rem;
-
-        @media screen and (max-width: 900px) {
-          display: none;
-        }
-
-        &-Content {
-          font-size: 1.125rem;
-          color: var(--theme-text-scale-1);
-        }
-      }
-
-      &-List {
+      &-categories {
         display: none;
         flex-wrap: wrap;
         width: 100%;

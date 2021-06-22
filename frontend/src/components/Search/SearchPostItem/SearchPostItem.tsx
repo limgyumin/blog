@@ -1,47 +1,44 @@
-import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import getDateFormat from "../../../util/lib/getDateFormat";
-import PostType from "../../../util/types/Post";
+import getDateFormat from "../../../lib/getDateFormat";
+import IPost from "../../../types/post.type";
 import "./SearchPostItem.scss";
 
-interface SearchPostItemProps {
-  post: PostType;
-}
+const styles = require("./SearchPostItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const SearchPostItem = ({ post }: SearchPostItemProps) => {
+type SearchPostItemProps = {
+  post: IPost;
+};
+
+const SearchPostItem: FC<SearchPostItemProps> = ({ post }) => {
+  const { idx, thumbnail, title, description, category_name, created_at } = post;
+
   return (
-    <>
-      <Link to={`/post/${post.idx}`} className="Search-Post-Item">
-        {post.thumbnail && (
-          <div className="Search-Post-Item-Thumbnail">
-            <img
-              src={post.thumbnail}
-              alt="Thumbnail"
-              className="Search-Post-Item-Thumbnail-Image"
-            />
-          </div>
-        )}
-        <div className="Search-Post-Item-Content">
-          <div className="Search-Post-Item-Content-Info">
-            <div className="Search-Post-Item-Content-Info-Title">
-              <span>{post.title}</span>
-              <p>↗</p>
-            </div>
-            <span className="Search-Post-Item-Content-Info-Description">
-              {post.description}
-            </span>
-          </div>
-          <div className="Search-Post-Item-Content-Wrapper">
-            <span className="Search-Post-Item-Content-Wrapper-Category">
-              {post.category_name}
-            </span>
-            <span className="Search-Post-Item-Content-Wrapper-Date">
-              {getDateFormat(post.created_at)}
-            </span>
-          </div>
+    <Link to={`/post/${idx}`} className={cx("search-post-item")}>
+      {thumbnail && (
+        <div className={cx("search-post-item-thumbnail")}>
+          <img src={thumbnail} alt="Thumbnail" className={cx("search-post-item-thumbnail-image")} />
         </div>
-      </Link>
-    </>
+      )}
+      <div className={cx("search-post-item-content")}>
+        <div className={cx("search-post-item-content-info")}>
+          <div className={cx("search-post-item-content-info-title")}>
+            <span>{title}</span>
+            <p>↗</p>
+          </div>
+          <span className={cx("search-post-item-content-info-description")}>{description}</span>
+        </div>
+        <div className={cx("search-post-item-content-wrap")}>
+          <span className={cx("search-post-item-content-wrap-category")}>{category_name}</span>
+          <span className={cx("search-post-item-content-wrap-date")}>
+            {getDateFormat(created_at)}
+          </span>
+        </div>
+      </div>
+    </Link>
   );
 };
 

@@ -1,28 +1,29 @@
 import React from "react";
-import "./MainPostNotFound.scss";
-import { ReactComponent as Paper } from "../../../../assets/images/paper.svg";
-import { ReactComponent as Shadow } from "../../../../assets/images/shadow.svg";
+import { ReactComponent as Paper } from "assets/images/paper.svg";
+import { ReactComponent as Shadow } from "assets/images/shadow.svg";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface MainPostNotFoundProps {}
+const styles = require("./MainPostNotFound.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const MainPostNotFound = ({}: MainPostNotFoundProps) => {
+const MainPostNotFound = () => {
   return (
-    <>
-      <div className="Main-Paper-NotFound">
-        <Paper className="Main-Paper-NotFound-Paper" />
-        <div className="Main-Paper-NotFound-Container">
-          <div className="Main-Paper-NotFound-Container-Image">
-            <Shadow className="Main-Paper-NotFound-Container-Image-Shadow" />
-          </div>
-          <p className="Main-Paper-NotFound-Container-Title">
-            으음.. 아무것도 없네요.
-          </p>
-          <p className="Main-Paper-NotFound-Container-Subtitle">
-            아마 곧 생기지 않을까요?.. 🤔
-          </p>
+    <div className={cx("main-post-notfound")}>
+      <Paper className={cx("main-post-notfound-picture")} />
+      <div className={cx("main-post-notfound-wrap")}>
+        <div className={cx("main-post-notfound-wrap-image")}>
+          <Shadow className={cx("main-post-notfound-wrap-image-shadow")} />
         </div>
+        <p className={cx("main-post-notfound-wrap-title")}>으음.. 아무것도 없네요.</p>
+        <p className={cx("main-post-notfound-wrap-subtitle")}>
+          아마 곧 생기지 않을까요?..{" "}
+          <span role="img" aria-label="person" aria-labelledby="person">
+            🤔
+          </span>
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 

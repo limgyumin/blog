@@ -1,10 +1,10 @@
-.Search {
+.search {
   display: flex;
   justify-content: center;
   padding: 8rem 0 4rem 0;
   min-height: 100vh;
 
-  &-Container {
+  &-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,11 +12,11 @@
     max-width: 1250px;
     padding: 0 1rem;
 
-    &-Wrapper {
+    &-container {
       width: 100%;
       max-width: 860px;
 
-      &-Input {
+      &-input {
         width: 100%;
         display: flex;
         align-items: center;
@@ -58,7 +58,7 @@
         }
       }
 
-      &-Count {
+      &-count {
         color: var(--theme-text-scale-3);
         font-size: 1.25rem;
         font-weight: normal;
@@ -69,14 +69,14 @@
         }
       }
 
-      &-NotFound {
+      &-notfound {
         color: var(--theme-main);
         font-size: 1.25rem;
         font-weight: normal;
       }
     }
 
-    &-Posts {
+    &-list {
       width: 100%;
       margin-top: 6rem;
     }

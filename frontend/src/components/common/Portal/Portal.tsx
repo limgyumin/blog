@@ -1,13 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import { createPortal } from "react-dom";
 
-interface PortalProps {
+type PortalProps = {
   children: React.ReactNode;
-  elementId: string;
-}
+};
 
-const Portal = ({ children, elementId }: PortalProps) => {
-  const element = document.getElementById(elementId);
+const Portal: FC<PortalProps> = ({ children }) => {
+  const element = document.getElementById("modal-root");
   return createPortal(children, element!);
 };
 

@@ -1,77 +1,71 @@
 import React from "react";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import useAbout from "hooks/common/useAbout";
 import { Link } from "react-router-dom";
-import "./About.scss";
 import AboutInformation from "./AboutInformation";
 import AboutPolicy from "./AboutPolicy";
+import ReactHelmet from "components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "config/config.json";
 
-interface AboutProps {
-  isInfo: boolean;
-  isPolicy: boolean;
-}
+const styles = require("./About.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const About = ({ isInfo, isPolicy }: AboutProps) => {
+const About = () => {
+  const { isInfo, isPolicy } = useAbout();
+
   return (
-    <>
-      <div className="About">
-        <div className="About-Container">
-          <h1 className="About-Container-Title">About</h1>
-          <h4 className="About-Container-Subtitle">
+    <React.Fragment>
+      <ReactHelmet
+        title="About | Nonamed"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/about/info"
+        image={THUMBNAIL_URL}
+      />
+      <div className={cx("about")}>
+        <div className={cx("about-wrap")}>
+          <h1 className={cx("about-wrap-title")}>About</h1>
+          <h4 className={cx("about-wrap-subtitle")}>
             블로그에 대한 설명, 개인정보 처리방침이 표시됩니다.
           </h4>
-          <div className="About-Container-Tab">
-            <div className="About-Container-Tab-Wrapper">
+          <div className={cx("about-wrap-tab")}>
+            <div className={cx("about-wrap-tab-container")}>
               <Link
                 to="/about/info"
-                className={
-                  isInfo
-                    ? "About-Container-Tab-Wrapper-Info-Active About-Container-Tab-Wrapper-Info"
-                    : "About-Container-Tab-Wrapper-Info"
-                }
+                className={cx("about-wrap-tab-container-info", { "info-active": isInfo })}
               >
                 <h2
-                  className={
-                    isInfo
-                      ? "About-Container-Tab-Wrapper-Info-Text-Active About-Container-Tab-Wrapper-Info-Text"
-                      : "About-Container-Tab-Wrapper-Info-Text"
-                  }
+                  className={cx("about-wrap-tab-container-info-text", {
+                    "info-text-active": isInfo,
+                  })}
                 >
                   블로그
                 </h2>
               </Link>
               <Link
                 to="/about/policy"
-                className={
-                  isPolicy
-                    ? "About-Container-Tab-Wrapper-Policy-Active About-Container-Tab-Wrapper-Policy"
-                    : "About-Container-Tab-Wrapper-Policy"
-                }
+                className={cx("about-wrap-tab-container-policy", { "policy-active": isPolicy })}
               >
                 <h2
-                  className={
-                    isPolicy
-                      ? "About-Container-Tab-Wrapper-Policy-Text-Active About-Container-Tab-Wrapper-Policy-Text"
-                      : "About-Container-Tab-Wrapper-Policy-Text"
-                  }
+                  className={cx("about-wrap-tab-container-policy-text", {
+                    "policy-text-active": isPolicy,
+                  })}
                 >
                   개인정보 처리방침
                 </h2>
               </Link>
               <div
-                className={
-                  !isPolicy
-                    ? "About-Container-Tab-Wrapper-Bottom"
-                    : "About-Container-Tab-Wrapper-Bottom-Active About-Container-Tab-Wrapper-Bottom"
-                }
+                className={cx("about-wrap-tab-container-bottom", { "bottom-active": isPolicy })}
               />
             </div>
           </div>
-          <div className="About-Container-Content">
+          <div className={cx("about-wrap-content")}>
             {isInfo && <AboutInformation />}
             {isPolicy && <AboutPolicy />}
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
