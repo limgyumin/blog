@@ -1,4 +1,4 @@
-.Categories-List-Item {
+.category-item {
   cursor: pointer;
   background-color: var(--theme-main-background);
 
@@ -6,13 +6,13 @@
     border-bottom: 1px solid var(--theme-background-scale-1);
   }
 
-  &-Info {
+  &-info {
     padding: 1rem 1.3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
 
@@ -22,7 +22,7 @@
         font-size: 1.2rem;
       }
 
-      &-Name {
+      &-name {
         margin-right: 0.6rem;
         font-size: 1rem;
         font-weight: normal;
@@ -34,7 +34,7 @@
         }
       }
 
-      &-Edit {
+      &-edit {
         border: 1px solid var(--theme-background-scale-1);
         border-radius: 0.3rem;
         padding: 0.3rem 0.5rem;
@@ -42,7 +42,7 @@
         display: flex;
         align-items: center;
 
-        &-Input {
+        &-input {
           border: none;
           outline: none;
           font-family: inherit;
@@ -68,32 +68,32 @@
         }
       }
 
-      &-Count {
+      &-count {
         color: var(--theme-text-scale-4);
         font-size: 0.8rem;
       }
     }
 
-    &-Icon {
+    &-icon {
       color: var(--theme-text-scale-4);
       font-size: 1.1rem;
       transform: rotate(0deg);
       transition: all ease 0.3s;
-
-      &-Active {
-        transform: rotate(180deg);
-      }
     }
   }
 
-  &-Post {
+  &-post {
     max-height: 0rem;
     overflow-y: auto;
     transition: max-height ease 0.6s;
-
-    &-Active {
-      border-top: 1px solid var(--theme-background-scale-1);
-      max-height: 20rem;
-    }
   }
+}
+
+.category-item-icon-active {
+  transform: rotate(180deg);
+}
+
+.category-item-post-active {
+  border-top: 1px solid var(--theme-background-scale-1);
+  max-height: 20rem;
 }

@@ -1,9 +1,9 @@
-.Categories {
+.categories {
   display: flex;
   justify-content: center;
   width: 100%;
 
-  &-Wrapper {
+  &-wrap {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -11,11 +11,11 @@
     margin: 8rem 0 6rem 0;
     padding: 0 1rem;
 
-    &-Container {
+    &-container {
       display: flex;
       justify-content: center;
 
-      &-Name {
+      &-name {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -29,15 +29,11 @@
         bottom: -10rem;
         transition: bottom ease 0.5s;
 
-        &-Active {
-          bottom: 6rem;
-        }
-
         &:focus-within {
           animation: buttonFloat ease 1s infinite;
         }
 
-        &-Input {
+        &-input {
           width: 20rem;
           padding: 0.5rem 0.5rem;
           font-size: 1rem;
@@ -56,15 +52,15 @@
         }
       }
 
-      &-Control {
+      &-control {
         display: flex;
         align-items: center;
         position: fixed;
         bottom: 2rem;
         z-index: 10;
 
-        &-Create,
-        &-Edit {
+        &-create,
+        &-edit {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -85,7 +81,7 @@
             animation: buttonFloat ease 1s infinite;
           }
 
-          &-Content {
+          &-content {
             display: flex;
             align-items: center;
             font-size: 1rem;
@@ -93,20 +89,16 @@
           }
         }
 
-        &-Create {
-          &-Icon {
+        &-create {
+          &-icon {
             font-size: 1.325rem;
             margin-right: 0.4rem;
             transition: transform ease 0.2s;
-
-            &-Active {
-              transform: rotate(-45deg);
-            }
           }
         }
 
-        &-Edit {
-          &-Icon {
+        &-edit {
+          &-icon {
             font-size: 0.925rem;
             margin-right: 0.4rem;
             transition: transform ease 0.2s;
@@ -115,32 +107,40 @@
       }
     }
 
-    &-Title {
+    &-title {
       font-size: 2.8rem;
       font-weight: bold;
       color: var(--theme-text-scale-1);
       margin-bottom: 0.8rem;
     }
 
-    &-Subtitle {
+    &-subtitle {
       font-size: 1.2rem;
       font-weight: normal;
       color: var(--theme-text-scale-1);
       margin-bottom: 3.6rem;
     }
 
-    &-List {
+    &-list {
       width: 100%;
       border-radius: 0.3rem;
       -webkit-box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.1);
       box-shadow: 0 5px 25px -5px rgba(0, 0, 0, 0.1);
       z-index: 0;
-
-      &-Delete {
-        animation: listShake 1s infinite;
-      }
     }
   }
+}
+
+.categories-name-active {
+  bottom: 6rem;
+}
+
+.categories-icon-active {
+  transform: rotate(-45deg);
+}
+
+.categories-delete {
+  animation: listShake 1s infinite;
 }
 
 @keyframes listShake {

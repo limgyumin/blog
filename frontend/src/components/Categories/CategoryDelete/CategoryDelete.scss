@@ -1,11 +1,11 @@
-.Category-Delete-Alert {
+.category-delete {
   display: flex;
   flex-direction: column;
   font-family: inherit;
   min-width: 22rem;
   padding: 2rem 1.6rem 1.4rem 1.6rem;
 
-  &-Content {
+  &-content {
     display: flex;
     flex-direction: column;
     color: var(--theme-main);
@@ -15,14 +15,14 @@
     }
   }
 
-  &-Button {
+  &-button {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
     margin-top: 1.4rem;
 
-    &-Delete {
+    &-delete {
       cursor: pointer;
       outline: none;
       border: none;
@@ -40,7 +40,7 @@
       }
     }
 
-    &-Cancel {
+    &-cancel {
       cursor: pointer;
       outline: none;
       border: none;

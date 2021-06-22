@@ -1,115 +1,102 @@
 import React from "react";
 import { IoMdAdd } from "react-icons/io";
 import { FiEdit2 } from "react-icons/fi";
-import { CategoryPostsType } from "../../util/types/Category";
-import "./Categories.scss";
-import CategoriesListItemContainer from "../../containers/Categories/CategoriesListItemContainer";
+import useCategory from "hooks/category/useCategory";
+import useFetchCategoryPosts from "hooks/category/useFetchCategoryPosts";
+import ReactHelmet from "components/common/ReactHelmet";
+import { THUMBNAIL_URL } from "../../config/config.json";
+import CategoryItem from "./CategoryItem";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface CategoriesProps {
-  categoryPosts: CategoryPostsType[];
-  admin: boolean;
-  login: boolean;
-  categoryName: string;
-  createMode: boolean;
-  editMode: boolean;
-  setCreateMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-  setCategoryName: React.Dispatch<React.SetStateAction<string>>;
-  keyDownListener: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleCategoryPostsCallback: () => Promise<void>;
-  handleCategoriesCallback: () => Promise<void>;
-}
+const styles = require("./Categories.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Categories = ({
-  categoryPosts,
-  admin,
-  login,
-  categoryName,
-  createMode,
-  editMode,
-  setCreateMode,
-  setEditMode,
-  setCategoryName,
-  keyDownListener,
-  handleCategoryPostsCallback,
-  handleCategoriesCallback,
-}: CategoriesProps) => {
+const Categories = () => {
+  const { categoryPosts } = useFetchCategoryPosts();
+  const {
+    admin,
+    login,
+    categoryName,
+    createMode,
+    editMode,
+    onCategoryChange,
+    onCreateCategoryKeyDown,
+    createModeHandler,
+    editModeHandler,
+  } = useCategory();
+
   return (
-    <>
-      <div className="Categories">
-        <div className="Categories-Wrapper">
+    <React.Fragment>
+      <ReactHelmet
+        title="Categories | Nonamed"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+        url="https://nonamed.blog/categories"
+        image={THUMBNAIL_URL}
+      />
+      <div className={cx("categories")}>
+        <div className={cx("categories-wrap")}>
           {admin && login && (
-            <div className="Categories-Wrapper-Container">
+            <div className={cx("categories-wrap-container")}>
               <div
-                className={
-                  createMode
-                    ? "Categories-Wrapper-Container-Name-Active Categories-Wrapper-Container-Name"
-                    : "Categories-Wrapper-Container-Name"
-                }
+                className={cx("categories-wrap-container-name", {
+                  "categories-name-active": createMode,
+                })}
               >
                 <input
-                  className="Categories-Wrapper-Container-Name-Input"
+                  className={cx("categories-wrap-container-name-input")}
                   type="text"
                   placeholder="카테고리 이름을 입력해주세용."
                   value={categoryName}
-                  onChange={(e) => setCategoryName(e.target.value)}
-                  onKeyDown={(e) => keyDownListener(e)}
+                  onChange={(e) => onCategoryChange(e)}
+                  onKeyDown={(e) => onCreateCategoryKeyDown(e)}
                 />
               </div>
-              <div className="Categories-Wrapper-Container-Control">
+              <div className={cx("categories-wrap-container-control")}>
                 <button
-                  className="Categories-Wrapper-Container-Control-Create"
-                  onClick={() => setCreateMode((prev) => !prev)}
+                  className={cx("categories-wrap-container-control-create")}
+                  onClick={createModeHandler}
                 >
                   <IoMdAdd
-                    className={
-                      createMode
-                        ? "Categories-Wrapper-Container-Control-Create-Icon-Active Categories-Wrapper-Container-Control-Create-Icon"
-                        : "Categories-Wrapper-Container-Control-Create-Icon"
-                    }
+                    className={cx("categories-wrap-container-control-create-icon", {
+                      "categories-icon-active": createMode,
+                    })}
                   />
-                  <p className="Categories-Wrapper-Container-Control-Create-Content">
+                  <p className={cx("categories-wrap-container-control-create-content")}>
                     {createMode ? "취소" : "추가"}
                   </p>
                 </button>
                 <button
-                  className="Categories-Wrapper-Container-Control-Edit"
-                  onClick={() => setEditMode((prev) => !prev)}
+                  className={cx("categories-wrap-container-control-edit")}
+                  onClick={editModeHandler}
                 >
-                  <FiEdit2 className="Categories-Wrapper-Container-Control-Edit-Icon" />
-                  <p className="Categories-Wrapper-Container-Control-Edit-Content">
+                  <FiEdit2 className={cx("categories-wrap-container-control-edit-icon")} />
+                  <p className={cx("categories-wrap-container-control-edit-content")}>
                     {editMode ? "취소" : "수정"}
                   </p>
                 </button>
               </div>
             </div>
           )}
-          <h1 className="Categories-Wrapper-Title">Categories</h1>
-          <h4 className="Categories-Wrapper-Subtitle">
+          <h1 className={cx("categories-wrap-title")}>Categories</h1>
+          <h4 className={cx("categories-wrap-subtitle")}>
             카테고리 목록과 해당 글 목록이 표시됩니다.
           </h4>
-          <div
-            className={
-              editMode
-                ? "Categories-Wrapper-List-Delete Categories-Wrapper-List"
-                : "Categories-Wrapper-List"
-            }
-          >
+          <div className={cx("categories-wrap-list", { "categories-delete": editMode })}>
             {categoryPosts.map((categoryPost, idx) => (
               <React.Fragment key={idx}>
-                <CategoriesListItemContainer
-                  handleCategoryPostsCallback={handleCategoryPostsCallback}
-                  handleCategoriesCallback={handleCategoriesCallback}
+                <CategoryItem
                   categoryPost={categoryPost}
                   categoryLength={categoryPosts.length}
                   editMode={editMode}
+                  editModeHandler={editModeHandler}
                 />
               </React.Fragment>
             ))}
           </div>
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

@@ -1,4 +1,4 @@
-.Categories-Posts-List-Item {
+.category-post-item {
   display: flex;
   cursor: pointer;
   background-color: var(--theme-background-scale-2);
@@ -8,14 +8,14 @@
     border-bottom: 1px solid var(--theme-background-scale-1);
   }
 
-  &-Info {
+  &-info {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 1.3rem 1rem 2.5rem;
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
 
@@ -25,7 +25,7 @@
         font-size: 1.2rem;
       }
 
-      &-Name {
+      &-name {
         margin-right: 0.6rem;
         font-size: 1rem;
         font-weight: normal;
@@ -38,7 +38,7 @@
       }
     }
 
-    &-Date {
+    &-date {
       color: var(--theme-text-scale-4);
       font-size: 0.8rem;
     }
