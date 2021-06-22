@@ -1,39 +1,32 @@
-import React from "react";
-import "./PostLikedUserItem.scss";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
+import React, { FC } from "react";
+import IUser from "types/user.type";
 
-interface PostLikedUserItemProps {
-  avatar: string;
-  id: string;
-  name: string;
-  bio: string;
-}
+const styles = require("./PostLikedUserItem.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostLikedUserItem = ({
-  avatar,
-  id,
-  name,
-  bio,
-}: PostLikedUserItemProps) => {
+type PostLikedUserItemProps = {
+  likedUser: IUser;
+};
+
+const PostLikedUserItem: FC<PostLikedUserItemProps> = ({ likedUser }: PostLikedUserItemProps) => {
+  const { id, avatar, name, bio } = likedUser;
   return (
-    <>
-      <div className="Post-Liked-User-Item">
-        <a
-          href={`https://github.com/${id}`}
-          target="_blank"
-          className="Post-Liked-User-Item-Wrapper"
-        >
-          <img
-            src={avatar}
-            alt={avatar}
-            className="Post-Liked-User-Item-Wrapper-Avatar"
-          />
-          <div className="Post-Liked-User-Item-Wrapper-Content">
-            <p className="Post-Liked-User-Item-Wrapper-Content-Name">{name}</p>
-            <p className="Post-Liked-User-Item-Wrapper-Content-Bio">{bio}</p>
-          </div>
-        </a>
-      </div>
-    </>
+    <div className={cx("post-liked-user-item")}>
+      <a
+        className={cx("post-liked-user-item-wrap")}
+        href={`https://github.com/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img src={avatar} alt={avatar} className={cx("post-liked-user-item-wrap-avatar")} />
+        <div className={cx("post-liked-user-item-wrap-content")}>
+          <p className={cx("post-liked-user-item-wrap-content-name")}>{name}</p>
+          <p className={cx("post-liked-user-item-wrap-content-bio")}>{bio}</p>
+        </div>
+      </a>
+    </div>
   );
 };
 

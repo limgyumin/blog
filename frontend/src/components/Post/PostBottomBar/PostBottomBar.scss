@@ -1,4 +1,4 @@
-.Post-BottomBar {
+.post-bottombar {
   border-top: 1px solid var(--theme-border);
   background-color: var(--theme-main-background);
   position: fixed;
@@ -15,7 +15,7 @@
     background-color: transparent;
   }
 
-  &-Like {
+  &-like {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -33,7 +33,7 @@
     }
   }
 
-  &-Users {
+  &-users {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -45,7 +45,7 @@
     }
   }
 
-  &-ScrollTop {
+  &-scroll {
     display: flex;
     align-items: center;
     cursor: pointer;

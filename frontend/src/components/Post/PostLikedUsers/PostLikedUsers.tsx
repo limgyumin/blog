@@ -1,42 +1,36 @@
-import React from "react";
-import UserType from "../../../util/types/User";
+import React, { FC } from "react";
 import "./PostLikedUsers.scss";
 import { IoIosArrowBack } from "react-icons/io";
 import PostLikedUserItem from "./PostLikedUserItem";
+import useFetchLikeUsers from "hooks/like/useFetchLikeUsers";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface PostLikedUsersProps {
-  likeCount: number;
-  likedUsers: UserType[];
-  showModalCallback: () => void;
-}
+const styles = require("./PostLikedUsers.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostLikedUsers = ({
-  likeCount,
-  likedUsers,
-  showModalCallback,
-}: PostLikedUsersProps) => {
+type PostLikedUsersProps = {
+  onClose: () => void;
+};
+
+const PostLikedUsers: FC<PostLikedUsersProps> = ({ onClose }) => {
+  const { likeCount, likedUsers } = useFetchLikeUsers();
+
   return (
-    <>
-      <div className="Post-Liked-Users">
-        <div className="Post-Liked-Users-Header">
-          <IoIosArrowBack onClick={() => showModalCallback()} />
-          <p className="Post-Liked-Users-Header-Title">좋아요를 누른 유저</p>
-          <p className="Post-Liked-Users-Header-Count">{likeCount}</p>
-        </div>
-        <div className="Post-Liked-Users-List">
-          {likedUsers.map((likedUser, idx) => (
-            <React.Fragment key={idx}>
-              <PostLikedUserItem
-                avatar={likedUser.avatar}
-                id={likedUser.id}
-                name={likedUser.name}
-                bio={likedUser.bio}
-              />
-            </React.Fragment>
-          ))}
-        </div>
+    <div className={cx("post-liked-users")}>
+      <div className={cx("post-liked-users-header")}>
+        <IoIosArrowBack onClick={onClose} />
+        <p className={cx("post-liked-users-header-title")}>좋아요를 누른 유저</p>
+        <p className={cx("post-liked-users-header-count")}>{likeCount}</p>
       </div>
-    </>
+      <div className={cx("post-liked-users-list")}>
+        {likedUsers.map((likedUser, idx) => (
+          <React.Fragment key={idx}>
+            <PostLikedUserItem likedUser={likedUser} />
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
   );
 };
 

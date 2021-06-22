@@ -1,74 +1,74 @@
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 import React from "react";
-import "./PostLoading.scss";
 
-interface PostLoadingProps {}
+const styles = require("./PostLoading.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const PostLoading = ({}: PostLoadingProps) => {
+const PostLoading = () => {
   return (
-    <>
-      <div className="Post-Loading">
-        <div className="Post-Loading-Wrap">
-          <div className="Post-Loading-Wrap-Title">
-            <span />
-            <span style={{ width: "16rem" }} />
-            <span />
-            <span style={{ width: "4rem" }} />
-            <span style={{ width: "10rem" }} />
-          </div>
-          <div className="Post-Loading-Wrap-Category">
-            <span />
-            <span />
-            <span style={{ width: "10rem" }} />
-            <span style={{ width: "5rem" }} />
-          </div>
+    <div className={cx("post-loading")}>
+      <div className={cx("post-loading-wrap")}>
+        <div className={cx("post-loading-wrap-title")}>
+          <span />
+          <span style={{ width: "16rem" }} />
+          <span />
+          <span style={{ width: "4rem" }} />
+          <span style={{ width: "10rem" }} />
         </div>
-        <span className="Post-Loading-Thumbnail" />
-        <div className="Post-Loading-Wrapper">
-          <div className="Post-Loading-Wrapper-Content">
-            <span style={{ width: "10rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "8rem" }} />
-            <span style={{ width: "9rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "14rem" }} />
-            <span style={{ width: "3rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "4rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "8rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "9rem" }} />
-          </div>
-          <div className="Post-Loading-Wrapper-Content">
-            <span style={{ width: "10rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "8rem" }} />
-            <span style={{ width: "9rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "14rem" }} />
-            <span style={{ width: "3rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "4rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "8rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "7rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "5rem" }} />
-            <span style={{ width: "9rem" }} />
-          </div>
+        <div className={cx("post-loading-wrap-category")}>
+          <span />
+          <span />
+          <span style={{ width: "10rem" }} />
+          <span style={{ width: "5rem" }} />
         </div>
       </div>
-    </>
+      <span className={cx("post-loading-thumbnail")} />
+      <div className={cx("post-loading-container")}>
+        <div className={cx("post-loading-container-content")}>
+          <span style={{ width: "10rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "8rem" }} />
+          <span style={{ width: "9rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "14rem" }} />
+          <span style={{ width: "3rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "4rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "8rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "9rem" }} />
+        </div>
+        <div className={cx("post-loading-container-content")}>
+          <span style={{ width: "10rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "8rem" }} />
+          <span style={{ width: "9rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "14rem" }} />
+          <span style={{ width: "3rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "4rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "8rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "7rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "5rem" }} />
+          <span style={{ width: "9rem" }} />
+        </div>
+      </div>
+    </div>
   );
 };
 
