@@ -1,9 +1,9 @@
-.About {
+.about {
   display: flex;
   justify-content: center;
   width: 100%;
 
-  &-Container {
+  &-wrap {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -11,34 +11,34 @@
     margin: 8rem 0 6rem 0;
     padding: 0 1rem;
 
-    &-Title {
+    &-title {
       font-size: 2.8rem;
       font-weight: bold;
       color: var(--theme-text-scale-1);
       margin-bottom: 0.8rem;
     }
 
-    &-Subtitle {
+    &-subtitle {
       font-size: 1.2rem;
       font-weight: normal;
       color: var(--theme-text-scale-1);
       margin-bottom: 4rem;
     }
 
-    &-Tab {
+    &-tab {
       display: flex;
 
       @media screen and (max-width: 560px) {
         justify-content: center;
       }
 
-      &-Wrapper {
+      &-container {
         display: flex;
         align-items: center;
         position: relative;
 
-        &-Info,
-        &-Policy {
+        &-info,
+        &-policy {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -48,21 +48,13 @@
           width: 12rem;
           margin-bottom: 0.6rem;
 
-          &-Active {
-            color: var(--theme-main);
-          }
-
-          &-Text {
+          &-text {
             font-size: 1.225rem;
             font-weight: normal;
-
-            &-Active {
-              font-weight: bold;
-            }
           }
         }
 
-        &-Bottom {
+        &-bottom {
           width: 50%;
           height: 2px;
           position: absolute;
@@ -70,16 +62,26 @@
           background-color: var(--theme-main);
           transition: transform ease 0.4s;
           transform: translateX(0);
-
-          &-Active {
-            transform: translateX(12rem);
-          }
         }
       }
     }
 
-    &-Content {
+    &-content {
       margin-top: 4rem;
     }
   }
+}
+
+.info-active,
+.policy-active {
+  color: var(--theme-main);
+}
+
+.info-text-active,
+.policy-text-active {
+  font-weight: bold;
+}
+
+.bottom-active {
+  transform: translateX(12rem);
 }
