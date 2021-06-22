@@ -1,6 +1,6 @@
-@import "../../../util/lib.scss";
+@import "../../../styles/lib.scss";
 
-.Search-Post-Item {
+.search-post-item {
   width: 100%;
   transition: transform ease 0.2s;
   position: relative;
@@ -17,12 +17,12 @@
     transform: scale(1.01, 1.01);
   }
 
-  &-Thumbnail {
+  &-thumbnail {
     position: relative;
     padding-top: 22%;
     padding-right: 32%;
 
-    &-Image {
+    &-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -31,7 +31,7 @@
     }
   }
 
-  &-Content {
+  &-content {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,11 +39,11 @@
     position: relative;
     padding: 2rem 1.8rem;
 
-    &-Wrapper {
+    &-wrap {
       display: flex;
       align-items: center;
 
-      &-Category {
+      &-category {
         font-size: 0.925rem;
         background-color: var(--theme-border);
         padding: 0.25rem 0.7rem;
@@ -60,19 +60,19 @@
         }
       }
 
-      &-Date {
+      &-date {
         font-size: 1rem;
         font-weight: normal;
         color: var(--theme-text-scale-4);
       }
     }
 
-    &-Info {
+    &-info {
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
 
-      &-Title {
+      &-title {
         display: flex;
         align-items: center;
         color: var(--theme-main);
@@ -94,7 +94,7 @@
         }
       }
 
-      &-Description {
+      &-description {
         font-size: 1.125rem;
         line-height: 1.5;
         font-weight: normal;
