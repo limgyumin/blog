@@ -1,0 +1,103 @@
+@mixin fade-in {
+  animation: fade-in-animation ease 0.5s;
+  @keyframes fade-in-animation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@mixin fade-out {
+  animation: fade-out-animation ease 0.5s;
+  @keyframes fade-out-animation {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+@mixin rise-up($before) {
+  animation: rise-up-animation ease 0.5s;
+  @keyframes rise-up-animation {
+    from {
+      transform: translateY($before);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+}
+
+@mixin rise-down($after) {
+  animation: rise-down-animation ease 0.5s;
+  @keyframes rise-down-animation {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY($after);
+    }
+  }
+}
+
+@mixin fade-in-up($before, $after) {
+  animation: fade-in-up-animation ease 0.5s;
+  @keyframes fade-in-up-animation {
+    from {
+      opacity: 0;
+      transform: translateY($before);
+    }
+    to {
+      opacity: 1;
+      transform: translateY($after);
+    }
+  }
+}
+
+@mixin floating-side($before, $after) {
+  animation: floating-side-animation ease 0.5s infinite;
+  @keyframes floating-side-animation {
+    0% {
+      transform: translateX($before);
+    }
+    50% {
+      transform: translateX($after);
+    }
+    100% {
+      transform: translateX($before);
+    }
+  }
+}
+
+@mixin big-small($before, $after) {
+  animation: big-small-animation ease 0.5s infinite;
+  @keyframes big-small-animation {
+    0% {
+      transform: scale($before, $before);
+    }
+    50% {
+      transform: scale($after, $after);
+    }
+    100% {
+      transform: scale($before, $before);
+    }
+  }
+}
+
+@mixin size-up($start) {
+  animation: size-up-animation ease 0.1s;
+  @keyframes size-up-animation {
+    from {
+      transform: scale($start, $start);
+    }
+    to {
+      transform: scale(1, 1);
+    }
+  }
+}
