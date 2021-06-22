@@ -1,19 +1,20 @@
-@import "../../../util/lib.scss";
+@import "../../../styles/lib.scss";
 
-.Handle-Category-Option {
-  bottom: 2.7rem;
+.handle-category-list {
+  width: 100%;
+  max-height: 8.5rem;
+  overflow-y: auto;
+  top: 4.8rem;
   left: 0;
   z-index: 1000;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--theme-border);
   background: var(--theme-main-background);
-  width: 12rem;
-  height: auto;
   position: absolute;
   border-radius: 0.2rem;
 
-  &-Item {
+  &-item {
     width: 100%;
     padding: 0.7rem 0.8rem;
     cursor: pointer;
@@ -22,7 +23,7 @@
       background-color: var(--theme-background-scale-1);
     }
 
-    &-Name {
+    &-name {
       font-size: 1rem;
       font-weight: normal;
       color: var(--theme-main);

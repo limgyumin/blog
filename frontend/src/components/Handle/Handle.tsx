@@ -1,224 +1,85 @@
 import React from "react";
-import MarkDownContainer from "../../containers/MarkDown/MarkDownContainer";
-import { ReactComponent as Option } from "../../assets/images/option.svg";
-import "./Handle.scss";
-import { CategoryType } from "../../util/types/Category";
-import HandleCategoryOption from "./HandleCategoryOption";
+import { THUMBNAIL_URL } from "config/config.json";
+import useHandlePost from "hooks/post/useHandlePost";
+import ReactHelmet from "components/common/ReactHelmet";
+import InputTitle from "./InputTitle";
+import useModal from "hooks/util/useModal";
+import ToolBar from "components/common/ToolBar";
+import HandleCreateContent from "./HandleCreateContent";
+import HandlePreview from "./HandlePreview";
+import HandleBottom from "./HandleBottom";
+import HandleSubmitModal from "./HandleSubmitModal";
+import usePostTextArea from "hooks/post/usePostTextArea";
+import classNames from "classnames";
+import { ClassNamesFn } from "classnames/types";
 
-interface HandleProps {
-  title: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  titleRef: React.RefObject<HTMLTextAreaElement>;
-  desc: string;
-  setDesc: React.Dispatch<React.SetStateAction<string>>;
-  descRef: React.RefObject<HTMLTextAreaElement>;
-  content: string;
-  contentRef: React.RefObject<HTMLTextAreaElement>;
-  writeCancelHandler: () => void;
-  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleInsertImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  preview: string | ArrayBuffer | null;
-  fileName: string;
-  clearImageHandler: () => void;
-  categories: CategoryType[];
-  category: string;
-  showOption: boolean;
-  setShowOption: React.Dispatch<React.SetStateAction<boolean>>;
-  categoryItemHandler: (name: string, idx: number) => void;
-  writeClickHandler: () => void;
-  saveClickHandler: () => void;
-  keyDownHandler: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  changeHandler: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  scrollDownRef: React.RefObject<HTMLDivElement>;
-}
+const styles = require("./Handle.scss");
+const cx: ClassNamesFn = classNames.bind(styles);
 
-const Handle = ({
-  title,
-  setTitle,
-  titleRef,
-  desc,
-  setDesc,
-  descRef,
-  content,
-  contentRef,
-  writeCancelHandler,
-  handleImageChange,
-  handleInsertImage,
-  preview,
-  fileName,
-  clearImageHandler,
-  categories,
-  category,
-  showOption,
-  setShowOption,
-  categoryItemHandler,
-  writeClickHandler,
-  saveClickHandler,
-  keyDownHandler,
-  changeHandler,
-  scrollDownRef,
-}: HandleProps) => {
+const Handle = () => {
+  const {
+    valid,
+    request,
+    onCancelPost,
+    onSavePost,
+    onSubmitPost,
+    onChangeRequest,
+  } = useHandlePost();
+  const {
+    passed,
+    titleEl,
+    contentEl,
+    onScrollToolBar,
+    onKeyDownContent,
+    contentFocusHandler,
+  } = usePostTextArea(request, onChangeRequest);
+  const { isMount, onMount } = useModal();
+
+  const { title, content, description } = request;
+
   return (
-    <>
-      <div className="Handle">
-        <div className="Handle-Wrapper">
-          <div className="Handle-Wrapper-Area">
-            <div className="Handle-Wrapper-Area-Label">
-              <p className="Handle-Wrapper-Area-Label-Inner">글 작성</p>
-              <div className="Handle-Wrapper-Area-Label-Buttons">
-                <button
-                  className="Handle-Wrapper-Area-Label-Buttons-Confirm"
-                  onClick={() => writeClickHandler()}
-                >
-                  작성하기
-                </button>
-                <button
-                  className="Handle-Wrapper-Area-Label-Buttons-Save"
-                  onClick={() => saveClickHandler()}
-                >
-                  임시 저장
-                </button>
-                <button
-                  className="Handle-Wrapper-Area-Label-Buttons-Cancel"
-                  onClick={() => writeCancelHandler()}
-                >
-                  나가기
-                </button>
-              </div>
+    <React.Fragment>
+      <ReactHelmet
+        title="Handle | Nonamed"
+        description="개발자를 꿈꾸는 한 학생의 이야기"
+        image={THUMBNAIL_URL}
+      />
+      <HandleSubmitModal
+        title={title}
+        description={description}
+        isMount={isMount}
+        onCancel={onMount}
+        onSubmit={onSubmitPost}
+        onChangeRequest={onChangeRequest}
+      />
+      <div className={cx("handle")}>
+        <div className={cx("handle-content")}>
+          <div className={cx("handle-content-wrap")}>
+            <div className={cx("handle-content-wrap-header", { "header-passed": passed })}>
+              <InputTitle titleEl={titleEl} title={title} onChangeRequest={onChangeRequest} />
             </div>
-            <div className="Handle-Wrapper-Area-Container">
-              <div className="Handle-Wrapper-Area-Container-InsertImage">
-                <p className="Handle-Wrapper-Area-Container-InsertImage-Title">
-                  이미지를 추가해보세요!
-                </p>
-                <label
-                  htmlFor="insert_image"
-                  className="Handle-Wrapper-Area-Container-InsertImage-Button"
-                >
-                  업로드
-                </label>
-                <input
-                  id="insert_image"
-                  type="file"
-                  accept="image/png, image/jpeg"
-                  onChange={(e) => handleInsertImage(e)}
-                />
-              </div>
-              <textarea
-                ref={titleRef}
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="Handle-Wrapper-Area-Container-Title"
-                placeholder="제목을 입력해주세요."
-              />
-              <textarea
-                ref={descRef}
-                value={desc}
-                onChange={(e) => setDesc(e.target.value)}
-                className="Handle-Wrapper-Area-Container-Description"
-                placeholder="설명을 입력해주세요."
-              />
-              <textarea
-                ref={contentRef}
-                value={content}
-                onKeyDown={(e) => keyDownHandler(e)}
-                onChange={(e) => changeHandler(e)}
-                className="Handle-Wrapper-Area-Container-Content"
-                placeholder="자! 이제 마음껏 이야기를 써보죠!"
-              />
+            <div className={cx("handle-content-wrap-toolbar", { "toolbar-passed": passed })}>
+              <ToolBar contentEl={contentEl} onChangeRequest={onChangeRequest} />
             </div>
-          </div>
-          <div className="Handle-Wrapper-Preview">
-            <div className="Handle-Wrapper-Preview-Label">
-              <p className="Handle-Wrapper-Preview-Label-Inner">미리보기</p>
-            </div>
-            <div className="Handle-Wrapper-Preview-Area">
-              <p className="Handle-Wrapper-Preview-Area-Title">{title}</p>
-              <p className="Handle-Wrapper-Preview-Area-Description">{desc}</p>
-              {preview && (
-                <img
-                  src={preview.toString()}
-                  className="Handle-Wrapper-Preview-Area-Image"
-                />
-              )}
-              <MarkDownContainer
-                className="Handle-Wrapper-Preview-Area-Content"
-                scrollDownRef={scrollDownRef}
-              >
-                {content}
-              </MarkDownContainer>
-            </div>
-          </div>
-        </div>
-
-        <div className="Handle-Control">
-          <div className="Handle-Control-Wrapper">
-            <div className="Handle-Control-Wrapper-Button">
-              <p className="Handle-Control-Wrapper-Button-FileName">
-                {fileName || "썸네일 이미지를 선택해주세요."}
-              </p>
-              {fileName ? (
-                <div
-                  onClick={() => clearImageHandler()}
-                  className="Handle-Control-Wrapper-Button-Delete"
-                >
-                  삭제
-                </div>
-              ) : (
-                <label
-                  htmlFor="thumbnail"
-                  className="Handle-Control-Wrapper-Button-Label"
-                >
-                  업로드
-                </label>
-              )}
-            </div>
-            <input
-              id="thumbnail"
-              type="file"
-              accept="image/png, image/jpeg"
-              onChange={(e) => handleImageChange(e)}
+            <HandleCreateContent
+              content={content}
+              contentEl={contentEl}
+              onChangeRequest={onChangeRequest}
+              onScrollToolBar={onScrollToolBar}
+              onKeyDownContent={onKeyDownContent}
+              contentFocusHandler={contentFocusHandler}
             />
-            <div
-              className="Handle-Control-Wrapper-Category"
-              onClick={() => setShowOption(true)}
-            >
-              <p className="Handle-Control-Wrapper-Category-Name">
-                {category || "카테고리"}
-              </p>
-              <Option />
-              {showOption && (
-                <HandleCategoryOption
-                  categories={categories}
-                  setShowOption={setShowOption}
-                  categoryItemHandler={categoryItemHandler}
-                />
-              )}
-            </div>
           </div>
-          <div className="Handle-Control-Buttons">
-            <button
-              className="Handle-Control-Buttons-Confirm"
-              onClick={() => writeClickHandler()}
-            >
-              작성하기
-            </button>
-            <button
-              className="Handle-Control-Buttons-Save"
-              onClick={() => saveClickHandler()}
-            >
-              임시 저장
-            </button>
-            <button
-              className="Handle-Control-Buttons-Cancel"
-              onClick={() => writeCancelHandler()}
-            >
-              나가기
-            </button>
-          </div>
+          <HandlePreview title={title} content={content} />
         </div>
+        <HandleBottom
+          valid={valid}
+          onCancel={onCancelPost}
+          onSave={onSavePost}
+          onComplete={onMount}
+        />
       </div>
-    </>
+    </React.Fragment>
   );
 };
 
