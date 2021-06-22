@@ -1,9 +1,9 @@
-.Members {
+.members {
   display: flex;
   justify-content: center;
   width: 100%;
 
-  &-Container {
+  &-wrap {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -24,12 +24,12 @@
       }
     }
 
-    &-Wrapper {
+    &-container {
       display: flex;
       align-items: center;
       flex-direction: column;
 
-      &-Title {
+      &-title {
         font-size: 3rem;
         font-weight: bold;
         color: var(--theme-text-scale-1);
@@ -40,7 +40,7 @@
         }
       }
 
-      &-Subtitle {
+      &-subtitle {
         font-size: 2.1rem;
         font-weight: normal;
         color: var(--theme-text-scale-1);
@@ -55,11 +55,11 @@
       }
     }
 
-    &-Admin {
+    &-admin {
       margin-top: 6rem;
       margin-bottom: 3rem;
 
-      &-Title {
+      &-title {
         display: flex;
         align-items: center;
         font-size: 1.4rem;
@@ -73,8 +73,8 @@
       }
     }
 
-    &-List {
-      &-Title {
+    &-list {
+      &-title {
         display: flex;
         align-items: center;
         font-size: 1.4rem;
