@@ -1,65 +1,44 @@
-import React, { useEffect } from "react";
+import React from "react";
+import "styles/theme.scss";
 import { Route, Switch } from "react-router-dom";
+import useTheme from "hooks/util/useTheme";
+import SideBar from "./common/SideBar";
+import Header from "./common/Header";
+import RestrictRoute from "./Route/RestrictRoute";
+import * as Pages from "pages";
 import { ToastContainer } from "react-toastify";
-import AuthPage from "../pages/AuthPage";
-import MainPage from "../pages/MainPage";
-import PostPage from "../pages/PostPage";
-import HandlePage from "../pages/HandlePage";
-import CategoriesPage from "../pages/CategoriesPage";
-import HeaderContainer from "../containers/Header/HeaderContainer";
-import SideBarContainer from "../containers/SideBar/SideBarContainer";
-import SearchPage from "../pages/SearchPage";
-import TempPage from "../pages/TempPage";
-import MemberPage from "../pages/MemberPage";
-import "../util/theme.scss";
-import { observer } from "mobx-react";
-import useStore from "../util/lib/hooks/useStore";
-import AboutPage from "../pages/AboutPage";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const { store } = useStore();
-  const { theme, handleThemeState } = store.ThemeStore;
-
-  const validateTheme = () => {
-    const currentTheme = localStorage.getItem("theme");
-    if (!currentTheme || currentTheme === "light") {
-      handleThemeState(false);
-    } else {
-      handleThemeState(true);
-    }
-  };
-
-  useEffect(() => {
-    validateTheme();
-  }, []);
+  const { isLight } = useTheme();
 
   return (
-    <div className={`App ${!theme ? "light" : "dark"}`}>
+    <div className={`App ${isLight ? "light" : "dark"}`}>
       <ToastContainer autoClose={4000} />
       <Route
         render={({ location }) => {
-          let path = location.pathname.split("/")[1];
+          const path = location.pathname.split("/")[1];
           return (
-            <>
-              {path !== "write" && path !== "modify" && path !== "auth" && (
-                <>
-                  <HeaderContainer />
-                  <SideBarContainer />
-                </>
+            <React.Fragment>
+              {path !== "write" && path !== "update" && path !== "auth" && (
+                <React.Fragment>
+                  <Header />
+                  <SideBar />
+                </React.Fragment>
               )}
               <Switch>
-                <Route exact path="/" component={MainPage} />
-                <Route path="/categories" component={CategoriesPage} />
-                <Route path="/post/:idx" component={PostPage} />
-                <Route path="/modify/:idx" component={HandlePage} />
-                <Route path="/write" component={HandlePage} />
-                <Route path="/search" component={SearchPage} />
-                <Route path="/auth" component={AuthPage} />
-                <Route path="/temp" component={TempPage} />
-                <Route path="/members" component={MemberPage} />
-                <Route path="/about" component={AboutPage} />
+                <Route exact path="/" render={() => <Pages.Main />} />
+                <Route path="/categories" render={() => <Pages.Categories />} />
+                <Route path="/post/:idx" render={() => <Pages.Post />} />
+                <RestrictRoute path="/write" render={() => <Pages.Handle />} />
+                <RestrictRoute path="/update/:idx" render={() => <Pages.Handle />} />
+                <Route path="/search" render={() => <Pages.Search />} />
+                <Route path="/auth" render={() => <Pages.Auth />} />
+                <RestrictRoute path="/temp" render={() => <Pages.Temp />} />
+                <Route path="/members" render={() => <Pages.Members />} />
+                <Route path="/about" render={() => <Pages.About />} />
               </Switch>
-            </>
+            </React.Fragment>
           );
         }}
       />
@@ -67,4 +46,4 @@ const App = () => {
   );
 };
 
-export default observer(App);
+export default App;
