@@ -12,13 +12,14 @@ type HeaderOptionProps = {
   clickEl: React.MutableRefObject<HTMLDivElement>;
   admin: boolean;
   handleLogout: () => void;
+  onShowMenu: () => void;
 };
 
-const HeaderOption: FC<HeaderOptionProps> = ({ clickEl, admin, handleLogout }) => {
+const HeaderOption: FC<HeaderOptionProps> = ({ clickEl, admin, handleLogout, onShowMenu }) => {
   return (
     <div className={cx("header-option")} ref={clickEl}>
       {admin && (
-        <Link to="/temp" className={cx("header-option-temp")}>
+        <Link to="/temp" className={cx("header-option-temp")} onClick={onShowMenu}>
           <div className={cx("header-option-temp-wrap")}>
             <FaSave />
           </div>

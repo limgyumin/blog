@@ -13,7 +13,7 @@ type HeaderProfileProps = {
   admin: boolean;
   profile: IUser;
   showMenu: boolean;
-  showMenuHandler: () => void;
+  onShowMenu: () => void;
 };
 
 const HeaderProfile: FC<HeaderProfileProps> = ({
@@ -22,11 +22,11 @@ const HeaderProfile: FC<HeaderProfileProps> = ({
   admin,
   profile,
   showMenu,
-  showMenuHandler,
+  onShowMenu,
 }) => {
   return (
     <div className={cx("header-profile")}>
-      <div className={cx("header-profile-user")} onClick={showMenuHandler} ref={menuEl}>
+      <div className={cx("header-profile-user")} onClick={onShowMenu} ref={menuEl}>
         <img src={profile.avatar} alt="Profile" className={cx("header-profile-user-avatar")} />
       </div>
       {admin && (
