@@ -61,6 +61,12 @@ export interface IPostResponse extends IResponse {
   };
 }
 
+export interface ICreateTempPostResponse extends IResponse {
+  data: {
+    idx: number;
+  };
+}
+
 export interface IPostsResponse extends IResponse {
   data: {
     post_count: number;

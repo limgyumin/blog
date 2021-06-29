@@ -3,8 +3,20 @@ import { RootState } from "modules";
 import { ThunkAction } from "redux-thunk";
 import { requestApi } from "request/requestApi";
 import { POST } from "request/requestUrl";
-import { IPostDTO, IOtherPostsResponse, IPostResponse } from "types/post.type";
-import { createPostAsync, createTempPostAsync, deletePostAsync, fetchOtherPostsAsync, fetchPostAsync, updatePostAsync } from "./actions";
+import {
+  IPostDTO,
+  IOtherPostsResponse,
+  IPostResponse,
+  ICreateTempPostResponse,
+} from "types/post.type";
+import {
+  createPostAsync,
+  createTempPostAsync,
+  deletePostAsync,
+  fetchOtherPostsAsync,
+  fetchPostAsync,
+  updatePostAsync,
+} from "./actions";
 import { PostAction } from "./types";
 
 export const fetchPostThunk = (idx: number): ThunkAction<void, RootState, void, PostAction> => {
@@ -32,7 +44,9 @@ export const fetchPostThunk = (idx: number): ThunkAction<void, RootState, void, 
   };
 };
 
-export const fetchOtherPostsThunk = (idx: number): ThunkAction<void, RootState, void, PostAction> => {
+export const fetchOtherPostsThunk = (
+  idx: number
+): ThunkAction<void, RootState, void, PostAction> => {
   return async (dispatch) => {
     const { request, success, failure } = fetchOtherPostsAsync;
     dispatch(request());
@@ -47,7 +61,10 @@ export const fetchOtherPostsThunk = (idx: number): ThunkAction<void, RootState, 
   };
 };
 
-export const createPostThunk = (post: IPostDTO, callback: () => void): ThunkAction<void, RootState, void, PostAction> => {
+export const createPostThunk = (
+  post: IPostDTO,
+  callback: () => void
+): ThunkAction<void, RootState, void, PostAction> => {
   return async (dispatch) => {
     const { request, success, failure } = createPostAsync;
     dispatch(request());
@@ -71,7 +88,10 @@ export const createPostThunk = (post: IPostDTO, callback: () => void): ThunkActi
   };
 };
 
-export const createTempPostThunk = (post: IPostDTO, callback: () => void): ThunkAction<void, RootState, void, PostAction> => {
+export const createTempPostThunk = (
+  post: IPostDTO,
+  callback: (idx: number) => void
+): ThunkAction<void, RootState, void, PostAction> => {
   return async (dispatch) => {
     const { request, success, failure } = createTempPostAsync;
     dispatch(request());
@@ -85,10 +105,14 @@ export const createTempPostThunk = (post: IPostDTO, callback: () => void): Thunk
         category_idx: post.category_idx,
       };
 
-      await requestApi(POST.CREATE.TEMP, ERequest.POST, body);
+      const { data }: ICreateTempPostResponse = await requestApi(
+        POST.CREATE.TEMP,
+        ERequest.POST,
+        body
+      );
 
       dispatch(success());
-      callback();
+      callback(data.idx);
     } catch (err) {
       dispatch(failure(err));
     }
@@ -125,7 +149,10 @@ export const updatePostThunk = (
   };
 };
 
-export const deletePostThunk = (idx: number, callback: () => void): ThunkAction<void, RootState, void, PostAction> => {
+export const deletePostThunk = (
+  idx: number,
+  callback: () => void
+): ThunkAction<void, RootState, void, PostAction> => {
   return async (dispatch) => {
     const { request, success, failure } = deletePostAsync;
     dispatch(request());

@@ -18,11 +18,12 @@ import { initialCreatePostState } from "types/initials/post.initial";
 import { IPostDTO } from "types/post.type";
 import getFileName from "lib/getFileName";
 import usePostIdx from "hooks/util/usePostIdx";
+import useInterval from "react-useinterval";
 
 export default function useHandlePost() {
   const { error, data } = useSelector((state: RootState) => state.posts);
-  const { login, admin } = useSelector((state: RootState) => state.users.data);
   const { post } = data;
+  const { login, admin } = useSelector((state: RootState) => state.users.data);
 
   const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ export default function useHandlePost() {
         setRequest({ ...request, [name]: value });
       }
     },
-    [request, setRequest]
+    [request]
   );
 
   const validHandler = useCallback(() => {
@@ -53,7 +54,7 @@ export default function useHandlePost() {
     const valid = !(emptyTitle || emptyContent);
 
     setValid(valid);
-  }, [request, setValid]);
+  }, [request]);
 
   const validatePost = useCallback(() => {
     const { description, category_idx } = request;
@@ -74,6 +75,25 @@ export default function useHandlePost() {
     return true;
   }, [request]);
 
+  const validateTempPost = useCallback(() => {
+    const { title, content } = request;
+
+    const emptyTitle = isEmpty(title);
+    const emptyContent = isEmpty(content);
+
+    if (emptyTitle) {
+      toast.warn("제목을 작성해주세요.");
+      return false;
+    }
+
+    if (emptyContent) {
+      toast.warn("내용을 작성해주세요.");
+      return false;
+    }
+
+    return true;
+  }, [request]);
+
   const createPostHandler = useCallback(() => {
     if (!login || !admin) return;
     if (!validatePost()) return;
@@ -88,18 +108,25 @@ export default function useHandlePost() {
 
   const createTempPostHandler = useCallback(() => {
     if (!login || !admin) return;
+    if (!validateTempPost()) return;
 
-    const onCreateTempPost = () => {
+    const onCreateTempPost = (idx: number) => {
       toast.success("글이 임시 저장되었습니다!");
+      history.push(`/update/${idx}`);
     };
 
     dispatch(createTempPostThunk(request, onCreateTempPost));
-  }, [login, admin, request, dispatch]);
+  }, [login, admin, request, history, dispatch, validateTempPost]);
 
   const updatePostHandler = useCallback(
     (temp: boolean) => {
       if (!login || !admin) return;
-      if (!temp && !validatePost()) return;
+
+      if (temp) {
+        if (!validateTempPost()) return;
+      } else {
+        if (!validatePost()) return;
+      }
 
       const onUpdatePost = () => {
         if (temp) {
@@ -112,7 +139,7 @@ export default function useHandlePost() {
 
       dispatch(updatePostThunk(postIdx, request, temp, onUpdatePost));
     },
-    [login, admin, postIdx, request, history, dispatch, validatePost]
+    [login, admin, postIdx, request, history, dispatch, validatePost, validateTempPost]
   );
 
   const deletePostHandler = useCallback(() => {
@@ -133,7 +160,7 @@ export default function useHandlePost() {
   }, [isUpdate, post.idx, postIdx, dispatch]);
 
   const onCancelPost = useCallback(() => {
-    history.goBack();
+    history.push("/");
   }, [history]);
 
   const onSavePost = useCallback(() => {
@@ -151,12 +178,6 @@ export default function useHandlePost() {
       createPostHandler();
     }
   }, [isUpdate, createPostHandler, updatePostHandler]);
-
-  useEffect(() => {
-    if (!login || !admin) {
-      history.push("/");
-    }
-  }, [login, admin, history]);
 
   useEffect(() => {
     if (isUpdate && postIdx) {
@@ -195,6 +216,8 @@ export default function useHandlePost() {
       dispatch(initPostError());
     }
   }, [error, history, dispatch]);
+
+  useInterval(onSavePost, 90000);
 
   useBeforeunload((e) => e.preventDefault());
 
