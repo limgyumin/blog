@@ -1,8 +1,6 @@
 import { initialUserState } from "types/initials/user.initial";
 import { createReducer } from "typesafe-actions";
 import {
-  CHANGE_ADMIN,
-  CHANGE_LOGIN,
   FETCH_ADMIN_PROFILE,
   FETCH_ADMIN_PROFILE_FAILURE,
   FETCH_ADMIN_PROFILE_SUCCESS,
@@ -19,6 +17,7 @@ import {
   CREATE_FCM_TOKEN_FAILURE,
   CREATE_FCM_TOKEN_SUCCESS,
   INIT_USER_ERROR,
+  INIT_USER,
 } from "./actions";
 import { UserAction, UserState } from "./types";
 
@@ -40,28 +39,16 @@ const users = createReducer<UserState, UserAction>(initialState, {
     ...state,
     loading: true,
     error: null,
-    data: {
-      ...state.data,
-      login: false,
-    },
   }),
   [GITHUB_AUTH_SUCCESS]: (state) => ({
     ...state,
     loading: false,
     error: null,
-    data: {
-      ...state.data,
-      login: true,
-    },
   }),
   [GITHUB_AUTH_FAILURE]: (state, action) => ({
     ...state,
     loading: false,
     error: action.payload,
-    data: {
-      ...state.data,
-      login: false,
-    },
   }),
   [CREATE_FCM_TOKEN]: (state) => ({
     ...state,
@@ -73,20 +60,6 @@ const users = createReducer<UserState, UserAction>(initialState, {
   }),
   [CREATE_FCM_TOKEN_FAILURE]: (state) => ({
     ...state,
-  }),
-  [CHANGE_LOGIN]: (state, action) => ({
-    ...state,
-    data: {
-      ...state.data,
-      login: action.payload,
-    },
-  }),
-  [CHANGE_ADMIN]: (state, action) => ({
-    ...state,
-    data: {
-      ...state.data,
-      admin: action.payload,
-    },
   }),
   [FETCH_PROFILES]: (state) => ({
     ...state,
@@ -121,6 +94,12 @@ const users = createReducer<UserState, UserAction>(initialState, {
     ...state,
     loading: true,
     error: null,
+    data: {
+      ...state.data,
+      login: false,
+      admin: false,
+      profile: initialUserState,
+    },
   }),
   [FETCH_MY_PROFILE_SUCCESS]: (state, action) => ({
     ...state,
@@ -129,6 +108,7 @@ const users = createReducer<UserState, UserAction>(initialState, {
     data: {
       ...state.data,
       login: true,
+      admin: action.payload.is_admin,
       profile: action.payload,
     },
   }),
@@ -168,6 +148,15 @@ const users = createReducer<UserState, UserAction>(initialState, {
     data: {
       ...state.data,
       adminProfile: initialUserState,
+    },
+  }),
+  [INIT_USER]: (state) => ({
+    ...state,
+    data: {
+      ...state.data,
+      login: false,
+      admin: false,
+      profile: initialUserState,
     },
   }),
   [INIT_USER_ERROR]: (state) => ({
