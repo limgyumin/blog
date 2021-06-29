@@ -16,9 +16,7 @@ const RestrictRoute: FC<RestrictRouteProps> = ({ exact, path, render }) => {
       exact={exact}
       path={path}
       render={() => {
-        if (profile.id) {
-          return admin ? render() : <Redirect to="/" />;
-        }
+        return profile.id && admin ? render() : <Redirect to="/" />;
       }}
     />
   );
