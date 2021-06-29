@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
 import Modal from "components/common/Modal";
 import useBottomBar from "hooks/common/useBottomBar";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import React, { FC } from "react";
 import { BsArrowBarUp } from "react-icons/bs";
 import { IoMdHeart, IoMdHeartEmpty, IoIosMore } from "react-icons/io";
