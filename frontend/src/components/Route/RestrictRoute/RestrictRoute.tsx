@@ -9,13 +9,17 @@ type RestrictRouteProps = {
 };
 
 const RestrictRoute: FC<RestrictRouteProps> = ({ exact, path, render }) => {
-  const { accessToken } = useFetchProfile();
+  const { profile, admin } = useFetchProfile();
 
   return (
     <Route
       exact={exact}
       path={path}
-      render={() => (accessToken ? render() : <Redirect to="/" />)}
+      render={() => {
+        if (profile.id) {
+          return admin ? render() : <Redirect to="/" />;
+        }
+      }}
     />
   );
 };

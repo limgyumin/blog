@@ -21,12 +21,6 @@ export default function useFetchTempPosts() {
   }, [login, admin, dispatch]);
 
   useEffect(() => {
-    if (!login || !admin) {
-      history.push("/");
-    }
-  }, [login, admin, history]);
-
-  useEffect(() => {
     fetchTempPostsHandler();
   }, [fetchTempPostsHandler]);
 
