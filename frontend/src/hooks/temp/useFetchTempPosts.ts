@@ -14,15 +14,15 @@ export default function useFetchTempPosts() {
 
   const history = useHistory();
 
-  const fetchTempPostsHandler = useCallback(() => {
+  const handleFetchTempPosts = useCallback(() => {
     if (!login || !admin) return;
 
     dispatch(fetchTempPostsThunk());
   }, [login, admin, dispatch]);
 
   useEffect(() => {
-    fetchTempPostsHandler();
-  }, [fetchTempPostsHandler]);
+    handleFetchTempPosts();
+  }, [handleFetchTempPosts]);
 
   useEffect(() => {
     if (error) {

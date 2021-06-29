@@ -16,19 +16,19 @@ export default function useReply(reply?: IReply) {
   const dispatch = useDispatch();
 
   const postIdx = usePostIdx();
-  const { isMount, onMount } = useModal();
+  const { isMount, handleModalMount } = useModal();
 
   const [replyIdx, setReplyIdx] = useState<number>(0);
   const [content, setContent] = useState<string>("");
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [showReplies, setShowReplies] = useState<boolean>(false);
 
-  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setContent(value);
   }, []);
 
-  const updateReplyHandler = useCallback(() => {
+  const handleUpdateReply = useCallback(() => {
     if (!login) return;
 
     if (isEmpty(content)) {
@@ -47,20 +47,20 @@ export default function useReply(reply?: IReply) {
     dispatch(updateReplyThunk(replyIdx, removeLastBlank(content), onUpdateReply));
   }, [login, content, postIdx, replyIdx, dispatch]);
 
-  const deleteReplyHandler = useCallback(() => {
+  const handleDeleteReply = useCallback(() => {
     if (!login) return;
 
     const onDeleteReply = async () => {
-      onMount();
+      handleModalMount();
       dispatch(fetchCommentCountThunk(postIdx));
       dispatch(fetchCommentsThunk(postIdx));
       setReplyIdx(0);
     };
 
     dispatch(deleteReplyThunk(replyIdx, onDeleteReply));
-  }, [login, postIdx, replyIdx, dispatch, onMount]);
+  }, [login, postIdx, replyIdx, dispatch, handleModalMount]);
 
-  const onUpdateHandler = useCallback(() => {
+  const handleClickUpdateReply = useCallback(() => {
     const { idx, content } = reply;
 
     setReplyIdx(idx);
@@ -68,33 +68,33 @@ export default function useReply(reply?: IReply) {
     setUpdateMode(true);
   }, [reply]);
 
-  const onCancelUpdateHandler = useCallback(() => {
+  const handleCancelUpdateReply = useCallback(() => {
     setUpdateMode(false);
     setContent("");
   }, []);
 
-  const onDeleteHandler = useCallback(
+  const handleClickDeleteReply = useCallback(
     (idx: number) => {
       setReplyIdx(idx);
-      onMount();
+      handleModalMount();
     },
-    [onMount]
+    [handleModalMount]
   );
 
-  const onKeyDownContent = useCallback(
+  const handleKeyDownContent = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       const { key, shiftKey } = e;
       if ((key === "Enter" || key === "NumpadEnter") && !shiftKey) {
         e.preventDefault();
         if (reply && reply.idx) {
-          updateReplyHandler();
+          handleUpdateReply();
         }
       }
     },
-    [reply, updateReplyHandler]
+    [reply, handleUpdateReply]
   );
 
-  const onShowReplies = useCallback(() => {
+  const handleShowReplies = useCallback(() => {
     setShowReplies((showReplies) => !showReplies);
   }, []);
 
@@ -114,14 +114,14 @@ export default function useReply(reply?: IReply) {
     isMount,
     showReplies,
     updateMode,
-    onMount,
-    onShowReplies,
-    onChangeContent,
-    onKeyDownContent,
-    onUpdateHandler,
-    onCancelUpdateHandler,
-    onDeleteHandler,
-    updateReplyHandler,
-    deleteReplyHandler,
+    handleModalMount,
+    handleShowReplies,
+    handleChangeContent,
+    handleKeyDownContent,
+    handleClickUpdateReply,
+    handleCancelUpdateReply,
+    handleClickDeleteReply,
+    handleUpdateReply,
+    handleDeleteReply,
   };
 }

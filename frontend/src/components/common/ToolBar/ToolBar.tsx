@@ -19,10 +19,10 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 type ToolBarProps = {
   contentEl: React.MutableRefObject<HTMLTextAreaElement>;
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
-const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
+const ToolBar: FC<ToolBarProps> = ({ contentEl, onChange }) => {
   const {
     imageEl,
     clickEl,
@@ -30,19 +30,20 @@ const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
     linkInputEl,
     isInputMount,
     link,
-    changeImageHandler,
-    changeLinkHandler,
-    submitLinkHandler,
-    linkKeyDownHandler,
-    toolsHandler,
-  } = useToolBar(contentEl, onChangeRequest);
+    handleChangeImage,
+    handleChangeLink,
+    handleSubmitLink,
+    handleKeyDownLink,
+    handleTools,
+  } = useToolBar(contentEl, onChange);
+
   return (
     <div className={cx("toolbar")}>
       {[1, 2, 3, 4].map((scale, idx) => (
         <button
           key={idx}
           className={cx("toolbar-button")}
-          onClick={() => toolsHandler("heading", scale)}
+          onClick={() => handleTools("heading", scale)}
         >
           <div className={cx("toolbar-button-heading")}>
             <FaHeading className={cx("toolbar-button-heading-icon")} />
@@ -51,21 +52,21 @@ const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
         </button>
       ))}
       <div className={cx("toolbar-divide")} />
-      <button className={cx("toolbar-button")} onClick={() => toolsHandler("bold")}>
+      <button className={cx("toolbar-button")} onClick={() => handleTools("bold")}>
         <FaBold className={cx("toolbar-button-icon")} />
       </button>
-      <button className={cx("toolbar-button")} onClick={() => toolsHandler("italic")}>
+      <button className={cx("toolbar-button")} onClick={() => handleTools("italic")}>
         <FaItalic className={cx("toolbar-button-icon")} />
       </button>
-      <button className={cx("toolbar-button")} onClick={() => toolsHandler("strike")}>
+      <button className={cx("toolbar-button")} onClick={() => handleTools("strike")}>
         <FaStrikethrough className={cx("toolbar-button-icon")} />
       </button>
       <div className={cx("toolbar-divide")} />
-      <button className={cx("toolbar-button")} onClick={() => toolsHandler("blockquote")}>
+      <button className={cx("toolbar-button")} onClick={() => handleTools("blockquote")}>
         <FaQuoteRight className={cx("toolbar-button-icon")} />
       </button>
       <div className={cx("toolbar-wrapper")} ref={clickEl}>
-        <button className={cx("toolbar-button")} onClick={() => toolsHandler("link")}>
+        <button className={cx("toolbar-button")} onClick={() => handleTools("link")}>
           <FaLink className={cx("toolbar-button-icon")} />
         </button>
         {isInputMount && (
@@ -73,13 +74,13 @@ const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
             linkEl={linkEl}
             linkInputEl={linkInputEl}
             link={link}
-            changeLinkHandler={changeLinkHandler}
-            submitLinkHandler={submitLinkHandler}
-            linkKeyDownHandler={linkKeyDownHandler}
+            onChange={handleChangeLink}
+            onClick={handleSubmitLink}
+            onKeyDown={handleKeyDownLink}
           />
         )}
       </div>
-      <button className={cx("toolbar-button")} onClick={() => toolsHandler("codeblock")}>
+      <button className={cx("toolbar-button")} onClick={() => handleTools("codeblock")}>
         <FaCode className={cx("toolbar-button-icon")} />
       </button>
       <label htmlFor="image" className={cx("toolbar-button")}>
@@ -90,7 +91,7 @@ const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
         type="file"
         accept="image/png, image/jpeg, image/gif"
         ref={imageEl}
-        onChange={(e) => changeImageHandler(e)}
+        onChange={(e) => handleChangeImage(e)}
       />
     </div>
   );

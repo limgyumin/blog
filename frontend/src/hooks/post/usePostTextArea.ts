@@ -15,7 +15,7 @@ export default function usePostTextArea(
   const titleEl = useRef<HTMLTextAreaElement>(null);
   const contentEl = useRef<HTMLTextAreaElement>(null);
 
-  const onScrollTextArea = useCallback((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+  const handleScrollContent = useCallback((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
     const { scrollTop, scrollHeight } = e.currentTarget;
     const pass: boolean = scrollTop > 0 && scrollHeight > 1000;
 
@@ -32,7 +32,7 @@ export default function usePostTextArea(
     [contentEl]
   );
 
-  const onKeyDownContent = useCallback(
+  const handleKeyDownContent = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       const pressed = e.key;
 
@@ -53,18 +53,18 @@ export default function usePostTextArea(
     [contentEl, onChangeRequest, setSelectionPos]
   );
 
-  const resizeWindowHandler = useCallback((): void => {
+  const handleResizeWindow = useCallback((): void => {
     setWindowSize({
       width: window.innerWidth,
       height: window.innerHeight,
     });
   }, []);
 
-  const contentFocusHandler = useCallback((): void => {
+  const handleFocusContent = useCallback((): void => {
     contentEl.current.focus();
   }, [contentEl]);
 
-  const increaseTitleScrollHandler = useCallback((): void => {
+  const handleResizeTitleScroll = useCallback((): void => {
     const { current } = titleEl;
 
     if (current) {
@@ -74,7 +74,7 @@ export default function usePostTextArea(
     }
   }, [titleEl]);
 
-  const increaseContentScrollHandler = useCallback((): void => {
+  const handleResizeContentScroll = useCallback((): void => {
     const { current } = contentEl;
 
     if (current) {
@@ -86,19 +86,19 @@ export default function usePostTextArea(
   }, [contentEl]);
 
   useEffect(() => {
-    increaseTitleScrollHandler();
-  }, [request.title, increaseTitleScrollHandler]);
+    handleResizeTitleScroll();
+  }, [request.title, handleResizeTitleScroll]);
 
   useEffect(() => {
-    increaseContentScrollHandler();
-  }, [request.content, windowSize, increaseContentScrollHandler]);
+    handleResizeContentScroll();
+  }, [request.content, windowSize, handleResizeContentScroll]);
 
   useEffect(() => {
-    window.addEventListener("resize", resizeWindowHandler);
+    window.addEventListener("resize", handleResizeWindow);
     return () => {
-      window.removeEventListener("resize", resizeWindowHandler);
+      window.removeEventListener("resize", handleResizeWindow);
     };
-  }, [resizeWindowHandler]);
+  }, [handleResizeWindow]);
 
   useEffect(() => {
     return () => {
@@ -111,8 +111,8 @@ export default function usePostTextArea(
     passed,
     titleEl,
     contentEl,
-    onScrollTextArea,
-    onKeyDownContent,
-    contentFocusHandler,
+    handleScrollContent,
+    handleKeyDownContent,
+    handleFocusContent,
   };
 }

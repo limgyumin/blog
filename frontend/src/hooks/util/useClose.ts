@@ -5,7 +5,7 @@ export default function useClose<T extends HTMLElement>(
   targetEl: React.MutableRefObject<T>,
   handler: () => void
 ): void {
-  const closeHandler = useCallback(
+  const handleCloseElement = useCallback(
     (e: MouseEvent): void => {
       const { target } = e;
 
@@ -22,7 +22,7 @@ export default function useClose<T extends HTMLElement>(
   );
 
   useEffect(() => {
-    window.addEventListener("mousedown", closeHandler);
-    return () => window.removeEventListener("mousedown", closeHandler);
-  }, [closeHandler]);
+    window.addEventListener("mousedown", handleCloseElement);
+    return () => window.removeEventListener("mousedown", handleCloseElement);
+  }, [handleCloseElement]);
 }

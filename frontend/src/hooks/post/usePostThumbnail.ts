@@ -8,23 +8,23 @@ import usePostIdx from "hooks/util/usePostIdx";
 export default function usePostThumbnail(changeRequestHandler: (name: string, value: any) => void) {
   const { post } = useSelector((state: RootState) => state.posts.data);
 
-  const { imageEl, uploadHandler } = useUpload();
+  const { imageEl, handleUploadImage } = useUpload();
   const postIdx = usePostIdx();
 
   const [thumbnail, setThumbnail] = useState<string>("");
 
-  const onChangeThumbnail = useCallback(
+  const handleChangeThumbnail = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const { files } = e.target;
 
-      const url: string = await uploadHandler(files);
+      const url: string = await handleUploadImage(files);
       setThumbnail(url);
       changeRequestHandler("thumbnail", getFileName(url));
     },
-    [changeRequestHandler, uploadHandler]
+    [changeRequestHandler, handleUploadImage]
   );
 
-  const onRemoveThumbnail = useCallback(() => {
+  const handleDeleteThumbnail = useCallback(() => {
     setThumbnail("");
     changeRequestHandler("thumbnail", "");
   }, [changeRequestHandler]);
@@ -42,7 +42,7 @@ export default function usePostThumbnail(changeRequestHandler: (name: string, va
   return {
     imageEl,
     thumbnail,
-    onChangeThumbnail,
-    onRemoveThumbnail,
+    handleChangeThumbnail,
+    handleDeleteThumbnail,
   };
 }

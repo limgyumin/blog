@@ -44,12 +44,12 @@ export default function useFetchProfile() {
     }
   }, [getFcmToken]);
 
-  const logoutHandler = useCallback(() => {
+  const handleLogout = useCallback(() => {
     dispatch(initUser());
     token.remove();
   }, [dispatch]);
 
-  const fetchMyProfileHandler = useCallback(() => {
+  const handleFetchMyProfile = useCallback(() => {
     const accessToken = token.get();
 
     if (!profile.id && accessToken) {
@@ -58,22 +58,22 @@ export default function useFetchProfile() {
   }, [profile, dispatch, requestNotification]);
 
   useEffect(() => {
-    fetchMyProfileHandler();
-  }, [fetchMyProfileHandler]);
+    handleFetchMyProfile();
+  }, [handleFetchMyProfile]);
 
   useEffect(() => {
     if (error) {
       history.push("/");
-      logoutHandler();
+      handleLogout();
       dispatch(initUserError());
     }
-  }, [error, history, logoutHandler, dispatch]);
+  }, [error, history, handleLogout, dispatch]);
 
   return {
     loading,
     login,
     admin,
     profile,
-    logoutHandler,
+    handleLogout,
   };
 }

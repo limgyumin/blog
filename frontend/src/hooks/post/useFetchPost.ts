@@ -16,15 +16,15 @@ export default function useFetchPost() {
 
   const postIdx = usePostIdx();
 
-  const fetchPostHandler = useCallback(() => {
+  const handleFetchPost = useCallback(() => {
     dispatch(fetchPostThunk(postIdx));
   }, [postIdx, dispatch]);
 
-  const fetchOtherPostHandler = useCallback(() => {
+  const handleFetchOtherPosts = useCallback(() => {
     dispatch(fetchOtherPostsThunk(postIdx));
   }, [postIdx, dispatch]);
 
-  const scrollToTop = useCallback(
+  const handleScrollTop = useCallback(
     (behavior: ScrollBehavior = "auto") => {
       const { current } = postTopEl;
       if (current) {
@@ -35,16 +35,16 @@ export default function useFetchPost() {
   );
 
   useEffect(() => {
-    scrollToTop();
-  }, [postIdx, scrollToTop]);
+    handleScrollTop();
+  }, [postIdx, handleScrollTop]);
 
   useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
+    handleFetchPost();
+  }, [handleFetchPost]);
 
   useEffect(() => {
-    fetchOtherPostHandler();
-  }, [fetchOtherPostHandler]);
+    handleFetchOtherPosts();
+  }, [handleFetchOtherPosts]);
 
   useEffect(() => {
     return () => dispatch(initPost());
@@ -65,6 +65,6 @@ export default function useFetchPost() {
     post,
     otherPosts,
     postTopEl,
-    scrollToTop,
+    handleScrollTop,
   };
 }

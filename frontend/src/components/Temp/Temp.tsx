@@ -14,7 +14,12 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 const Temp = () => {
   const { posts } = useFetchTempPosts();
-  const { isMount, onMount, onDeleteHandler, deleteTempPostHandler } = useTempPost();
+  const {
+    isMount,
+    handleModalMount,
+    handleClickDeleteTempPost,
+    handleDeleteTempPost,
+  } = useTempPost();
 
   return (
     <React.Fragment>
@@ -24,7 +29,7 @@ const Temp = () => {
         image={THUMBNAIL_URL}
       />
       <Modal isMount={isMount}>
-        <TempPostDelete onDelete={deleteTempPostHandler} onCancel={onMount} />
+        <TempPostDelete onDelete={handleDeleteTempPost} onCancel={handleModalMount} />
       </Modal>
       <div className={cx("temp")}>
         <div className={cx("temp-wrap")}>
@@ -32,7 +37,7 @@ const Temp = () => {
           <h4 className={cx("temp-wrap-subtitle")}>임시 저장된 글 목록이 표시됩니다.</h4>
           <div className={cx("temp-wrap-list")}>
             {posts.map((post) => (
-              <TempPostItem key={post.idx} post={post} onDeleteHandler={onDeleteHandler} />
+              <TempPostItem key={post.idx} post={post} onClick={handleClickDeleteTempPost} />
             ))}
           </div>
         </div>

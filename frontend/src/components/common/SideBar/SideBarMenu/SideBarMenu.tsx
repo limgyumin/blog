@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { BiBook } from "react-icons/bi";
 import { RiHome3Line, RiMacbookLine } from "react-icons/ri";
 import { HiOutlineInformationCircle } from "react-icons/hi";
@@ -9,7 +9,7 @@ import { ClassNamesFn } from "classnames/types";
 const styles = require("./SideBarMenu.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
-const SideBarMenu: FC = () => {
+const SideBarMenu = () => {
   return (
     <div className={cx("sidebar-menu")}>
       <Link to="/" className={cx("sidebar-menu-home")}>

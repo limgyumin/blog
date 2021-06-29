@@ -36,7 +36,7 @@ export default function useHandlePost() {
 
   const isUpdate = useMemo<boolean>(() => pathname.split("/")[1] === "update", [pathname]);
 
-  const onChangeRequest = useCallback(
+  const handleChangeRequest = useCallback(
     (name: string, value: any) => {
       if (name in request) {
         setRequest({ ...request, [name]: value });
@@ -45,7 +45,7 @@ export default function useHandlePost() {
     [request]
   );
 
-  const validHandler = useCallback(() => {
+  const handleValid = useCallback(() => {
     const { title, content } = request;
 
     const emptyTitle = isEmpty(title);
@@ -94,7 +94,7 @@ export default function useHandlePost() {
     return true;
   }, [request]);
 
-  const createPostHandler = useCallback(() => {
+  const handleCreatePost = useCallback(() => {
     if (!login || !admin) return;
     if (!validatePost()) return;
 
@@ -106,7 +106,7 @@ export default function useHandlePost() {
     dispatch(createPostThunk(request, onCreatePost));
   }, [login, admin, request, history, dispatch, validatePost]);
 
-  const createTempPostHandler = useCallback(() => {
+  const handleCreateTempPost = useCallback(() => {
     if (!login || !admin) return;
     if (!validateTempPost()) return;
 
@@ -118,7 +118,7 @@ export default function useHandlePost() {
     dispatch(createTempPostThunk(request, onCreateTempPost));
   }, [login, admin, request, history, dispatch, validateTempPost]);
 
-  const updatePostHandler = useCallback(
+  const handleUpdatePost = useCallback(
     (temp: boolean) => {
       if (!login || !admin) return;
 
@@ -142,7 +142,7 @@ export default function useHandlePost() {
     [login, admin, postIdx, request, history, dispatch, validatePost, validateTempPost]
   );
 
-  const deletePostHandler = useCallback(() => {
+  const handleDeletePost = useCallback(() => {
     if (!login || !admin) return;
 
     const onDeletePost = () => {
@@ -153,31 +153,31 @@ export default function useHandlePost() {
     dispatch(deletePostThunk(postIdx, onDeletePost));
   }, [login, admin, postIdx, history, dispatch]);
 
-  const fetchPostHandler = useCallback(() => {
+  const handleFetchPost = useCallback(() => {
     if (isUpdate && !post.idx) {
       dispatch(fetchPostThunk(postIdx));
     }
   }, [isUpdate, post.idx, postIdx, dispatch]);
 
-  const onCancelPost = useCallback(() => {
+  const handleCancelPost = useCallback(() => {
     history.push("/");
   }, [history]);
 
-  const onSavePost = useCallback(() => {
+  const handleSavePost = useCallback(() => {
     if (isUpdate) {
-      updatePostHandler(true);
+      handleUpdatePost(true);
     } else {
-      createTempPostHandler();
+      handleCreateTempPost();
     }
-  }, [isUpdate, createTempPostHandler, updatePostHandler]);
+  }, [isUpdate, handleCreateTempPost, handleUpdatePost]);
 
-  const onSubmitPost = useCallback(() => {
+  const handleSubmitPost = useCallback(() => {
     if (isUpdate) {
-      updatePostHandler(false);
+      handleUpdatePost(false);
     } else {
-      createPostHandler();
+      handleCreatePost();
     }
-  }, [isUpdate, createPostHandler, updatePostHandler]);
+  }, [isUpdate, handleCreatePost, handleUpdatePost]);
 
   useEffect(() => {
     if (isUpdate && postIdx) {
@@ -192,12 +192,12 @@ export default function useHandlePost() {
   }, [isUpdate, postIdx, post]);
 
   useEffect(() => {
-    fetchPostHandler();
-  }, [fetchPostHandler]);
+    handleFetchPost();
+  }, [handleFetchPost]);
 
   useEffect(() => {
-    validHandler();
-  }, [validHandler]);
+    handleValid();
+  }, [handleValid]);
 
   useEffect(() => {
     return () => {
@@ -217,17 +217,17 @@ export default function useHandlePost() {
     }
   }, [error, history, dispatch]);
 
-  useInterval(onSavePost, 90000);
+  useInterval(handleSavePost, 90000);
 
   useBeforeunload((e) => e.preventDefault());
 
   return {
     valid,
     request,
-    onCancelPost,
-    onSavePost,
-    onSubmitPost,
-    onChangeRequest,
-    deletePostHandler,
+    handleCancelPost,
+    handleSavePost,
+    handleSubmitPost,
+    handleChangeRequest,
+    handleDeletePost,
   };
 }

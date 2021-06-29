@@ -20,7 +20,7 @@ export default function useFetchPosts() {
 
   const [lastPostEl, inView] = useInView({ threshold: 0.5 });
 
-  const fetchPostsHandler = useCallback(() => {
+  const handleFetchPosts = useCallback(() => {
     const params: PostParamsType = {
       page,
       limit: POST_LIMIT,
@@ -34,8 +34,8 @@ export default function useFetchPosts() {
   }, [page, tab, dispatch]);
 
   useEffect(() => {
-    fetchPostsHandler();
-  }, [search, fetchPostsHandler]);
+    handleFetchPosts();
+  }, [search, handleFetchPosts]);
 
   useEffect(() => {
     if (inView && !loading && posts.length < total) {

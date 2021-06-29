@@ -10,11 +10,11 @@ export default function usePost() {
   const history = useHistory();
   const postIdx = usePostIdx();
 
-  const onUpdateHandler = useCallback(() => {
+  const handleClickUpdatePost = useCallback(() => {
     history.push(`/update/${postIdx}`);
   }, [history, postIdx]);
 
-  const deletePostHandler = useCallback(() => {
+  const handleConfirmDeletePost = useCallback(() => {
     const push = () => {
       history.push("/");
     };
@@ -23,7 +23,7 @@ export default function usePost() {
   }, [postIdx, history, dispatch]);
 
   return {
-    onUpdateHandler,
-    deletePostHandler,
+    handleClickUpdatePost,
+    handleConfirmDeletePost,
   };
 }

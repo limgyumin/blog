@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 const useModal = () => {
   const [isMount, setIsMount] = useState<boolean>(false);
 
-  const onMount = useCallback((): void => {
+  const handleModalMount = useCallback((): void => {
     setIsMount(!isMount);
   }, [isMount]);
 
@@ -20,7 +20,7 @@ const useModal = () => {
 
   return {
     isMount,
-    onMount,
+    handleModalMount,
   };
 };
 

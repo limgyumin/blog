@@ -15,7 +15,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
   const { login, admin } = useSelector((state: RootState) => state.users.data);
   const dispatch = useDispatch();
 
-  const { isMount, onMount } = useModal();
+  const { isMount, handleModalMount } = useModal();
 
   const [categoryName, setCategoryName] = useState<string>("");
   const [createMode, setCreateMode] = useState<boolean>(false);
@@ -23,7 +23,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
   const [updateMode, setUpdateMode] = useState<boolean>(false);
   const [categoryIdx, setCategoryIdx] = useState<number>(0);
 
-  const createCategoryHandler = useCallback(() => {
+  const handleCreateCategory = useCallback(() => {
     if (!login || !admin) return;
 
     dispatch(createCategoryThunk(removeBlank(categoryName)));
@@ -31,7 +31,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     setCategoryName("");
   }, [login, admin, categoryName, dispatch]);
 
-  const updateCategoryHandler = useCallback(() => {
+  const handleUpdateCategory = useCallback(() => {
     if (!login || !admin) return;
 
     if (categoryName === categoryPost.name) {
@@ -45,7 +45,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     setCategoryIdx(0);
   }, [login, admin, categoryIdx, categoryName, categoryPost, dispatch]);
 
-  const deleteCategoryHandler = useCallback(() => {
+  const handleDeleteCategory = useCallback(() => {
     if (!login || !admin) return;
 
     if (categoryPosts.length <= 1) {
@@ -57,15 +57,15 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     setCategoryIdx(0);
   }, [login, admin, categoryPosts, categoryIdx, dispatch]);
 
-  const createModeHandler = useCallback(() => {
+  const handleCreateMode = useCallback(() => {
     setCreateMode((prev) => !prev);
   }, []);
 
-  const editModeHandler = useCallback(() => {
+  const handleEditMode = useCallback(() => {
     setEditMode((prev) => !prev);
   }, []);
 
-  const onUpdateHandler = useCallback(
+  const handleClickUpdateCategory = useCallback(
     (idx: number) => {
       setUpdateMode(true);
       setCategoryName(categoryPost.name);
@@ -74,47 +74,47 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     [categoryPost]
   );
 
-  const onDeleteConfirmHandler = useCallback(() => {
-    deleteCategoryHandler();
-    onMount();
-  }, [deleteCategoryHandler, onMount]);
+  const handleConfirmDeleteCategory = useCallback(() => {
+    handleDeleteCategory();
+    handleModalMount();
+  }, [handleDeleteCategory, handleModalMount]);
 
-  const onDeleteHandler = useCallback(
+  const handleClickDeleteCategory = useCallback(
     (idx: number) => {
-      onMount();
+      handleModalMount();
       setCategoryIdx(idx);
     },
-    [onMount]
+    [handleModalMount]
   );
 
-  const onCategoryChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCategory = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setCategoryName(e.target.value);
   }, []);
 
-  const onCreateCategoryKeyDown = useCallback(
+  const handleKeyDownCreateCategory = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter" || e.key === "NumpadEnter") {
         if (isEmpty(categoryName)) {
           toast.error("이름을 작성해주세요.");
           return;
         }
-        createCategoryHandler();
+        handleCreateCategory();
       }
     },
-    [categoryName, createCategoryHandler]
+    [categoryName, handleCreateCategory]
   );
 
-  const onUpdateCategoryKeyDown = useCallback(
+  const handleKeyDownUpdateCategory = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "Enter" || e.key === "NumpadEnter") {
         if (isEmpty(categoryName)) {
           toast.error("이름을 작성해주세요.");
           return;
         }
-        updateCategoryHandler();
+        handleUpdateCategory();
       }
     },
-    [categoryName, updateCategoryHandler]
+    [categoryName, handleUpdateCategory]
   );
 
   useEffect(() => {
@@ -135,17 +135,17 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     editMode,
     updateMode,
     isMount,
-    onMount,
-    onCategoryChange,
-    onCreateCategoryKeyDown,
-    onUpdateCategoryKeyDown,
-    createModeHandler,
-    editModeHandler,
-    onUpdateHandler,
-    onDeleteHandler,
-    onDeleteConfirmHandler,
-    createCategoryHandler,
-    updateCategoryHandler,
-    deleteCategoryHandler,
+    handleModalMount,
+    handleChangeCategory,
+    handleKeyDownCreateCategory,
+    handleKeyDownUpdateCategory,
+    handleCreateMode,
+    handleEditMode,
+    handleClickUpdateCategory,
+    handleClickDeleteCategory,
+    handleConfirmDeleteCategory,
+    handleCreateCategory,
+    handleUpdateCategory,
+    handleDeleteCategory,
   };
 }

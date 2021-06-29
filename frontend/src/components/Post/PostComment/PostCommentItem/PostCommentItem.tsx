@@ -12,20 +12,20 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 type PostCommentItemProps = {
   comment: IComment;
-  onDeleteHandler: (idx: number) => void;
+  onClick: (idx: number) => void;
 };
 
-const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onDeleteHandler }) => {
+const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onClick }) => {
   const {
     login,
     profile,
     updateMode,
     content,
-    onChangeContent,
-    onKeyDownContent,
-    onUpdateHandler,
-    onCancelUpdateHandler,
-    updateCommentHandler,
+    handleChangeContent,
+    handleKeyDownContent,
+    handleClickUpdateComment,
+    handleCancelUpdateComment,
+    handleUpdateComment,
   } = useComment(comment);
 
   return (
@@ -60,13 +60,13 @@ const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onDeleteHandler })
               <div className={cx("post-comment-item-wrap-control")}>
                 <p
                   className={cx("post-comment-item-wrap-control-update")}
-                  onClick={onUpdateHandler}
+                  onClick={handleClickUpdateComment}
                 >
                   <FaPen />
                 </p>
                 <p
                   className={cx("post-comment-item-wrap-control-delete")}
-                  onClick={() => onDeleteHandler(comment.idx)}
+                  onClick={() => onClick(comment.idx)}
                 >
                   <FaTrash />
                 </p>
@@ -80,21 +80,21 @@ const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onDeleteHandler })
           <textarea
             value={content}
             autoFocus
-            onChange={(e) => onChangeContent(e)}
-            onKeyDown={(e) => onKeyDownContent(e)}
+            onChange={(e) => handleChangeContent(e)}
+            onKeyDown={(e) => handleKeyDownContent(e)}
             placeholder="Write a comment ..."
             className={cx("post-comment-item-input-box")}
           />
           <div className={cx("post-comment-item-input-wrap")}>
             <button
               className={cx("post-comment-item-input-wrap-button")}
-              onClick={updateCommentHandler}
+              onClick={handleUpdateComment}
             >
               Update
             </button>
             <button
               className={cx("post-comment-item-input-wrap-cancel")}
-              onClick={onCancelUpdateHandler}
+              onClick={handleCancelUpdateComment}
             >
               Cancel
             </button>

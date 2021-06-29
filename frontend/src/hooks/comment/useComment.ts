@@ -19,7 +19,7 @@ export default function useComment(comment?: IComment) {
 
   const dispatch = useDispatch();
 
-  const { isMount, onMount } = useModal();
+  const { isMount, handleModalMount } = useModal();
   const postIdx = usePostIdx();
 
   const [commentIdx, setCommentIdx] = useState<number>(0);
@@ -29,12 +29,12 @@ export default function useComment(comment?: IComment) {
   const commentLastEl = useRef<HTMLDivElement>(null);
   const commentTextAreaEl = useRef<HTMLTextAreaElement>(null);
 
-  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setContent(value);
   }, []);
 
-  const fetchCommentsHandler = useCallback(() => {
+  const handleFetchComments = useCallback(() => {
     const onFetchComments = () => {
       const { current } = commentLastEl;
       if (current) {
@@ -45,7 +45,7 @@ export default function useComment(comment?: IComment) {
     dispatch(fetchCommentsThunk(postIdx, onFetchComments));
   }, [commentLastEl, postIdx, dispatch]);
 
-  const createCommentHandler = useCallback(() => {
+  const handleCreateComment = useCallback(() => {
     if (!login) {
       toast.info("로그인 후 댓글을 작성하실 수 있어요.");
       return;
@@ -57,14 +57,14 @@ export default function useComment(comment?: IComment) {
     }
 
     const onCreateComment = () => {
-      fetchCommentsHandler();
+      handleFetchComments();
       setContent("");
     };
 
     dispatch(createCommentThunk(postIdx, removeLastBlank(content), onCreateComment));
-  }, [login, postIdx, content, dispatch, fetchCommentsHandler]);
+  }, [login, postIdx, content, dispatch, handleFetchComments]);
 
-  const updateCommentHandler = useCallback(() => {
+  const handleUpdateComment = useCallback(() => {
     if (!login) return;
 
     if (isEmpty(content)) {
@@ -73,28 +73,28 @@ export default function useComment(comment?: IComment) {
     }
 
     const onUpdateComment = () => {
-      fetchCommentsHandler();
+      handleFetchComments();
       setContent("");
       setCommentIdx(0);
       setUpdateMode(false);
     };
 
     dispatch(updateCommentThunk(commentIdx, removeLastBlank(content), onUpdateComment));
-  }, [login, content, commentIdx, dispatch, fetchCommentsHandler]);
+  }, [login, content, commentIdx, dispatch, handleFetchComments]);
 
-  const deleteCommentHandler = useCallback(() => {
+  const handleDeleteComment = useCallback(() => {
     if (!login) return;
 
     const onDeleteComment = () => {
-      onMount();
+      handleModalMount();
       setCommentIdx(0);
-      fetchCommentsHandler();
+      handleFetchComments();
     };
 
     dispatch(deleteCommentThunk(commentIdx, onDeleteComment));
-  }, [login, commentIdx, dispatch, fetchCommentsHandler, onMount]);
+  }, [login, commentIdx, dispatch, handleFetchComments, handleModalMount]);
 
-  const onUpdateHandler = useCallback(() => {
+  const handleClickUpdateComment = useCallback(() => {
     const { idx, content } = comment;
 
     setCommentIdx(idx);
@@ -102,35 +102,35 @@ export default function useComment(comment?: IComment) {
     setUpdateMode(true);
   }, [comment]);
 
-  const onCancelUpdateHandler = useCallback(() => {
+  const handleCancelUpdateComment = useCallback(() => {
     setContent("");
     setUpdateMode(false);
   }, []);
 
-  const onDeleteHandler = useCallback(
+  const handleClickDeleteComment = useCallback(
     (idx: number) => {
       setCommentIdx(idx);
-      onMount();
+      handleModalMount();
     },
-    [onMount]
+    [handleModalMount]
   );
 
-  const onKeyDownContent = useCallback(
+  const handleKeyDownContent = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       const { key, shiftKey } = e;
       if ((key === "Enter" || key === "NumpadEnter") && !shiftKey) {
         e.preventDefault();
         if (comment && comment.idx) {
-          updateCommentHandler();
+          handleUpdateComment();
         } else {
-          createCommentHandler();
+          handleCreateComment();
         }
       }
     },
-    [comment, createCommentHandler, updateCommentHandler]
+    [comment, handleCreateComment, handleUpdateComment]
   );
 
-  const increaseContentScrollHandler = useCallback(() => {
+  const handleResizeContentScroll = useCallback(() => {
     const { current } = commentTextAreaEl;
     if (current) {
       current.style.height = "0px";
@@ -140,8 +140,8 @@ export default function useComment(comment?: IComment) {
   }, [commentTextAreaEl]);
 
   useEffect(() => {
-    increaseContentScrollHandler();
-  }, [content, increaseContentScrollHandler]);
+    handleResizeContentScroll();
+  }, [content, handleResizeContentScroll]);
 
   useEffect(() => {
     return () => {
@@ -159,14 +159,14 @@ export default function useComment(comment?: IComment) {
     commentTextAreaEl,
     isMount,
     updateMode,
-    onMount,
-    onChangeContent,
-    onKeyDownContent,
-    onUpdateHandler,
-    onCancelUpdateHandler,
-    onDeleteHandler,
-    createCommentHandler,
-    updateCommentHandler,
-    deleteCommentHandler,
+    handleModalMount,
+    handleChangeContent,
+    handleKeyDownContent,
+    handleClickUpdateComment,
+    handleCancelUpdateComment,
+    handleClickDeleteComment,
+    handleCreateComment,
+    handleUpdateComment,
+    handleDeleteComment,
   };
 }

@@ -14,7 +14,7 @@ const useTheme = () => {
 
   const isLight = useMemo(() => LIGHT === theme, [LIGHT, theme]);
 
-  const onChangeTheme = useCallback(() => {
+  const handleChangeTheme = useCallback(() => {
     if (theme === LIGHT) {
       localStorage.setItem("theme", DARK);
       dispatch(changeTheme(DARK));
@@ -28,7 +28,7 @@ const useTheme = () => {
   return {
     isLight,
     theme,
-    onChangeTheme,
+    handleChangeTheme,
   };
 };
 

@@ -10,13 +10,13 @@ export default function useFetchAdminProfile() {
 
   const dispatch = useDispatch();
 
-  const fetchAdminProfileHandler = useCallback(() => {
+  const handleFetchAdminProfile = useCallback(() => {
     dispatch(fetchAdminProfileThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    fetchAdminProfileHandler();
-  }, [fetchAdminProfileHandler]);
+    handleFetchAdminProfile();
+  }, [handleFetchAdminProfile]);
 
   useEffect(() => {
     if (error && error.response) {

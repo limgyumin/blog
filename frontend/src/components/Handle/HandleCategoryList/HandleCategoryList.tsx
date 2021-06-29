@@ -9,13 +9,13 @@ const cx: ClassNamesFn = classNames.bind(styles);
 type HandleCategoryListProps = {
   categoriesEl: React.MutableRefObject<HTMLDivElement>;
   categories: ICategory[];
-  onChangeCategory: (category: ICategory) => void;
+  onChange: (category: ICategory) => void;
 };
 
 const HandleCategoryList: FC<HandleCategoryListProps> = ({
   categoriesEl,
   categories,
-  onChangeCategory,
+  onChange,
 }) => {
   return (
     <div className={cx("handle-category-list")} ref={categoriesEl}>
@@ -23,7 +23,7 @@ const HandleCategoryList: FC<HandleCategoryListProps> = ({
         <div
           key={category.idx}
           className={cx("handle-category-list-item")}
-          onClick={() => onChangeCategory(category)}
+          onClick={() => onChange(category)}
         >
           <span className={cx("handle-category-list-item-name")}>{category.name}</span>
         </div>

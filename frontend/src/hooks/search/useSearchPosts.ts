@@ -18,7 +18,7 @@ export default function useSearchPosts() {
 
   const searchInputEl = useRef<HTMLInputElement>(null);
 
-  const fetchSearchPostHandler = useCallback(() => {
+  const handleFetchSearchedPosts = useCallback(() => {
     if (isEmpty(keyword)) {
       toast.warn("검색어를 입력해주세요.");
       return;
@@ -27,30 +27,30 @@ export default function useSearchPosts() {
     dispatch(fetchSearchedPostsThunk(keyword));
   }, [keyword, dispatch]);
 
-  const onFocusInput = useCallback(() => {
+  const handleFocusInput = useCallback(() => {
     if (searchInputEl.current) {
       searchInputEl.current.focus();
     }
   }, [searchInputEl]);
 
-  const onChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setKeyword(value);
   }, []);
 
-  const onClickInput = useCallback(() => {
-    fetchSearchPostHandler();
-  }, [fetchSearchPostHandler]);
+  const handleClickInput = useCallback(() => {
+    handleFetchSearchedPosts();
+  }, [handleFetchSearchedPosts]);
 
-  const onKeyDownInput = useCallback(
+  const handleKeyDownInput = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       const { key } = e;
 
       if (key === "Enter" || key === "NumpadEnter") {
-        fetchSearchPostHandler();
+        handleFetchSearchedPosts();
       }
     },
-    [fetchSearchPostHandler]
+    [handleFetchSearchedPosts]
   );
 
   useEffect(() => {
@@ -71,9 +71,9 @@ export default function useSearchPosts() {
     notFound,
     total,
     searchInputEl,
-    onFocusInput,
-    onChangeKeyword,
-    onClickInput,
-    onKeyDownInput,
+    handleFocusInput,
+    handleChangeKeyword,
+    handleClickInput,
+    handleKeyDownInput,
   };
 }

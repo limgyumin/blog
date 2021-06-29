@@ -10,12 +10,12 @@ const styles = require("./SideBarThemeButton.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 const SideBarThemeButton = () => {
-  const { theme, onChangeTheme } = useTheme();
+  const { theme, handleChangeTheme } = useTheme();
 
   const isLight = theme === ETheme.LIGHT;
 
   return (
-    <div className={cx("sidebar-theme-button")} onClick={onChangeTheme}>
+    <div className={cx("sidebar-theme-button")} onClick={handleChangeTheme}>
       <div className={cx("sidebar-theme-button-toggle", { "toggle-dark": isLight })}>
         {isLight ? <IoMdMoon /> : <WiMoonAltNew />}
       </div>

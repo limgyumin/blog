@@ -21,9 +21,9 @@ const styles = require("./Post.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 const Post = () => {
-  const { admin, loading, notFound, post, otherPosts, postTopEl, scrollToTop } = useFetchPost();
-  const { isMount, onMount } = useModal();
-  const { onUpdateHandler, deletePostHandler } = usePost();
+  const { admin, loading, notFound, post, otherPosts, postTopEl, handleScrollTop } = useFetchPost();
+  const { isMount, handleModalMount } = useModal();
+  const { handleClickUpdatePost, handleConfirmDeletePost } = usePost();
 
   const {
     idx,
@@ -48,10 +48,10 @@ const Post = () => {
         />
       )}
       <Modal isMount={isMount}>
-        <PostDelete onDelete={deletePostHandler} onCancel={onMount} />
+        <PostDelete onDelete={handleConfirmDeletePost} onCancel={handleModalMount} />
       </Modal>
       <div className={cx("post")} ref={postTopEl}>
-        {idx && <PostBottomBar scrollToTop={scrollToTop} />}
+        {idx && <PostBottomBar onClick={handleScrollTop} />}
         {notFound ? (
           <PostNotFound />
         ) : (
@@ -67,8 +67,8 @@ const Post = () => {
                     categoryName={category_name}
                     createdAt={created_at}
                     thumbnail={thumbnail}
-                    onUpdate={onUpdateHandler}
-                    onDelete={onMount}
+                    onUpdate={handleClickUpdatePost}
+                    onDelete={handleModalMount}
                     admin={admin}
                   />
                   {content && <MarkDown className={cx("post-content")}>{content}</MarkDown>}

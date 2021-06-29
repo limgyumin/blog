@@ -11,28 +11,24 @@ const styles = require("./HandleCategory.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 type HandleCategoryProps = {
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
-const HandleCategory: FC<HandleCategoryProps> = ({ onChangeRequest }) => {
+const HandleCategory: FC<HandleCategoryProps> = ({ onChange }) => {
   const { categories } = useFetchCategories();
   const {
     categoriesEl,
     clickEl,
     showCategories,
     selectedCategory,
-    onChangeCategory,
-    showCategoriesHandler,
-  } = usePostCategory(onChangeRequest);
+    handleChangeCategory,
+    handleShowCategories,
+  } = usePostCategory(onChange);
 
   return (
     <div className={cx("handle-category")}>
       <p className={cx("handle-category-name")}>카테고리</p>
-      <div
-        className={cx("handle-category-selectbox")}
-        ref={clickEl}
-        onClick={showCategoriesHandler}
-      >
+      <div className={cx("handle-category-selectbox")} ref={clickEl} onClick={handleShowCategories}>
         <div className={cx("handle-category-selectbox-wrap")}>
           <BiBook className={cx("handle-category-selectbox-wrap-icon")} />
           <p className={cx("handle-category-selectbox-wrap-current")}>
@@ -45,7 +41,7 @@ const HandleCategory: FC<HandleCategoryProps> = ({ onChangeRequest }) => {
         <HandleCategoryList
           categoriesEl={categoriesEl}
           categories={categories}
-          onChangeCategory={onChangeCategory}
+          onChange={handleChangeCategory}
         />
       )}
     </div>

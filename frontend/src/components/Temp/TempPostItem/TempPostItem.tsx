@@ -11,10 +11,10 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 type TempPostItemProps = {
   post: IPost;
-  onDeleteHandler: (idx: number) => void;
+  onClick: (idx: number) => void;
 };
 
-const TempPostItem: FC<TempPostItemProps> = ({ post, onDeleteHandler }) => {
+const TempPostItem: FC<TempPostItemProps> = ({ post, onClick }) => {
   const { idx, title, content, created_at } = post;
 
   return (
@@ -26,7 +26,7 @@ const TempPostItem: FC<TempPostItemProps> = ({ post, onDeleteHandler }) => {
         </Link>
         <div className={cx("temp-post-item-info-bottom")}>
           <p className={cx("temp-post-item-info-bottom-date")}>{getDateFormat(created_at)}</p>
-          <FaTrash onClick={() => onDeleteHandler(idx)} />
+          <FaTrash onClick={() => onClick(idx)} />
         </div>
       </div>
     </div>

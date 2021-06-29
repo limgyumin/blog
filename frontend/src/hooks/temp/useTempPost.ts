@@ -12,26 +12,26 @@ export default function useTempPost() {
 
   const [postIdx, setPostIdx] = useState<number>(0);
 
-  const { isMount, onMount } = useModal();
+  const { isMount, handleModalMount } = useModal();
 
-  const deleteTempPostHandler = useCallback(() => {
+  const handleDeleteTempPost = useCallback(() => {
     if (!login || !admin) return;
 
     const onDeletePost = () => {
-      onMount();
+      handleModalMount();
       setPostIdx(0);
       dispatch(fetchTempPostsThunk());
     };
 
     dispatch(deletePostThunk(postIdx, onDeletePost));
-  }, [login, admin, postIdx, dispatch, onMount]);
+  }, [login, admin, postIdx, dispatch, handleModalMount]);
 
-  const onDeleteHandler = useCallback(
+  const handleClickDeleteTempPost = useCallback(
     (idx: number) => {
       setPostIdx(idx);
-      onMount();
+      handleModalMount();
     },
-    [onMount]
+    [handleModalMount]
   );
 
   useEffect(() => {
@@ -40,8 +40,8 @@ export default function useTempPost() {
 
   return {
     isMount,
-    onMount,
-    onDeleteHandler,
-    deleteTempPostHandler,
+    handleModalMount,
+    handleClickDeleteTempPost,
+    handleDeleteTempPost,
   };
 }
