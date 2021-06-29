@@ -66,10 +66,6 @@ export const COMMENT = {
 
 export const REPLY = {
   CREATE: "/reply",
-  GET: {
-    ALL: (commentIdx: number) => `/reply?comment=${commentIdx}`,
-    COUNT: (idx: number) => `/comment/reply/${idx}`,
-  },
   UPDATE: (idx: number) => `/reply/${idx}`,
   DELETE: (idx: number) => `/reply/${idx}`,
 };

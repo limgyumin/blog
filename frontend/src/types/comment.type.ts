@@ -1,3 +1,4 @@
+import IReply from "./reply.type";
 import { IResponse } from "./response.type";
 import UserType from "./user.type";
 
@@ -7,6 +8,7 @@ export default interface IComment {
   created_at: Date;
   updated_at: Date;
   reply_count: number;
+  replies: IReply[];
   user: UserType;
 }
 

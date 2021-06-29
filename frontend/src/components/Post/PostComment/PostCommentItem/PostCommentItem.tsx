@@ -103,7 +103,11 @@ const PostCommentItem: FC<PostCommentItemProps> = ({ comment, onDeleteHandler })
       ) : (
         <p className={cx("post-comment-item-content")}>{comment.content}</p>
       )}
-      <PostReply commentIdx={comment.idx} />
+      <PostReply
+        commentIdx={comment.idx}
+        replyCount={comment.reply_count}
+        replies={comment.replies}
+      />
     </div>
   );
 };

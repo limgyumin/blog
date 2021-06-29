@@ -13,10 +13,9 @@ const cx: ClassNamesFn = classNames.bind(styles);
 type PostReplyItemProps = {
   reply: IReply;
   onDeleteHandler: (idx: number) => void;
-  fetchRepliesHandler: () => Promise<void>;
 };
 
-const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler, fetchRepliesHandler }) => {
+const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler }) => {
   const {
     login,
     profile,
@@ -27,7 +26,7 @@ const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler, fetchRe
     onUpdateHandler,
     onCancelUpdateHandler,
     updateReplyHandler,
-  } = useReply(fetchRepliesHandler, reply);
+  } = useReply(reply);
 
   return (
     <div className={cx("post-reply-item")}>

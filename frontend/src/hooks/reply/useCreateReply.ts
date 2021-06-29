@@ -2,16 +2,13 @@ import usePostIdx from "hooks/util/usePostIdx";
 import isEmpty from "lib/isEmpty";
 import removeLastBlank from "lib/removeLastBlank";
 import { RootState } from "modules";
-import { fetchCommentCountThunk } from "modules/comment";
+import { fetchCommentCountThunk, fetchCommentsThunk } from "modules/comment";
 import { createReplyThunk } from "modules/reply";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-export default function useCreateReply(
-  fetchRepliesHandler: () => Promise<void>,
-  commentIdx: number
-) {
+export default function useCreateReply(commentIdx: number) {
   const { login } = useSelector((state: RootState) => state.users.data);
 
   const dispatch = useDispatch();
@@ -22,13 +19,21 @@ export default function useCreateReply(
 
   const replyLastEl = useRef<HTMLDivElement>(null);
 
-  const onChangeContent = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const { value } = e.target;
-      setContent(value);
-    },
-    [setContent]
-  );
+  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setContent(value);
+  }, []);
+
+  const fetchCommentsHandler = useCallback(() => {
+    const onFetchComments = () => {
+      const { current } = replyLastEl;
+      if (current) {
+        current.scrollIntoView({ behavior: "smooth", block: "end" });
+      }
+    };
+
+    dispatch(fetchCommentsThunk(postIdx, onFetchComments));
+  }, [postIdx, dispatch]);
 
   const createReplyHandler = useCallback(() => {
     if (!login) {
@@ -42,19 +47,13 @@ export default function useCreateReply(
     }
 
     const onCreateReply = async () => {
-      const { current } = replyLastEl;
-
-      dispatch(fetchCommentCountThunk(postIdx));
-      await fetchRepliesHandler();
       setContent("");
-
-      if (current) {
-        current.scrollIntoView({ behavior: "smooth", block: "end" });
-      }
+      dispatch(fetchCommentCountThunk(postIdx));
+      fetchCommentsHandler();
     };
 
     dispatch(createReplyThunk(commentIdx, removeLastBlank(content), onCreateReply));
-  }, [login, content, postIdx, commentIdx, dispatch, setContent, fetchRepliesHandler]);
+  }, [login, content, postIdx, commentIdx, dispatch, fetchCommentsHandler]);
 
   const onKeyDownContent = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -66,6 +65,10 @@ export default function useCreateReply(
     },
     [createReplyHandler]
   );
+
+  useEffect(() => {
+    return () => setContent("");
+  }, []);
 
   return {
     content,
