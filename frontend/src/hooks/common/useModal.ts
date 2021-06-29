@@ -5,7 +5,7 @@ const useModal = () => {
 
   const onMount = useCallback((): void => {
     setIsMount(!isMount);
-  }, [isMount, setIsMount]);
+  }, [isMount]);
 
   useEffect(() => {
     isMount ? (document.body.style.overflow = "hidden") : (document.body.style.overflow = "unset");
@@ -16,7 +16,7 @@ const useModal = () => {
 
   useEffect(() => {
     return () => setIsMount(false);
-  }, [setIsMount]);
+  }, []);
 
   return {
     isMount,

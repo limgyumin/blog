@@ -27,13 +27,17 @@ export default function usePostThumbnail(changeRequestHandler: (name: string, va
   const onRemoveThumbnail = useCallback(() => {
     setThumbnail("");
     changeRequestHandler("thumbnail", "");
-  }, [changeRequestHandler, setThumbnail]);
+  }, [changeRequestHandler]);
 
   useEffect(() => {
     if (postIdx) {
       setThumbnail(post.thumbnail);
     }
   }, [post, postIdx]);
+
+  useEffect(() => {
+    return () => setThumbnail("");
+  }, []);
 
   return {
     imageEl,

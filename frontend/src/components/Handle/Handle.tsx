@@ -3,7 +3,7 @@ import { THUMBNAIL_URL } from "config/config.json";
 import useHandlePost from "hooks/post/useHandlePost";
 import ReactHelmet from "components/common/ReactHelmet";
 import InputTitle from "./InputTitle";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import ToolBar from "components/common/ToolBar";
 import HandleCreateContent from "./HandleCreateContent";
 import HandlePreview from "./HandlePreview";
@@ -29,7 +29,7 @@ const Handle = () => {
     passed,
     titleEl,
     contentEl,
-    onScrollToolBar,
+    onScrollTextArea,
     onKeyDownContent,
     contentFocusHandler,
   } = usePostTextArea(request, onChangeRequest);
@@ -65,7 +65,7 @@ const Handle = () => {
               content={content}
               contentEl={contentEl}
               onChangeRequest={onChangeRequest}
-              onScrollToolBar={onScrollToolBar}
+              onScrollTextArea={onScrollTextArea}
               onKeyDownContent={onKeyDownContent}
               contentFocusHandler={contentFocusHandler}
             />

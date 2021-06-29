@@ -15,15 +15,12 @@ export default function usePostTextArea(
   const titleEl = useRef<HTMLTextAreaElement>(null);
   const contentEl = useRef<HTMLTextAreaElement>(null);
 
-  const onScrollToolBar = useCallback(
-    (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-      const { scrollTop, scrollHeight } = e.currentTarget;
-      const pass: boolean = scrollTop > 0 && scrollHeight > 1000;
+  const onScrollTextArea = useCallback((e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+    const { scrollTop, scrollHeight } = e.currentTarget;
+    const pass: boolean = scrollTop > 0 && scrollHeight > 1000;
 
-      setPassed(pass);
-    },
-    [setPassed]
-  );
+    setPassed(pass);
+  }, []);
 
   const setSelectionPos = useCallback(
     (start: number, end: number) => {
@@ -61,30 +58,36 @@ export default function usePostTextArea(
       width: window.innerWidth,
       height: window.innerHeight,
     });
-  }, [setWindowSize]);
+  }, []);
 
   const contentFocusHandler = useCallback((): void => {
     contentEl.current.focus();
   }, [contentEl]);
 
   const increaseTitleScrollHandler = useCallback((): void => {
-    titleEl.current.style.height = "0px";
+    const { current } = titleEl;
 
-    const scrollHeight: number = titleEl.current.scrollHeight;
-    titleEl.current.style.height = scrollHeight + "px";
+    if (current) {
+      current.style.height = "0px";
+      const scrollHeight: number = current.scrollHeight;
+      current.style.height = scrollHeight + "px";
+    }
   }, [titleEl]);
 
   const increaseContentScrollHandler = useCallback((): void => {
-    contentEl.current.style.height = "0px";
+    const { current } = contentEl;
 
-    const scrollHeight: number = contentEl.current.scrollHeight;
-    contentEl.current.style.height = scrollHeight + "px";
-    contentEl.current.scrollIntoView({ block: "end" });
+    if (current) {
+      current.style.height = "0px";
+      const scrollHeight: number = current.scrollHeight;
+      current.style.height = scrollHeight + "px";
+      current.scrollIntoView({ block: "end" });
+    }
   }, [contentEl]);
 
   useEffect(() => {
     increaseTitleScrollHandler();
-  }, [request.title, windowSize, increaseTitleScrollHandler]);
+  }, [request.title, increaseTitleScrollHandler]);
 
   useEffect(() => {
     increaseContentScrollHandler();
@@ -108,7 +111,7 @@ export default function usePostTextArea(
     passed,
     titleEl,
     contentEl,
-    onScrollToolBar,
+    onScrollTextArea,
     onKeyDownContent,
     contentFocusHandler,
   };

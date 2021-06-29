@@ -4,13 +4,8 @@ import { RootState } from "modules";
 import { ThunkAction } from "redux-thunk";
 import { requestApi } from "request/requestApi";
 import { AUTH, PROFILE } from "request/requestUrl";
+import { IAuthResponse, IProfileResponse, IProfilesResponse } from "types/user.type";
 import {
-  IAuthResponse,
-  IProfileResponse,
-  IProfilesResponse,
-} from "types/user.type";
-import {
-  changeAdmin,
   fetchAdminProfileAsync,
   fetchMyProfileAsync,
   fetchProfilesAsync,
@@ -28,11 +23,9 @@ export const gitHubAuthThunk = (
     dispatch(request());
 
     try {
-      const { data }: IAuthResponse = await requestApi(
-        AUTH.GITHUB,
-        ERequest.POST,
-        { code }
-      );
+      const body = { code };
+
+      const { data }: IAuthResponse = await requestApi(AUTH.GITHUB, ERequest.POST, body);
 
       token.set(data.access_token);
 
@@ -52,7 +45,9 @@ export const createFcmTokenThunk = (
     dispatch(request());
 
     try {
-      await requestApi(AUTH.FCM, ERequest.POST, { token });
+      const body = { token };
+
+      await requestApi(AUTH.FCM, ERequest.POST, body);
 
       dispatch(success());
     } catch (err) {
@@ -61,21 +56,13 @@ export const createFcmTokenThunk = (
   };
 };
 
-export const fetchProfilesThunk = (): ThunkAction<
-  void,
-  RootState,
-  void,
-  UserAction
-> => {
+export const fetchProfilesThunk = (): ThunkAction<void, RootState, void, UserAction> => {
   return async (dispatch) => {
     const { request, success, failure } = fetchProfilesAsync;
     dispatch(request());
 
     try {
-      const { data }: IProfilesResponse = await requestApi(
-        PROFILE.ALL,
-        ERequest.GET
-      );
+      const { data }: IProfilesResponse = await requestApi(PROFILE.ALL, ERequest.GET);
 
       const result = {
         userCount: data.user_count,
@@ -97,17 +84,9 @@ export const fetchMyProfileThunk = (
     dispatch(request());
 
     try {
-      const { data }: IProfileResponse = await requestApi(
-        PROFILE.MY,
-        ERequest.GET
-      );
+      const { data }: IProfileResponse = await requestApi(PROFILE.MY, ERequest.GET);
 
       dispatch(success(data.user));
-
-      if (data.user.is_admin) {
-        dispatch(changeAdmin(true));
-      }
-
       callback();
     } catch (err) {
       dispatch(failure(err));
@@ -115,21 +94,13 @@ export const fetchMyProfileThunk = (
   };
 };
 
-export const fetchAdminProfileThunk = (): ThunkAction<
-  void,
-  RootState,
-  void,
-  UserAction
-> => {
+export const fetchAdminProfileThunk = (): ThunkAction<void, RootState, void, UserAction> => {
   return async (dispatch) => {
     const { request, success, failure } = fetchAdminProfileAsync;
     dispatch(request());
 
     try {
-      const { data }: IProfileResponse = await requestApi(
-        PROFILE.ADMIN,
-        ERequest.GET
-      );
+      const { data }: IProfileResponse = await requestApi(PROFILE.ADMIN, ERequest.GET);
 
       dispatch(success(data.user));
     } catch (err) {

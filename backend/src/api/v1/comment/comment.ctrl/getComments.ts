@@ -38,26 +38,36 @@ export default async (req: Request, res: Response) => {
       },
     });
 
-    for (let i in comments) {
-      const replyRepo = getRepository(Reply);
-      const reply_count: number = await replyRepo.count({
-        where: {
-          comment: comments[i],
-        },
-      });
-
+    for (let comment of comments) {
       const userRepo = getRepository(User);
       const user: User = await userRepo.findOne({
         where: {
-          idx: comments[i].fk_user_idx,
+          idx: comment.fk_user_idx,
         },
       });
 
-      comments[i].reply_count = reply_count;
-      comments[i].user = user;
+      comment.user = user;
 
-      delete comments[i].fk_user_idx;
-      delete comments[i].fk_post_idx;
+      const replyRepo = getRepository(Reply);
+      const [replies, replyCount]: [Reply[], number] = await replyRepo.findAndCount({
+        where: {
+          comment,
+        },
+      });
+
+      for (let reply of replies) {
+        const userRepo = getRepository(User);
+        const user: User = await userRepo.findOne({
+          where: {
+            idx: reply.fk_user_idx,
+          },
+        });
+
+        reply.user = user;
+      }
+
+      comment.reply_count = replyCount;
+      comment.replies = replies;
     }
 
     logger.green("[GET] 댓글 목록 조회 성공.");

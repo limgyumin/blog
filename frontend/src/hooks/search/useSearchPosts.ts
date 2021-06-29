@@ -33,13 +33,10 @@ export default function useSearchPosts() {
     }
   }, [searchInputEl]);
 
-  const onChangeKeyword = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-      setKeyword(value);
-    },
-    [setKeyword]
-  );
+  const onChangeKeyword = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setKeyword(value);
+  }, []);
 
   const onClickInput = useCallback(() => {
     fetchSearchPostHandler();
@@ -63,6 +60,10 @@ export default function useSearchPosts() {
       history.push("/");
     }
   }, [error, history, dispatch]);
+
+  useEffect(() => {
+    return () => setKeyword("");
+  }, []);
 
   return {
     keyword,

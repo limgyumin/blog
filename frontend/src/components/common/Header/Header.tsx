@@ -10,13 +10,14 @@ import HeaderProgress from "./HeaderProgress";
 import HeaderOption from "./HeaderOption";
 import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
+import { memo } from "react";
 
 const styles = require("./Header.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 const Header = () => {
   const { login, admin, profile, logoutHandler } = useFetchProfile();
-  const { clickEl, menuEl, scroll, showMenu, isPost, showMenuHandler } = useHeader();
+  const { clickEl, menuEl, scroll, showMenu, isPost, onShowMenu } = useHeader();
 
   return (
     <header className={cx("header")}>
@@ -32,9 +33,14 @@ const Header = () => {
               admin={admin}
               profile={profile}
               showMenu={showMenu}
-              showMenuHandler={showMenuHandler}
+              onShowMenu={onShowMenu}
             >
-              <HeaderOption admin={admin} handleLogout={logoutHandler} clickEl={clickEl} />
+              <HeaderOption
+                admin={admin}
+                clickEl={clickEl}
+                handleLogout={logoutHandler}
+                onShowMenu={onShowMenu}
+              />
             </HeaderProfile>
           ) : (
             <HeaderAction />
@@ -46,4 +52,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

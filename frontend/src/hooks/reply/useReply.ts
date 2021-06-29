@@ -1,16 +1,16 @@
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import usePostIdx from "hooks/util/usePostIdx";
 import isEmpty from "lib/isEmpty";
 import removeLastBlank from "lib/removeLastBlank";
 import { RootState } from "modules";
-import { fetchCommentCountThunk } from "modules/comment";
+import { fetchCommentCountThunk, fetchCommentsThunk } from "modules/comment";
 import { deleteReplyThunk, updateReplyThunk } from "modules/reply";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import IReply from "types/reply.type";
 
-export default function useReply(fetchRepliesHandler: () => Promise<void>, reply?: IReply) {
+export default function useReply(reply?: IReply) {
   const { login, profile } = useSelector((state: RootState) => state.users.data);
 
   const dispatch = useDispatch();
@@ -21,14 +21,12 @@ export default function useReply(fetchRepliesHandler: () => Promise<void>, reply
   const [replyIdx, setReplyIdx] = useState<number>(0);
   const [content, setContent] = useState<string>("");
   const [updateMode, setUpdateMode] = useState<boolean>(false);
+  const [showReplies, setShowReplies] = useState<boolean>(false);
 
-  const onChangeContent = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const { value } = e.target;
-      setContent(value);
-    },
-    [setContent]
-  );
+  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setContent(value);
+  }, []);
 
   const updateReplyHandler = useCallback(() => {
     if (!login) return;
@@ -40,24 +38,14 @@ export default function useReply(fetchRepliesHandler: () => Promise<void>, reply
 
     const onUpdateReply = async () => {
       dispatch(fetchCommentCountThunk(postIdx));
-      await fetchRepliesHandler();
+      dispatch(fetchCommentsThunk(postIdx));
       setContent("");
       setReplyIdx(0);
       setUpdateMode(false);
     };
 
     dispatch(updateReplyThunk(replyIdx, removeLastBlank(content), onUpdateReply));
-  }, [
-    login,
-    content,
-    postIdx,
-    replyIdx,
-    dispatch,
-    setContent,
-    setReplyIdx,
-    setUpdateMode,
-    fetchRepliesHandler,
-  ]);
+  }, [login, content, postIdx, replyIdx, dispatch]);
 
   const deleteReplyHandler = useCallback(() => {
     if (!login) return;
@@ -65,33 +53,32 @@ export default function useReply(fetchRepliesHandler: () => Promise<void>, reply
     const onDeleteReply = async () => {
       onMount();
       dispatch(fetchCommentCountThunk(postIdx));
-      await fetchRepliesHandler();
+      dispatch(fetchCommentsThunk(postIdx));
       setReplyIdx(0);
     };
 
     dispatch(deleteReplyThunk(replyIdx, onDeleteReply));
-  }, [login, postIdx, replyIdx, dispatch, onMount, setReplyIdx, fetchRepliesHandler]);
+  }, [login, postIdx, replyIdx, dispatch, onMount]);
 
   const onUpdateHandler = useCallback(() => {
     const { idx, content } = reply;
-    console.log(idx, content);
 
     setReplyIdx(idx);
     setContent(content);
     setUpdateMode(true);
-  }, [reply, setReplyIdx, setContent, setUpdateMode]);
+  }, [reply]);
 
   const onCancelUpdateHandler = useCallback(() => {
     setUpdateMode(false);
     setContent("");
-  }, [setUpdateMode, setContent]);
+  }, []);
 
   const onDeleteHandler = useCallback(
     (idx: number) => {
       setReplyIdx(idx);
       onMount();
     },
-    [setReplyIdx, onMount]
+    [onMount]
   );
 
   const onKeyDownContent = useCallback(
@@ -107,13 +94,28 @@ export default function useReply(fetchRepliesHandler: () => Promise<void>, reply
     [reply, updateReplyHandler]
   );
 
+  const onShowReplies = useCallback(() => {
+    setShowReplies((showReplies) => !showReplies);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      setReplyIdx(0);
+      setContent("");
+      setUpdateMode(false);
+      setShowReplies(false);
+    };
+  }, []);
+
   return {
     login,
     profile,
     content,
     isMount,
+    showReplies,
     updateMode,
     onMount,
+    onShowReplies,
     onChangeContent,
     onKeyDownContent,
     onUpdateHandler,

@@ -25,9 +25,9 @@ type ToolBarProps = {
 const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
   const {
     imageEl,
-    clickRef,
-    linkRef,
-    linkInputRef,
+    clickEl,
+    linkEl,
+    linkInputEl,
     isInputMount,
     link,
     changeImageHandler,
@@ -64,14 +64,14 @@ const ToolBar: FC<ToolBarProps> = ({ contentEl, onChangeRequest }) => {
       <button className={cx("toolbar-button")} onClick={() => toolsHandler("blockquote")}>
         <FaQuoteRight className={cx("toolbar-button-icon")} />
       </button>
-      <div className={cx("toolbar-wrapper")} ref={clickRef}>
+      <div className={cx("toolbar-wrapper")} ref={clickEl}>
         <button className={cx("toolbar-button")} onClick={() => toolsHandler("link")}>
           <FaLink className={cx("toolbar-button-icon")} />
         </button>
         {isInputMount && (
           <InputLink
-            linkRef={linkRef}
-            linkInputRef={linkInputRef}
+            linkEl={linkEl}
+            linkInputEl={linkInputEl}
             link={link}
             changeLinkHandler={changeLinkHandler}
             submitLinkHandler={submitLinkHandler}

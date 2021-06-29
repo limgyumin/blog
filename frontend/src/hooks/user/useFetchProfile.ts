@@ -1,16 +1,9 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/messaging";
-import option from "../../config/firebase";
-import axios from "axios";
-import {
-  changeAdmin,
-  changeLogin,
-  fetchMyProfileThunk,
-  createFcmTokenThunk,
-  initUserError,
-} from "modules/user";
+import option from "config/firebase";
+import { fetchMyProfileThunk, createFcmTokenThunk, initUserError, initUser } from "modules/user";
 import token from "lib/token";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "modules";
@@ -21,8 +14,6 @@ export default function useFetchProfile() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-
-  const accessToken = useMemo(() => token.get(), []);
 
   const getFcmToken = useCallback(async () => {
     if (!firebase.apps.length) {
@@ -54,20 +45,17 @@ export default function useFetchProfile() {
   }, [getFcmToken]);
 
   const logoutHandler = useCallback(() => {
+    dispatch(initUser());
     token.remove();
-    axios.defaults.headers.common["access_token"] = "";
-
-    dispatch(changeLogin(false));
-    dispatch(changeAdmin(false));
-
-    history.push("/");
-  }, [history, dispatch]);
+  }, [dispatch]);
 
   const fetchMyProfileHandler = useCallback(() => {
+    const accessToken = token.get();
+
     if (!profile.id && accessToken) {
       dispatch(fetchMyProfileThunk(requestNotification));
     }
-  }, [profile, accessToken, dispatch, requestNotification]);
+  }, [profile, dispatch, requestNotification]);
 
   useEffect(() => {
     fetchMyProfileHandler();
@@ -86,7 +74,6 @@ export default function useFetchProfile() {
     login,
     admin,
     profile,
-    accessToken,
     logoutHandler,
   };
 }

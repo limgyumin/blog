@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCallback, useState } from "react";
 import isEmpty from "lib/isEmpty";
 import { RootState } from "modules";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { createCategoryThunk, deleteCategoryThunk, updateCategoryThunk } from "modules/category";
 import removeBlank from "lib/removeLastBlank";
 import { ICategoryPosts } from "types/category.type";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 
 export default function useCategory(categoryPost?: ICategoryPosts) {
   const { data } = useSelector((state: RootState) => state.categories);
@@ -29,7 +29,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     dispatch(createCategoryThunk(removeBlank(categoryName)));
     setCreateMode(false);
     setCategoryName("");
-  }, [login, admin, categoryName, dispatch, setCreateMode, setCategoryName]);
+  }, [login, admin, categoryName, dispatch]);
 
   const updateCategoryHandler = useCallback(() => {
     if (!login || !admin) return;
@@ -55,15 +55,15 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
 
     dispatch(deleteCategoryThunk(categoryIdx));
     setCategoryIdx(0);
-  }, [login, admin, categoryPosts, categoryIdx, dispatch, setCategoryIdx]);
+  }, [login, admin, categoryPosts, categoryIdx, dispatch]);
 
   const createModeHandler = useCallback(() => {
     setCreateMode((prev) => !prev);
-  }, [setCreateMode]);
+  }, []);
 
   const editModeHandler = useCallback(() => {
     setEditMode((prev) => !prev);
-  }, [setEditMode]);
+  }, []);
 
   const onUpdateHandler = useCallback(
     (idx: number) => {
@@ -71,7 +71,7 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
       setCategoryName(categoryPost.name);
       setCategoryIdx(idx);
     },
-    [categoryPost, setUpdateMode, setCategoryName, setCategoryIdx]
+    [categoryPost]
   );
 
   const onDeleteConfirmHandler = useCallback(() => {
@@ -87,12 +87,9 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     [onMount]
   );
 
-  const onCategoryChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCategoryName(e.target.value);
-    },
-    [setCategoryName]
-  );
+  const onCategoryChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setCategoryName(e.target.value);
+  }, []);
 
   const onCreateCategoryKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -119,6 +116,16 @@ export default function useCategory(categoryPost?: ICategoryPosts) {
     },
     [categoryName, updateCategoryHandler]
   );
+
+  useEffect(() => {
+    return () => {
+      setCategoryName("");
+      setCategoryIdx(0);
+      setCreateMode(false);
+      setEditMode(false);
+      setUpdateMode(false);
+    };
+  }, []);
 
   return {
     admin,

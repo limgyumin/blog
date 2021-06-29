@@ -11,7 +11,7 @@ type HandleCreateContentProps = {
   contentFocusHandler: () => void;
   onChangeRequest: (name: string, value: any) => void;
   onKeyDownContent: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
-  onScrollToolBar: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void;
+  onScrollTextArea: (e: React.UIEvent<HTMLDivElement, UIEvent>) => void;
 };
 
 const HandleCreateContent: FC<HandleCreateContentProps> = ({
@@ -20,20 +20,20 @@ const HandleCreateContent: FC<HandleCreateContentProps> = ({
   contentFocusHandler,
   onChangeRequest,
   onKeyDownContent,
-  onScrollToolBar,
+  onScrollTextArea,
 }) => {
   return (
     <div
       className={cx("handle-create-content")}
       onClick={contentFocusHandler}
-      onScroll={(e) => onScrollToolBar(e)}
+      onScroll={(e) => onScrollTextArea(e)}
     >
       <textarea
         ref={contentEl}
         value={content}
         name="content"
         className={cx("handle-create-content-textarea")}
-        placeholder="무엇이 궁금하신가요? 어떤 것이든 좋아요!"
+        placeholder="당신의 이야기를 들려주세요!"
         onChange={({ target: { name, value } }) => onChangeRequest(name, value)}
         onKeyDown={(e) => onKeyDownContent(e)}
       />

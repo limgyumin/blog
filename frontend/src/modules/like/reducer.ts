@@ -30,8 +30,6 @@ const likes = createReducer<LikeState, LikeAction>(initialState, {
     error: null,
     data: {
       ...state.data,
-      liked: false,
-      likeCount: 0,
     },
   }),
   [FETCH_LIKE_INFO_SUCCESS]: (state, action) => ({

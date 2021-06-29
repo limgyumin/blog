@@ -28,7 +28,6 @@ const PostReplyHandle: FC<PostReplyHandleProps> = ({
       <textarea
         ref={replyTextAreaEl}
         value={content}
-        autoFocus
         onChange={(e) => onChange(e)}
         onKeyDown={(e) => onKeyDown(e)}
         placeholder="Write a reply ..."

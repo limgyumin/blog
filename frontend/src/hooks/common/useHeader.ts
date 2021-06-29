@@ -13,24 +13,30 @@ export default function useHeader() {
 
   const isPost = useMemo(() => pathname.split("/")[1] === "post", [pathname]);
 
-  const showMenuHandler = useCallback(() => {
+  const onShowMenu = useCallback(() => {
     setShowMenu(!showMenu);
-  }, [showMenu, setShowMenu]);
+  }, [showMenu]);
 
-  const progressBarHandler = () => {
-    const totalScroll = document.documentElement.scrollTop;
-    const windowHeight =
-      document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const progress = totalScroll / windowHeight;
+  const progressBarHandler = useCallback(() => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    const windowHeight = scrollHeight - clientHeight;
+    const progress = scrollTop / windowHeight;
 
     setScroll(progress);
-  };
+  }, []);
 
-  useClose<HTMLDivElement>(clickEl, menuEl, showMenuHandler);
+  useClose<HTMLDivElement>(clickEl, menuEl, onShowMenu);
 
   useEffect(() => {
     window.addEventListener("scroll", progressBarHandler);
     return () => window.removeEventListener("scroll", progressBarHandler);
+  }, [progressBarHandler]);
+
+  useEffect(() => {
+    return () => {
+      setShowMenu(false);
+      setScroll(0);
+    };
   }, []);
 
   return {
@@ -39,6 +45,6 @@ export default function useHeader() {
     scroll,
     showMenu,
     isPost,
-    showMenuHandler,
+    onShowMenu,
   };
 }

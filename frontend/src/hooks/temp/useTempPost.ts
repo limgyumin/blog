@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import { RootState } from "modules";
 import { deletePostThunk } from "modules/post";
 import { fetchTempPostsThunk } from "modules/temp/thunks";
@@ -24,15 +24,19 @@ export default function useTempPost() {
     };
 
     dispatch(deletePostThunk(postIdx, onDeletePost));
-  }, [login, admin, postIdx, dispatch, onMount, setPostIdx]);
+  }, [login, admin, postIdx, dispatch, onMount]);
 
   const onDeleteHandler = useCallback(
     (idx: number) => {
       setPostIdx(idx);
       onMount();
     },
-    [setPostIdx, onMount]
+    [onMount]
   );
+
+  useEffect(() => {
+    return () => setPostIdx(0);
+  }, []);
 
   return {
     isMount,

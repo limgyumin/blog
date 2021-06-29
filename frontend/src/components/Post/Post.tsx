@@ -4,7 +4,7 @@ import Modal from "components/common/Modal";
 import ReactHelmet from "components/common/ReactHelmet";
 import useFetchPost from "hooks/post/useFetchPost";
 import usePost from "hooks/post/usePost";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import removeElTag from "lib/removeElTag";
 import PostDelete from "./PostDelete";
 import PostHeader from "./PostHeader";

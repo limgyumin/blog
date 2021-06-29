@@ -60,6 +60,9 @@ export default async (req: AuthRequest, res: Response) => {
     res.status(200).json({
       status: 200,
       message: "임시 글 작성 성공.",
+      data: {
+        idx: post.idx,
+      },
     });
   } catch (error) {
     logger.red("[POST] 임시 글 작성 서버 오류.", error.message);

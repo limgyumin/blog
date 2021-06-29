@@ -4,7 +4,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
-import { changeLogin, gitHubAuthThunk, initUserError } from "modules/user";
+import { gitHubAuthThunk, initUserError } from "modules/user";
 
 export default function useGitHubAuth() {
   const { error } = useSelector((state: RootState) => state.users);
@@ -28,9 +28,7 @@ export default function useGitHubAuth() {
 
   useEffect(() => {
     if (error && error.response) {
-      if (error.response.status === 400) {
-        dispatch(changeLogin(true));
-      } else {
+      if (error.response.status !== 400) {
         toast.error("회원관리 부분에서 오류가 발생했어요!");
       }
       history.push("/");
