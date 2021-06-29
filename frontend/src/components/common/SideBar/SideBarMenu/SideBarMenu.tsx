@@ -9,14 +9,10 @@ import { ClassNamesFn } from "classnames/types";
 const styles = require("./SideBarMenu.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
-type SideBarMenuProps = {
-  sideBarOpenHandler: (state: boolean) => void;
-};
-
-const SideBarMenu: FC<SideBarMenuProps> = ({ sideBarOpenHandler }) => {
+const SideBarMenu: FC = () => {
   return (
     <div className={cx("sidebar-menu")}>
-      <Link to="/" className={cx("sidebar-menu-home")} onClick={() => sideBarOpenHandler(false)}>
+      <Link to="/" className={cx("sidebar-menu-home")}>
         <div className={cx("sidebar-menu-home-wrap")}>
           <div className={cx("sidebar-menu-home-wrap-area")}>
             <RiHome3Line />
@@ -24,11 +20,7 @@ const SideBarMenu: FC<SideBarMenuProps> = ({ sideBarOpenHandler }) => {
           <p>HOME</p>
         </div>
       </Link>
-      <Link
-        to="/categories"
-        className={cx("sidebar-menu-categories")}
-        onClick={() => sideBarOpenHandler(false)}
-      >
+      <Link to="/categories" className={cx("sidebar-menu-categories")}>
         <div className={cx("sidebar-menu-categories-wrap")}>
           <div className={cx("sidebar-menu-categories-wrap-area")}>
             <BiBook />
@@ -36,11 +28,7 @@ const SideBarMenu: FC<SideBarMenuProps> = ({ sideBarOpenHandler }) => {
           <p>CATEGORIES</p>
         </div>
       </Link>
-      <Link
-        to="/members"
-        className={cx("sidebar-menu-members")}
-        onClick={() => sideBarOpenHandler(false)}
-      >
+      <Link to="/members" className={cx("sidebar-menu-members")}>
         <div className={cx("sidebar-menu-members-wrap")}>
           <div className={cx("sidebar-menu-members-wrap-area")}>
             <RiMacbookLine />
@@ -48,11 +36,7 @@ const SideBarMenu: FC<SideBarMenuProps> = ({ sideBarOpenHandler }) => {
           <p>MEMBERS</p>
         </div>
       </Link>
-      <Link
-        to="/about/info"
-        className={cx("sidebar-menu-about")}
-        onClick={() => sideBarOpenHandler(false)}
-      >
+      <Link to="/about/info" className={cx("sidebar-menu-about")}>
         <div className={cx("sidebar-menu-about-wrap")}>
           <div className={cx("sidebar-menu-about-wrap-area")}>
             <HiOutlineInformationCircle />
