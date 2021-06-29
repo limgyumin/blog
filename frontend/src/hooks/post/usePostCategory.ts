@@ -7,6 +7,7 @@ import usePostIdx from "hooks/util/usePostIdx";
 
 export default function usePostCategory(onChangeRequest: (name: string, value: any) => void) {
   const { post } = useSelector((state: RootState) => state.posts.data);
+
   const [showCategories, setShowCategories] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
@@ -21,12 +22,12 @@ export default function usePostCategory(onChangeRequest: (name: string, value: a
       setShowCategories(false);
       onChangeRequest("category_idx", idx);
     },
-    [setSelectedCategory, setShowCategories, onChangeRequest]
+    [onChangeRequest]
   );
 
   const showCategoriesHandler = useCallback(() => {
     setShowCategories(!showCategories);
-  }, [showCategories, setShowCategories]);
+  }, [showCategories]);
 
   useClose<HTMLDivElement>(categoriesEl, clickEl, showCategoriesHandler);
 
@@ -35,6 +36,13 @@ export default function usePostCategory(onChangeRequest: (name: string, value: a
       setSelectedCategory(post.category_name);
     }
   }, [post, postIdx]);
+
+  useEffect(() => {
+    return () => {
+      setShowCategories(false);
+      setSelectedCategory("");
+    };
+  }, []);
 
   return {
     categoriesEl,

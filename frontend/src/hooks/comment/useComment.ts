@@ -11,7 +11,7 @@ import usePostIdx from "hooks/util/usePostIdx";
 import { toast } from "react-toastify";
 import isEmpty from "lib/isEmpty";
 import removeLastBlank from "lib/removeLastBlank";
-import useModal from "hooks/util/useModal";
+import useModal from "hooks/common/useModal";
 import IComment from "types/comment.type";
 
 export default function useComment(comment?: IComment) {
@@ -29,13 +29,10 @@ export default function useComment(comment?: IComment) {
   const commentLastEl = useRef<HTMLDivElement>(null);
   const commentTextAreaEl = useRef<HTMLTextAreaElement>(null);
 
-  const onChangeContent = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const { value } = e.target;
-      setContent(value);
-    },
-    [setContent]
-  );
+  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setContent(value);
+  }, []);
 
   const fetchCommentsHandler = useCallback(() => {
     const onFetchComments = () => {
@@ -65,7 +62,7 @@ export default function useComment(comment?: IComment) {
     };
 
     dispatch(createCommentThunk(postIdx, removeLastBlank(content), onCreateComment));
-  }, [login, postIdx, content, dispatch, fetchCommentsHandler, setContent]);
+  }, [login, postIdx, content, dispatch, fetchCommentsHandler]);
 
   const updateCommentHandler = useCallback(() => {
     if (!login) return;
@@ -83,7 +80,7 @@ export default function useComment(comment?: IComment) {
     };
 
     dispatch(updateCommentThunk(commentIdx, removeLastBlank(content), onUpdateComment));
-  }, [login, content, commentIdx, dispatch, fetchCommentsHandler, setContent, setCommentIdx]);
+  }, [login, content, commentIdx, dispatch, fetchCommentsHandler]);
 
   const deleteCommentHandler = useCallback(() => {
     if (!login) return;
@@ -95,7 +92,7 @@ export default function useComment(comment?: IComment) {
     };
 
     dispatch(deleteCommentThunk(commentIdx, onDeleteComment));
-  }, [login, commentIdx, dispatch, fetchCommentsHandler, setCommentIdx, onMount]);
+  }, [login, commentIdx, dispatch, fetchCommentsHandler, onMount]);
 
   const onUpdateHandler = useCallback(() => {
     const { idx, content } = comment;
@@ -103,19 +100,19 @@ export default function useComment(comment?: IComment) {
     setCommentIdx(idx);
     setContent(content);
     setUpdateMode(true);
-  }, [comment, setCommentIdx, setContent, setUpdateMode]);
+  }, [comment]);
 
   const onCancelUpdateHandler = useCallback(() => {
     setContent("");
     setUpdateMode(false);
-  }, [setContent, setUpdateMode]);
+  }, []);
 
   const onDeleteHandler = useCallback(
     (idx: number) => {
       setCommentIdx(idx);
       onMount();
     },
-    [setCommentIdx, onMount]
+    [onMount]
   );
 
   const onKeyDownContent = useCallback(
@@ -145,6 +142,14 @@ export default function useComment(comment?: IComment) {
   useEffect(() => {
     increaseContentScrollHandler();
   }, [content, increaseContentScrollHandler]);
+
+  useEffect(() => {
+    return () => {
+      setCommentIdx(0);
+      setContent("");
+      setUpdateMode(false);
+    };
+  }, []);
 
   return {
     login,
