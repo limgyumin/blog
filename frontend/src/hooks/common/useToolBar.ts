@@ -11,33 +11,36 @@ const useToolBar = (
   const [link, setLink] = useState<string>("");
   const [isInputMount, setIsInputMount] = useState<boolean>(false);
 
-  const linkInputRef = useRef<HTMLInputElement>(null);
-  const clickRef = useRef<HTMLDivElement>(null);
-  const linkRef = useRef<HTMLDivElement>(null);
+  const linkInputEl = useRef<HTMLInputElement>(null);
+  const clickEl = useRef<HTMLDivElement>(null);
+  const linkEl = useRef<HTMLDivElement>(null);
 
   const setSelectionPos = useCallback(
-    (start: number, end: number): void => {
+    (start: number, end: number) => {
+      const { current } = contentEl;
       setTimeout(() => {
-        contentEl.current.focus();
-        contentEl.current.setSelectionRange(start, end);
+        current.focus();
+        current.setSelectionRange(start, end);
+        current.scrollIntoView({ block: "end" });
       }, 0);
     },
     [contentEl]
   );
 
-  const linkFocusHandler = useCallback((): void => {
+  const linkFocusHandler = useCallback(() => {
+    const { current } = linkInputEl;
     setTimeout(() => {
-      linkInputRef.current.focus();
+      current.focus();
     }, 0);
-  }, [linkInputRef]);
+  }, [linkInputEl]);
 
-  const linkMountHandler = useCallback((): void => {
+  const linkMountHandler = useCallback(() => {
     setIsInputMount(true);
     linkFocusHandler();
   }, [setIsInputMount, linkFocusHandler]);
 
   const changeLinkHandler = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       setLink(value);
     },
@@ -51,15 +54,15 @@ const useToolBar = (
     [onChangeRequest]
   );
 
-  const closeLinkHandler = useCallback((): void => {
+  const closeLinkHandler = useCallback(() => {
     setIsInputMount(false);
     setLink("");
   }, [setLink, setIsInputMount]);
 
-  useClose<HTMLDivElement>(clickRef, linkRef, closeLinkHandler);
+  useClose<HTMLDivElement>(clickEl, linkEl, closeLinkHandler);
 
-  const submitLinkHandler = useCallback((): void => {
-    const current = contentEl.current;
+  const submitLinkHandler = useCallback(() => {
+    const { current } = contentEl;
 
     const startPos: number = current.selectionStart;
     const endPos: number = current.selectionEnd;
@@ -84,7 +87,7 @@ const useToolBar = (
   }, [link, contentEl, changeContentHandler, setSelectionPos, setIsInputMount]);
 
   const linkKeyDownHandler = useCallback(
-    (e: React.KeyboardEvent<HTMLInputElement>): void => {
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
       const pressed: string = e.key;
 
       if (pressed === "Enter") {
@@ -99,7 +102,7 @@ const useToolBar = (
     async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
       const { files } = e.target;
 
-      const current = contentEl.current;
+      const { current } = contentEl;
 
       const startPos: number = current.selectionStart;
       const endPos: number = current.selectionEnd;
@@ -111,9 +114,7 @@ const useToolBar = (
 
       const url: string = await uploadHandler(files);
 
-      console.log(url);
-
-      const imageText: string = `![](${url})\n`;
+      const imageText: string = `\n![](${url})\n`;
 
       changeContentHandler(`${textBefore}${imageText}${textAfter}`);
       setSelectionPos(startPos + imageText.length, startPos + imageText.length);
@@ -122,8 +123,8 @@ const useToolBar = (
   );
 
   const toolsHandler = useCallback(
-    (mode: string, scale?: number): void => {
-      const current = contentEl.current;
+    (mode: string, scale?: number) => {
+      const { current } = contentEl;
 
       const startPos: number = current.selectionStart;
       const endPos: number = current.selectionEnd;
@@ -156,7 +157,7 @@ const useToolBar = (
 
       // toolbar에 존재하는 많은 handler들을 하나의 object에서 key형식으로 관리
       const handlers: { [key: string]: Function } = {
-        heading: (): void => {
+        heading: () => {
           const characters: string = "#".repeat(scale);
           const posScaleDiff: number = scale + 1;
 
@@ -176,7 +177,7 @@ const useToolBar = (
           setSelectionPos(startPos + posScaleDiff, endPos + posScaleDiff);
         },
 
-        bold: (): void => {
+        bold: () => {
           const isBold: boolean = /\*\*(.*)\*\*/.test(selected);
 
           if (isBold) {
@@ -199,7 +200,7 @@ const useToolBar = (
           setSelectionPos(startPos, startPos + selected.length + 4);
         },
 
-        italic: (): void => {
+        italic: () => {
           const isItalic: boolean = /_(.*)_/.test(selected);
 
           if (isItalic) {
@@ -222,7 +223,7 @@ const useToolBar = (
           setSelectionPos(startPos, startPos + selected.length + 2);
         },
 
-        strike: (): void => {
+        strike: () => {
           const isBold: boolean = /~~(.*)~~/.test(selected);
 
           if (isBold) {
@@ -245,7 +246,7 @@ const useToolBar = (
           setSelectionPos(startPos, startPos + selected.length + 4);
         },
 
-        blockquote: (): void => {
+        blockquote: () => {
           const isBlockQuote: boolean = /^> /.test(lineText);
 
           if (isBlockQuote) {
@@ -263,21 +264,21 @@ const useToolBar = (
           return;
         },
 
-        link: (): void => {
+        link: () => {
           linkMountHandler();
         },
 
-        codeblock: (): void => {
+        codeblock: () => {
           if (selected.length === 0) {
             const sample: string = "코드 입력";
 
-            changeContentHandler(`${textBefore}\`\`\`\n${sample}\n\`\`\`${textAfter}`);
-            setSelectionPos(startPos + 4, startPos + sample.length + 4);
+            changeContentHandler(`${textBefore}\n\`\`\`\n${sample}\n\`\`\`\n${textAfter}`);
+            setSelectionPos(startPos + 5, startPos + sample.length + 5);
             return;
           }
 
-          changeContentHandler(`${textBefore}\`\`\`\n${lineText}\n\`\`\`${textAfter}`);
-          setSelectionPos(startPos + 4, startPos + selected.length + 4);
+          changeContentHandler(`${textBefore}\n\`\`\`\n${selected}\n\`\`\`\n${textAfter}`);
+          setSelectionPos(startPos + 5, startPos + selected.length + 5);
         },
       };
 
@@ -298,9 +299,9 @@ const useToolBar = (
 
   return {
     imageEl,
-    clickRef,
-    linkRef,
-    linkInputRef,
+    clickEl,
+    linkEl,
+    linkInputEl,
     isInputMount,
     link,
     changeLinkHandler,
