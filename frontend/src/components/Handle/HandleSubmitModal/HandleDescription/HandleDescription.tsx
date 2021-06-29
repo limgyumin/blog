@@ -7,10 +7,10 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 type HandleDescriptionProps = {
   description: string;
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
-const HandleDescription: FC<HandleDescriptionProps> = ({ description, onChangeRequest }) => {
+const HandleDescription: FC<HandleDescriptionProps> = ({ description, onChange }) => {
   return (
     <div className={cx("handle-description")}>
       <p className={cx("handle-description-name")}>소개</p>
@@ -19,7 +19,7 @@ const HandleDescription: FC<HandleDescriptionProps> = ({ description, onChangeRe
         value={description}
         name="description"
         placeholder="소개를 작성해주세요."
-        onChange={({ target: { name, value } }) => onChangeRequest(name, value)}
+        onChange={({ target: { name, value } }) => onChange(name, value)}
       />
     </div>
   );

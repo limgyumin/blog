@@ -16,8 +16,16 @@ const styles = require("./Header.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 const Header = () => {
-  const { login, admin, profile, logoutHandler } = useFetchProfile();
-  const { clickEl, menuEl, scroll, showMenu, isPost, onShowMenu } = useHeader();
+  const { login, admin, profile, handleLogout } = useFetchProfile();
+  const {
+    clickEl,
+    menuEl,
+    scroll,
+    showMenu,
+    isPost,
+    handleShowMenu,
+    handleClickTemp,
+  } = useHeader();
 
   return (
     <header className={cx("header")}>
@@ -33,13 +41,13 @@ const Header = () => {
               admin={admin}
               profile={profile}
               showMenu={showMenu}
-              onShowMenu={onShowMenu}
+              onClick={handleShowMenu}
             >
               <HeaderOption
                 admin={admin}
                 clickEl={clickEl}
-                handleLogout={logoutHandler}
-                onShowMenu={onShowMenu}
+                onClickTemp={handleClickTemp}
+                onClickLogout={handleLogout}
               />
             </HeaderProfile>
           ) : (

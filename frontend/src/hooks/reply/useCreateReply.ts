@@ -19,12 +19,12 @@ export default function useCreateReply(commentIdx: number) {
 
   const replyLastEl = useRef<HTMLDivElement>(null);
 
-  const onChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeContent = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
     setContent(value);
   }, []);
 
-  const fetchCommentsHandler = useCallback(() => {
+  const handleFetchComments = useCallback(() => {
     const onFetchComments = () => {
       const { current } = replyLastEl;
       if (current) {
@@ -35,7 +35,7 @@ export default function useCreateReply(commentIdx: number) {
     dispatch(fetchCommentsThunk(postIdx, onFetchComments));
   }, [postIdx, dispatch]);
 
-  const createReplyHandler = useCallback(() => {
+  const handleCreateReply = useCallback(() => {
     if (!login) {
       toast.info("로그인 후 답글을 작성하실 수 있어요.");
       return;
@@ -49,21 +49,21 @@ export default function useCreateReply(commentIdx: number) {
     const onCreateReply = async () => {
       setContent("");
       dispatch(fetchCommentCountThunk(postIdx));
-      fetchCommentsHandler();
+      handleFetchComments();
     };
 
     dispatch(createReplyThunk(commentIdx, removeLastBlank(content), onCreateReply));
-  }, [login, content, postIdx, commentIdx, dispatch, fetchCommentsHandler]);
+  }, [login, content, postIdx, commentIdx, dispatch, handleFetchComments]);
 
-  const onKeyDownContent = useCallback(
+  const handleKeyDownContent = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
       const { key, shiftKey } = e;
       if ((key === "Enter" || key === "NumpadEnter") && !shiftKey) {
         e.preventDefault();
-        createReplyHandler();
+        handleCreateReply();
       }
     },
-    [createReplyHandler]
+    [handleCreateReply]
   );
 
   useEffect(() => {
@@ -73,8 +73,8 @@ export default function useCreateReply(commentIdx: number) {
   return {
     content,
     replyLastEl,
-    createReplyHandler,
-    onChangeContent,
-    onKeyDownContent,
+    handleCreateReply,
+    handleChangeContent,
+    handleKeyDownContent,
   };
 }

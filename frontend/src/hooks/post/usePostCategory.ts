@@ -16,7 +16,7 @@ export default function usePostCategory(onChangeRequest: (name: string, value: a
   const categoriesEl = useRef<HTMLDivElement>(null);
   const clickEl = useRef<HTMLDivElement>(null);
 
-  const onChangeCategory = useCallback(
+  const handleChangeCategory = useCallback(
     ({ idx, name }: ICategory) => {
       setSelectedCategory(name);
       setShowCategories(false);
@@ -25,11 +25,11 @@ export default function usePostCategory(onChangeRequest: (name: string, value: a
     [onChangeRequest]
   );
 
-  const showCategoriesHandler = useCallback(() => {
+  const handleShowCategories = useCallback(() => {
     setShowCategories(!showCategories);
   }, [showCategories]);
 
-  useClose<HTMLDivElement>(categoriesEl, clickEl, showCategoriesHandler);
+  useClose<HTMLDivElement>(categoriesEl, clickEl, handleShowCategories);
 
   useEffect(() => {
     if (postIdx) {
@@ -49,7 +49,7 @@ export default function usePostCategory(onChangeRequest: (name: string, value: a
     clickEl,
     showCategories,
     selectedCategory,
-    onChangeCategory,
-    showCategoriesHandler,
+    handleChangeCategory,
+    handleShowCategories,
   };
 }

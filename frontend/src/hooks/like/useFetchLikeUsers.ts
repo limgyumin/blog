@@ -12,13 +12,13 @@ export default function useFetchLikeUsers() {
 
   const postIdx = usePostIdx();
 
-  const fetchLikeUsersHandler = useCallback(() => {
+  const handleFetchLikeUsers = useCallback(() => {
     dispatch(fetchLikeUsersThunk(postIdx));
   }, [postIdx, dispatch]);
 
   useEffect(() => {
-    fetchLikeUsersHandler();
-  }, [fetchLikeUsersHandler]);
+    handleFetchLikeUsers();
+  }, [handleFetchLikeUsers]);
 
   return {
     likeCount,

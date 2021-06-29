@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useClose from "hooks/util/useClose";
 
 export default function useHeader() {
   const { pathname } = useLocation();
+  const history = useHistory();
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const [scroll, setScroll] = useState<number>(0);
@@ -13,11 +14,16 @@ export default function useHeader() {
 
   const isPost = useMemo(() => pathname.split("/")[1] === "post", [pathname]);
 
-  const onShowMenu = useCallback(() => {
+  const handleShowMenu = useCallback(() => {
     setShowMenu(!showMenu);
   }, [showMenu]);
 
-  const progressBarHandler = useCallback(() => {
+  const handleClickTemp = useCallback(() => {
+    history.push("/temp");
+    handleShowMenu();
+  }, [history, handleShowMenu]);
+
+  const handleProgressBar = useCallback(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
     const windowHeight = scrollHeight - clientHeight;
     const progress = scrollTop / windowHeight;
@@ -25,12 +31,12 @@ export default function useHeader() {
     setScroll(progress);
   }, []);
 
-  useClose<HTMLDivElement>(clickEl, menuEl, onShowMenu);
+  useClose<HTMLDivElement>(clickEl, menuEl, handleShowMenu);
 
   useEffect(() => {
-    window.addEventListener("scroll", progressBarHandler);
-    return () => window.removeEventListener("scroll", progressBarHandler);
-  }, [progressBarHandler]);
+    window.addEventListener("scroll", handleProgressBar);
+    return () => window.removeEventListener("scroll", handleProgressBar);
+  }, [handleProgressBar]);
 
   useEffect(() => {
     return () => {
@@ -45,6 +51,7 @@ export default function useHeader() {
     scroll,
     showMenu,
     isPost,
-    onShowMenu,
+    handleShowMenu,
+    handleClickTemp,
   };
 }

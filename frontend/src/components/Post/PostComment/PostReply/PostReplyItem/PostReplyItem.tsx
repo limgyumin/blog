@@ -12,20 +12,20 @@ const cx: ClassNamesFn = classNames.bind(styles);
 
 type PostReplyItemProps = {
   reply: IReply;
-  onDeleteHandler: (idx: number) => void;
+  onClick: (idx: number) => void;
 };
 
-const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler }) => {
+const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onClick }) => {
   const {
     login,
     profile,
     content,
     updateMode,
-    onChangeContent,
-    onKeyDownContent,
-    onUpdateHandler,
-    onCancelUpdateHandler,
-    updateReplyHandler,
+    handleChangeContent,
+    handleKeyDownContent,
+    handleClickUpdateReply,
+    handleCancelUpdateReply,
+    handleUpdateReply,
   } = useReply(reply);
 
   return (
@@ -62,12 +62,15 @@ const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler }) => {
           <React.Fragment>
             {!updateMode && (
               <div className={cx("post-reply-item-wrap-control")}>
-                <p className={cx("post-reply-item-wrap-control-update")} onClick={onUpdateHandler}>
+                <p
+                  className={cx("post-reply-item-wrap-control-update")}
+                  onClick={handleClickUpdateReply}
+                >
                   <FaPen />
                 </p>
                 <p
                   className={cx("post-reply-item-wrap-control-delete")}
-                  onClick={() => onDeleteHandler(reply.idx)}
+                  onClick={() => onClick(reply.idx)}
                 >
                   <FaTrash />
                 </p>
@@ -79,10 +82,10 @@ const PostReplyItem: FC<PostReplyItemProps> = ({ reply, onDeleteHandler }) => {
       {updateMode ? (
         <PostReplyHandle
           content={content}
-          onChange={onChangeContent}
-          onKeyDown={onKeyDownContent}
-          onComplete={updateReplyHandler}
-          onCancel={onCancelUpdateHandler}
+          onChange={handleChangeContent}
+          onKeyDown={handleKeyDownContent}
+          onComplete={handleUpdateReply}
+          onCancel={handleCancelUpdateReply}
         />
       ) : (
         <p className={cx("post-reply-item-content")}>{reply.content}</p>

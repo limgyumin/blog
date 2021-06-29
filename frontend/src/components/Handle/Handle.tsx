@@ -20,20 +20,20 @@ const Handle = () => {
   const {
     valid,
     request,
-    onCancelPost,
-    onSavePost,
-    onSubmitPost,
-    onChangeRequest,
+    handleCancelPost,
+    handleSavePost,
+    handleSubmitPost,
+    handleChangeRequest,
   } = useHandlePost();
   const {
     passed,
     titleEl,
     contentEl,
-    onScrollTextArea,
-    onKeyDownContent,
-    contentFocusHandler,
-  } = usePostTextArea(request, onChangeRequest);
-  const { isMount, onMount } = useModal();
+    handleScrollContent,
+    handleKeyDownContent,
+    handleFocusContent,
+  } = usePostTextArea(request, handleChangeRequest);
+  const { isMount, handleModalMount } = useModal();
 
   const { title, content, description } = request;
 
@@ -48,35 +48,35 @@ const Handle = () => {
         title={title}
         description={description}
         isMount={isMount}
-        onCancel={onMount}
-        onSubmit={onSubmitPost}
-        onChangeRequest={onChangeRequest}
+        onCancel={handleModalMount}
+        onSubmit={handleSubmitPost}
+        onChange={handleChangeRequest}
       />
       <div className={cx("handle")}>
         <div className={cx("handle-content")}>
           <div className={cx("handle-content-wrap")}>
             <div className={cx("handle-content-wrap-header", { "header-passed": passed })}>
-              <InputTitle titleEl={titleEl} title={title} onChangeRequest={onChangeRequest} />
+              <InputTitle titleEl={titleEl} title={title} onChange={handleChangeRequest} />
             </div>
             <div className={cx("handle-content-wrap-toolbar", { "toolbar-passed": passed })}>
-              <ToolBar contentEl={contentEl} onChangeRequest={onChangeRequest} />
+              <ToolBar contentEl={contentEl} onChange={handleChangeRequest} />
             </div>
             <HandleCreateContent
               content={content}
               contentEl={contentEl}
-              onChangeRequest={onChangeRequest}
-              onScrollTextArea={onScrollTextArea}
-              onKeyDownContent={onKeyDownContent}
-              contentFocusHandler={contentFocusHandler}
+              onChange={handleChangeRequest}
+              onScroll={handleScrollContent}
+              onKeyDown={handleKeyDownContent}
+              onClick={handleFocusContent}
             />
           </div>
           <HandlePreview title={title} content={content} />
         </div>
         <HandleBottom
           valid={valid}
-          onCancel={onCancelPost}
-          onSave={onSavePost}
-          onComplete={onMount}
+          onCancel={handleCancelPost}
+          onSave={handleSavePost}
+          onComplete={handleModalMount}
         />
       </div>
     </React.Fragment>

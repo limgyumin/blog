@@ -14,17 +14,17 @@ export default function useGitHubAuth() {
   const history = useHistory();
   const code = useQueryString("code");
 
-  const push = useCallback(() => {
-    history.push("/");
-  }, [history]);
+  const handleGitHubAuth = useCallback(() => {
+    const onComplete = () => {
+      history.push("/");
+    };
 
-  const gitHubAuthHandler = useCallback(() => {
-    dispatch(gitHubAuthThunk(code, push));
-  }, [code, dispatch, push]);
+    dispatch(gitHubAuthThunk(code, onComplete));
+  }, [code, dispatch, history]);
 
   useEffect(() => {
-    gitHubAuthHandler();
-  }, [gitHubAuthHandler]);
+    handleGitHubAuth();
+  }, [handleGitHubAuth]);
 
   useEffect(() => {
     if (error && error.response) {

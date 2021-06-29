@@ -8,12 +8,12 @@ const styles = require("./HandleThumbnail.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 type HandleThumbnailProps = {
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
-const HandleThumbnail: FC<HandleThumbnailProps> = ({ onChangeRequest }) => {
-  const { thumbnail, imageEl, onChangeThumbnail, onRemoveThumbnail } = usePostThumbnail(
-    onChangeRequest
+const HandleThumbnail: FC<HandleThumbnailProps> = ({ onChange }) => {
+  const { thumbnail, imageEl, handleChangeThumbnail, handleDeleteThumbnail } = usePostThumbnail(
+    onChange
   );
   return (
     <div className={cx("handle-thumbnail")}>
@@ -34,7 +34,7 @@ const HandleThumbnail: FC<HandleThumbnailProps> = ({ onChangeRequest }) => {
               </label>
               <button
                 className={cx("handle-thumbnail-wrapper-preview-buttons-cancel")}
-                onClick={() => onRemoveThumbnail()}
+                onClick={handleDeleteThumbnail}
               >
                 제거
               </button>
@@ -54,7 +54,7 @@ const HandleThumbnail: FC<HandleThumbnailProps> = ({ onChangeRequest }) => {
         type="file"
         accept="image/png, image/jpeg, image/gif"
         ref={imageEl}
-        onChange={(e) => onChangeThumbnail(e)}
+        onChange={(e) => handleChangeThumbnail(e)}
       />
     </div>
   );

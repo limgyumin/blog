@@ -6,11 +6,11 @@ import { IUploadFileResponse } from "types/upload.type";
 export default function useUpload() {
   const imageEl = useRef<HTMLInputElement>(null);
 
-  const initImageHandler = useCallback((): void => {
+  const handleInitImage = useCallback((): void => {
     imageEl.current.value = "";
   }, [imageEl]);
 
-  const uploadHandler = useCallback(
+  const handleUploadImage = useCallback(
     async (files: FileList): Promise<string> => {
       try {
         if (!files || !files.length) return;
@@ -20,18 +20,18 @@ export default function useUpload() {
         const { data }: IUploadFileResponse = await uploadImage(file);
         const url: string = data.files[0];
 
-        initImageHandler();
+        handleInitImage();
 
         return url;
       } catch (err) {
         toast.error("이미지를 업로드하는 중에 오류가 발생했어요...");
       }
     },
-    [initImageHandler]
+    [handleInitImage]
   );
 
   return {
     imageEl,
-    uploadHandler,
+    handleUploadImage,
   };
 }

@@ -17,7 +17,7 @@ type HandleSubmitModalProps = {
   isMount: boolean;
   onCancel: () => void;
   onSubmit: () => void;
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
 const HandleSubmitModal: FC<HandleSubmitModalProps> = ({
@@ -26,7 +26,7 @@ const HandleSubmitModal: FC<HandleSubmitModalProps> = ({
   isMount,
   onCancel,
   onSubmit,
-  onChangeRequest,
+  onChange,
 }) => {
   const { isLight } = useTheme();
 
@@ -55,10 +55,10 @@ const HandleSubmitModal: FC<HandleSubmitModalProps> = ({
               <div className={cx("handle-submit-modal-box-wrap-content-area")}>
                 <div className={cx("handle-submit-modal-box-wrap-content-area-main")}>
                   <HandleTitlePreview title={title} />
-                  <HandleCategory onChangeRequest={onChangeRequest} />
-                  <HandleDescription description={description} onChangeRequest={onChangeRequest} />
+                  <HandleCategory onChange={onChange} />
+                  <HandleDescription description={description} onChange={onChange} />
                 </div>
-                <HandleThumbnail onChangeRequest={onChangeRequest} />
+                <HandleThumbnail onChange={onChange} />
               </div>
             </div>
             <div className={cx("handle-submit-modal-box-wrap-bottom")}>

@@ -17,10 +17,10 @@ const Search = () => {
     notFound,
     total,
     searchInputEl,
-    onFocusInput,
-    onChangeKeyword,
-    onClickInput,
-    onKeyDownInput,
+    handleFocusInput,
+    handleChangeKeyword,
+    handleClickInput,
+    handleKeyDownInput,
   } = useSearchPosts();
 
   return (
@@ -34,14 +34,14 @@ const Search = () => {
       <div className={cx("search")}>
         <div className={cx("search-wrap")}>
           <div className={cx("search-wrap-container")}>
-            <div className={cx("search-wrap-container-input")} onClick={onFocusInput}>
-              <BsSearch onClick={onClickInput} />
+            <div className={cx("search-wrap-container-input")} onClick={handleFocusInput}>
+              <BsSearch onClick={handleClickInput} />
               <input
                 placeholder="Search Post"
                 autoFocus
                 value={keyword}
-                onChange={(e) => onChangeKeyword(e)}
-                onKeyDown={(e) => onKeyDownInput(e)}
+                onChange={(e) => handleChangeKeyword(e)}
+                onKeyDown={(e) => handleKeyDownInput(e)}
                 ref={searchInputEl}
               />
             </div>

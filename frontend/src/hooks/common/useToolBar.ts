@@ -6,7 +6,7 @@ const useToolBar = (
   contentEl: React.MutableRefObject<HTMLTextAreaElement>,
   onChangeRequest: (name: string, value: any) => void
 ) => {
-  const { imageEl, uploadHandler } = useUpload();
+  const { imageEl, handleUploadImage } = useUpload();
 
   const [link, setLink] = useState<string>("");
   const [isInputMount, setIsInputMount] = useState<boolean>(false);
@@ -27,19 +27,19 @@ const useToolBar = (
     [contentEl]
   );
 
-  const linkFocusHandler = useCallback(() => {
+  const handleFocusLink = useCallback(() => {
     const { current } = linkInputEl;
     setTimeout(() => {
       current.focus();
     }, 0);
   }, [linkInputEl]);
 
-  const linkMountHandler = useCallback(() => {
+  const handleMountLink = useCallback(() => {
     setIsInputMount(true);
-    linkFocusHandler();
-  }, [setIsInputMount, linkFocusHandler]);
+    handleFocusLink();
+  }, [setIsInputMount, handleFocusLink]);
 
-  const changeLinkHandler = useCallback(
+  const handleChangeLink = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
       setLink(value);
@@ -47,21 +47,21 @@ const useToolBar = (
     [setLink]
   );
 
-  const changeContentHandler = useCallback(
+  const handleChangeContent = useCallback(
     (value: string) => {
       onChangeRequest("content", value);
     },
     [onChangeRequest]
   );
 
-  const closeLinkHandler = useCallback(() => {
+  const handleCloseLink = useCallback(() => {
     setIsInputMount(false);
     setLink("");
   }, [setLink, setIsInputMount]);
 
-  useClose<HTMLDivElement>(clickEl, linkEl, closeLinkHandler);
+  useClose<HTMLDivElement>(clickEl, linkEl, handleCloseLink);
 
-  const submitLinkHandler = useCallback(() => {
+  const handleSubmitLink = useCallback(() => {
     const { current } = contentEl;
 
     const startPos: number = current.selectionStart;
@@ -80,25 +80,25 @@ const useToolBar = (
       linkText = "링크 텍스트";
     }
 
-    changeContentHandler(`${textBefore}[${linkText}](${link})${textAfter}`);
+    handleChangeContent(`${textBefore}[${linkText}](${link})${textAfter}`);
     setSelectionPos(startPos + 1, startPos + linkText.length + 1);
     setLink("");
     setIsInputMount(false);
-  }, [link, contentEl, changeContentHandler, setSelectionPos, setIsInputMount]);
+  }, [link, contentEl, handleChangeContent, setSelectionPos, setIsInputMount]);
 
-  const linkKeyDownHandler = useCallback(
+  const handleKeyDownLink = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       const pressed: string = e.key;
 
       if (pressed === "Enter") {
         e.preventDefault();
-        submitLinkHandler();
+        handleSubmitLink();
       }
     },
-    [submitLinkHandler]
+    [handleSubmitLink]
   );
 
-  const changeImageHandler = useCallback(
+  const handleChangeImage = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
       const { files } = e.target;
 
@@ -112,17 +112,17 @@ const useToolBar = (
       const textBefore: string = content.substring(0, startPos);
       const textAfter: string = content.substring(endPos);
 
-      const url: string = await uploadHandler(files);
+      const url: string = await handleUploadImage(files);
 
       const imageText: string = `\n![](${url})\n`;
 
-      changeContentHandler(`${textBefore}${imageText}${textAfter}`);
+      handleChangeContent(`${textBefore}${imageText}${textAfter}`);
       setSelectionPos(startPos + imageText.length, startPos + imageText.length);
     },
-    [contentEl, changeContentHandler, setSelectionPos, uploadHandler]
+    [contentEl, handleChangeContent, setSelectionPos, handleUploadImage]
   );
 
-  const toolsHandler = useCallback(
+  const handleTools = useCallback(
     (mode: string, scale?: number) => {
       const { current } = contentEl;
 
@@ -168,12 +168,12 @@ const useToolBar = (
 
             const posDiff: number = replaced.length - lineText.length;
 
-            changeContentHandler(`${textLineBefore}${replaced}${textLineBelow}`);
+            handleChangeContent(`${textLineBefore}${replaced}${textLineBelow}`);
             setSelectionPos(startPos + posDiff, endPos + posDiff);
             return;
           }
 
-          changeContentHandler(`${textLineBefore}${characters} ${lineText}${textLineBelow}`);
+          handleChangeContent(`${textLineBefore}${characters} ${lineText}${textLineBelow}`);
           setSelectionPos(startPos + posScaleDiff, endPos + posScaleDiff);
         },
 
@@ -183,7 +183,7 @@ const useToolBar = (
           if (isBold) {
             const replaced: string = selected.replace(/\*\*/g, "");
 
-            changeContentHandler(`${textBefore}${replaced}${textAfter}`);
+            handleChangeContent(`${textBefore}${replaced}${textAfter}`);
             setSelectionPos(startPos, startPos + selected.length - 4);
             return;
           }
@@ -191,12 +191,12 @@ const useToolBar = (
           if (selected.length === 0) {
             const sample: string = "텍스트";
 
-            changeContentHandler(`${textBefore}**${sample}**${textAfter}`);
+            handleChangeContent(`${textBefore}**${sample}**${textAfter}`);
             setSelectionPos(startPos + 2, startPos + sample.length + 2);
             return;
           }
 
-          changeContentHandler(`${textBefore}**${selected}**${textAfter}`);
+          handleChangeContent(`${textBefore}**${selected}**${textAfter}`);
           setSelectionPos(startPos, startPos + selected.length + 4);
         },
 
@@ -206,7 +206,7 @@ const useToolBar = (
           if (isItalic) {
             const replaced: string = selected.replace(/_/g, "");
 
-            changeContentHandler(`${textBefore}${replaced}${textAfter}`);
+            handleChangeContent(`${textBefore}${replaced}${textAfter}`);
             setSelectionPos(startPos, startPos + selected.length - 2);
             return;
           }
@@ -214,12 +214,12 @@ const useToolBar = (
           if (selected.length === 0) {
             const sample: string = "텍스트";
 
-            changeContentHandler(`${textBefore}_${sample}_${textAfter}`);
+            handleChangeContent(`${textBefore}_${sample}_${textAfter}`);
             setSelectionPos(startPos + 1, startPos + sample.length + 1);
             return;
           }
 
-          changeContentHandler(`${textBefore}_${selected}_${textAfter}`);
+          handleChangeContent(`${textBefore}_${selected}_${textAfter}`);
           setSelectionPos(startPos, startPos + selected.length + 2);
         },
 
@@ -229,7 +229,7 @@ const useToolBar = (
           if (isBold) {
             const replaced: string = selected.replace(/~~/g, "");
 
-            changeContentHandler(`${textBefore}${replaced}${textAfter}`);
+            handleChangeContent(`${textBefore}${replaced}${textAfter}`);
             setSelectionPos(startPos, startPos + selected.length - 4);
             return;
           }
@@ -237,12 +237,12 @@ const useToolBar = (
           if (selected.length === 0) {
             const sample: string = "텍스트";
 
-            changeContentHandler(`${textBefore}~~${sample}~~${textAfter}`);
+            handleChangeContent(`${textBefore}~~${sample}~~${textAfter}`);
             setSelectionPos(startPos + 2, startPos + sample.length + 2);
             return;
           }
 
-          changeContentHandler(`${textBefore}~~${selected}~~${textAfter}`);
+          handleChangeContent(`${textBefore}~~${selected}~~${textAfter}`);
           setSelectionPos(startPos, startPos + selected.length + 4);
         },
 
@@ -254,30 +254,30 @@ const useToolBar = (
 
             const posDiff: number = replaced.length - lineText.length;
 
-            changeContentHandler(`${textLineBefore}${replaced}${textLineBelow}`);
+            handleChangeContent(`${textLineBefore}${replaced}${textLineBelow}`);
             setSelectionPos(startPos + posDiff, endPos + posDiff);
             return;
           }
 
-          changeContentHandler(`${textLineBefore}> ${lineText}${textLineBelow}`);
+          handleChangeContent(`${textLineBefore}> ${lineText}${textLineBelow}`);
           setSelectionPos(startPos + 2, endPos + 2);
           return;
         },
 
         link: () => {
-          linkMountHandler();
+          handleMountLink();
         },
 
         codeblock: () => {
           if (selected.length === 0) {
             const sample: string = "코드 입력";
 
-            changeContentHandler(`${textBefore}\n\`\`\`\n${sample}\n\`\`\`\n${textAfter}`);
+            handleChangeContent(`${textBefore}\n\`\`\`\n${sample}\n\`\`\`\n${textAfter}`);
             setSelectionPos(startPos + 5, startPos + sample.length + 5);
             return;
           }
 
-          changeContentHandler(`${textBefore}\n\`\`\`\n${selected}\n\`\`\`\n${textAfter}`);
+          handleChangeContent(`${textBefore}\n\`\`\`\n${selected}\n\`\`\`\n${textAfter}`);
           setSelectionPos(startPos + 5, startPos + selected.length + 5);
         },
       };
@@ -287,7 +287,7 @@ const useToolBar = (
 
       handler();
     },
-    [contentEl, changeContentHandler, setSelectionPos, linkMountHandler]
+    [contentEl, handleChangeContent, setSelectionPos, handleMountLink]
   );
 
   useEffect(() => {
@@ -304,11 +304,11 @@ const useToolBar = (
     linkInputEl,
     isInputMount,
     link,
-    changeLinkHandler,
-    changeImageHandler,
-    submitLinkHandler,
-    linkKeyDownHandler,
-    toolsHandler,
+    handleChangeLink,
+    handleChangeImage,
+    handleSubmitLink,
+    handleKeyDownLink,
+    handleTools,
   };
 };
 

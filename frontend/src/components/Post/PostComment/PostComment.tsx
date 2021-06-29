@@ -17,18 +17,18 @@ const PostComment = () => {
     commentLastEl,
     commentTextAreaEl,
     isMount,
-    onMount,
-    onChangeContent,
-    onKeyDownContent,
-    onDeleteHandler,
-    createCommentHandler,
-    deleteCommentHandler,
+    handleModalMount,
+    handleChangeContent,
+    handleKeyDownContent,
+    handleClickDeleteComment,
+    handleCreateComment,
+    handleDeleteComment,
   } = useComment();
 
   return (
     <React.Fragment>
       <Modal isMount={isMount}>
-        <PostCommentDelete onDelete={deleteCommentHandler} onCancel={onMount} />
+        <PostCommentDelete onDelete={handleDeleteComment} onCancel={handleModalMount} />
       </Modal>
       <div className={cx("post-comment")}>
         <div className={cx("post-comment-wrap")}>
@@ -39,15 +39,15 @@ const PostComment = () => {
             <textarea
               ref={commentTextAreaEl}
               value={content}
-              onChange={(e) => onChangeContent(e)}
-              onKeyDown={(e) => onKeyDownContent(e)}
+              onChange={(e) => handleChangeContent(e)}
+              onKeyDown={(e) => handleKeyDownContent(e)}
               placeholder="Write a comment ..."
               className={cx("post-comment-wrap-input-box")}
             />
             <div className={cx("post-comment-wrap-input-container")}>
               <button
                 className={cx("post-comment-wrap-input-container-button")}
-                onClick={createCommentHandler}
+                onClick={handleCreateComment}
               >
                 Send
               </button>
@@ -59,7 +59,7 @@ const PostComment = () => {
             <PostCommentItem
               key={comment.idx}
               comment={comment}
-              onDeleteHandler={onDeleteHandler}
+              onClick={handleClickDeleteComment}
             />
           ))}
         </div>

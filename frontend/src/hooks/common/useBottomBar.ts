@@ -16,25 +16,25 @@ export default function useBottomBar() {
   const postIdx = usePostIdx();
   const history = useHistory();
 
-  const fetchLikeInfoHandler = useCallback(() => {
+  const handleFetchLikeInfo = useCallback(() => {
     dispatch(fetchLikeInfoThunk(postIdx));
   }, [postIdx, dispatch]);
 
-  const createLikeHandler = useCallback(() => {
+  const handleCreateLike = useCallback(() => {
     dispatch(createLikeThunk(postIdx));
   }, [postIdx, dispatch]);
 
-  const onCreateHandler = useCallback(() => {
+  const handleClickCreateLike = useCallback(() => {
     if (!login) {
       toast.info("로그인 후 좋아요를 추가하실 수 있어요.");
       return;
     }
-    createLikeHandler();
-  }, [login, createLikeHandler]);
+    handleCreateLike();
+  }, [login, handleCreateLike]);
 
   useEffect(() => {
-    fetchLikeInfoHandler();
-  }, [fetchLikeInfoHandler]);
+    handleFetchLikeInfo();
+  }, [handleFetchLikeInfo]);
 
   useEffect(() => {
     if (error) {
@@ -47,6 +47,6 @@ export default function useBottomBar() {
   return {
     liked,
     likeCount,
-    onCreateHandler,
+    handleClickCreateLike,
   };
 }

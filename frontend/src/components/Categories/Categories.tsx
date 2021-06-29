@@ -20,10 +20,10 @@ const Categories = () => {
     categoryName,
     createMode,
     editMode,
-    onCategoryChange,
-    onCreateCategoryKeyDown,
-    createModeHandler,
-    editModeHandler,
+    handleChangeCategory,
+    handleKeyDownCreateCategory,
+    handleCreateMode,
+    handleEditMode,
   } = useCategory();
 
   return (
@@ -48,14 +48,14 @@ const Categories = () => {
                   type="text"
                   placeholder="카테고리 이름을 입력해주세용."
                   value={categoryName}
-                  onChange={(e) => onCategoryChange(e)}
-                  onKeyDown={(e) => onCreateCategoryKeyDown(e)}
+                  onChange={(e) => handleChangeCategory(e)}
+                  onKeyDown={(e) => handleKeyDownCreateCategory(e)}
                 />
               </div>
               <div className={cx("categories-wrap-container-control")}>
                 <button
                   className={cx("categories-wrap-container-control-create")}
-                  onClick={createModeHandler}
+                  onClick={handleCreateMode}
                 >
                   <IoMdAdd
                     className={cx("categories-wrap-container-control-create-icon", {
@@ -68,7 +68,7 @@ const Categories = () => {
                 </button>
                 <button
                   className={cx("categories-wrap-container-control-edit")}
-                  onClick={editModeHandler}
+                  onClick={handleEditMode}
                 >
                   <FiEdit2 className={cx("categories-wrap-container-control-edit-icon")} />
                   <p className={cx("categories-wrap-container-control-edit-content")}>
@@ -89,7 +89,7 @@ const Categories = () => {
                   categoryPost={categoryPost}
                   categoryLength={categoryPosts.length}
                   editMode={editMode}
-                  editModeHandler={editModeHandler}
+                  onClick={handleEditMode}
                 />
               </React.Fragment>
             ))}

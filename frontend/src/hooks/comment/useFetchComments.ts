@@ -15,23 +15,23 @@ export default function useFetchComments() {
   const postIdx = usePostIdx();
   const history = useHistory();
 
-  const fetchCommentCountHandler = useCallback(() => {
+  const handleFetchCommentCount = useCallback(() => {
     dispatch(fetchCommentCountThunk(postIdx));
   }, [postIdx, dispatch]);
 
-  const fetchCommentsHandler = useCallback(() => {
+  const handleFetchComments = useCallback(() => {
     dispatch(fetchCommentsThunk(postIdx));
   }, [postIdx, dispatch]);
 
   useEffect(() => {
-    fetchCommentCountHandler();
-  }, [fetchCommentCountHandler]);
+    handleFetchCommentCount();
+  }, [handleFetchCommentCount]);
 
   useEffect(() => {
     if (commentCount) {
-      fetchCommentsHandler();
+      handleFetchComments();
     }
-  }, [commentCount, fetchCommentsHandler]);
+  }, [commentCount, handleFetchComments]);
 
   useEffect(() => {
     if (error) {

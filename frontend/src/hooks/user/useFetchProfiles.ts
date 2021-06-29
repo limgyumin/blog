@@ -10,13 +10,13 @@ export default function useFetchProfiles() {
 
   const dispatch = useDispatch();
 
-  const fetchProfilesHandler = useCallback(() => {
+  const handleFetchProfiles = useCallback(() => {
     dispatch(fetchProfilesThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    fetchProfilesHandler();
-  }, [fetchProfilesHandler]);
+    handleFetchProfiles();
+  }, [handleFetchProfiles]);
 
   useEffect(() => {
     if (error) {

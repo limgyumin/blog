@@ -8,10 +8,10 @@ const cx: ClassNamesFn = classNames.bind(styles);
 type InputTitleProps = {
   titleEl: React.MutableRefObject<HTMLTextAreaElement>;
   title: string;
-  onChangeRequest: (name: string, value: any) => void;
+  onChange: (name: string, value: any) => void;
 };
 
-const InputTitle: FC<InputTitleProps> = ({ titleEl, title, onChangeRequest }) => {
+const InputTitle: FC<InputTitleProps> = ({ titleEl, title, onChange }) => {
   return (
     <React.Fragment>
       <textarea
@@ -20,7 +20,7 @@ const InputTitle: FC<InputTitleProps> = ({ titleEl, title, onChangeRequest }) =>
         name="title"
         placeholder="제목을 입력해주세요"
         className={cx("input-title")}
-        onChange={({ target: { name, value } }) => onChangeRequest(name, value)}
+        onChange={({ target: { name, value } }) => onChange(name, value)}
       />
       <div className={cx("input-line")} />
     </React.Fragment>

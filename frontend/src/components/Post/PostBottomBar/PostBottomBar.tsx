@@ -13,27 +13,27 @@ const styles = require("./PostBottomBar.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 type PostBottomBarProps = {
-  scrollToTop: (behavior: ScrollBehavior) => void;
+  onClick: (behavior: ScrollBehavior) => void;
 };
 
-const PostBottomBar: FC<PostBottomBarProps> = ({ scrollToTop }) => {
-  const { liked, likeCount, onCreateHandler } = useBottomBar();
-  const { isMount, onMount } = useModal();
+const PostBottomBar: FC<PostBottomBarProps> = ({ onClick }) => {
+  const { liked, likeCount, handleClickCreateLike } = useBottomBar();
+  const { isMount, handleModalMount } = useModal();
 
   return (
     <React.Fragment>
       <Modal isMount={isMount}>
-        <PostLikedUsers onClose={onMount} />
+        <PostLikedUsers onClose={handleModalMount} />
       </Modal>
       <div className={cx("post-bottombar")}>
-        <button className={cx("post-bottombar-like")} onClick={onCreateHandler}>
+        <button className={cx("post-bottombar-like")} onClick={handleClickCreateLike}>
           {liked ? <IoMdHeart /> : <IoMdHeartEmpty />}
           <p className={cx("post-bottombar-like-count")}>{likeCount}</p>
         </button>
-        <button className={cx("post-bottombar-users")} onClick={onMount}>
+        <button className={cx("post-bottombar-users")} onClick={handleModalMount}>
           <IoIosMore />
         </button>
-        <button className={cx("post-bottombar-scroll")} onClick={() => scrollToTop("smooth")}>
+        <button className={cx("post-bottombar-scroll")} onClick={() => onClick("smooth")}>
           <BsArrowBarUp />
         </button>
       </div>

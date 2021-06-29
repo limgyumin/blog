@@ -5,22 +5,22 @@ import React, { FC } from "react";
 const styles = require("./InputLink.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
-export type InputLinkProps = {
+type InputLinkProps = {
   linkEl: React.MutableRefObject<HTMLDivElement>;
   linkInputEl: React.MutableRefObject<HTMLInputElement>;
   link: string;
-  changeLinkHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  submitLinkHandler: () => void;
-  linkKeyDownHandler: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick: () => void;
+  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
 const InputLink: FC<InputLinkProps> = ({
   linkEl,
   linkInputEl,
   link,
-  changeLinkHandler,
-  submitLinkHandler,
-  linkKeyDownHandler,
+  onChange,
+  onClick,
+  onKeyDown,
 }) => {
   return (
     <div className={cx("input-link")} ref={linkEl}>
@@ -31,11 +31,11 @@ const InputLink: FC<InputLinkProps> = ({
         type="text"
         placeholder="링크를 입력해주세요."
         className={cx("input-link-insert")}
-        onChange={(e) => changeLinkHandler(e)}
-        onKeyDown={(e) => linkKeyDownHandler(e)}
+        onChange={(e) => onChange(e)}
+        onKeyDown={(e) => onKeyDown(e)}
       />
       <div className={cx("input-link-submit")}>
-        <button className={cx("input-link-submit-button")} onClick={() => submitLinkHandler()}>
+        <button className={cx("input-link-submit-button")} onClick={onClick}>
           완료
         </button>
       </div>

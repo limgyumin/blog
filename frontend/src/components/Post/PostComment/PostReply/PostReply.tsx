@@ -24,42 +24,42 @@ const PostReply: FC<PostReplyProps> = ({ commentIdx, replyCount, replies }) => {
   const {
     content,
     replyLastEl,
-    createReplyHandler,
-    onChangeContent,
-    onKeyDownContent,
+    handleCreateReply,
+    handleChangeContent,
+    handleKeyDownContent,
   } = useCreateReply(commentIdx);
   const {
     isMount,
     showReplies,
-    onMount,
-    onShowReplies,
-    onDeleteHandler,
-    deleteReplyHandler,
+    handleModalMount,
+    handleShowReplies,
+    handleClickDeleteReply,
+    handleDeleteReply,
   } = useReply();
 
   return (
     <React.Fragment>
       <Modal isMount={isMount}>
-        <PostReplyDelete onDelete={deleteReplyHandler} onCancel={onMount} />
+        <PostReplyDelete onDelete={handleDeleteReply} onCancel={handleModalMount} />
       </Modal>
       <div className={cx("post-reply")}>
         <div className={cx("post-reply-preview")}>
           {showReplies ? (
-            <div className={cx("post-reply-preview-hide")} onClick={onShowReplies}>
+            <div className={cx("post-reply-preview-hide")} onClick={handleShowReplies}>
               <BiMessageSquareMinus />
               <span>Hide</span>
             </div>
           ) : (
             <React.Fragment>
               {replyCount ? (
-                <div className={cx("post-reply-preview-count")} onClick={onShowReplies}>
+                <div className={cx("post-reply-preview-count")} onClick={handleShowReplies}>
                   <BiMessageSquareAdd />
                   <span>
                     {replyCount} {replyCount > 1 ? "Replies" : "Reply"}
                   </span>
                 </div>
               ) : (
-                <div className={cx("post-reply-preview-leave")} onClick={onShowReplies}>
+                <div className={cx("post-reply-preview-leave")} onClick={handleShowReplies}>
                   <BiMessageSquareAdd />
                   <span>Leave a reply</span>
                 </div>
@@ -70,13 +70,13 @@ const PostReply: FC<PostReplyProps> = ({ commentIdx, replyCount, replies }) => {
         {showReplies && (
           <div className={cx("post-reply-list")} ref={replyLastEl}>
             {replies.map((reply) => (
-              <PostReplyItem key={reply.idx} reply={reply} onDeleteHandler={onDeleteHandler} />
+              <PostReplyItem key={reply.idx} reply={reply} onClick={handleClickDeleteReply} />
             ))}
             <PostReplyHandle
               content={content}
-              onChange={onChangeContent}
-              onKeyDown={onKeyDownContent}
-              onComplete={createReplyHandler}
+              onChange={handleChangeContent}
+              onKeyDown={handleKeyDownContent}
+              onComplete={handleCreateReply}
             />
           </div>
         )}

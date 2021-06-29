@@ -9,13 +9,13 @@ export default function useFetchCategoryPosts() {
 
   const dispatch = useDispatch();
 
-  const fetchCategoryPostsHandler = useCallback(() => {
+  const handleFetchCategoryPosts = useCallback(() => {
     dispatch(fetchCategoryPostsThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    fetchCategoryPostsHandler();
-  }, [fetchCategoryPostsHandler]);
+    handleFetchCategoryPosts();
+  }, [handleFetchCategoryPosts]);
 
   return {
     loading,

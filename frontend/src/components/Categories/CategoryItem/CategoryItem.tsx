@@ -18,32 +18,32 @@ type CategoryItemProps = {
   categoryPost: ICategoryPosts;
   categoryLength: number;
   editMode: boolean;
-  editModeHandler: () => void;
+  onClick: () => void;
 };
 
 const CategoryItem: FC<CategoryItemProps> = ({
   categoryPost,
   categoryLength,
   editMode,
-  editModeHandler,
+  onClick,
 }) => {
   const {
     categoryName,
     isMount,
     updateMode,
-    onMount,
-    onDeleteConfirmHandler,
-    onCategoryChange,
-    onUpdateCategoryKeyDown,
-    onUpdateHandler,
-    onDeleteHandler,
+    handleModalMount,
+    handleConfirmDeleteCategory,
+    handleChangeCategory,
+    handleKeyDownUpdateCategory,
+    handleClickUpdateCategory,
+    handleClickDeleteCategory,
   } = useCategory(categoryPost);
   const [open, setOpen] = useState<boolean>(false);
 
   return (
     <React.Fragment>
       <Modal isMount={isMount}>
-        <CategoryDelete onDelete={onDeleteConfirmHandler} onCancel={onMount} />
+        <CategoryDelete onDelete={handleConfirmDeleteCategory} onCancel={handleModalMount} />
       </Modal>
       <div className={cx("category-item")}>
         <div
@@ -61,12 +61,12 @@ const CategoryItem: FC<CategoryItemProps> = ({
                   type="text"
                   placeholder="카테고리 이름 입력."
                   className={cx("category-item-info-wrap-edit-input")}
-                  onChange={(e) => onCategoryChange(e)}
-                  onKeyDown={(e) => onUpdateCategoryKeyDown(e)}
+                  onChange={(e) => handleChangeCategory(e)}
+                  onKeyDown={(e) => handleKeyDownUpdateCategory(e)}
                 />
                 <RiDeleteBack2Fill
                   onClick={() => {
-                    editMode && editModeHandler();
+                    editMode && onClick();
                   }}
                 />
               </div>
@@ -74,7 +74,7 @@ const CategoryItem: FC<CategoryItemProps> = ({
               <p
                 className={cx("category-item-info-wrap-name")}
                 onClick={() => {
-                  editMode && onUpdateHandler(categoryPost.idx);
+                  editMode && handleClickUpdateCategory(categoryPost.idx);
                 }}
               >
                 {categoryPost.name}
@@ -86,7 +86,7 @@ const CategoryItem: FC<CategoryItemProps> = ({
             categoryLength > 1 && (
               <MdCancel
                 className={cx("category-item-info-icon")}
-                onClick={() => onDeleteHandler(categoryPost.idx)}
+                onClick={() => handleClickDeleteCategory(categoryPost.idx)}
               />
             )
           ) : (

@@ -10,13 +10,13 @@ export default function useFetchCategories() {
 
   const dispatch = useDispatch();
 
-  const fetchCategoriesHandler = useCallback(() => {
+  const handleFetchCategories = useCallback(() => {
     dispatch(fetchCategoriesThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    fetchCategoriesHandler();
-  }, [fetchCategoriesHandler]);
+    handleFetchCategories();
+  }, [handleFetchCategories]);
 
   useEffect(() => {
     if (error) {
