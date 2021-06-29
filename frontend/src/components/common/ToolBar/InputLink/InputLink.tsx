@@ -6,8 +6,8 @@ const styles = require("./InputLink.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 export type InputLinkProps = {
-  linkRef: React.MutableRefObject<HTMLDivElement>;
-  linkInputRef: React.MutableRefObject<HTMLInputElement>;
+  linkEl: React.MutableRefObject<HTMLDivElement>;
+  linkInputEl: React.MutableRefObject<HTMLInputElement>;
   link: string;
   changeLinkHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
   submitLinkHandler: () => void;
@@ -15,19 +15,19 @@ export type InputLinkProps = {
 };
 
 const InputLink: FC<InputLinkProps> = ({
-  linkRef,
-  linkInputRef,
+  linkEl,
+  linkInputEl,
   link,
   changeLinkHandler,
   submitLinkHandler,
   linkKeyDownHandler,
 }) => {
   return (
-    <div className={cx("input-link")} ref={linkRef}>
+    <div className={cx("input-link")} ref={linkEl}>
       <h3 className={cx("input-link-title")}>링크 삽입하기</h3>
       <input
         value={link}
-        ref={linkInputRef}
+        ref={linkInputEl}
         type="text"
         placeholder="링크를 입력해주세요."
         className={cx("input-link-insert")}
