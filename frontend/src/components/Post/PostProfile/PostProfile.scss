@@ -35,19 +35,16 @@
     }
   }
 
-  & > a {
-    & > svg {
-      width: 2.6rem;
-      height: 2.6rem;
+  &-github {
+    &-icon {
+      width: 3rem;
+      height: 3rem;
+      transition: all ease 0.2s;
+      color: var(--theme-background-scale-0);
 
-      & > path {
-        transition: all ease 0.2s;
-        fill: var(--theme-background-scale-0);
+      &:hover {
+        color: var(--theme-text-scale-0);
       }
-    }
-
-    &:hover > svg > path {
-      fill: var(--theme-main);
     }
   }
 }

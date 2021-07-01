@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ReactComponent as GitHub } from "../../../assets/images/github.svg";
+import { AiFillGithub } from "react-icons/ai";
 import IUser from "types/user.type";
 import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
@@ -23,8 +23,13 @@ const PostProfile: FC<PostProfileProps> = ({ user }) => {
           <p>{bio}</p>
         </div>
       </div>
-      <a href={`https://github.com/${id}`} target="_blank" rel="noopener noreferrer">
-        <GitHub />
+      <a
+        className={cx("post-profile-github")}
+        href={`https://github.com/${id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <AiFillGithub className={cx("post-profile-github-icon")} />
       </a>
     </div>
   );
