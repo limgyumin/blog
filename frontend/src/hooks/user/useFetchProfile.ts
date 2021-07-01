@@ -44,11 +44,6 @@ export default function useFetchProfile() {
     }
   }, [getFcmToken]);
 
-  const handleLogout = useCallback(() => {
-    dispatch(initUser());
-    token.remove();
-  }, [dispatch]);
-
   const handleFetchMyProfile = useCallback(() => {
     const accessToken = token.get();
 
@@ -64,16 +59,16 @@ export default function useFetchProfile() {
   useEffect(() => {
     if (error) {
       history.push("/");
-      handleLogout();
+      token.remove();
+      dispatch(initUser());
       dispatch(initUserError());
     }
-  }, [error, history, handleLogout, dispatch]);
+  }, [error, history, dispatch]);
 
   return {
     loading,
     login,
     admin,
     profile,
-    handleLogout,
   };
 }
