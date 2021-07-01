@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  margin-left: 0.3rem;
 
   &-user {
     display: flex;
@@ -9,8 +10,8 @@
     cursor: pointer;
 
     &-avatar {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 2.2rem;
+      height: 2.2rem;
       border-radius: 50%;
       border: 1px solid var(--theme-background-scale-4);
     }
@@ -18,8 +19,8 @@
 
   &-divide {
     width: 1px;
-    margin: 0 1.5rem;
-    height: 1rem;
+    margin: 0 1.3rem;
+    height: 0.8rem;
     background-color: var(--theme-background-scale-0);
   }
 
@@ -27,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.36rem 0.94rem;
+    padding: 0.33rem 0.9rem;
     background-color: var(--theme-main);
     font-size: 0.925rem;
     font-weight: bold;
