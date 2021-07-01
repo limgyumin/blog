@@ -8,7 +8,6 @@ const styles = require("./HeaderProfile.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 type HeaderProfileProps = {
-  children: React.ReactNode;
   menuEl: React.MutableRefObject<HTMLDivElement>;
   admin: boolean;
   profile: IUser;
@@ -16,14 +15,7 @@ type HeaderProfileProps = {
   onClick: () => void;
 };
 
-const HeaderProfile: FC<HeaderProfileProps> = ({
-  children,
-  menuEl,
-  admin,
-  profile,
-  showMenu,
-  onClick,
-}) => {
+const HeaderProfile: FC<HeaderProfileProps> = ({ menuEl, admin, profile, showMenu, onClick }) => {
   return (
     <div className={cx("header-profile")}>
       <div className={cx("header-profile-user")} onClick={onClick} ref={menuEl}>
@@ -37,7 +29,6 @@ const HeaderProfile: FC<HeaderProfileProps> = ({
           </Link>
         </React.Fragment>
       )}
-      {showMenu && children}
     </div>
   );
 };

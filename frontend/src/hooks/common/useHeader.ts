@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import useClose from "hooks/util/useClose";
+import { initUser } from "modules/user";
+import token from "lib/token";
+import { useDispatch } from "react-redux";
 
 export default function useHeader() {
+  const dispatch = useDispatch();
+
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -15,8 +20,8 @@ export default function useHeader() {
   const isPost = useMemo(() => pathname.split("/")[1] === "post", [pathname]);
 
   const handleShowMenu = useCallback(() => {
-    setShowMenu(!showMenu);
-  }, [showMenu]);
+    setShowMenu((prevState) => !prevState);
+  }, []);
 
   const handleClickTemp = useCallback(() => {
     history.push("/temp");
@@ -30,6 +35,12 @@ export default function useHeader() {
 
     setScroll(progress);
   }, []);
+
+  const handleLogout = useCallback(() => {
+    dispatch(initUser());
+    handleShowMenu();
+    token.remove();
+  }, [dispatch, handleShowMenu]);
 
   useClose<HTMLDivElement>(clickEl, menuEl, handleShowMenu);
 
@@ -46,11 +57,12 @@ export default function useHeader() {
   }, []);
 
   return {
+    isPost,
     clickEl,
     menuEl,
     scroll,
     showMenu,
-    isPost,
+    handleLogout,
     handleShowMenu,
     handleClickTemp,
   };

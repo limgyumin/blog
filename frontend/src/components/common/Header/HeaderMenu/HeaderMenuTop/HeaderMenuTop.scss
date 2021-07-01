@@ -1,0 +1,23 @@
+.header-menu-top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-logo {
+    width: auto;
+    height: 2rem;
+  }
+
+  &-close {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &-icon {
+      color: var(--theme-text-scale-3);
+      font-size: 2rem;
+    }
+  }
+}

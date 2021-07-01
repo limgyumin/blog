@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
 import { FiArrowLeft } from "react-icons/fi";
+import ThemeButton from "components/common/ThemeButton";
 
 const styles = require("./HandleBottom.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
@@ -16,6 +17,7 @@ type HandleBottomProps = {
 const HandleBottom: FC<HandleBottomProps> = ({ valid, onCancel, onSave, onComplete }) => {
   return (
     <div className={cx("handle-bottom")}>
+      <ThemeButton />
       <div className={cx("handle-bottom-buttons")}>
         <button className={cx("handle-bottom-buttons-cancel")} onClick={onCancel}>
           <FiArrowLeft className={cx("handle-bottom-buttons-cancel-icon")} />

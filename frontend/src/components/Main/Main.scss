@@ -11,6 +11,10 @@
     justify-content: center;
     position: relative;
 
+    @media screen and (max-width: 900px) {
+      padding-top: 4rem;
+    }
+
     &-container {
       width: 100%;
       max-width: 960px;

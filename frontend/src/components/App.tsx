@@ -2,7 +2,6 @@ import React from "react";
 import "styles/theme.scss";
 import { Route, Switch } from "react-router-dom";
 import useTheme from "hooks/util/useTheme";
-import SideBar from "./common/SideBar";
 import Header from "./common/Header";
 import RestrictRoute from "./Route/RestrictRoute";
 import * as Pages from "pages";
@@ -20,12 +19,7 @@ const App = () => {
           const path = location.pathname.split("/")[1];
           return (
             <React.Fragment>
-              {path !== "write" && path !== "update" && path !== "auth" && (
-                <React.Fragment>
-                  <Header />
-                  <SideBar />
-                </React.Fragment>
-              )}
+              {path !== "write" && path !== "update" && path !== "auth" && <Header />}
               <Switch>
                 <Route exact path="/" render={() => <Pages.Main />} />
                 <Route path="/categories" render={() => <Pages.Categories />} />
@@ -36,7 +30,7 @@ const App = () => {
                 <Route path="/auth" render={() => <Pages.Auth />} />
                 <RestrictRoute path="/temp" render={() => <Pages.Temp />} />
                 <Route path="/members" render={() => <Pages.Members />} />
-                <Route path="/about" render={() => <Pages.About />} />
+                <Route exact path="/about" render={() => <Pages.About />} />
               </Switch>
             </React.Fragment>
           );

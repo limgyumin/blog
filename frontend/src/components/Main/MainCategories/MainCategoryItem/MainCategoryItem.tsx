@@ -17,10 +17,10 @@ const MainCategoryItem: FC<MainCategoryItemProps> = ({ category }) => {
 
   const { idx, name, post_count } = category;
 
-  const isTotal = idx === 0;
   const path = `?tab=${idx}`;
+  const isTotal = idx === 0;
   const isMain = tab === null;
-  const isCorrect = Number(tab) === idx;
+  const isMatch = Number(tab) === idx;
 
   return (
     <React.Fragment>
@@ -31,20 +31,18 @@ const MainCategoryItem: FC<MainCategoryItemProps> = ({ category }) => {
               {name}
             </p>
           </div>
-          <div className={cx("main-category-item-count", { "category-count-active": isCorrect })}>
+          <div className={cx("main-category-item-count", { "category-count-active": isMatch })}>
             {post_count}
           </div>
         </Link>
       ) : (
-        <Link to={`${path}`} className={cx("main-category-item", { "category-active": isCorrect })}>
+        <Link to={path} className={cx("main-category-item", { "category-active": isMatch })}>
           <div className={cx("main-category-item-wrap")}>
-            <p
-              className={cx("main-category-item-wrap-name", { "category-name-active": isCorrect })}
-            >
+            <p className={cx("main-category-item-wrap-name", { "category-name-active": isMatch })}>
               {name}
             </p>
           </div>
-          <div className={cx("main-category-item-count", { "category-count-active": isCorrect })}>
+          <div className={cx("main-category-item-count", { "category-count-active": isMatch })}>
             {post_count}
           </div>
         </Link>

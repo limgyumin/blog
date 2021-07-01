@@ -1,5 +1,5 @@
 import { RootState } from "modules";
-import { fetchProfilesThunk, initUserError } from "modules/user";
+import { fetchAdminProfileThunk, fetchProfilesThunk, initUserError } from "modules/user";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -14,9 +14,17 @@ export default function useFetchProfiles() {
     dispatch(fetchProfilesThunk());
   }, [dispatch]);
 
+  const handleFetchAdminProfile = useCallback(() => {
+    dispatch(fetchAdminProfileThunk());
+  }, [dispatch]);
+
   useEffect(() => {
     handleFetchProfiles();
   }, [handleFetchProfiles]);
+
+  useEffect(() => {
+    handleFetchAdminProfile();
+  }, [handleFetchAdminProfile]);
 
   useEffect(() => {
     if (error) {
