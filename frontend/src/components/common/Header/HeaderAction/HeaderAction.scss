@@ -3,8 +3,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 2.4rem;
-  height: 2.4rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  margin-left: 0.3rem;
   background-color: var(--theme-main);
   border-radius: 50%;
   box-shadow: none;
@@ -18,12 +19,8 @@
     box-shadow: 0 0 0.7rem 0 rgba(0, 0, 0, 0.2);
   }
 
-  &-logo {
-    width: 1.65rem;
-    height: 1.65rem;
-
-    & > path {
-      fill: var(--theme-main-background);
-    }
+  &-icon {
+    font-size: 1.7rem;
+    color: var(--theme-main-background);
   }
 }
