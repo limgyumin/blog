@@ -12,7 +12,7 @@ const styles = require("./About.scss");
 const cx: ClassNamesFn = classNames.bind(styles);
 
 const About = () => {
-  const { isInfo, isPolicy } = useAbout();
+  const { isPolicy } = useAbout();
 
   return (
     <React.Fragment>
@@ -31,19 +31,19 @@ const About = () => {
           <div className={cx("about-wrap-tab")}>
             <div className={cx("about-wrap-tab-container")}>
               <Link
-                to="/about/info"
-                className={cx("about-wrap-tab-container-info", { "info-active": isInfo })}
+                to="/about"
+                className={cx("about-wrap-tab-container-info", { "info-active": !isPolicy })}
               >
                 <h2
                   className={cx("about-wrap-tab-container-info-text", {
-                    "info-text-active": isInfo,
+                    "info-text-active": !isPolicy,
                   })}
                 >
                   블로그
                 </h2>
               </Link>
               <Link
-                to="/about/policy"
+                to="/about?type=policy"
                 className={cx("about-wrap-tab-container-policy", { "policy-active": isPolicy })}
               >
                 <h2
@@ -60,8 +60,7 @@ const About = () => {
             </div>
           </div>
           <div className={cx("about-wrap-content")}>
-            {isInfo && <AboutInformation />}
-            {isPolicy && <AboutPolicy />}
+            {isPolicy ? <AboutPolicy /> : <AboutInformation />}
           </div>
         </div>
       </div>
