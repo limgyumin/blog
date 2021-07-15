@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
-import { headerMenuTabModel } from "components/models/headerMenuTabModel";
+import { headerMenuTabModel } from "models/headerMenuTabModel";
 import React from "react";
 import { memo } from "react";
 import MenuTabItem from "./MenuTabItem";
