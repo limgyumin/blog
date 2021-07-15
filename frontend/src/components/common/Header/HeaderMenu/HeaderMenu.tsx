@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { ClassNamesFn } from "classnames/types";
 import IUser from "types/user.type";
 import { Link } from "react-router-dom";
-import { headerMenuTabModel } from "components/models/headerMenuTabModel";
+import { headerMenuTabModel } from "models/headerMenuTabModel";
 import HeaderMenuProfile from "./HeaderMenuProfile";
 import HeaderMenuLogin from "./HeaderMenuLogin";
 import HeaderMenuTop from "./HeaderMenuTop";
@@ -33,12 +33,19 @@ const HeaderMenu: FC<HeaderMenuProps> = ({
       <div className={cx("header-menu-wrap")}>
         <HeaderMenuTop onClose={onClose} />
         <div className={cx("header-menu-wrap-container")}>
-          {login ? <HeaderMenuProfile profile={profile} /> : <HeaderMenuLogin />}
+          {login ? (
+            <HeaderMenuProfile profile={profile} />
+          ) : (
+            <HeaderMenuLogin />
+          )}
         </div>
         <div className={cx("header-menu-wrap-content")}>
           {login && admin && (
             <div className={cx("header-menu-wrap-content-restrict")}>
-              <div className={cx("header-menu-wrap-content-item")} onClick={onClickTemp}>
+              <div
+                className={cx("header-menu-wrap-content-item")}
+                onClick={onClickTemp}
+              >
                 임시 글
               </div>
               <Link to="/write" className={cx("header-menu-wrap-content-item")}>
@@ -57,7 +64,10 @@ const HeaderMenu: FC<HeaderMenuProps> = ({
             </Link>
           ))}
           {login && (
-            <div className={cx("header-menu-wrap-content-logout")} onClick={onClickLogout}>
+            <div
+              className={cx("header-menu-wrap-content-logout")}
+              onClick={onClickLogout}
+            >
               로그아웃
             </div>
           )}
