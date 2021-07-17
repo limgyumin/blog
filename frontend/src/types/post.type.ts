@@ -77,3 +77,9 @@ export interface IPostsResponse extends IResponse {
 export type PostParamsType = {
   idx: string;
 };
+
+export type PostQueryType = {
+  page: number;
+  limit: number;
+  category?: number;
+};

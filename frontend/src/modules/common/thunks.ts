@@ -3,21 +3,15 @@ import { RootState } from "modules";
 import { ThunkAction } from "redux-thunk";
 import { requestApi } from "request/requestApi";
 import { POST } from "request/requestUrl";
-import { IPostsResponse } from "types/post.type";
+import { IPostsResponse, PostQueryType } from "types/post.type";
 import { fetchPostsAsync } from "./actions";
 import { CommonAction } from "./types";
-
-export type PostParamsType = {
-  page: number;
-  limit: number;
-  category?: number;
-};
 
 export const fetchPostsThunk = ({
   page,
   limit,
   category,
-}: PostParamsType): ThunkAction<void, RootState, void, CommonAction> => {
+}: PostQueryType): ThunkAction<void, RootState, void, CommonAction> => {
   return async (dispatch) => {
     const { request, success, failure } = fetchPostsAsync;
     dispatch(request(category));

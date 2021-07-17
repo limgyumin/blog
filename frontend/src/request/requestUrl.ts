@@ -1,8 +1,4 @@
-type PostParamsType = {
-  page: number;
-  limit: number;
-  category?: number;
-};
+import { PostQueryType } from "types/post.type";
 
 export const AUTH = {
   GITHUB: "/auth/login",
@@ -23,7 +19,7 @@ export const POST = {
   },
   GET: {
     ONE: (idx: number) => `/post/${idx}`,
-    ALL: ({ page, limit, category }: PostParamsType) => {
+    ALL: ({ page, limit, category }: PostQueryType) => {
       let url = `/post?page=${page}&limit=${limit}`;
       if (category) url += `&category=${category}`;
       return url;

@@ -3,14 +3,17 @@ import useQueryString from "hooks/util/useQueryString";
 import { RootState } from "modules";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import { fetchPostsThunk, PostParamsType } from "modules/common/thunks";
+import { fetchPostsThunk } from "modules/common/thunks";
 import { POST_LIMIT } from "constants/postLimit";
 import { increasePage, initCommonError, resetPage } from "modules/common";
 import { useInView } from "react-intersection-observer";
 import { toast } from "react-toastify";
+import { PostQueryType } from "types/post.type";
 
 export default function useFetchPosts() {
-  const { loading, error, data } = useSelector((state: RootState) => state.commons);
+  const { loading, error, data } = useSelector(
+    (state: RootState) => state.commons
+  );
   const { page, total, notFound, posts } = data;
 
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ export default function useFetchPosts() {
   const [lastPostEl, inView] = useInView({ threshold: 0.5 });
 
   const handleFetchPosts = useCallback(() => {
-    const params: PostParamsType = {
+    const params: PostQueryType = {
       page,
       limit: POST_LIMIT,
     };
