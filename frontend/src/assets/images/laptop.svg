@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="685.461" height="547.419" viewBox="0 0 685.461 547.419">
+  <g id="laptop" transform="translate(-5465.552 3804.913)">
+    <path id="background" d="M7339.529-2646.887c-89.812,23.183-86.282,73.664-143.883,158.963s-103.732,168.983-44.616,225.311,150.021-11.154,281.081,0,222.465,33.3,279.226-55.9-57.246-110.578-107.913-213.057S7429.341-2670.07,7339.529-2646.887Z" transform="translate(-1988.244 -2953.431) rotate(14)" fill="rgba(132,132,132,0.12)"/>
+    <g id="사각형_73" data-name="사각형 73" transform="translate(5589 -3494.373)" fill="#fff" stroke="#1e1e1e" stroke-linecap="round" stroke-linejoin="round" stroke-width="8">
+      <rect width="416" height="211" rx="8" stroke="none"/>
+      <rect x="-4" y="-4" width="424" height="219" rx="12" fill="none"/>
+    </g>
+    <g id="패스_349" data-name="패스 349" transform="translate(5589 -3637.799)" fill="#fff" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 419.0466918945313 148.4258728027344 L 416 148.4258728027344 L 7.512019237765344e-06 148.4258728027344 L -3.181838750839233 148.4258728027344 L -4.529454231262207 145.5434875488281 L -71.58368682861328 2.117644071578979 L -74.91130065917969 -4.999971389770508 L -67.05422210693359 -4.999971389770508 L 489.9927062988281 -4.999971389770508 L 498.1983032226563 -4.999971389770508 L 494.4362487792969 2.292413234710693 L 420.4435424804688 145.71826171875 L 419.0466918945313 148.4258728027344 Z" stroke="none"/>
+      <path d="M 416 143.4258728027344 L 489.9926452636719 3.499348895275034e-05 L -67.05417633056641 3.499348895275034e-05 L -1.171875010186341e-05 143.4258728027344 L 416 143.4258728027344 M 416 153.4258728027344 L -1.171875010186341e-05 153.4258728027344 C -3.882761716842651 153.4258728027344 -7.414511680603027 151.1783752441406 -9.058845520019531 147.6610412597656 L -76.11301422119141 4.235201835632324 C -77.56109619140625 1.13803493976593 -77.32634735107422 -2.484298229217529 -75.49076080322266 -5.36879825592041 C -73.65518188476563 -8.253214836120605 -70.47317504882813 -9.999964714050293 -67.05417633056641 -9.999964714050293 L 489.9926452636719 -9.999964714050293 C 493.4808959960938 -9.999964714050293 496.7170715332031 -8.182214736938477 498.5322265625 -5.203464984893799 C 500.3473205566406 -2.224631786346436 500.4789733886719 1.484784960746765 498.8797302246094 4.584784984588623 L 424.8870849609375 148.0106201171875 C 423.1713256835938 151.3363647460938 419.7422485351563 153.4258728027344 416 153.4258728027344 Z" stroke="none" fill="#1e1e1e"/>
+    </g>
+    <g id="패스_350" data-name="패스 350" transform="translate(5584.672 -3637.799)" fill="#484848" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 418.8956909179688 141.0224609375 L 5.854050159454346 141.0224609375 L -55.36474609375 7.499999523162842 L 486.4491577148438 7.499999523162842 L 418.8956909179688 141.0224609375 Z" stroke="none"/>
+      <path d="M 414.2849426269531 133.5224761962891 L 474.2494201660156 14.99998092651367 L -43.67539215087891 14.99998092651367 L 10.66612529754639 133.5224761962891 L 414.2849426269531 133.5224761962891 M 423.5064392089844 148.5224761962891 L 1.042029976844788 148.5224761962891 L -67.05422210693359 -1.953124956344254e-05 L 498.6489562988281 -1.953124956344254e-05 L 423.5064392089844 148.5224761962891 Z" stroke="none" fill="#1e1e1e"/>
+    </g>
+    <path id="패스_351" data-name="패스 351" d="M5505.246-1482.843h88.531L5521.7-1364.878h-82.289Z" transform="translate(393 -2139.677)" fill="#5e5e5e"/>
+    <path id="패스_352" data-name="패스 352" d="M5460.066-1482.843h27.772l-67.7,117.866h-25.814Z" transform="translate(382.342 -2139.579)" fill="#5e5e5e"/>
+    <g id="keyboard" transform="translate(5121 -4293.332)">
+      <g id="사각형_74" data-name="사각형 74" transform="translate(488 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="none"/>
+      </g>
+      <g id="사각형_75" data-name="사각형 75" transform="translate(488 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_76" data-name="사각형 76" transform="translate(518 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_77" data-name="사각형 77" transform="translate(548 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_78" data-name="사각형 78" transform="translate(578 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_79" data-name="사각형 79" transform="translate(608 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_80" data-name="사각형 80" transform="translate(638 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_81" data-name="사각형 81" transform="translate(668 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_82" data-name="사각형 82" transform="translate(698 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_83" data-name="사각형 83" transform="translate(730 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_84" data-name="사각형 84" transform="translate(760 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_85" data-name="사각형 85" transform="translate(790 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_86" data-name="사각형 86" transform="translate(820 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="44" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="43" height="23" rx="3.5" fill="none"/>
+      </g>
+    </g>
+    <g id="keyboard-2" data-name="keyboard" transform="translate(5171 -4263.332)">
+      <g id="사각형_74-2" data-name="사각형 74" transform="translate(488 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="none"/>
+      </g>
+      <g id="사각형_75-2" data-name="사각형 75" transform="translate(490 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_76-2" data-name="사각형 76" transform="translate(520 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_77-2" data-name="사각형 77" transform="translate(550 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_78-2" data-name="사각형 78" transform="translate(580 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_79-2" data-name="사각형 79" transform="translate(610 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_80-2" data-name="사각형 80" transform="translate(640 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_81-2" data-name="사각형 81" transform="translate(670 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_82-2" data-name="사각형 82" transform="translate(700 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_83-2" data-name="사각형 83" transform="translate(730 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_84-2" data-name="사각형 84" transform="translate(760 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_85-2" data-name="사각형 85" transform="translate(790 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_87" data-name="사각형 87" transform="translate(438 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="44" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="43" height="23" rx="3.5" fill="none"/>
+      </g>
+    </g>
+    <g id="keyboard-3" data-name="keyboard" transform="translate(5171 -4233.332)">
+      <g id="사각형_76-3" data-name="사각형 76" transform="translate(509 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_77-3" data-name="사각형 77" transform="translate(539 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_78-3" data-name="사각형 78" transform="translate(569 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_79-3" data-name="사각형 79" transform="translate(599 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_80-3" data-name="사각형 80" transform="translate(629 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_81-3" data-name="사각형 81" transform="translate(659 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_82-3" data-name="사각형 82" transform="translate(689 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_83-3" data-name="사각형 83" transform="translate(719 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_87-2" data-name="사각형 87" transform="translate(438 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="65" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="64" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_88" data-name="사각형 88" transform="translate(749 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="65" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="64" height="23" rx="3.5" fill="none"/>
+      </g>
+    </g>
+    <g id="keyboard-4" data-name="keyboard" transform="translate(5171 -4233.332)">
+      <g id="사각형_76-4" data-name="사각형 76" transform="translate(509 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_77-4" data-name="사각형 77" transform="translate(539 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_78-4" data-name="사각형 78" transform="translate(569 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_79-4" data-name="사각형 79" transform="translate(599 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_80-4" data-name="사각형 80" transform="translate(629 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_81-4" data-name="사각형 81" transform="translate(659 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_82-4" data-name="사각형 82" transform="translate(689 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_83-4" data-name="사각형 83" transform="translate(719 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_87-3" data-name="사각형 87" transform="translate(438 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="65" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="64" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_88-2" data-name="사각형 88" transform="translate(749 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="65" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="64" height="23" rx="3.5" fill="none"/>
+      </g>
+    </g>
+    <g id="keyboard-5" data-name="keyboard" transform="translate(5121 -4203.332)">
+      <g id="사각형_74-3" data-name="사각형 74" transform="translate(488 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="6" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="5.5" fill="none"/>
+      </g>
+      <g id="사각형_75-3" data-name="사각형 75" transform="translate(488 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_76-5" data-name="사각형 76" transform="translate(518 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_77-5" data-name="사각형 77" transform="translate(548 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_84-3" data-name="사각형 84" transform="translate(760 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_85-3" data-name="사각형 85" transform="translate(790 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="24" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="23" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_86-2" data-name="사각형 86" transform="translate(820 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="44" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="43" height="23" rx="3.5" fill="none"/>
+      </g>
+      <g id="사각형_89" data-name="사각형 89" transform="translate(578 832)" fill="#1e1e1e" stroke="#1e1e1e" stroke-width="1">
+        <rect width="175" height="24" rx="4" stroke="none"/>
+        <rect x="0.5" y="0.5" width="174" height="23" rx="3.5" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>
