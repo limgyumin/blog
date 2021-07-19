@@ -26,6 +26,7 @@ body {
   font-family: MalgunGothic;
   height: 100%;
   margin: 0;
+  line-height: 1.4;
 }
 `;
 
