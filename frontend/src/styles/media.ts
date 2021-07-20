@@ -1,6 +1,6 @@
 import { css, CSSProp } from "styled-components";
 
-export const sizes: { [key: string]: number } = {
+export const sizes = {
   mobile: 580,
   tablet: 768,
   desktop: 1284,
