@@ -1,25 +1,49 @@
 import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
 import { IoMdClose } from "react-icons/io";
 import { ReactComponent as LogoBlack } from "assets/images/logo_black.svg";
-
-const styles = require("./HeaderMenuTop.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import styled from "styled-components";
 
 type HeaderMenuTopProps = {
-  onClose: () => void;
+  onClickClose: () => void;
 };
 
-const HeaderMenuTop: FC<HeaderMenuTopProps> = ({ onClose }) => {
+const HeaderMenuTop: FC<HeaderMenuTopProps> = ({ onClickClose }) => {
   return (
-    <div className={cx("header-menu-top")}>
-      <LogoBlack className={cx("header-menu-top-logo")} />
-      <button className={cx("header-menu-top-close")} onClick={onClose}>
-        <IoMdClose className={cx("header-menu-top-close-icon")} />
-      </button>
-    </div>
+    <HeaderMenuTopWrapper>
+      <HeaderMenuTopLogo />
+      <HeaderMenuTopClose onClick={onClickClose}>
+        <IoMdClose />
+      </HeaderMenuTopClose>
+    </HeaderMenuTopWrapper>
   );
 };
+
+const HeaderMenuTopWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const HeaderMenuTopLogo = styled(LogoBlack)`
+  width: auto;
+  height: 2rem;
+
+  & > path {
+    fill: ${({ theme }) => theme.color.ftColor};
+  }
+`;
+
+const HeaderMenuTopClose = styled.button`
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  & > svg {
+    color: ${({ theme }) => theme.color.ftColor4};
+    font-size: 2rem;
+  }
+`;
 
 export default HeaderMenuTop;
