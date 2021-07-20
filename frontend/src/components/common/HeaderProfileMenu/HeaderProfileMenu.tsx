@@ -10,7 +10,7 @@ const cx: ClassNamesFn = classNames.bind(styles);
 type HeaderProfileMenuProps = {
   clickEl: React.MutableRefObject<HTMLDivElement>;
   admin: boolean;
-  onClickTemp: () => void;
+  onClickTemp: (path: string) => void;
   onClickLogout: () => void;
 };
 
@@ -23,7 +23,10 @@ const HeaderProfileMenu: FC<HeaderProfileMenuProps> = ({
   return (
     <div className={cx("header-profile-menu")} ref={clickEl}>
       {admin && (
-        <div className={cx("header-profile-menu-temp")} onClick={onClickTemp}>
+        <div
+          className={cx("header-profile-menu-temp")}
+          onClick={() => onClickTemp("/temp")}
+        >
           <div className={cx("header-profile-menu-temp-wrap")}>
             <FaSave />
           </div>

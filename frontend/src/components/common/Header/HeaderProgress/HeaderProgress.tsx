@@ -1,9 +1,5 @@
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
 import React, { FC } from "react";
-
-const styles = require("./HeaderProgress.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import styled, { css } from "styled-components";
 
 type HeaderProgressProps = {
   scroll: number;
@@ -11,13 +7,29 @@ type HeaderProgressProps = {
 
 const HeaderProgress: FC<HeaderProgressProps> = ({ scroll }) => {
   return (
-    <div className={cx("header-progress")}>
-      <div
-        className={cx("header-progress-container")}
-        style={{ transform: `scale(${scroll}, 1)` }}
-      />
-    </div>
+    <HeaderProgressWrapper>
+      <HeaderProgressContainer $scroll={scroll} />
+    </HeaderProgressWrapper>
   );
 };
+
+const HeaderProgressWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -4px;
+  height: 4px;
+  z-index: 100;
+`;
+
+const HeaderProgressContainer = styled.div<{ $scroll: number }>`
+  background: ${({ theme }) => theme.color.ftColor2};
+  transform-origin: top left;
+  transform: scale(0, 0);
+  height: 4px;
+  ${(props) => css`
+    transform: scale(${props.$scroll}, 1);
+  `};
+`;
 
 export default HeaderProgress;

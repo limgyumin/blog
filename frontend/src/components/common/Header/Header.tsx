@@ -4,19 +4,15 @@ import { Link } from "react-router-dom";
 import useFetchProfile from "hooks/user/useFetchProfile";
 import useHeader from "hooks/common/useHeader";
 import HeaderProfile from "./HeaderProfile";
-import HeaderAction from "./HeaderAction";
 import HeaderProgress from "./HeaderProgress";
 import HeaderProfileMenu from "../HeaderProfileMenu";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
 import { memo } from "react";
 import HeaderMenuTab from "./HeaderMenuTab";
 import HeaderButtons from "./HeaderButtons";
-import { useMediaQuery } from "react-responsive";
 import HeaderMenu from "./HeaderMenu";
-
-const styles = require("./Header.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import styled from "styled-components";
+import HeaderLogin from "./HeaderLogin";
+import useCustomMedia from "hooks/util/useCustomMedia";
 
 const Header = () => {
   const { login, admin, profile } = useFetchProfile();
@@ -28,61 +24,104 @@ const Header = () => {
     showMenu,
     handleLogout,
     handleShowMenu,
-    handleClickTemp,
+    handleClickItem,
+    handleClickSearch,
   } = useHeader();
 
-  const isDesktop = useMediaQuery({ query: "(min-width: 730px) and (max-width: 1920px)" });
+  const isTablet = useCustomMedia("tablet");
 
   return (
-    <header className={cx("header")}>
-      <div className={cx("header-wrap")}>
-        {isDesktop && (
+    <HeaderWrapper>
+      <HeaderContainer>
+        {isTablet && (
           <Link to="/">
-            <Logo className={cx("header-wrap-image")} />
+            <HeaderLogo />
           </Link>
         )}
         <HeaderMenuTab />
-        <div className={cx("header-wrap-right")}>
-          <HeaderButtons isDesktop={isDesktop} onClick={handleShowMenu} />
-          {isDesktop &&
+        <HeaderActions>
+          <HeaderButtons
+            isTablet={isTablet}
+            onClickMenu={handleShowMenu}
+            onClickSearch={handleClickSearch}
+          />
+          {isTablet &&
             (login && profile.id ? (
               <HeaderProfile
                 menuEl={menuEl}
                 admin={admin}
                 profile={profile}
-                showMenu={showMenu}
                 onClick={handleShowMenu}
               />
             ) : (
-              <HeaderAction />
+              <HeaderLogin />
             ))}
-          <div className={cx("header-wrap-right-area")}>
-            {showMenu &&
-              (isDesktop ? (
-                login && (
-                  <HeaderProfileMenu
-                    admin={admin}
-                    clickEl={clickEl}
-                    onClickTemp={handleClickTemp}
-                    onClickLogout={handleLogout}
-                  />
-                )
-              ) : (
-                <HeaderMenu
-                  login={login}
+          {showMenu &&
+            (isTablet ? (
+              login && (
+                <HeaderProfileMenu
                   admin={admin}
-                  profile={profile}
-                  onClickTemp={handleClickTemp}
+                  clickEl={clickEl}
+                  onClickTemp={handleClickItem}
                   onClickLogout={handleLogout}
-                  onClose={handleShowMenu}
                 />
-              ))}
-          </div>
-        </div>
-      </div>
+              )
+            ) : (
+              <HeaderMenu
+                login={login}
+                admin={admin}
+                profile={profile}
+                onClickItem={handleClickItem}
+                onClickLogout={handleLogout}
+                onClickClose={handleShowMenu}
+              />
+            ))}
+        </HeaderActions>
+      </HeaderContainer>
       {isPost && <HeaderProgress scroll={scroll} />}
-    </header>
+    </HeaderWrapper>
   );
 };
+
+const HeaderWrapper = styled.header`
+  width: 100%;
+  height: 3.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.bgColor};
+  transition: transform ease 0.5s, box-shadow ease 0.3s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  border-bottom: 1px solid ${({ theme }) => theme.color.bdColor};
+`;
+
+const HeaderContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0 1rem;
+  max-width: 1250px;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+`;
+
+const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+const HeaderLogo = styled(Logo)`
+  width: auto;
+  height: 1.125rem;
+
+  & > path {
+    fill: ${({ theme }) => theme.color.ftColor};
+  }
+`;
 
 export default memo(Header);

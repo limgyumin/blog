@@ -1,36 +1,62 @@
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
-import useTheme from "hooks/util/useTheme";
 import React, { FC } from "react";
+import useTheme from "hooks/util/useTheme";
 import { FiMenu, FiMoon, FiSearch, FiSun } from "react-icons/fi";
-import { Link } from "react-router-dom";
-
-const styles = require("./HeaderButtons.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import styled from "styled-components";
 
 type HeaderButtonsProps = {
-  isDesktop: any;
-  onClick: () => void;
+  isTablet: boolean;
+  onClickMenu: () => void;
+  onClickSearch: () => void;
 };
 
-const HeaderButtons: FC<HeaderButtonsProps> = ({ isDesktop, onClick }) => {
+const HeaderButtons: FC<HeaderButtonsProps> = ({
+  isTablet,
+  onClickMenu,
+  onClickSearch,
+}) => {
   const { isLight, handleChangeTheme } = useTheme();
 
   return (
-    <div className={cx("header-buttons")}>
-      <Link to="/search" className={cx("header-buttons-item")}>
+    <HeaderButtonsWrapper>
+      <HeaderButtonsItem onClick={onClickSearch}>
         <FiSearch />
-      </Link>
-      <div className={cx("header-buttons-item")} onClick={handleChangeTheme}>
+      </HeaderButtonsItem>
+      <HeaderButtonsItem onClick={handleChangeTheme}>
         {isLight ? <FiMoon /> : <FiSun />}
-      </div>
-      {!isDesktop && (
-        <div className={cx("header-buttons-item")} onClick={onClick}>
+      </HeaderButtonsItem>
+      {!isTablet && (
+        <HeaderButtonsItem onClick={onClickMenu}>
           <FiMenu />
-        </div>
+        </HeaderButtonsItem>
       )}
-    </div>
+    </HeaderButtonsWrapper>
   );
 };
+
+const HeaderButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const HeaderButtonsItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  margin-right: 0.3rem;
+  border-radius: 50%;
+  padding: 0.4rem;
+  transition: background-color ease 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.bgColor2};
+  }
+
+  & > svg {
+    font-size: 1.4rem;
+    color: ${({ theme }) => theme.color.ftColor1};
+  }
+`;
 
 export default HeaderButtons;

@@ -1,21 +1,22 @@
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
+import React, { memo } from "react";
 import { headerMenuTabModel } from "models/headerMenuTabModel";
-import React from "react";
-import { memo } from "react";
-import MenuTabItem from "./MenuTabItem";
-
-const styles = require("./HeaderMenuTab.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import styled from "styled-components";
+import MenuTabItem from "./HeaderMenuTabItem";
 
 const HeaderMenuTab = () => {
   return (
-    <div className={cx("header-menu-tab")}>
+    <HeaderMenuTabWrapper>
       {headerMenuTabModel.map((tabMenu, idx) => (
         <MenuTabItem key={idx} tabMenu={tabMenu} />
       ))}
-    </div>
+    </HeaderMenuTabWrapper>
   );
 };
+
+const HeaderMenuTabWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+`;
 
 export default memo(HeaderMenuTab);

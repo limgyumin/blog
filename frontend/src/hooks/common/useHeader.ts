@@ -23,10 +23,14 @@ export default function useHeader() {
     setShowMenu((prevState) => !prevState);
   }, []);
 
-  const handleClickTemp = useCallback(() => {
-    history.push("/temp");
+  const handleClickItem = (path: string) => {
+    history.push(path);
     handleShowMenu();
-  }, [history, handleShowMenu]);
+  };
+
+  const handleClickSearch = () => {
+    history.push("/search");
+  };
 
   const handleProgressBar = useCallback(() => {
     const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -36,11 +40,11 @@ export default function useHeader() {
     setScroll(progress);
   }, []);
 
-  const handleLogout = useCallback(() => {
+  const handleLogout = () => {
     dispatch(initUser());
     handleShowMenu();
     token.remove();
-  }, [dispatch, handleShowMenu]);
+  };
 
   useClose<HTMLDivElement>(clickEl, menuEl, handleShowMenu);
 
@@ -64,6 +68,7 @@ export default function useHeader() {
     showMenu,
     handleLogout,
     handleShowMenu,
-    handleClickTemp,
+    handleClickItem,
+    handleClickSearch,
   };
 }
