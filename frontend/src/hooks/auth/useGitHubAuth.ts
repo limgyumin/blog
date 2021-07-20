@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { gitHubAuthThunk, initUserError } from "modules/user";
 
 export default function useGitHubAuth() {
-  const { error } = useSelector((state: RootState) => state.users);
+  const { loading, error } = useSelector((state: RootState) => state.users);
 
   const dispatch = useDispatch();
 
@@ -35,4 +35,8 @@ export default function useGitHubAuth() {
       dispatch(initUserError());
     }
   }, [error, history, dispatch]);
+
+  return {
+    loading,
+  };
 }
