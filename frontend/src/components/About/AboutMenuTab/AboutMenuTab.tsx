@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 type AboutMenuTabProps = {
   isPolicy: boolean;
@@ -11,14 +11,16 @@ const AboutMenuTab: FC<AboutMenuTabProps> = ({ isPolicy }) => {
     <AboutMenuTabWrapper>
       <AboutMenuTabContainer>
         <AboutMenuTabItem to="/about">
-          <AboutMenuTabItemText active={!isPolicy}>블로그</AboutMenuTabItemText>
+          <AboutMenuTabItemText $active={!isPolicy}>
+            블로그
+          </AboutMenuTabItemText>
         </AboutMenuTabItem>
         <AboutMenuTabItem to="/about?type=policy">
-          <AboutMenuTabItemText active={isPolicy}>
+          <AboutMenuTabItemText $active={isPolicy}>
             개인정보 처리방침
           </AboutMenuTabItemText>
         </AboutMenuTabItem>
-        <AboutMenuTabBottom active={isPolicy} />
+        <AboutMenuTabBottom $active={isPolicy} />
       </AboutMenuTabContainer>
     </AboutMenuTabWrapper>
   );
@@ -45,25 +47,38 @@ const AboutMenuTabItem = styled(Link)`
   margin-bottom: 0.8rem;
 `;
 
-const AboutMenuTabItemText = styled.h2<{ active: boolean }>`
+const AboutMenuTabItemText = styled.h2<{ $active: boolean }>`
   font-size: 1.225rem;
   font-weight: normal;
-  color: ${(props) =>
-    props.active
-      ? ({ theme }) => theme.color.ftColor
-      : ({ theme }) => theme.color.bgColor1};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+
+  ${(props) =>
+    props.$active
+      ? css`
+          color: ${({ theme }) => theme.color.ftColor};
+          font-weight: bold;
+        `
+      : css`
+          color: ${({ theme }) => theme.color.bgColor1};
+          font-weight: normal;
+        `};
 `;
 
-const AboutMenuTabBottom = styled.div<{ active: boolean }>`
+const AboutMenuTabBottom = styled.div<{ $active: boolean }>`
   width: 50%;
   height: 2px;
   position: absolute;
   bottom: 0;
   background-color: ${({ theme }) => theme.color.ftColor};
   transition: transform ease 0.4s;
-  transform: ${(props) =>
-    props.active ? "translateX(12rem)" : "translateX(0)"};
+
+  ${(props) =>
+    props.$active
+      ? css`
+          transform: translateX(12rem);
+        `
+      : css`
+          transform: translateX(0);
+        `};
 `;
 
 export default AboutMenuTab;

@@ -151,7 +151,7 @@ const AboutPolicyWrapper = styled.div`
   line-height: 1.7;
 
   ${({ theme }) => theme.media.desktop`
-    width: 680px;
+    width: 680px; 
   `};
 
   ${({ theme }) => theme.media.tablet`
