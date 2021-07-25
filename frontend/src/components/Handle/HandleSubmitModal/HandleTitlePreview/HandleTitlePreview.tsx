@@ -1,21 +1,38 @@
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
-import React, { FC } from "react";
+import React from "react";
+import styled from "styled-components";
 
-const styles = require("./HandleTitlePreview.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import { ellipsis } from "styles/lib";
 
-type HandleTitlePreviewProps = {
+type Props = {
   title: string;
 };
 
-const HandleTitlePreview: FC<HandleTitlePreviewProps> = ({ title }) => {
+const HandleTitlePreview: React.FC<Props> = ({ title }) => {
   return (
-    <div className={cx("handle-title-preview")}>
-      <p className={cx("handle-title-preview-name")}>제목</p>
-      <h1 className={cx("handle-title-preview-text")}>{title}</h1>
-    </div>
+    <Container>
+      <Title>제목</Title>
+      <Content>{title}</Content>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid ${({ theme }) => theme.color.bdColor};
+`;
+
+const Title = styled.p`
+  font-weight: bold;
+  font-size: 1.025rem;
+  color: ${({ theme }) => theme.color.ftColor3};
+  margin-bottom: 0.8rem;
+`;
+
+const Content = styled.h1`
+  font-weight: bold;
+  font-size: 1.325rem;
+  color: ${({ theme }) => theme.color.ftColor1};
+  ${ellipsis(1)}
+`;
 
 export default HandleTitlePreview;

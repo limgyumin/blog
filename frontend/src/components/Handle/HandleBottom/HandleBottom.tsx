@@ -1,48 +1,84 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
+import React from "react";
+import styled from "styled-components";
 import { FiArrowLeft } from "react-icons/fi";
-import ThemeButton from "components/common/ThemeButton";
 
-const styles = require("./HandleBottom.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import ThemeButton from "components/common/UI/ThemeButton";
+import Button from "components/common/UI/Buttons/Button";
 
-type HandleBottomProps = {
+type Props = {
   valid: boolean;
   onCancel: () => void;
   onSave: () => void;
   onComplete: () => void;
 };
 
-const HandleBottom: FC<HandleBottomProps> = ({ valid, onCancel, onSave, onComplete }) => {
+const HandleBottom: React.FC<Props> = ({
+  valid,
+  onCancel,
+  onSave,
+  onComplete,
+}) => {
   return (
-    <div className={cx("handle-bottom")}>
+    <Container>
       <ThemeButton />
-      <div className={cx("handle-bottom-buttons")}>
-        <button className={cx("handle-bottom-buttons-cancel")} onClick={onCancel}>
-          <FiArrowLeft className={cx("handle-bottom-buttons-cancel-icon")} />
-        </button>
-        <button
-          className={cx("handle-bottom-buttons-save", {
-            "button-disable": !valid,
-          })}
+      <Buttons>
+        <CancelButton onClick={onCancel}>
+          <FiArrowLeft />
+        </CancelButton>
+        <Button
+          color="lightGray"
+          disabled={!valid}
+          size="lg"
           onClick={onSave}
-          disabled={!valid}
+          style={{ marginRight: "1rem" }}
         >
-          <p className={cx("handle-bottom-buttons-save-text")}>임시저장</p>
-        </button>
-        <button
-          className={cx("handle-bottom-buttons-submit", {
-            "button-disable": !valid,
-          })}
-          onClick={onComplete}
-          disabled={!valid}
-        >
-          <p className={cx("handle-bottom-buttons-submit-text")}>작성하기</p>
-        </button>
-      </div>
-    </div>
+          임시저장
+        </Button>
+        <Button color="black" disabled={!valid} size="lg" onClick={onComplete}>
+          작성하기
+        </Button>
+      </Buttons>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  padding: 0 2rem;
+  background-color: ${({ theme }) => theme.color.bgColor4};
+  border-top: 1px solid ${({ theme }) => theme.color.bdColor};
+`;
+
+const Buttons = styled.div`
+  display: flex;
+`;
+
+const CancelButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 1rem;
+  transition: all ease 0.1s;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.bgColor5};
+  }
+
+  & > svg {
+    font-size: 1.625rem;
+    color: ${({ theme }) => theme.color.ftColor2};
+  }
+`;
 
 export default HandleBottom;

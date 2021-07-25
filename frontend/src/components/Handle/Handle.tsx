@@ -1,22 +1,24 @@
 import React from "react";
-import { THUMBNAIL_URL } from "config/config.json";
-import useHandlePost from "hooks/post/useHandlePost";
-import ReactHelmet from "components/common/ReactHelmet";
-import InputTitle from "./InputTitle";
-import useModal from "hooks/common/useModal";
-import ToolBar from "components/common/ToolBar";
+
+import * as S from "./styles";
+
 import HandleCreateContent from "./HandleCreateContent";
 import HandlePreview from "./HandlePreview";
 import HandleBottom from "./HandleBottom";
 import HandleSubmitModal from "./HandleSubmitModal";
+
+import ReactHelmet from "components/common/UI/ReactHelmet";
+import ToolBar from "components/common/UI/ToolBar/ToolBar";
+
+import useModal from "hooks/common/useModal";
+import useHandlePost from "hooks/post/useHandlePost";
 import usePostTextArea from "hooks/post/usePostTextArea";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
 
-const styles = require("./Handle.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import { THUMBNAIL_URL } from "config/config.json";
 
-const Handle = () => {
+type Props = unknown;
+
+const Handle: React.FC<Props> = () => {
   const {
     valid,
     request,
@@ -38,7 +40,7 @@ const Handle = () => {
   const { title, content, description } = request;
 
   return (
-    <React.Fragment>
+    <>
       <ReactHelmet
         title="Handle | Nonamed"
         description="개발자를 꿈꾸는 한 학생의 이야기"
@@ -52,15 +54,24 @@ const Handle = () => {
         onSubmit={handleSubmitPost}
         onChange={handleChangeRequest}
       />
-      <div className={cx("handle")}>
-        <div className={cx("handle-content")}>
-          <div className={cx("handle-content-wrap")}>
-            <div className={cx("handle-content-wrap-header", { "header-passed": passed })}>
-              <InputTitle titleEl={titleEl} title={title} onChange={handleChangeRequest} />
-            </div>
-            <div className={cx("handle-content-wrap-toolbar", { "toolbar-passed": passed })}>
+      <S.HandleWrapper>
+        <S.HandleContent>
+          <S.HandleWrite>
+            <S.HandleWriteHeader $active={passed}>
+              <S.HandleInputTitle
+                ref={titleEl}
+                value={title}
+                name="title"
+                placeholder="제목을 입력해주세요"
+                onChange={({ target: { name, value } }) =>
+                  handleChangeRequest(name, value)
+                }
+              />
+              <S.HandleInputTitleBottomLine />
+            </S.HandleWriteHeader>
+            <S.HandleWriteToolBar $active={passed}>
               <ToolBar contentEl={contentEl} onChange={handleChangeRequest} />
-            </div>
+            </S.HandleWriteToolBar>
             <HandleCreateContent
               content={content}
               contentEl={contentEl}
@@ -69,17 +80,17 @@ const Handle = () => {
               onKeyDown={handleKeyDownContent}
               onClick={handleFocusContent}
             />
-          </div>
+          </S.HandleWrite>
           <HandlePreview title={title} content={content} />
-        </div>
+        </S.HandleContent>
         <HandleBottom
           valid={valid}
           onCancel={handleCancelPost}
           onSave={handleSavePost}
           onComplete={handleModalMount}
         />
-      </div>
-    </React.Fragment>
+      </S.HandleWrapper>
+    </>
   );
 };
 

@@ -1,23 +1,41 @@
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
-import MarkDown from "components/common/MarkDown";
-import React, { FC } from "react";
+import React from "react";
+import styled from "styled-components";
 
-const styles = require("./HandlePreview.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import MarkDown from "components/common/UI/MarkDown";
 
-type HandlePreviewProps = {
+type Props = {
   title: string;
   content: string;
 };
 
-const HandlePreview: FC<HandlePreviewProps> = ({ title, content }) => {
+const HandlePreview: React.FC<Props> = ({ title, content }) => {
   return (
-    <div className={cx("handle-preview")}>
-      <h1 className={cx("handle-preview-title")}>{title}</h1>
+    <Container>
+      <Title>{title}</Title>
       <MarkDown>{content}</MarkDown>
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  width: 50%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 3rem 2rem 1rem;
+  background-color: ${({ theme }) => theme.color.bgColor};
+  border-left: 1px solid ${({ theme }) => theme.color.bdColor};
+
+  ${({ theme }) => theme.media.tablet} {
+    display: none;
+  }
+`;
+
+const Title = styled.h1`
+  word-break: break-all;
+  font-weight: bold;
+  font-size: 2.225rem;
+  color: ${({ theme }) => theme.color.ftColor1};
+  margin-bottom: 2.5rem;
+`;
 
 export default HandlePreview;

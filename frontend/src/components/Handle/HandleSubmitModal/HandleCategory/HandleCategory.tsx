@@ -1,20 +1,19 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
+import React from "react";
+import styled from "styled-components";
+
 import { BiBook } from "react-icons/bi";
 import { IoMdArrowDropdown } from "react-icons/io";
+
+import HandleCategoryList from "./HandleCategoryList";
+
 import useFetchCategories from "hooks/category/useFetchCategories";
 import usePostCategory from "hooks/post/usePostCategory";
-import HandleCategoryList from "components/Handle/HandleCategoryList";
 
-const styles = require("./HandleCategory.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
-
-type HandleCategoryProps = {
+type Props = {
   onChange: (name: string, value: any) => void;
 };
 
-const HandleCategory: FC<HandleCategoryProps> = ({ onChange }) => {
+const HandleCategory: React.FC<Props> = ({ onChange }) => {
   const { categories } = useFetchCategories();
   const {
     categoriesEl,
@@ -26,17 +25,17 @@ const HandleCategory: FC<HandleCategoryProps> = ({ onChange }) => {
   } = usePostCategory(onChange);
 
   return (
-    <div className={cx("handle-category")}>
-      <p className={cx("handle-category-name")}>카테고리</p>
-      <div className={cx("handle-category-selectbox")} ref={clickEl} onClick={handleShowCategories}>
-        <div className={cx("handle-category-selectbox-wrap")}>
-          <BiBook className={cx("handle-category-selectbox-wrap-icon")} />
-          <p className={cx("handle-category-selectbox-wrap-current")}>
+    <Container>
+      <Title>카테고리</Title>
+      <SelectBox ref={clickEl} onClick={handleShowCategories}>
+        <Wrapper>
+          <BiBook />
+          <CurrentCategory>
             {selectedCategory || "카테고리 선택"}
-          </p>
-        </div>
-        <IoMdArrowDropdown className={cx("handle-category-selectbox-arrow")} />
-      </div>
+          </CurrentCategory>
+        </Wrapper>
+        <IoMdArrowDropdown />
+      </SelectBox>
       {showCategories && (
         <HandleCategoryList
           categoriesEl={categoriesEl}
@@ -44,8 +43,56 @@ const HandleCategory: FC<HandleCategoryProps> = ({ onChange }) => {
           onChange={handleChangeCategory}
         />
       )}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  margin-top: 1rem;
+  position: relative;
+`;
+
+const Title = styled.p`
+  font-weight: bold;
+  font-size: 1.025rem;
+  color: ${({ theme }) => theme.color.ftColor3};
+  margin-bottom: 0.8rem;
+`;
+
+const SelectBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid ${({ theme }) => theme.color.bgColor5};
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  background-color: ${({ theme }) => theme.color.bgColor};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.color.bgColor4};
+  }
+
+  & > svg {
+    font-size: 1.225rem;
+    color: ${({ theme }) => theme.color.ftColor3};
+  }
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.025rem;
+  color: ${({ theme }) => theme.color.ftColor3};
+
+  & > svg {
+    margin-right: 0.4rem;
+  }
+`;
+
+const CurrentCategory = styled.p`
+  font-size: 0.925rem;
+  font-weight: normal;
+`;
 
 export default HandleCategory;

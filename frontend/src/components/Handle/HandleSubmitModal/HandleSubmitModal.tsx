@@ -1,17 +1,18 @@
-import React, { FC } from "react";
-import classNames from "classnames";
-import { ClassNamesFn } from "classnames/types";
-import HandleThumbnail from "./HandleThumbnail";
-import HandleTitlePreview from "./HandleTitlePreview";
-import HandleDescription from "./HandleDescription";
-import DelayUnmount from "components/common/DelayUnmount";
-import HandleCategory from "./HandleCategory";
-import useTheme from "hooks/util/useTheme";
+import React from "react";
+import styled from "styled-components";
 
-const styles = require("./HandleSubmitModal.scss");
-const cx: ClassNamesFn = classNames.bind(styles);
+import HandleThumbnail from "./HandleThumbnail/HandleThumbnail";
+import HandleTitlePreview from "./HandleTitlePreview/HandleTitlePreview";
+import HandleDescription from "./HandleDescription/HandleDescription";
+import HandleCategory from "./HandleCategory/HandleCategory";
 
-type HandleSubmitModalProps = {
+import DelayUnmount from "components/common/HOC/DelayUnmount/DelayUnmount";
+import ThemeWrapper from "components/common/HOC/ThemeWrapper/ThemeWrapper";
+import Button from "components/common/UI/Buttons/Button/Button";
+
+import { fadeIn, fadeOut, moveDown, moveUp } from "styles/animation";
+
+type Props = {
   title: string;
   description: string;
   isMount: boolean;
@@ -20,7 +21,7 @@ type HandleSubmitModalProps = {
   onChange: (name: string, value: any) => void;
 };
 
-const HandleSubmitModal: FC<HandleSubmitModalProps> = ({
+const HandleSubmitModal: React.FC<Props> = ({
   title,
   description,
   isMount,
@@ -28,58 +29,131 @@ const HandleSubmitModal: FC<HandleSubmitModalProps> = ({
   onSubmit,
   onChange,
 }) => {
-  const { isLight } = useTheme();
-
   return (
     <DelayUnmount delay={500} isMount={isMount}>
-      <div className={cx("handle-submit-modal", { light: isLight, dark: !isLight })}>
-        <div
-          className={cx("handle-submit-modal-overlay", {
-            appear: isMount,
-            disappear: !isMount,
-          })}
-          onClick={onCancel}
-        />
-        <div
-          className={cx("handle-submit-modal-box", {
-            "rise-up": isMount,
-            "rise-down": !isMount,
-          })}
-        >
-          <div className={cx("handle-submit-modal-box-wrap")}>
-            <div className={cx("handle-submit-modal-box-wrap-header")}>
-              <h3 className={cx("handle-submit-modal-box-wrap-header-text")}>작성 완료하기</h3>
-              <div className={cx("handle-submit-modal-box-wrap-header-line")} />
-            </div>
-            <div className={cx("handle-submit-modal-box-wrap-content")}>
-              <div className={cx("handle-submit-modal-box-wrap-content-area")}>
-                <div className={cx("handle-submit-modal-box-wrap-content-area-main")}>
+      <ThemeWrapper>
+        <Container>
+          <Overlay $active={isMount} onClick={onCancel} />
+          <Box $active={isMount}>
+            <Wrapper>
+              <Header>
+                <Title>작성 완료하기</Title>
+                <Underline />
+              </Header>
+              <Contents>
+                <Info>
                   <HandleTitlePreview title={title} />
                   <HandleCategory onChange={onChange} />
-                  <HandleDescription description={description} onChange={onChange} />
-                </div>
+                  <HandleDescription
+                    description={description}
+                    onChange={onChange}
+                  />
+                </Info>
                 <HandleThumbnail onChange={onChange} />
-              </div>
-            </div>
-            <div className={cx("handle-submit-modal-box-wrap-bottom")}>
-              <button
-                className={cx("handle-submit-modal-box-wrap-bottom-cancel")}
-                onClick={onCancel}
-              >
-                취소
-              </button>
-              <button
-                className={cx("handle-submit-modal-box-wrap-bottom-submit")}
-                onClick={onSubmit}
-              >
-                작성 완료
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Contents>
+              <Bottom>
+                <Button
+                  size="lg"
+                  color="lightGray"
+                  onClick={onCancel}
+                  style={{ marginRight: "0.8rem" }}
+                >
+                  취소
+                </Button>
+                <Button size="lg" color="black" onClick={onSubmit}>
+                  작성 완료
+                </Button>
+              </Bottom>
+            </Wrapper>
+          </Box>
+        </Container>
+      </ThemeWrapper>
     </DelayUnmount>
   );
 };
+
+const Container = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 100;
+`;
+
+const Overlay = styled.div<{ $active: boolean }>`
+  width: 100%;
+  height: inherit;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${({ theme }) => theme.color.olColor};
+  ${(props) => (props.$active ? fadeIn("0.5s") : fadeOut("0.5s"))}
+`;
+
+const Box = styled.div<{ $active: boolean }>`
+  position: relative;
+  width: 100%;
+  height: auto;
+  background-color: ${({ theme }) => theme.color.bgColor};
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  ${(props) =>
+    props.$active ? moveUp("100vh", "0.5s") : moveDown("100vh", "0.5s")}
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  padding: 2rem 2rem 3rem;
+`;
+
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+const Title = styled.h3`
+  font-weight: bold;
+  font-size: 1.125rem;
+  color: ${({ theme }) => theme.color.ftColor};
+`;
+
+const Underline = styled.div`
+  margin: 0.6rem 0;
+  border-bottom: 2.5px solid ${({ theme }) => theme.color.ftColor};
+  width: 70px;
+`;
+
+const Contents = styled.div`
+  display: flex;
+  margin: 1.7rem 0 3rem;
+`;
+
+const Info = styled.div`
+  width: 100%;
+  padding-right: 1.5rem;
+  border-right: 1px solid ${({ theme }) => theme.color.bdColor};
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default HandleSubmitModal;
