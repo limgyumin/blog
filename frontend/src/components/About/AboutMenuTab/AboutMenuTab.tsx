@@ -1,43 +1,39 @@
-import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
 
-type AboutMenuTabProps = {
+type Props = {
   isPolicy: boolean;
 };
 
-const AboutMenuTab: FC<AboutMenuTabProps> = ({ isPolicy }) => {
+const AboutMenuTab: React.FC<Props> = ({ isPolicy }) => {
   return (
-    <AboutMenuTabWrapper>
-      <AboutMenuTabContainer>
-        <AboutMenuTabItem to="/about">
-          <AboutMenuTabItemText $active={!isPolicy}>
-            블로그
-          </AboutMenuTabItemText>
-        </AboutMenuTabItem>
-        <AboutMenuTabItem to="/about?type=policy">
-          <AboutMenuTabItemText $active={isPolicy}>
-            개인정보 처리방침
-          </AboutMenuTabItemText>
-        </AboutMenuTabItem>
-        <AboutMenuTabBottom $active={isPolicy} />
-      </AboutMenuTabContainer>
-    </AboutMenuTabWrapper>
+    <Container>
+      <Wrapper>
+        <Item to="/about">
+          <Text $active={!isPolicy}>블로그</Text>
+        </Item>
+        <Item to="/about?type=policy">
+          <Text $active={isPolicy}>개인정보 처리방침</Text>
+        </Item>
+        <Bottom $active={isPolicy} />
+      </Wrapper>
+    </Container>
   );
 };
 
-const AboutMenuTabWrapper = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const AboutMenuTabContainer = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   position: relative;
 `;
 
-const AboutMenuTabItem = styled(Link)`
+const Item = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +43,7 @@ const AboutMenuTabItem = styled(Link)`
   margin-bottom: 0.8rem;
 `;
 
-const AboutMenuTabItemText = styled.h2<{ $active: boolean }>`
+const Text = styled.h2<{ $active: boolean }>`
   font-size: 1.225rem;
   font-weight: normal;
 
@@ -63,7 +59,7 @@ const AboutMenuTabItemText = styled.h2<{ $active: boolean }>`
         `};
 `;
 
-const AboutMenuTabBottom = styled.div<{ $active: boolean }>`
+const Bottom = styled.div<{ $active: boolean }>`
   width: 50%;
   height: 2px;
   position: absolute;

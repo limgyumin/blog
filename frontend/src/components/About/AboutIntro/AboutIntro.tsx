@@ -1,56 +1,59 @@
 import React from "react";
 import styled from "styled-components";
+
 import { ReactComponent as Laptop } from "assets/images/laptop.svg";
 import { ReactComponent as Bulb } from "assets/images/bulb.svg";
 
-const AboutIntro = () => {
+type Props = unknown;
+
+const AboutIntro: React.FC<Props> = () => {
   return (
-    <AboutIntroWrapper>
-      <AboutIntroSection>
-        <AboutIntroContainer>
+    <Container>
+      <Section>
+        <Wrapper>
           <LaptopImage />
-          <AboutIntroContent>
-            <AboutIntroTitle>
+          <Content>
+            <Title>
               다양한 분야의
               <br />
               기술 지식을 공유
-            </AboutIntroTitle>
-            <AboutIntroSubtitle>
+            </Title>
+            <Subtitle>
               프론트엔드 분야뿐만 아닌 백엔드 분야 및<br />
               디자인 분야의 지식을 공유하며 소통합니다.
-            </AboutIntroSubtitle>
-          </AboutIntroContent>
-        </AboutIntroContainer>
-      </AboutIntroSection>
-      <AboutIntroSection>
-        <AboutIntroContainer>
+            </Subtitle>
+          </Content>
+        </Wrapper>
+      </Section>
+      <Section>
+        <Wrapper>
           <BulbImage />
-          <AboutIntroContent>
-            <AboutIntroTitle>
+          <Content>
+            <Title>
               부족한 레퍼런스도
               <br />
               노네임드에서
-            </AboutIntroTitle>
-            <AboutIntroSubtitle>
+            </Title>
+            <Subtitle>
               쉽게 레퍼런스를 찾기 어려운 기술 지식들을
               <br />
               보다 간단히 찾을 수 있도록 공유합니다.
-            </AboutIntroSubtitle>
-          </AboutIntroContent>
-        </AboutIntroContainer>
-      </AboutIntroSection>
-    </AboutIntroWrapper>
+            </Subtitle>
+          </Content>
+        </Wrapper>
+      </Section>
+    </Container>
   );
 };
 
-const AboutIntroWrapper = styled.div`
+const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const AboutIntroSection = styled.section`
+const Section = styled.section`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -59,7 +62,7 @@ const AboutIntroSection = styled.section`
   padding: 6rem 0;
 `;
 
-const AboutIntroContainer = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   max-width: 850px;
   display: flex;
@@ -76,21 +79,21 @@ const BulbImage = styled(Bulb)`
   height: 20rem;
 `;
 
-const AboutIntroContent = styled.div`
+const Content = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 380px;
   margin-top: 1.5rem;
 `;
 
-const AboutIntroTitle = styled.h1`
+const Title = styled.h1`
   font-size: 2.325rem;
   font-weight: bold;
   color: ${({ theme }) => theme.color.ftColor};
   margin-bottom: 1.5rem;
 `;
 
-const AboutIntroSubtitle = styled.p`
+const Subtitle = styled.p`
   font-size: 1.125rem;
   font-weight: normal;
   color: ${({ theme }) => theme.color.ftColor};
