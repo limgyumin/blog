@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as Logo } from "assets/images/logo.svg";
 
-const HeaderWrapper = styled.header`
+export const HeaderWrapper = styled.header`
   width: 100%;
   height: 3.2rem;
   display: flex;
@@ -16,7 +16,7 @@ const HeaderWrapper = styled.header`
   border-bottom: 1px solid ${({ theme }) => theme.color.bdColor};
 `;
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,13 +27,13 @@ const HeaderContainer = styled.div`
   position: relative;
 `;
 
-const HeaderActions = styled.div`
+export const HeaderActions = styled.div`
   display: flex;
   align-items: center;
   position: relative;
 `;
 
-const HeaderLogo = styled(Logo)`
+export const HeaderLogo = styled(Logo)`
   width: auto;
   height: 1.125rem;
 
@@ -41,5 +41,3 @@ const HeaderLogo = styled(Logo)`
     fill: ${({ theme }) => theme.color.ftColor};
   }
 `;
-
-export { HeaderWrapper, HeaderContainer, HeaderActions, HeaderLogo };
