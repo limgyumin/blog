@@ -1,77 +1,37 @@
-import React from "react";
+import { css } from "styled-components";
 import { darken, lighten } from "polished";
-import { FC } from "react";
-import styled, { css } from "styled-components";
-import {
-  ButtonColor,
-  ButtonColorValue,
-  ButtonShape,
-  ButtonShapeValue,
-  ButtonSize,
-  ButtonSizeValue,
-} from "./types";
+import { ButtonColor, ButtonShape, ButtonSize } from "./types";
 
-type ButtonProps = {
-  children: React.ReactNode;
-  size?: ButtonSizeValue;
-  color?: ButtonColorValue;
-  shape?: ButtonShapeValue;
-  disabled?: boolean;
-  icon?: React.ReactNode;
-  onClick?: () => void;
-};
-
-const Button: FC<ButtonProps> = ({
-  children,
-  size = "md",
-  color = "black",
-  shape = "square",
-  disabled = false,
-  icon,
-  onClick = () => {},
-}) => {
-  return (
-    <StyledButton
-      $size={size}
-      $color={color}
-      $shape={shape}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      {icon}
-      {children}
-    </StyledButton>
-  );
-};
-
-const buttonBaseStyle = css`
+export const buttonBaseStyle = css`
   width: auto;
   border: none;
   outline: none;
   transition: background-color ease 0.1s;
   cursor: pointer;
-  padding: 0.33rem 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const buttonStyleBySize: { [key in ButtonSize] } = {
+export const buttonStyleBySize: { [key in ButtonSize] } = {
   [ButtonSize.SMALL]: css`
-    font-size: 0.725rem;
+    font-size: 0.875rem;
     font-weight: bold;
+    padding: 0.4rem 0.7rem;
   `,
   [ButtonSize.MEDIUM]: css`
     font-size: 0.925rem;
     font-weight: bold;
+    padding: 0.33rem 1rem;
   `,
   [ButtonSize.LARGE]: css`
     font-size: 1.125rem;
     font-weight: bold;
+    padding: 0.4rem 1rem;
   `,
 };
 
-const iconStyleBySize: { [key in ButtonSize] } = {
+export const iconStyleBySize: { [key in ButtonSize] } = {
   [ButtonSize.SMALL]: css`
     font-size: 1.2rem;
   `,
@@ -83,7 +43,7 @@ const iconStyleBySize: { [key in ButtonSize] } = {
   `,
 };
 
-const buttonStyleByColor: { [key in ButtonColor] } = {
+export const buttonStyleByColor: { [key in ButtonColor] } = {
   [ButtonColor.BLACK]: css`
     background-color: ${({ theme }) => theme.color.ftColor};
     color: ${({ theme }) => theme.color.bgColor};
@@ -123,12 +83,12 @@ const buttonStyleByColor: { [key in ButtonColor] } = {
     &:disabled {
       cursor: default;
       color: ${({ theme }) => lighten(0.4, theme.color.ftColor)};
-      background-color: ${({ theme }) => lighten(0.1, theme.color.bgColor5)};
+      background-color: ${({ theme }) => lighten(0.05, theme.color.bgColor5)};
     }
   `,
 };
 
-const buttonStyleByShape: { [key in ButtonShape] } = {
+export const buttonStyleByShape: { [key in ButtonShape] } = {
   [ButtonShape.SQUARE]: css`
     border-radius: 0.2rem;
   `,
@@ -136,24 +96,3 @@ const buttonStyleByShape: { [key in ButtonShape] } = {
     border-radius: 3rem;
   `,
 };
-
-type StyledButtonProps = {
-  $size: ButtonSizeValue;
-  $color: ButtonColorValue;
-  $shape: ButtonShapeValue;
-};
-
-const StyledButton = styled.button<StyledButtonProps>`
-  ${buttonBaseStyle};
-
-  ${(props) => buttonStyleBySize[props.$size]}
-  ${(props) => buttonStyleByColor[props.$color]}
-  ${(props) => buttonStyleByShape[props.$shape]}
-
-  & > svg {
-    ${(props) => iconStyleBySize[props.$size]}
-    margin-right: 0.5rem;
-  }
-`;
-
-export default Button;
